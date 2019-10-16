@@ -6,7 +6,9 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import TrapdoorScreen from '../screens/TrapdoorScreen';
+import GcdParentScreen from '../screens/TrapdoorKnapsack/GcdParentScreen';
+import PublicKeyParentScreen from '../screens/TrapdoorKnapsack/PublicKeyParentScreen';
+import PrivateKeyParentScreen from '../screens/TrapdoorKnapsack/PrivateKeyParentScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -70,19 +72,21 @@ SettingsStack.path = '';
 
 const TrapdoorStack = createStackNavigator(
     {
-      Settings: TrapdoorScreen,
+      SelectNandM: { screen: GcdParentScreen },
+      SelectPublicKey: { screen: PublicKeyParentScreen },
+      SelectPrivateKey: { screen: PrivateKeyParentScreen },
     },
     config
 );
 
 TrapdoorStack.navigationOptions = {
-  tabBarLabel: 'Trapdoor',
+  tabBarLabel: 'Trapdoor Knapsack',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
-TrapdoorStack.apth = '';
+TrapdoorStack.path = '';
 
 
 const tabNavigator = createBottomTabNavigator({

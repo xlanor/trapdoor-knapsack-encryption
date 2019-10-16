@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { withNavigation } from 'react-navigation';
 
 import { View, Button, Text } from 'react-native';
 
 import ModuloAndMultiplicator from './ModuloAndMultiplicator'
 import ErrorMessage from './ErrorMessage'
 
-export default class GcdParent extends Component {
+class GcdParent extends Component {
   constructor(props){
       super(props);
       this.state = {
@@ -18,27 +19,28 @@ export default class GcdParent extends Component {
         errorMessage: '',
         showGcd: false,
         computedGCD: 5,
+        showNextPage:false,
       };
   }
   calculateGCD = () => {
     const { valueM, valueN } = this.state;
+    const { navigation } = this.props;
     let localValueM = valueM;
     let localValueN = valueN;
     if (localValueM > localValueN) {let temp = localValueN; localValueN = localValueM; localValueM = temp;}
     let loop = true;
-    while (loop) {
-        if (localValueM == 0) {
-          this.setState({ computedGCD:localValueN, showGcd: true });
-          loop = false;
-        }
-        localValueN %= localValueM;
-        if (localValueN == 0){
-          this.setState({ computedGCD:localValueM, showGcd: true });
-          loop = false;
-        }
-        if(loop) localValueM %= localValueN;
+    let computed = 0;
+    while(localValueM) {
+      var t = localValueM;
+      localValueM = localValueN % localValueM;
+      localValueN = t;
+      console.log(`M ${localValueM} N ${localValueN}`)
     }
+    let newVal = localValueN == 1 ? true:false;
+    console.log(localValueN)
+    this.setState({ computedGCD:localValueN, showGcd: newVal, showNextPage: newVal });
   }
+
   isValidNumber = (stringToVerify) => {
     let str = String(stringToVerify);
     console.log(`Received String ${str}`)
@@ -71,7 +73,9 @@ export default class GcdParent extends Component {
       this.setState({ valueN: valueNInput }, () => { this.validateMandN() })
   }
   render(){
-    const { errorMessage, showError, showGcd, computedGCD } = this.state;
+    const { errorMessage, showError, showGcd, computedGCD, showNextPage } = this.state;
+    const { navigation } = this.props;
+    const { valueM, valueN } = this.state;
     return (
       <View>
         <ModuloAndMultiplicator updateValue={this.updateValueM} />
@@ -79,16 +83,23 @@ export default class GcdParent extends Component {
         <ErrorMessage errorMessage={errorMessage} showMessage={showError} />
         <Button title="Calculate GCD" onPress={() => {this.calculateGCD()} }/>
         {
-          showGcd ?
-          <Text >Calculated GCD: {computedGCD}</Text>:
-          null
-        }
-        {
-          showGcd ? 
-            computedGCD != 1 ?
-              <Text>GCD of m and n must be 1!</Text>:
-              null:
-          null
+          showGcd == 1? (
+            
+              showNextPage ? (
+              <Button title="Next Page" onPress = {() => {
+                  this.setState({ 
+                    showGcd: false,
+                    computedGCD: 5,
+                    showNextPage:false}, ()=>{
+                      navigation.navigate('SelectPublicKey', { valueM: valueM, valueN: valueN})
+                  })
+              }}/>
+              ): null
+            
+          ):
+            <Text> 
+              GCD Wrong {computedGCD}
+            </Text>
         }
       </View>
     );
@@ -96,3 +107,4 @@ export default class GcdParent extends Component {
     
   }
 }
+export default withNavigation(GcdParent);
