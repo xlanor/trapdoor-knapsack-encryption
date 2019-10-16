@@ -86,7 +86,7 @@ class PublicKeyParent extends Component{
           {
             buttonShow ? 
             <Button title="Next Page" onPress={() => {navigation.navigate('SelectPrivateKey', {
-                primaryKey: superIncreasing, valueM: valueM, valueN: valueN
+              publicKey: superIncreasing, valueM: valueM, valueN: valueN
               } )
             }}/>:
             null
