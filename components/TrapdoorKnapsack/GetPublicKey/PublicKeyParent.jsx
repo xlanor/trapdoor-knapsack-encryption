@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import { Text, View, Button } from 'react-native';
 
-class PrivateKeyParent extends Component{
+class PublicKeyParent extends Component{
     constructor(props){
       super(props);
       this.state = {
         valueM: 0,
         valueN: 0,
-        publicKey: [],
-        pkLength: 0,
         privateKey: [],
-        showPrivate: false,
+        pkLength: 0,
+        publicKey: [],
+        showPublic: false,
       };
     }
     componentDidMount(){
       const { navigation } = this.props;
       const valueM  = navigation.getParam('valueM', 'No-Data');
       const valueN  = navigation.getParam('valueN', 'No-Data');
-      const publicKey  = navigation.getParam('publicKey', 'No-Data');
-      let pkLength = publicKey.length;
+      const privateKey  = navigation.getParam('privateKey', 'No-Data');
+      let pkLength = privateKey.length;
       this.setState({
           valueN: valueN,
           valueM: valueM,
-          publicKey: publicKey,
+          privateKey: privateKey,
           pkLength: pkLength
       });
       
@@ -32,32 +32,32 @@ class PrivateKeyParent extends Component{
     static getDerivedStateFromProps(nextProps, prevState){
       const newValueM = nextProps.navigation.getParam('valueM', 'No-Data');
       const newValueN = nextProps.navigation.getParam('valueN', 'No-Data');
-      const publicKey  = nextProps.navigation.getParam('publicKey', 'No-Data');
-      console.log(`Derived state ${publicKey}`)
-      console.log(`COmparing ${publicKey.join()} to ${prevState.publicKey.join()}`)
+      const privateKey  = nextProps.navigation.getParam('privateKey', 'No-Data');
+      console.log(`Derived state ${privateKey}`)
+      console.log(`COmparing ${privateKey.join()} to ${prevState.privateKey.join()}`)
       if( newValueM != prevState.valueM ||
         newValueN != prevState.valueN ||
-        publicKey.join() !== prevState.publicKey.join()
+        privateKey.join() !== prevState.privateKey.join()
         ){
             console.log(" Change in state, returning a new object ");
-            return { valueM: newValueM , valueN: newValueN, publicKey: publicKey };
+            return { valueM: newValueM , valueN: newValueN, privateKey: privateKey };
         }
         return null;
     }
 
-    calculatePrivateKey = () => {
-      const { valueM, valueN, publicKey, pkLength } = this.state;
+    calculatePublicKey = () => {
+      const { valueM, valueN, privateKey, pkLength } = this.state;
       let newPk = [];
       for( let i = 0; i < pkLength; i++){
-        newPk.push(publicKey[i] * valueN % valueM);
+        newPk.push(privateKey[i] * valueN % valueM);
       }
       this.setState({
-          privateKey: newPk,
-          showPrivate: true,
+          publicKey: newPk,
+          showPublic: true,
       })
     }
     render(){
-      const { valueM, valueN, publicKey, pkLength, privateKey, showPrivate } = this.state;
+      const { valueM, valueN, publicKey, pkLength, privateKey, showPublic } = this.state;
       console.log(publicKey + "THIS");
       return(
         <View>
@@ -65,15 +65,15 @@ class PrivateKeyParent extends Component{
             {valueM} {valueN} {pkLength}
           </Text>
           <Text>
-           Public Key: {publicKey.join()}
+           Private Key: {privateKey.join()}
           </Text>
-          <Button title="Calculate Private Key" onPress={() => {
-            this.calculatePrivateKey()
+          <Button title="Calculate Public Key" onPress={() => {
+            this.calculatePublicKey()
           }}/>
           {
-            showPrivate ? (
+            showPublic ? (
             <Text>
-                Private Key: {privateKey.join()}
+                PublicKey: {publicKey.join()}
               </Text>
             ): null
 
@@ -84,4 +84,4 @@ class PrivateKeyParent extends Component{
 };
 
 
-export default withNavigation(PrivateKeyParent);
+export default withNavigation(PublicKeyParent);

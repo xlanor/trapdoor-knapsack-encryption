@@ -12,7 +12,7 @@ const styles = {
   }
 }
 
-class PublicKeyParent extends Component{
+class PrivateKeyParent extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -86,7 +86,7 @@ class PublicKeyParent extends Component{
           {
             buttonShow ? 
             <Button title="Next Page" onPress={() => {navigation.navigate('SelectPrivateKey', {
-              publicKey: superIncreasing, valueM: valueM, valueN: valueN
+              privateKey: superIncreasing, valueM: valueM, valueN: valueN
               } )
             }}/>:
             null
@@ -97,4 +97,4 @@ class PublicKeyParent extends Component{
 };
 
 
-export default withNavigation(PublicKeyParent);
+export default withNavigation(PrivateKeyParent);

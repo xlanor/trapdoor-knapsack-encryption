@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import PublicKeyParent from '../../components/TrapdoorKnapsack/PickPublicKey/PublicKeyParent'
+import PrivateKeyParent from '../../components/TrapdoorKnapsack/PickPrivateKey/PrivateKeyParent'
 
 export default function PublicKeyParentScreen(){
   return (
@@ -11,12 +11,12 @@ export default function PublicKeyParentScreen(){
         // This acts as the Parent class that will be responsible for holding all the states.
         // The states will then be passed as props via the navigation stack to the enxt screen
       }
-      <PublicKeyParent/>
+      <PrivateKeyParent/>
     </View>
 
   );
 }
 
 PublicKeyParentScreen.navigationOptions = {
-  title: 'Select N and M'
+  title: 'Select Private Key'
 };
