@@ -12,6 +12,7 @@ class PublicKeyParent extends Component{
         pkLength: 0,
         publicKey: [],
         showPublic: false,
+        navigateNext: false,
       };
     }
     componentDidMount(){
@@ -54,10 +55,13 @@ class PublicKeyParent extends Component{
       this.setState({
           publicKey: newPk,
           showPublic: true,
+          navigateNext: true,
       })
     }
     render(){
-      const { valueM, valueN, publicKey, pkLength, privateKey, showPublic } = this.state;
+      const { navigation } = this.props;
+      const { valueM, valueN, publicKey, pkLength, 
+        privateKey, showPublic, navigateNext } = this.state;
       console.log(publicKey + "THIS");
       return(
         <View>
@@ -76,7 +80,13 @@ class PublicKeyParent extends Component{
                 PublicKey: {publicKey.join()}
               </Text>
             ): null
-
+          }
+          {
+            navigateNext? (
+              <Button title="Enter text to encrypt" onPress={ () =>{navigation.navigate('EncryptText', {
+                privateKey: privateKey, publicKey: publicKey, valueM: valueM, valueN: valueN
+              } )}}/>
+            ): null
           }
         </View>
       );

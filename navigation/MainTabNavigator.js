@@ -9,6 +9,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import GcdParentScreen from '../screens/TrapdoorKnapsack/GcdParentScreen';
 import PublicKeyParentScreen from '../screens/TrapdoorKnapsack/PublicKeyParentScreen';
 import PrivateKeyParentScreen from '../screens/TrapdoorKnapsack/PrivateKeyParentScreen';
+import EncryptUserInputScreen from '../screens/TrapdoorKnapsack/EncryptUserInputScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -75,6 +76,7 @@ const TrapdoorStack = createStackNavigator(
       SelectNandM: { screen: GcdParentScreen },
       SelectPublicKey: { screen: PublicKeyParentScreen },
       SelectPrivateKey: { screen: PrivateKeyParentScreen },
+      EncryptText: { screen: EncryptUserInputScreen },
     },
     config
 );
@@ -88,7 +90,6 @@ TrapdoorStack.navigationOptions = {
 
 TrapdoorStack.path = '';
 
-
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
@@ -96,5 +97,6 @@ const tabNavigator = createBottomTabNavigator({
 });
 
 tabNavigator.path = '';
+
 
 export default tabNavigator;
