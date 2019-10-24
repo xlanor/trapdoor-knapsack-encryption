@@ -22,7 +22,7 @@ class EncryptUserInput extends Component{
       showEncrypted: false,
       showDecryptedButton: false,
       showDecrypt: false,
-      decrypted: [],
+      decrypted: '',
       encrypted: [],
       asciiCode: [],
       knapsackLength: 0,
@@ -68,11 +68,14 @@ class EncryptUserInput extends Component{
     for(let i = 0; i <= upper; i+= trapdoorSize){
       binBlocks.push(binString.substring(i,i+trapdoorSize));
     }
+    console.log(`Binary String length ${binString.length}`)
+    console.log(`Traqpdoor Size: ${trapdoorSize}`)
     // need to pad
     if(binString.length % trapdoorSize != 0){
       let padding =  trapdoorSize - (binString.length % trapdoorSize);
       let start = binString.length - (binString.length % trapdoorSize);
       let blockStr = binString.substring(start);
+      console.log(`Padding to ${padding}`)
       for (let j = 0; j < padding; j++){
         blockStr += '0';
       }
@@ -92,7 +95,7 @@ class EncryptUserInput extends Component{
     let binString = this.convertStringToBinary();
     let chunkedBinStr = this.chunk(binString, publicKey.length);
     console.log(chunkedBinStr)
-    console.log(padNumber)
+    console.log(`Pad Number: ${padNumber}`)
     let encrypted = [];
     chunkedBinStr.forEach((chunkBin)=>{
         let curIdx = 0;
@@ -102,7 +105,7 @@ class EncryptUserInput extends Component{
         console.log('----')
         console.log(publicKey)
         for(let i = 0; i < chunkBin.length; i++){
-            let numeric = chunkBin.charCodeAt(i);
+            let numeric = parseInt(chunkBin[i]);
             console.log("Numeric: "+numeric)
             let result = numeric * publicKey[curIdx];
             console.log("Rs: "+result)
@@ -157,11 +160,12 @@ class EncryptUserInput extends Component{
   decrypt = () => {
     const { navigation } = this.props;
     const { encrypted, padNumber } = this.state;
-    const valueM = navigation.getParam('valueM', 'No-Data');
-    const valueN = navigation.getParam('valueN', 'No-Data');
+    const valueM = parseInt(navigation.getParam('valueM', 'No-Data'));
+    const valueN = parseInt(navigation.getParam('valueN', 'No-Data'));
     const privateKey  = navigation.getParam('privateKey', 'No-Data');
     
-    const modInv = this.xgcd(valueN, valueM)[0];
+    let modInv = this.xgcd(valueN, valueM)[0];
+    modInv = (modInv < 0 )? (valueM + modInv) : modInv;
     console.log(`Modular Multiplicative Invers: ${modInv}`);
     console.log(`Private Key: ${privateKey}`)
     let decrypted = [];
@@ -178,9 +182,21 @@ class EncryptUserInput extends Component{
     console.log(unpadded)
     let dec = this.convertBinToText(unpadded)
     console.log(dec)
+    this.setState({
+      decrypted: dec,
+      showDecrypt: true,
+    })
   }
   render(){
-    const { showEncryptButton, text, showEncrypted, encrypted, showDecryptedButton } = this.state;
+    const { 
+        showEncryptButton, 
+        text, 
+        showEncrypted, 
+        encrypted, 
+        showDecryptedButton,
+        showDecrypt,
+        decrypted,
+      } = this.state;
     return(
       <View>  
         <Text>Enter Text to Encrypt</Text>
@@ -198,6 +214,11 @@ class EncryptUserInput extends Component{
         {
           showDecryptedButton?
             <Button title="Decrypt" onPress={() => {this.decrypt()}}/>:
+            null
+        }
+        {
+          showDecrypt?
+            <Text> {decrypted}</Text>:
             null
         }
       </View>

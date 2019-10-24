@@ -34,8 +34,6 @@ class PublicKeyParent extends Component{
       const newValueM = nextProps.navigation.getParam('valueM', 'No-Data');
       const newValueN = nextProps.navigation.getParam('valueN', 'No-Data');
       const privateKey  = nextProps.navigation.getParam('privateKey', 'No-Data');
-      console.log(`Derived state ${privateKey}`)
-      console.log(`COmparing ${privateKey.join()} to ${prevState.privateKey.join()}`)
       if( newValueM != prevState.valueM ||
         newValueN != prevState.valueN ||
         privateKey.join() !== prevState.privateKey.join()
@@ -50,7 +48,9 @@ class PublicKeyParent extends Component{
       const { valueM, valueN, privateKey, pkLength } = this.state;
       let newPk = [];
       for( let i = 0; i < pkLength; i++){
-        newPk.push(privateKey[i] * valueN % valueM);
+        let pub = (privateKey[i] * valueN) % valueM;
+        console.log(`${privateKey[i]} * ${valueN} % ${valueM} = ${pub}`)
+        newPk.push(pub);
       }
       this.setState({
           publicKey: newPk,
