@@ -25,8 +25,10 @@ export default class ModuloAndMultiplicator extends Component{
 
   }
   render(){
+    const { placeholder } = this.props;
     return (
-      <TextInput style={styles.textInput} onChangeText={(text) => this.setTextState(text)} keyboardType={'numeric'}  ></TextInput>
+      <TextInput style={styles.textInput} onChangeText={(text) => this.setTextState(text)} 
+        keyboardType={'numeric'} placeholder={placeholder} ></TextInput>
     );
   }
 };

@@ -78,8 +78,8 @@ class GcdParent extends Component {
     const { valueM, valueN } = this.state;
     return (
       <View>
-        <ModuloAndMultiplicator updateValue={this.updateValueM} />
-        <ModuloAndMultiplicator updateValue={this.updateValueN} />
+        <ModuloAndMultiplicator updateValue={this.updateValueM} placeholder='Modulus' />
+        <ModuloAndMultiplicator updateValue={this.updateValueN} placeholder='Multipler' />
         <ErrorMessage errorMessage={errorMessage} showMessage={showError} />
         <Button title="Calculate GCD" onPress={() => {this.calculateGCD()} }/>
         {
