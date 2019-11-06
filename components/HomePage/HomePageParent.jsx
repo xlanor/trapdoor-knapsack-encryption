@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { withNavigation } from 'react-navigation';
-import { View, Button, Text, Image, TouchableHighlight } from 'react-native';
+import { View, Button, Text, Image, TouchableOpacity } from 'react-native';
 
 // importing image assets
 import arrow from '../../assets/images/arrow.png';
@@ -37,29 +37,41 @@ class HomePageParent extends Component{
   
     return(
         <View>
-            <TouchableHighlight onPress={() => {this.updateIconPressed("creditsIcon")}}>        
-              <Image
-                key="creditsIcon"
-                style= {styles.homePageParent.imageStyle} source = {credits}/>
-            </TouchableHighlight>  
-            <TouchableHighlight onPress={() => {this.updateIconPressed("lightBulbIcon")}}>  
-              <Image 
-                  key="lightBulbIcon"
-                  style={styles.homePageParent.imageStyle} source = {lightbulb}/>
-            </TouchableHighlight>
+            <View style={styles.homePageParent.iconsView}>
+              <TouchableOpacity onPress={() => {this.updateIconPressed("creditsIcon")}}>        
+                <Image
+                  key="creditsIcon"
+                  style= {styles.homePageParent.imageStyle} source = {credits}/>
+              </TouchableOpacity>  
+              <TouchableOpacity onPress={() => {this.updateIconPressed("lightBulbIcon")}}>  
+                <Image 
+                    key="lightBulbIcon"
+                    style={styles.homePageParent.imageStyle} source = {lightbulb}/>
+              </TouchableOpacity>
 
-            <TouchableHighlight onPress={() => {this.updateIconPressed("progressIcon")}}>  
-            <Image 
-                key="progressIcon"
-                style={styles.homePageParent.imageStyle} source = {progress}
-            />
-            </TouchableHighlight>
-            <Text>{selectedText}</Text>
+              <TouchableOpacity onPress={() => {this.updateIconPressed("progressIcon")}}>  
+              <Image 
+                  key="progressIcon"
+                  style={styles.homePageParent.imageStyle} source = {progress}
+              />
+              </TouchableOpacity>
+
+            </View>
+           
+            <View style={styles.homePageParent.textWrapperStyle}>
+              <Text
+                style = {styles.homePageParent.textBox} 
+              >
+                {selectedText}
+              </Text>
+
             {
                 optionChosen?
-                  <Image style={styles.homePageParent.imageStyle} source = {arrow}/>:
+                  <Image style={styles.homePageParent.imageStyleArrow} source = {arrow}/>:
                   null
             }
+            </View>
+        
         </View>
     );
   }
