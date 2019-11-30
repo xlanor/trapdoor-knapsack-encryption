@@ -15,7 +15,7 @@ const imageStyle = {
 const iconsView = {
   flex:1,
   marginTop:100,
-  marginBottom: 20,
+  marginBottom: 40,
 }
 
 
