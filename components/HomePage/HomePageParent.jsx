@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 
 import { withNavigation } from 'react-navigation';
 import { View, Button, Text, Image, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+
+// redux actions
+import { bindActionCreators } from 'redux';
+import { changeCount } from '../../actions/counts';
+import { COUNTER_CHANGE } from '../../constants';
 
 // importing image assets
 import arrow from '../../assets/images/arrow.png';
@@ -19,6 +25,7 @@ class HomePageParent extends Component{
       optionChosen: false,
       selectedOption: null,
     };
+    console.log(props)
   }
 
   updateIconPressed = (keyName) => {
@@ -29,12 +36,26 @@ class HomePageParent extends Component{
         selectedText: newKey,
         optionChosen: true,
       })
+      this.incrementCount();
+  }
+  decrementCount() {
+    let { count, onChangeCount } = this.props;
+    count--;
+    onChangeCount(count);
+  }
+  incrementCount() {
+    let { count, onChangeCount, dispatch } = this.props;
+    console.log("IN FN");
+    console.log( count );
+    console.log( this.props );
+    count++;
+    onChangeCount(count);
   }
 
   render(){
-    const { navigation } = this.props;
+    const { navigation, count } = this.props;
     const { selectedText, optionChosen } = this.state;
-  
+    console.log("Current Count "+count);
     return(
         <View>
             <View style={styles.homePageParent.iconsView}>
@@ -77,5 +98,18 @@ class HomePageParent extends Component{
   }
 };
 
+const mapStateToProps = state => ({
+  count: state.count.count,
+});
 
-export default withNavigation(HomePageParent);
+
+
+const mapDispatchToProps = dispatch =>({
+    onChangeCount: (count) => {console.log(changeCount); dispatch({
+      type: COUNTER_CHANGE,
+      payload: count
+    })},
+    dispatch,
+});
+
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(HomePageParent));
