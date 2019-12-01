@@ -25,7 +25,7 @@ const initialState = {
     introSelected: true,
     introLocked: false,
     algoSelected: false,
-    alogLocked: true,
+    algoLocked: true,
     keySelected: false,
     keyLocked: true,
     decryptSelected: false,
@@ -40,7 +40,7 @@ const allUnlocked = {
   introSelected: true,
   introLocked: false,
   algoSelected: false,
-  alogLocked: false,
+  algoLocked: false,
   keySelected: false,
   keyLocked: false,
   decryptSelected: false,
@@ -82,7 +82,7 @@ const lessonPageReducer = (state = initialState, action ) => {
           return {
             ...state,
             algoSelected: true,
-            alogLocked: false,
+            algoLocked: false,
             // unset all other selected
             introSelected: false,
             keySelected: false,
@@ -94,13 +94,13 @@ const lessonPageReducer = (state = initialState, action ) => {
     case ALGO_LOCK:
           return {
             ...state,
-            alogLocked: true,
+            algoLocked: true,
             algoSelected: false,
           }
     case ALGO_UNLOCK:
         return {
             ...state,
-            alogLocked: false,
+            algoLocked: false,
         }
     case KEY_SELECT:
       return {

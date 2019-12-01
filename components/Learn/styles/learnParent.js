@@ -12,11 +12,24 @@ const wrapperViewBackground = {
 };
 
 const scrollViewBackground = {
+  flex: 5,
   backgroundColor: COLORS.WHITE_1,
 };
+
+const imageSize = {
+  width:60,
+  height:60,
+}
+
+const listStyle = {
+  flexDirection: "row",
+  flexWrap: "wrap",
+}
 
 export default {
   borderLine,
   scrollViewBackground,
   wrapperViewBackground,
+  imageSize,
+  listStyle,
 }
