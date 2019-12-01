@@ -1,23 +1,16 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
 } from 'react-native';
 
-import styles from './styles';
+import { SafeAreaView } from 'react-navigation'
 
-import { MonoText } from '../components/StyledText';
+import styles from './styles';
 import HomePageParent from '../components/HomePage/HomePageParent'
 
 export default function HomeScreen() {
   return (
-    <View style={styles.homeScreen.backGroundContainer}>
+    <SafeAreaView style={styles.homeScreen.backGroundContainer}>
       <ScrollView
         style={styles.homeScreen.backGroundContainer}>
           <HomePageParent/>
@@ -25,7 +18,7 @@ export default function HomeScreen() {
       </ScrollView>
 
       
-    </View>
+    </SafeAreaView>
   );
 }
 

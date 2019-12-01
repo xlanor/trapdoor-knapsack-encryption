@@ -20,41 +20,57 @@ import styles from './styles';
 class HomePageParent extends Component{
   constructor(props){
     super(props);
+    
     this.state = {
       selectedText: 'Trapdoor Knapsack',
       optionChosen: false,
       selectedOption: null,
     };
-    console.log(props)
   }
 
   updateIconPressed = (keyName) => {
       let newKey = keyName == "creditsIcon" ? "Credits":
                         keyName == "lightBulbIcon" ? "Start Learning":
                         keyName == "progressIcon" ? "Progress" : "Trapdoor Knapsack";
+      let selectedOption = keyName == "creditsIcon" ? 1:
+                  keyName == "lightBulbIcon" ? 2:
+                  keyName == "progressIcon" ? 3 : null ;
+      console.log("Selected "+selectedOption);
       this.setState({
         selectedText: newKey,
         optionChosen: true,
+        selectedOption: selectedOption,
       })
-      this.incrementCount();
   }
+
+  navigateScreen = (newScreen) => {
+      const { navigation } = this.props;
+      console.log(newScreen)
+      switch(newScreen){
+          case 1:
+              break;
+          case 2:
+              navigation.navigate('LearnScreen');
+              break;
+          case 3:
+          default: break;
+      }
+  }
+
   decrementCount() {
     let { count, onChangeCount } = this.props;
     count--;
     onChangeCount(count);
   }
   incrementCount() {
-    let { count, onChangeCount, dispatch } = this.props;
-    console.log("IN FN");
-    console.log( count );
-    console.log( this.props );
+    let { count, onChangeCount } = this.props;
     count++;
     onChangeCount(count);
   }
 
   render(){
     const { navigation, count } = this.props;
-    const { selectedText, optionChosen } = this.state;
+    const { selectedText, optionChosen, selectedOption } = this.state;
     console.log("Current Count "+count);
     return(
         <View>
@@ -88,7 +104,9 @@ class HomePageParent extends Component{
 
             {
                 optionChosen?
-                  <Image style={styles.homePageParent.imageStyleArrow} source = {arrow}/>:
+                  <TouchableOpacity onPress={ ()=> { this.navigateScreen(selectedOption) } }>
+                    <Image style={styles.homePageParent.imageStyleArrow} source = {arrow}/>
+                  </TouchableOpacity>:
                   null
             }
             </View>
