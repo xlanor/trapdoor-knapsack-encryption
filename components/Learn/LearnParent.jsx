@@ -9,6 +9,32 @@ import {
     TouchableOpacity 
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// importing redux actions
+import { 
+  INTRO_SELECT_ACTION,
+  INTRO_LOCK_ACTION,
+  INTRO_UNLOCK_ACTION,
+  ALGO_SELECT_ACTION,
+  ALGO_LOCK_ACTION,
+  ALGO_UNLOCK_ACTION,
+  KEY_SELECT_ACTION,
+  KEY_LOCK_ACTION,
+  KEY_UNLOCK_ACTION,
+  DECRYPT_SELECT_ACTION,
+  DECRYPT_LOCK_ACTION,
+  DECRYPT_UNLOCK_ACTION,
+  ENCRYPT_SELECT_ACTION,
+  ENCRYPT_LOCK_ACTION,
+  ENCRYPT_UNLOCK_ACTION,
+  KNAPSACK_SELECT_ACTION,
+  KNAPSACK_LOCK_ACTION,
+  KNAPSACK_UNLOCK_ACTION,
+  UNLOCK_ALL_ACTION,
+  RESET_ALL_ACTION,
+ }  from '../../actions/learnPageLock';
 
 // importing image assets
 // unlocked
@@ -35,6 +61,9 @@ class LearnParent extends Component {
       showText: "hello, world!",
       selected: 1,
     }
+    console.log(this.props);
+    console.log(this.state);
+    console.log(INTRO_SELECT_ACTION);
   }
 
   updatedText = () => {
@@ -61,7 +90,7 @@ class LearnParent extends Component {
     }
   }
 
-  getImages = () => {
+  getImages = (currentState) => {
 
   }
 
@@ -86,4 +115,36 @@ class LearnParent extends Component {
 
 };
 
-export default withNavigation(LearnParent);
+const mapStateToProps = state => ({
+  lockState: state
+})
+
+const ActionCreators = Object.assign(
+  {},  
+  INTRO_SELECT_ACTION,
+  INTRO_LOCK_ACTION,
+  INTRO_UNLOCK_ACTION,
+  ALGO_SELECT_ACTION,
+  ALGO_LOCK_ACTION,
+  ALGO_UNLOCK_ACTION,
+  KEY_SELECT_ACTION,
+  KEY_LOCK_ACTION,
+  KEY_UNLOCK_ACTION,
+  DECRYPT_SELECT_ACTION,
+  DECRYPT_LOCK_ACTION,
+  DECRYPT_UNLOCK_ACTION,
+  ENCRYPT_SELECT_ACTION,
+  ENCRYPT_LOCK_ACTION,
+  ENCRYPT_UNLOCK_ACTION,
+  KNAPSACK_SELECT_ACTION,
+  KNAPSACK_LOCK_ACTION,
+  KNAPSACK_UNLOCK_ACTION,
+  UNLOCK_ALL_ACTION,
+  RESET_ALL_ACTION,
+);
+
+const mapDispatchToProps = dispatch => ({
+  actions:bindActionCreators(ActionCreators, dispatch)
+});
+
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(LearnParent));

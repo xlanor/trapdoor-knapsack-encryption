@@ -1,5 +1,6 @@
 import { COLORS } from '../../../constants/Colors';
 
+
 const borderLine = {
   borderBottomColor: COLORS.BLACK_1,
   borderBottomWidth: 5,

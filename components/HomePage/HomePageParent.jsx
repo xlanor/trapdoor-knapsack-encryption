@@ -35,7 +35,6 @@ class HomePageParent extends Component{
       let selectedOption = keyName == "creditsIcon" ? 1:
                   keyName == "lightBulbIcon" ? 2:
                   keyName == "progressIcon" ? 3 : null ;
-      console.log("Selected "+selectedOption);
       this.setState({
         selectedText: newKey,
         optionChosen: true,
@@ -45,7 +44,6 @@ class HomePageParent extends Component{
 
   navigateScreen = (newScreen) => {
       const { navigation } = this.props;
-      console.log(newScreen)
       switch(newScreen){
           case 1:
               break;
@@ -71,7 +69,6 @@ class HomePageParent extends Component{
   render(){
     const { navigation, count } = this.props;
     const { selectedText, optionChosen, selectedOption } = this.state;
-    console.log("Current Count "+count);
     return(
         <View>
             <View style={styles.homePageParent.iconsView}>
@@ -123,7 +120,7 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch =>({
-    onChangeCount: (count) => {console.log(changeCount); dispatch({
+    onChangeCount: (count) => {dispatch({
       type: COUNTER_CHANGE,
       payload: count
     })},
