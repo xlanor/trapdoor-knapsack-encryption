@@ -1,9 +1,10 @@
 const tintColor = '#2f95dc';
 
 export const COLORS = {
+  BLACK_1: '#000000',
   ORANGE_1: '#FFA200',
   RED_1: '#FF3D3D',
-  YELLOW_1: '#FEF6A7',
   WHITE_1: '#FFFFFF',
+  YELLOW_1: '#FEF6A7',
 };
 
