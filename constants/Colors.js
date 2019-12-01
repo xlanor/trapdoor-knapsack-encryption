@@ -4,5 +4,6 @@ export const COLORS = {
   ORANGE_1: '#FFA200',
   RED_1: '#FF3D3D',
   YELLOW_1: '#FEF6A7',
+  WHITE_1: '#FFFFFF',
 };
 
