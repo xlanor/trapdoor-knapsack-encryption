@@ -58,6 +58,9 @@ import KeyLocked from '../../assets/images/KeyLocked.png';
 // import stylesheet.
 import styles from './styles';
 
+// import other components.
+import AlertPopUp from '../Common/AlertPopUp';
+
 
 class LearnParent extends Component {
   constructor(props){
@@ -66,38 +69,22 @@ class LearnParent extends Component {
     // a state defined in redux so that the state
     // is able to persist throughout app shutdowns.
     this.state = {
-      showText: "hello, world!",
       selected: 1,
+      displayPopup: false,
+      popupMessage: "An error has occured",
     }
     console.log(this.props);
     console.log(this.state);
   }
 
-  updatedText = () => {
-    const { selected } = this.state;
-    switch(selected){
-      case 1: 
-            this.setState({showText: "book"});
-            break;
-      case 2:
-          this.setState({showText: "Algo"});
-          break;
-      case 3:
-          this.setState({showText: "Key"});
-          break;
-      case 4:
-          this.setState({showText: "Lock"});
-          break;
-      case 5:
-          this.setState({showText: "Unlock"});
-          break;
-      default:
-          this.setState({showText: "Hello, World!"});
-          break;
-    }
+  updatePopupMessage = (messageString) => {
+      this.setState({
+          displayPopup: true,
+          popupMessage: messageString        
+      })
   }
   getAlgoIcon = () => {
-    // lessonPage is the result of our redux state
+    //lockState is the result of our redux state
    const { lockState } = this.props;
    if (lockState.lessonPage.algoLocked === true){
      return (
@@ -126,7 +113,7 @@ class LearnParent extends Component {
 
   }
   getDecryptIcon = () => {
-        // lessonPage is the result of our redux state
+        //lockState is the result of our redux state
       const { lockState } = this.props;
       if (lockState.lessonPage.decryptLocked === true){
         return (
@@ -155,7 +142,7 @@ class LearnParent extends Component {
 
   }
   getEncryptIcon = () => {
-      // lessonPage is the result of our redux state
+      //lockState is the result of our redux state
       const { lockState } = this.props;
       if (lockState.lessonPage.encryptLocked === true){
         return (
@@ -184,7 +171,7 @@ class LearnParent extends Component {
 
   }
   getKnapsackIcon = () => {
-        // lessonPage is the result of our redux state
+        //lockState is the result of our redux state
       const { lockState } = this.props;
       if (lockState.lessonPage.knapSackLocked === true){
         return (
@@ -213,37 +200,53 @@ class LearnParent extends Component {
 
   }
   getKeyIcon = () => {
-      // lessonPage is the result of our redux state
-      const { lockState } = this.props;
+      //lockState is the result of our redux state
+      const { lockState, actions } = this.props;
       if (lockState.lessonPage.keyLocked === true){
         return (
+          <TouchableOpacity onPress = {()=>{
+
+            this.updatePopupMessage("You have not unlocked this portion of the application!");
+          }}>
             <Image 
               style={ styles.learnParent.imageSize }
               source= { KeyLocked }
-              />
+            />
+
+          </TouchableOpacity>
+         
+            
         );
       }else if (lockState.lessonPage.keySelected === true){
           return (
             // to be replaced when kevin is done with selected icon
-            <Image 
-              style={ styles.learnParent.imageSize }
-              source= { Key }
+            <TouchableOpacity>
+              <Image 
+                style={ styles.learnParent.imageSize }
+                source= { Key }
               />
+            </TouchableOpacity>
+           
           );
       }else{
         // not selected, but unlocked.
         return (
-            <Image 
-              style={ styles.learnParent.imageSize }
-              source= { Key }
+          <TouchableOpacity onPress = {()=>{
+            actions.KEY_SELECT_ACTION();
+          }}>
+              <Image 
+               style={ styles.learnParent.imageSize }
+               source= { Key }
               />
+          </TouchableOpacity>
+         
           );
       } 
 
   }
   getIntroIcon = () => {
-      // lessonPage is the result of our redux state
-      const { lockState } = this.props;
+      //lockState is the result of our redux state
+      const { lockState, actions } = this.props;
       if (lockState.lessonPage.introLocked === true){
         return (
             <Image 
@@ -254,25 +257,34 @@ class LearnParent extends Component {
       }else if (lockState.lessonPage.introSelected === true){
           return (
             // to be replaced when kevin is done with selected icon
+            <TouchableOpacity onPress={()=>{
+              console.log("Clicked");
+              actions.INTRO_SELECT_ACTION();
+              }}>
             <Image 
               style={ styles.learnParent.imageSize }
               source= { Intro }
               />
+              </TouchableOpacity>
           );
       }else{
         // not selected, but unlocked.
         return (
-            <Image 
-              style={ styles.learnParent.imageSize }
-              source= { Intro }
-              />
+            <TouchableOpacity onPress={()=>{
+              actions.INTRO_SELECT_ACTION();
+              }}>
+              <Image 
+                style={ styles.learnParent.imageSize }
+                source= { Intro }
+                />
+            </TouchableOpacity>
           );
       } 
 
   }
   getImages = () => {
       return (
-        <View >
+        <View style={{alignItems: 'center'}}>
           {/* Must have the nested view to allow flexdirection to be preserved! */}
           <View style={{ flexDirection: 'row'}}>
             {
@@ -302,7 +314,7 @@ class LearnParent extends Component {
   }
 
   render(){
-    const { showText } = this.state;
+    const { displayPopup, popupMessage } = this.state;
     return(
       // flex set to 1 so that the white box will take up all the remaining space!
       <View style={styles.learnParent.wrapperViewBackground}>
@@ -312,8 +324,14 @@ class LearnParent extends Component {
         <View
           style={styles.learnParent.borderLine}
         />
+        {/* Callback function to hide the popup */}
+        <AlertPopUp
+            messageContent={popupMessage}
+            callback={() => this.setState({ displayPopup: false })}
+            visibility={displayPopup}
+        />
         <ScrollView style={styles.learnParent.scrollViewBackground}>
-          <Text>{showText}</Text>
+          <Text></Text>
 
         </ScrollView>
       </View>
