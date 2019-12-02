@@ -88,10 +88,16 @@ class LearnParent extends Component {
    const { lockState } = this.props;
    if (lockState.lessonPage.algoLocked === true){
      return (
+      <TouchableOpacity onPress = {()=>{
+
+        this.updatePopupMessage("You have not unlocked this portion of the application!");
+      }}>
         <Image 
           style={ styles.learnParent.imageSize }
           source= { AlgoLocked }
-          />
+        />
+
+      </TouchableOpacity>
      );
    }else if (lockState.lessonPage.algoSelected === true){
       return (
@@ -117,10 +123,16 @@ class LearnParent extends Component {
       const { lockState } = this.props;
       if (lockState.lessonPage.decryptLocked === true){
         return (
+          <TouchableOpacity onPress = {()=>{
+
+            this.updatePopupMessage("You have not unlocked this portion of the application!");
+          }}>
             <Image 
               style={ styles.learnParent.imageSize }
               source= { DecryptLocked }
-              />
+            />
+
+          </TouchableOpacity>
         );
       }else if (lockState.lessonPage.decryptSelected === true){
           return (
@@ -146,10 +158,16 @@ class LearnParent extends Component {
       const { lockState } = this.props;
       if (lockState.lessonPage.encryptLocked === true){
         return (
+          <TouchableOpacity onPress = {()=>{
+
+            this.updatePopupMessage("You have not unlocked this portion of the application!");
+          }}>
             <Image 
               style={ styles.learnParent.imageSize }
               source= { EncryptLocked }
-              />
+            />
+
+          </TouchableOpacity>
         );
       }else if (lockState.lessonPage.encryptSelected === true){
           return (
@@ -175,10 +193,16 @@ class LearnParent extends Component {
       const { lockState } = this.props;
       if (lockState.lessonPage.knapSackLocked === true){
         return (
+          <TouchableOpacity onPress = {()=>{
+
+            this.updatePopupMessage("You have not unlocked this portion of the application!");
+          }}>
             <Image 
               style={ styles.learnParent.imageSize }
               source= { KnapSackLocked }
-              />
+            />
+
+          </TouchableOpacity>
         );
       }else if (lockState.lessonPage.knapSackSelected === true){
           return (
@@ -315,6 +339,11 @@ class LearnParent extends Component {
 
   render(){
     const { displayPopup, popupMessage } = this.state;
+     // after 2 seconds, auto dismiss the alert popup
+      setTimeout(() => {
+        if (displayPopup) this.setState({ displayPopup: false });
+      }, 2000);
+
     return(
       // flex set to 1 so that the white box will take up all the remaining space!
       <View style={styles.learnParent.wrapperViewBackground}>
