@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ScrollView, 
   View,
+  Platform, StatusBar
 } from 'react-native';
 
 import { SafeAreaView } from 'react-navigation'
