@@ -18,6 +18,7 @@
     "@shoutem/ui": "^1.0.1",
     "expo": "^35.0.0",
     "expo-asset": "^7.0.0",
+    "expo-cli": "^3.9.1",
     "expo-constants": "^7.0.0",
     "expo-font": "^7.0.0",
     "expo-web-browser": "^7.0.0",
