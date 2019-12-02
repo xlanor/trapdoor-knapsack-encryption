@@ -199,7 +199,7 @@ const lessonPageReducer = (state = initialState, action ) => {
     case UNLOCK_ALL:
       return allUnlocked;
     case RESET_ALL:
-      return state;
+      return initialState;
     default:
       return state;
   }
