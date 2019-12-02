@@ -78,7 +78,8 @@ class LearnTab extends Component{
     }
 
     isFirstPage = () => {
-        return lockState.lessonPageTabAndPages.tabPage <= 1 ? true: false;
+      const { lockState } = this.props;
+      return lockState.lessonPageTabAndPages.tabPage <= 1 ? true: false;
     }
 
     getContent = () => {
@@ -118,8 +119,13 @@ class LearnTab extends Component{
         <View>
           {this.loadIntro()}
           {
-            this.isFinalPage()?
-            <Text>Previous Page</Text>:null
+            this.isFirstPage()?
+            null:
+            <TouchableOpacity onPress = {()=>{
+                this.getTouchablePreviousAction()
+            }}>
+              <Text>Previous Page</Text>
+            </TouchableOpacity>
           }
           {
             this.isFinalPage()?
