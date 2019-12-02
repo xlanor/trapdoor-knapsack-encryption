@@ -60,6 +60,7 @@ import styles from './styles';
 
 // import other components.
 import AlertPopUp from '../Common/AlertPopUp';
+import LearnTab from './LearnTab';
 
 
 class LearnParent extends Component {
@@ -339,10 +340,10 @@ class LearnParent extends Component {
 
   render(){
     const { displayPopup, popupMessage } = this.state;
-     // after 2 seconds, auto dismiss the alert popup
+     // after 3 seconds, auto dismiss the alert popup
       setTimeout(() => {
         if (displayPopup) this.setState({ displayPopup: false });
-      }, 2000);
+      }, 3000);
 
     return(
       // flex set to 1 so that the white box will take up all the remaining space!
@@ -360,7 +361,7 @@ class LearnParent extends Component {
             visibility={displayPopup}
         />
         <ScrollView style={styles.learnParent.scrollViewBackground}>
-          <Text></Text>
+          <LearnTab/>
 
         </ScrollView>
       </View>
