@@ -84,6 +84,7 @@ class LearnParent extends Component {
           popupMessage: messageString        
       })
   }
+  
   getAlgoIcon = () => {
     //lockState is the result of our redux state
    const { lockState } = this.props;

@@ -21,6 +21,7 @@ import {
   UNLOCK_ALL,
   RESET_ALL,
  } from '../constants';
+ 
 export const UNLOCK_ALL_ACTION = () =>{
   return{
     type: UNLOCK_ALL
