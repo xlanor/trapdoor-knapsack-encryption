@@ -11,7 +11,7 @@ const initialState = {
   tabName: "intro",
   tabPage: 1,
   minTabPage: 0,
-  maxIntroPages: 2,
+  maxIntroPages: 4,
 }
 
 

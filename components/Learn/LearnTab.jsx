@@ -15,7 +15,9 @@ import Pages  from './Pages'
 
 import { 
   introPageOne,
-  introPageTwo
+  introPageTwo,
+  introPageThree,
+  introPageFour,
 } from './content'
 
 import {
@@ -94,6 +96,10 @@ class LearnTab extends Component{
                 return introPageOne;
               case 2:
                 return introPageTwo;
+              case 3:
+                return introPageThree;
+              case 4:
+                return introPageFour;
               default: return introPageOne;
             }
             
