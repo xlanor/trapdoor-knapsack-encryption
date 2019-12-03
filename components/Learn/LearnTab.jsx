@@ -27,6 +27,30 @@ import {
   CHANGE_TAB_ACTION,
 } from '../../actions/tabPage';
 
+// importing redux defined actions
+import { 
+  INTRO_SELECT_ACTION,
+  INTRO_LOCK_ACTION,
+  INTRO_UNLOCK_ACTION,
+  ALGO_SELECT_ACTION,
+  ALGO_LOCK_ACTION,
+  ALGO_UNLOCK_ACTION,
+  KEY_SELECT_ACTION,
+  KEY_LOCK_ACTION,
+  KEY_UNLOCK_ACTION,
+  DECRYPT_SELECT_ACTION,
+  DECRYPT_LOCK_ACTION,
+  DECRYPT_UNLOCK_ACTION,
+  ENCRYPT_SELECT_ACTION,
+  ENCRYPT_LOCK_ACTION,
+  ENCRYPT_UNLOCK_ACTION,
+  KNAPSACK_SELECT_ACTION,
+  KNAPSACK_LOCK_ACTION,
+  KNAPSACK_UNLOCK_ACTION,
+  UNLOCK_ALL_ACTION,
+  RESET_ALL_ACTION,
+ }  from '../../actions/learnPageLock';
+
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -47,6 +71,36 @@ class LearnTab extends Component{
          tab: "intro",
          page: 1
       }
+    }
+    getNextTab = () => {
+      // to be defined  - hardcoded.
+      // from current name, get next possible name.
+      // if not, return none.
+      const { lockState, actions } = this.props;
+      let currentTab = lockState.lessonPageTabAndPages.tabName
+      let isFound = false;
+      switch(currentTab){
+        case "intro":
+          isFound = true; break;
+        default: break;
+      }
+      if (!isFound) 
+        return null;
+      else{
+        // return a button. to be designed.
+        return (<Button title={"Unlock next tab"} onPress={()=>{
+          console.log(currentTab)
+          switch(currentTab){
+            case "intro":
+                console.log("is intro")
+                return actions.KEY_UNLOCK_ACTION();
+            default: return null;
+          }
+        }} />
+        );
+      }
+      
+      
     }
     getTouchablePreviousAction = () => {
       const { lockState, actions } = this.props;
@@ -135,7 +189,7 @@ class LearnTab extends Component{
           }
           {
             this.isFinalPage()?
-            null:
+            this.getNextTab():
             <TouchableOpacity onPress = {()=>{
                 this.getTouchableNextAction()
             }}>
@@ -160,6 +214,26 @@ const mapDispatchToProps = (dispatch) => ({
     PREVIOUS_INTRO_PAGE_ACTION,
     RESET_PAGE_ACTION,
     CHANGE_TAB_ACTION,
+    INTRO_SELECT_ACTION,
+    INTRO_LOCK_ACTION,
+    INTRO_UNLOCK_ACTION,
+    ALGO_SELECT_ACTION,
+    ALGO_LOCK_ACTION,
+    ALGO_UNLOCK_ACTION,
+    KEY_SELECT_ACTION,
+    KEY_LOCK_ACTION,
+    KEY_UNLOCK_ACTION,
+    DECRYPT_SELECT_ACTION,
+    DECRYPT_LOCK_ACTION,
+    DECRYPT_UNLOCK_ACTION,
+    ENCRYPT_SELECT_ACTION,
+    ENCRYPT_LOCK_ACTION,
+    ENCRYPT_UNLOCK_ACTION,
+    KNAPSACK_SELECT_ACTION,
+    KNAPSACK_LOCK_ACTION,
+    KNAPSACK_UNLOCK_ACTION,
+    UNLOCK_ALL_ACTION,
+    RESET_ALL_ACTION,
   }, dispatch)
 });
 
