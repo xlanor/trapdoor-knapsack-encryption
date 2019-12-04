@@ -18,6 +18,8 @@ import {
   introPageTwo,
   introPageThree,
   introPageFour,
+  gcdPageOne,
+
 } from './content'
 
 import {
@@ -92,7 +94,6 @@ class LearnTab extends Component{
           console.log(currentTab)
           switch(currentTab){
             case "intro":
-                console.log("is intro")
                 return actions.KEY_UNLOCK_ACTION();
             default: return null;
           }
@@ -156,7 +157,13 @@ class LearnTab extends Component{
                 return introPageFour;
               default: return introPageOne;
             }
-            
+        case "gcd":
+            switch(currentPage){
+              case 1:
+                return gcdPageOne;
+              default:
+                return gcdPageOne;
+            }
         default: return null;
       }
     }
