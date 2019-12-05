@@ -97,7 +97,7 @@ class LearnParent extends Component {
   
   getAlgoIcon = () => {
     //lockState is the result of our redux state
-   const { lockState } = this.props;
+   const { lockState, actions } = this.props;
    if (lockState.lessonPage.algoLocked === true){
      return (
       <TouchableOpacity onPress = {()=>{
@@ -114,18 +114,30 @@ class LearnParent extends Component {
    }else if (lockState.lessonPage.algoSelected === true){
       return (
         // to be replaced when kevin is done with selected icon
+        <TouchableOpacity  onPress={() =>{
+          actions.ALGO_SELECT_ACTION();
+          actions.CHANGE_TAB_ACTION("gcd");
+
+        }}>
         <Image 
           style={ styles.learnParent.imageSize }
           source= { Algo }
           />
+        </TouchableOpacity>
       );
    }else{
      // not selected, but unlocked.
      return (
+       <TouchableOpacity  onPress={() =>{
+        actions.ALGO_SELECT_ACTION();
+        actions.CHANGE_TAB_ACTION("gcd");
+
+      }}>
         <Image 
           style={ styles.learnParent.imageSize }
           source= { Algo }
           />
+        </TouchableOpacity>
       );
    }
 
@@ -258,7 +270,7 @@ class LearnParent extends Component {
             // to be replaced when kevin is done with selected icon
             <TouchableOpacity onPress={() =>{
               actions.KEY_SELECT_ACTION();
-              actions.CHANGE_TAB_ACTION("gcd");
+              actions.CHANGE_TAB_ACTION("key");
 
             }}>
               <Image 
@@ -273,7 +285,7 @@ class LearnParent extends Component {
         return (
           <TouchableOpacity onPress = {()=>{
             actions.KEY_SELECT_ACTION();
-            actions.CHANGE_TAB_ACTION("gcd");
+            actions.CHANGE_TAB_ACTION("key");
           }}>
               <Image 
                style={ styles.learnParent.imageSize }
@@ -335,10 +347,10 @@ class LearnParent extends Component {
               this.getIntroIcon()
             }
             {
-              this.getKeyIcon()
+              this.getAlgoIcon()
             }
             {
-              this.getAlgoIcon()
+              this.getKeyIcon()
             }
             {
               this.getEncryptIcon()

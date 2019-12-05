@@ -19,6 +19,7 @@ import {
   introPageThree,
   introPageFour,
   gcdPageOne,
+  keyPageOne,
 
 } from './content'
 
@@ -84,6 +85,9 @@ class LearnTab extends Component{
       switch(currentTab){
         case "intro":
           isFound = true; break;
+        case "gcd":
+          isFound = true; break;
+
         default: break;
       }
       if (!isFound) 
@@ -94,6 +98,8 @@ class LearnTab extends Component{
           console.log(currentTab)
           switch(currentTab){
             case "intro":
+                return actions.ALGO_UNLOCK_ACTION();
+            case "gcd":
                 return actions.KEY_UNLOCK_ACTION();
             default: return null;
           }
@@ -124,14 +130,8 @@ class LearnTab extends Component{
     isFinalPage = () => {
       const { lockState } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
-      switch(currentTab){
-        case "intro":
-          return lockState.lessonPageTabAndPages.tabPage >= lockState.lessonPageTabAndPages.maxPage 
+       return lockState.lessonPageTabAndPages.tabPage >= lockState.lessonPageTabAndPages.maxPage 
                   ? true : false;
-        default:
-          return true;
-
-      }
     }
 
     isFirstPage = () => {
@@ -164,6 +164,13 @@ class LearnTab extends Component{
                 return gcdPageOne;
               default:
                 return gcdPageOne;
+            }
+        case "key":
+            switch(currentPage){
+              case 1:
+                return keyPageOne;
+              default: 
+                return keyPageOne;
             }
         default: return null;
       }
