@@ -256,7 +256,11 @@ class LearnParent extends Component {
       }else if (lockState.lessonPage.keySelected === true){
           return (
             // to be replaced when kevin is done with selected icon
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() =>{
+              actions.KEY_SELECT_ACTION();
+              actions.CHANGE_TAB_ACTION("gcd");
+
+            }}>
               <Image 
                 style={ styles.learnParent.imageSize }
                 source= { KeySelected }
@@ -297,6 +301,7 @@ class LearnParent extends Component {
             <TouchableOpacity onPress={()=>{
               console.log("Clicked");
               actions.INTRO_SELECT_ACTION();
+              actions.CHANGE_TAB_ACTION("intro");
               }}>
             <Image 
               style={ styles.learnParent.imageSize }
@@ -309,6 +314,8 @@ class LearnParent extends Component {
         return (
             <TouchableOpacity onPress={()=>{
               actions.INTRO_SELECT_ACTION();
+              actions.CHANGE_TAB_ACTION("intro");
+              
               }}>
               <Image 
                 style={ styles.learnParent.imageSize }
