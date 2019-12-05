@@ -8,6 +8,7 @@ import {
 
 const MAX_INTRO_PAGES=4;
 const MAX_GCD_PAGES=1;
+const MAX_KEY_PAGES=1;
 // we will have different tab names
 // to be determined.
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   maxPage: MAX_INTRO_PAGES,
   maxIntroPages: MAX_INTRO_PAGES,
   maxGcdPages: MAX_GCD_PAGES,
+  maxKeyPages: MAX_KEY_PAGES,
 }
 
 
@@ -43,6 +45,10 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
               case "gcd":
                   newMaxPages = MAX_GCD_PAGES;
                   newTabName = 'gcd';
+                  break;
+              case "key":
+                  newMaxPages = MAX_KEY_PAGES;
+                  newTabName = 'key';
                   break;
               default: break;
 
