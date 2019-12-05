@@ -34,7 +34,8 @@ export const RESET_ALL_ACTION = () =>{
 } 
 export const KNAPSACK_SELECT_ACTION = () =>{
   return{
-    type: KNAPSACK_SELECT
+    type: KNAPSACK_SELECT,
+    payload: 'knapsack'
   }
 } 
 export const KNAPSACK_LOCK_ACTION = () =>{
@@ -49,7 +50,8 @@ export const KNAPSACK_UNLOCK_ACTION = () =>{
 } 
 export const ENCRYPT_SELECT_ACTION = () =>{
   return{
-    type: ENCRYPT_SELECT
+    type: ENCRYPT_SELECT,
+    payload: 'encrypt',
   }
 } 
 export const ENCRYPT_LOCK_ACTION = () =>{
@@ -64,7 +66,8 @@ export const ENCRYPT_UNLOCK_ACTION = () =>{
 } 
 export const DECRYPT_SELECT_ACTION = () =>{
   return{
-    type: DECRYPT_SELECT
+    type: DECRYPT_SELECT,
+    payload: 'decrypt',
   }
 } 
 export const DECRYPT_LOCK_ACTION = () =>{
@@ -80,7 +83,8 @@ export const DECRYPT_UNLOCK_ACTION = () =>{
 
 export const KEY_SELECT_ACTION = () =>{
   return{
-    type: KEY_SELECT
+    type: KEY_SELECT,
+    payload: 'key'
   }
 } 
 export const KEY_LOCK_ACTION = () =>{
@@ -96,7 +100,8 @@ export const KEY_UNLOCK_ACTION = () =>{
 
 export const ALGO_SELECT_ACTION = () =>{
   return{
-    type: ALGO_SELECT
+    type: ALGO_SELECT,
+    payload: 'algo',
   }
 } 
 export const ALGO_LOCK_ACTION = () =>{
@@ -111,7 +116,8 @@ export const ALGO_UNLOCK_ACTION = () =>{
 }
 export const INTRO_SELECT_ACTION = () =>{
   return{
-    type: INTRO_SELECT
+    type: INTRO_SELECT,
+    payload: 'intro',
   }
 }
 export const INTRO_LOCK_ACTION = () =>{

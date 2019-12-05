@@ -39,6 +39,10 @@ import {
   RESET_ALL_ACTION,
  }  from '../../actions/learnPageLock';
 
+ import {
+  CHANGE_TAB_ACTION
+}  from '../../actions/tabPage';
+
 // importing image assets
 // unlocked
 import Algo from '../../assets/images/Algo.png';
@@ -54,6 +58,12 @@ import DecryptLocked from '../../assets/images/DecryptLocked.png';
 import EncryptLocked from '../../assets/images/EncryptLocked.png';
 import KnapSackLocked from '../../assets/images/KnapSackLocked.png';
 import KeyLocked from '../../assets/images/KeyLocked.png';
+
+//selected
+import EncryptSelected from  '../../assets/images/EncryptSelected.png';
+import KeySelected from  '../../assets/images/KeySelected.png';
+import IntroSelected from  '../../assets/images/IntroSelected.png';
+
 
 // import stylesheet.
 import styles from './styles';
@@ -249,7 +259,7 @@ class LearnParent extends Component {
             <TouchableOpacity>
               <Image 
                 style={ styles.learnParent.imageSize }
-                source= { Key }
+                source= { KeySelected }
               />
             </TouchableOpacity>
            
@@ -259,6 +269,7 @@ class LearnParent extends Component {
         return (
           <TouchableOpacity onPress = {()=>{
             actions.KEY_SELECT_ACTION();
+            actions.CHANGE_TAB_ACTION("gcd");
           }}>
               <Image 
                style={ styles.learnParent.imageSize }
@@ -289,7 +300,7 @@ class LearnParent extends Component {
               }}>
             <Image 
               style={ styles.learnParent.imageSize }
-              source= { Intro }
+              source= { IntroSelected }
               />
               </TouchableOpacity>
           );
@@ -397,6 +408,7 @@ const mapDispatchToProps = (dispatch) => ({
     KNAPSACK_UNLOCK_ACTION,
     UNLOCK_ALL_ACTION,
     RESET_ALL_ACTION,
+    CHANGE_TAB_ACTION,
   }, dispatch)
 });
 

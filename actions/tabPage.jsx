@@ -24,8 +24,9 @@ import {
     }
  }
 
- export const CHANGE_TAB_ACTION = () => {
+ export const CHANGE_TAB_ACTION = (type) => {
     return {
-       type: CHANGE_TAB
+       type: CHANGE_TAB,
+       payload: type,
     }
  }
