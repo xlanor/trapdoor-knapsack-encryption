@@ -31,5 +31,7 @@ export const RESET_ALL = 'RESET_ALL';
 // for navigating pages
 export const NEXT_INTRO_PAGE='NEXT_INTRO_PAGE';
 export const PREVIOUS_INTRO_PAGE='PREVIOUS_INTRO_PAGE';
+export const CHANGE_INTRO_PAGE='CHANGE_INTRO_PAGE';
+export const CHANGE_GCD_PAGE='CHANGE_GCD_PAGE';
 export const RESET_PAGE='RESET_PAGE';
 export const CHANGE_TAB='CHANGE_TAB';

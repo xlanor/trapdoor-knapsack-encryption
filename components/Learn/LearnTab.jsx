@@ -126,7 +126,7 @@ class LearnTab extends Component{
       let currentTab = lockState.lessonPageTabAndPages.tabName
       switch(currentTab){
         case "intro":
-          return lockState.lessonPageTabAndPages.tabPage >= lockState.lessonPageTabAndPages.maxIntroPages 
+          return lockState.lessonPageTabAndPages.tabPage >= lockState.lessonPageTabAndPages.maxPage 
                   ? true : false;
         default:
           return true;
@@ -144,6 +144,7 @@ class LearnTab extends Component{
       const { lockState } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
       let currentPage = lockState.lessonPageTabAndPages.tabPage
+      console.log("Getting content for "+currentTab+" : "+currentPage)
       switch(currentTab){
         case "intro":
             switch(currentPage){

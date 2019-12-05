@@ -7,7 +7,7 @@ import {
 
 import {
     gcdPageOne,
-} from './intro';
+} from './gcd';
 
 
 export { 
