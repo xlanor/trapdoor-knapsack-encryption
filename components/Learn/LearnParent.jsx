@@ -61,6 +61,7 @@ import KeyLocked from '../../assets/images/KeyLocked.png';
 
 //selected
 import EncryptSelected from  '../../assets/images/EncryptSelected.png';
+import AlgoSelected from  '../../assets/images/AlgoSelected.png';
 import KeySelected from  '../../assets/images/KeySelected.png';
 import IntroSelected from  '../../assets/images/IntroSelected.png';
 
@@ -121,7 +122,7 @@ class LearnParent extends Component {
         }}>
         <Image 
           style={ styles.learnParent.imageSize }
-          source= { Algo }
+          source= { AlgoSelected }
           />
         </TouchableOpacity>
       );

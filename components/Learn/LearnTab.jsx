@@ -54,6 +54,7 @@ import {
   RESET_ALL_ACTION,
  }  from '../../actions/learnPageLock';
 
+ import KeyPage from './content/key/page1';
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -65,15 +66,15 @@ import Next from '../../assets/images/Next.png';
 // import stylesheet.
 import styles from './styles';
 
+
+import BackArrow from  '../../assets/images/BackArrow.png';
+import FrontArrow from  '../../assets/images/FrontArrow.png';
+
 // we will use ONE tab that will contain state
 class LearnTab extends Component{
     constructor(props){
       super(props);
-      // temporary state.
-      this.state = {
-         tab: "intro",
-         page: 1
-      }
+     
     }
     getNextTab = () => {
       // to be defined  - hardcoded.
@@ -177,15 +178,36 @@ class LearnTab extends Component{
     }
 
     loadIntro = () =>{
-      const { tab, page } = this.state;
-      let curPage = this.getContent()
-      return (
+      const { lockState } = this.props;
+      let currentTab = lockState.lessonPageTabAndPages.tabName
+      let currentPage = lockState.lessonPageTabAndPages.tabPage
+      let CurPage = this.getContent()
+      console.log(CurPage);
+      // for dynamic pages, we render component, while for static
+      // we render a page.
+      if (currentTab == "key"){
+        console.log("Returning dynamic page")
+        console.log(CurPage);
+        return (
+          <View>
+            <CurPage />
+
+          </View>
+        );
+       
+        
+      }else{ 
+        console.log("Returning static page")
+        console.log(currentTab);
+        return (
         <Pages
-          key={`${tab}-${page}-page`}
-          title={curPage.title}
-          renderText={curPage.text}
+          key={`${currentTab}-${currentPage}-page`}
+          title={CurPage.title}
+          renderText={CurPage.text}
         />
-      )
+        )
+      }
+     
         
     }
 
@@ -199,7 +221,7 @@ class LearnTab extends Component{
             <TouchableOpacity onPress = {()=>{
                 this.getTouchablePreviousAction()
             }}>
-              <Text>Previous Page</Text>
+            <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } />
             </TouchableOpacity>
           }
           {
@@ -209,7 +231,7 @@ class LearnTab extends Component{
                 this.getTouchableNextAction()
             }}>
               
-              <Image style={styles.learnTab.nextArrowSize} source={Next}/>
+              <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow} />
             </TouchableOpacity>
           }
 
