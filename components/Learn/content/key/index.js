@@ -1,5 +1,5 @@
-import pageOne from './page1';
-
+import KeyPage from './page1';
+console.log(KeyPage);
 export { 
-  pageOne as keyPageOne,
+  KeyPage as keyPageOne,
 };

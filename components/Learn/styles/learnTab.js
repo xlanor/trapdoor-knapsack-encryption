@@ -1,8 +1,8 @@
 import { COLORS } from '../../../constants/Colors';
 
 const nextArrowSize = {
-    width: 100,
-    height: 70,
+    width: 30,
+    height: 50.6,
 }
 
 export default {

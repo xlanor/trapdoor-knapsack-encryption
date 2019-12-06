@@ -13,6 +13,7 @@ import {
 import {
     keyPageOne,
 } from './key';
+console.log(keyPageOne);
 
 
 export { 
