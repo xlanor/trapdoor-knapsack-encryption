@@ -53,6 +53,7 @@ async function loadResourcesAsync() {
       // remove this if you are not using it in your app
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
       'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+      'comfortaa': require('./assets/fonts/Comfortaa-Regular.ttf'),
     }),
   ]);
 }

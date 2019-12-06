@@ -177,7 +177,7 @@ class LearnTab extends Component{
       }
     }
 
-    loadIntro = () =>{
+    loadPage = () =>{
       const { lockState } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
       let currentPage = lockState.lessonPageTabAndPages.tabPage
@@ -214,7 +214,7 @@ class LearnTab extends Component{
     render(){
       return(
         <View>
-          {this.loadIntro()}
+          {this.loadPage()}
           {
             this.isFirstPage()?
             null:
