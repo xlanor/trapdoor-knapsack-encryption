@@ -1,8 +1,11 @@
 import {
   NEXT_INTRO_PAGE,
   PREVIOUS_INTRO_PAGE,
+  NEXT_KEY_PAGE,
+  PREVIOUS_KEY_PAGE,
   RESET_PAGE,
   CHANGE_TAB,
+  SET_NEXT_TAB,
 
 } from '../constants';
 
@@ -19,6 +22,9 @@ const initialState = {
   maxIntroPages: MAX_INTRO_PAGES,
   maxGcdPages: MAX_GCD_PAGES,
   maxKeyPages: MAX_KEY_PAGES,
+  allowNextPage:true, // set to true by default. we turn it off as and when we need to.
+  showErrorMessage: false, // set to fals eby default, we dont need to show an error
+  errorMessage: "", // empty by default.
 }
 
 
@@ -28,8 +34,34 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
           return {
             ...state,
             tabPage: (state.tabPage+1 > state.maxPage) ?  state.tabPage: state.tabPage+1,
+            allowNextPage: true,
+            showErrorMessage: false,
+            errorMessage: "",
           }
       case PREVIOUS_INTRO_PAGE:
+          return {
+            ...state,
+            tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
+            allowNextPage: true, // intro does not have any requirements that we cant navigate to the next tab.
+            showErrorMessage: false,
+            errorMessage: "",
+          }
+          
+      case NEXT_KEY_PAGE:
+          // action to be passed in as a state.
+          if(state.allowNextPage === true){
+            return {
+              ...state,
+              tabPage: (state.tabPage+1 > state.maxPage) ?  state.tabPage: state.tabPage+1,
+              allowNextPage: true,
+            }
+          }else{
+            return {
+               ...state,
+            }
+          }
+         
+      case PREVIOUS_KEY_PAGE:
           return {
             ...state,
             tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
@@ -55,12 +87,27 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
           }
           console.log(action.payload);
           if (newTabName != null && newMaxPages != null){
-            return {
-              ...state,
-              tabName: newTabName,
-              maxPage: newMaxPages,
+            if (newTabName == "key"){
+                return {
+                  ...state,
+                  tabName: newTabName,
+                  maxPage: newMaxPages,
+                  allowNextPage: false, // these pages do NOT allow next page to be navigatable by default.
+                  showErrorMessage: false,
+                  errorMessage: "",
+                  tabPage: 1
+              }
+            }else{
 
-              tabPage: 1,
+              return {
+                ...state,
+                tabName: newTabName,
+                maxPage: newMaxPages,
+                allowNextPage: true, // by default, allow all to navigate to next page
+                showErrorMessage: false,
+                errorMessage: "",
+                tabPage: 1
+              }
             }
           } else{
             return {
@@ -68,8 +115,15 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
             }
 
           }
+      case SET_NEXT_TAB:
+          return {
+            ...state,
+            allowNextPage: true,
+          }
       case RESET_PAGE:
-          return initialState;
+          return {
+            ...initialState
+          };
       default: return state;
   }
 }
