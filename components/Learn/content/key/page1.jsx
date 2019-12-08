@@ -226,10 +226,16 @@ class KeyPage extends Component {
      }
      return newPk;
    }
+   loadInverse = () => {
+
+     const { lockState, actions } = this.props;
+     let currentInverse = this.xgcd(lockState.updateParameters.multiplier,lockState.updateParameters.modulo);
+     actions.UPDATE_INVERSE_ACTION(currentInverse);
+
+   }
    getFifthPage = () => {
      const { lockState,actions } = this.props;
      let pub = this.computePublicKey()
-
      actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
      actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
      return (
@@ -246,21 +252,17 @@ class KeyPage extends Component {
          <Text style={styles.page1.textStyle}>Inverse of multiplier = {lockState.updateParameters.inverse}</Text>
        </View>
      )
-
-
    }
    getFourthPage = () => {
-     const { lockState, actions } = this.props;
-     let currentInverse = this.xgcd(lockState.updateParameters.multiplier,lockState.updateParameters.modulo);
-     actions.ALLOW_NEXT_PAGE_ACTION();  
-     actions.UPDATE_INVERSE_ACTION(currentInverse);
+     const { lockState } = this.props;
+     this.loadInverse()
      return (
        <View>
          <Text style={styles.page1.textStyle}>Calculate the multiplicative inverse of your multiplier w({lockState.updateParameters.multiplier}):</Text>
          <Text style={styles.page1.textStyle}>(Using Extended Euclidean's algorithm)</Text>
          <Text style={styles.page1.textStyle}>This is needed for decryption</Text>
          <Text style={styles.page1.textStyle}>E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)</Text>
-          <Text style={styles.page1.textStyle}>Multiplicative inverse of your multiplier ({lockState.updateParameters.multiplier}): {currentInverse}</Text>
+          <Text style={styles.page1.textStyle}>Multiplicative inverse of your multiplier ({lockState.updateParameters.multiplier}): {lockState.updateParameters.inverse}</Text>
        </View>
      )
    }
