@@ -26,6 +26,8 @@ import {
 import {
   NEXT_INTRO_PAGE_ACTION,
   PREVIOUS_INTRO_PAGE_ACTION,
+  NEXT_KEY_PAGE_ACTION,
+  PREVIOUS_KEY_PAGE_ACTION,
   RESET_PAGE_ACTION,
   CHANGE_TAB_ACTION,
 } from '../../actions/tabPage';
@@ -82,15 +84,19 @@ class LearnTab extends Component{
       // if not, return none.
       const { lockState, actions } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
+      let isUnlockable = lockState.lessonPageTabAndPages.allowNextPage
       let isFound = false;
       switch(currentTab){
         case "intro":
           isFound = true; break;
         case "gcd":
           isFound = true; break;
-
+        case "key":
+          isFound = true; break;
+          break;
         default: break;
       }
+
       if (!isFound) 
         return null;
       else{
@@ -110,11 +116,18 @@ class LearnTab extends Component{
       
       
     }
+    canNavigate = () => {
+      const { lockState } = this.props;
+      let isUnlockable = lockState.lessonPageTabAndPages.allowNextPage
+      return isUnlockable ? true: false; // redundant true/false but to be a little more explicit
+    }
+
     getTouchablePreviousAction = () => {
       const { lockState, actions } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
       switch(currentTab){
         case "intro": return actions.PREVIOUS_INTRO_PAGE_ACTION();
+        case "key": return actions.PREVIOUS_KEY_PAGE_ACTION();
         default: return actions.PREVIOUS_INTRO_PAGE_ACTION();
       }
 
@@ -124,6 +137,7 @@ class LearnTab extends Component{
       let currentTab = lockState.lessonPageTabAndPages.tabName
       switch(currentTab){
         case "intro": return actions.NEXT_INTRO_PAGE_ACTION();
+        case "key": return actions.NEXT_KEY_PAGE_ACTION();
         default: return actions.NEXT_INTRO_PAGE_ACTION();
       }
 
@@ -227,12 +241,14 @@ class LearnTab extends Component{
           {
             this.isFinalPage()?
             this.getNextTab():
-            <TouchableOpacity onPress = {()=>{
-                this.getTouchableNextAction()
-            }}>
-              
-              <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow} />
-            </TouchableOpacity>
+              this.canNavigate()?
+                <TouchableOpacity onPress = {()=>{
+                    this.getTouchableNextAction()
+                }}>
+                  
+                  <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow} />
+                </TouchableOpacity>
+                : null
           }
 
         </View>
@@ -271,6 +287,8 @@ const mapDispatchToProps = (dispatch) => ({
     KNAPSACK_UNLOCK_ACTION,
     UNLOCK_ALL_ACTION,
     RESET_ALL_ACTION,
+    NEXT_KEY_PAGE_ACTION,
+    PREVIOUS_KEY_PAGE_ACTION,
   }, dispatch)
 });
 

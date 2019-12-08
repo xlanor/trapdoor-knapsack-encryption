@@ -27,7 +27,7 @@ const initialState = {
     algoSelected: false,
     algoLocked: true,
     keySelected: false,
-    keyLocked: true,
+    keyLocked: false,
     decryptSelected: false,
     decryptLocked: true,
     encryptSelected: false,
