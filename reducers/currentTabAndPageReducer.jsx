@@ -6,12 +6,12 @@ import {
   RESET_PAGE,
   CHANGE_TAB,
   SET_NEXT_TAB,
-
+  ALLOW_NEXT_PAGE,
 } from '../constants';
 
 const MAX_INTRO_PAGES=4;
 const MAX_GCD_PAGES=1;
-const MAX_KEY_PAGES=1;
+const MAX_KEY_PAGES=3;
 // we will have different tab names
 // to be determined.
 const initialState = {
@@ -50,22 +50,30 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
       case NEXT_KEY_PAGE:
           // action to be passed in as a state.
           if(state.allowNextPage === true){
+            console.log("Reset to false")
             return {
               ...state,
               tabPage: (state.tabPage+1 > state.maxPage) ?  state.tabPage: state.tabPage+1,
-              allowNextPage: true,
+              allowNextPage: false, // so that you cant turn to the next page on the new page.
             }
           }else{
             return {
                ...state,
             }
           }
-         
+       
       case PREVIOUS_KEY_PAGE:
           return {
             ...state,
             tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
           }
+
+      case ALLOW_NEXT_PAGE:
+          return {
+            ...state,
+            allowNextPage: true,
+          }
+1
       case CHANGE_TAB:
           let newTabName = null;
           let newMaxPages = null;
@@ -85,7 +93,6 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
               default: break;
 
           }
-          console.log(action.payload);
           if (newTabName != null && newMaxPages != null){
             if (newTabName == "key"){
                 return {

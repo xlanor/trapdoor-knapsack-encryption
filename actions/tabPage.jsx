@@ -9,6 +9,7 @@ import {
   SET_NEXT_TAB,
   RESET_ERROR_MESSAGE,
   SET_ERROR_MESSAGE,
+  ALLOW_NEXT_PAGE,
  } from '../constants';
 
 
@@ -49,6 +50,12 @@ import {
 export const RESET_ERROR_MESSAGE_ACTION = () => {
     return {
         type: RESET_ERROR_MESSAGE,
+    }
+}
+
+export const ALLOW_NEXT_PAGE_ACTION = () => {
+    return {
+        type: ALLOW_NEXT_PAGE,
     }
 }
 
