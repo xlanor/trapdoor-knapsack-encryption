@@ -11,7 +11,7 @@ import {
 
 const MAX_INTRO_PAGES=4;
 const MAX_GCD_PAGES=1;
-const MAX_KEY_PAGES=3;
+const MAX_KEY_PAGES=6;
 // we will have different tab names
 // to be determined.
 const initialState = {
