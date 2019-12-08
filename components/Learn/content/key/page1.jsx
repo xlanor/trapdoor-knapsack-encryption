@@ -214,7 +214,7 @@ class KeyPage extends Component {
 
    }
    computePublicKey = () => {
-     const { lockState, actions } = this.props;
+     const { lockState } = this.props;
      // for every element in the public key, multiply by the multiplier and get the remainder.
      let privateKey = lockState.updateParameters.privateKeyArr
      let modulo = lockState.updateParameters.modulo
@@ -229,15 +229,23 @@ class KeyPage extends Component {
    loadInverse = () => {
 
      const { lockState, actions } = this.props;
-     let currentInverse = this.xgcd(lockState.updateParameters.multiplier,lockState.updateParameters.modulo);
-     actions.UPDATE_INVERSE_ACTION(currentInverse);
+     if (lockState.updateParameters.inverse == 0){
+       // to prevent infinite loop, we need to ensure that inverse is reset to 0 if we go back then
+       // currently we dont handle any state from popping off the stack.
+        let currentInverse = this.xgcd(lockState.updateParameters.multiplier,lockState.updateParameters.modulo);
+        actions.UPDATE_INVERSE_ACTION(currentInverse);
+        actions.ALLOW_NEXT_PAGE_ACTION()
+
+     }
 
    }
    getFifthPage = () => {
-     const { lockState,actions } = this.props;
-     let pub = this.computePublicKey()
-     actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
-     actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
+     const { lockState, actions } = this.props;
+     if( lockState.updateParameters.publicKeyArr.length == 0 ){
+        let pub = this.computePublicKey()
+        actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
+        actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
+     }
      return (
        <View>
          <Text style={styles.page1.textStyle}> Compute the public key b:</Text>
@@ -356,7 +364,7 @@ class KeyPage extends Component {
        case 4:
          return this.getFourthPage();
        case 5: 
-       return this.getFifthPage();
+         return this.getFifthPage();
        default:  
           return this.getFirstPage();
     }

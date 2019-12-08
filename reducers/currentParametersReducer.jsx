@@ -2,6 +2,8 @@ import {
   UPDATE_PRIVATE_KEY_STRING,
   UPDATE_PRIVATE_KEY_SUM,
   UPDATE_PRIVATE_KEY_ARRAY,
+  UPDATE_PUBLIC_KEY_ARRAY,
+  UPDATE_PUBLIC_KEY_STRING,
   UPDATE_MODULO,
   UPDATE_MULTIPLIER,
   UPDATE_INVERSE,
@@ -16,6 +18,7 @@ const initialState = {
     inverse: 0,
     publicKeyString: "",
     publicKeyArr: [],
+
 }
 
 const currentParametersReducer = ( state=initialState, action ) => {
@@ -51,6 +54,16 @@ const currentParametersReducer = ( state=initialState, action ) => {
           return {
             ...state,
             inverse: action.payload,
+          }
+        case UPDATE_PUBLIC_KEY_ARRAY:
+          return {
+            ...state,
+            publicKeyArr: action.payload,
+          }
+        case UPDATE_PUBLIC_KEY_STRING:
+          return {
+            ...state,
+            publicKeyString: action.payload,
           }
         default:
           return {

@@ -63,10 +63,38 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
           }
        
       case PREVIOUS_KEY_PAGE:
+        if(state.tabName === "key"){
+          console.log("Resetting key")
+          if(state.tabPage === 5){
+            console.log("Resetting inverse to 0")
+            return {
+              // reset the conditional checking that we prevented in our
+              // infinite loop 
+              ...state,
+              inverse: 0,
+              allowNextPage: true, // so that you cant turn to the next page on the new page.
+              tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
+            }
+          }
+          else if (state.tabPage === 6){
+              return {
+                  ...state,
+                  publicKeyString: "",
+                  publicKeyArr: [],
+                  tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
+              }
+          }else{
+            return {
+              ...state,
+              tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
+            }
+          }
+        }else{
           return {
             ...state,
             tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
           }
+        }
 
       case ALLOW_NEXT_PAGE:
           return {
