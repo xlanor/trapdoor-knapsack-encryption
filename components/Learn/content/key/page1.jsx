@@ -226,6 +226,7 @@ class KeyPage extends Component {
      }
      return newPk;
    }
+   
    loadInverse = () => {
 
      const { lockState, actions } = this.props;
@@ -239,12 +240,21 @@ class KeyPage extends Component {
      }
 
    }
+   getSixthPage = () => {
+     return (
+       <View> 
+       <Text style={styles.page1.textStyle}> Quiz Time</Text>
+         <Text style={styles.page1.textStyle}> WIP</Text>
+       </View>
+     )
+   }
    getFifthPage = () => {
      const { lockState, actions } = this.props;
      if( lockState.updateParameters.publicKeyArr.length == 0 ){
         let pub = this.computePublicKey()
         actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
         actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
+        actions.ALLOW_NEXT_PAGE_ACTION();
      }
      return (
        <View>
@@ -365,14 +375,22 @@ class KeyPage extends Component {
          return this.getFourthPage();
        case 5: 
          return this.getFifthPage();
+        case 6:
+          return this.getSixthPage();
        default:  
           return this.getFirstPage();
     }
    }
    render(){
+
+    let pageNo = this.checkPageNo()
      return(
        <View>
-         <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image>
+         {
+           pageNo <= 5 ? 
+           <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image>:
+           null
+         }
         {
           this.getPageElements()
         }

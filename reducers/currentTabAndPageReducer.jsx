@@ -81,6 +81,7 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
                   ...state,
                   publicKeyString: "",
                   publicKeyArr: [],
+                  allowNextPage: true,
                   tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
               }
           }else{

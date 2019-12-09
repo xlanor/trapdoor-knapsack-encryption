@@ -92,8 +92,7 @@ class LearnTab extends Component{
         case "gcd":
           isFound = true; break;
         case "key":
-          isFound = true; break;
-          break;
+          isFound = true; break
         default: break;
       }
 
@@ -108,6 +107,8 @@ class LearnTab extends Component{
                 return actions.ALGO_UNLOCK_ACTION();
             case "gcd":
                 return actions.KEY_UNLOCK_ACTION();
+            case "key":
+                return actions.ENCRYPT_UNLOCK_ACTION();
             default: return null;
           }
         }} />
