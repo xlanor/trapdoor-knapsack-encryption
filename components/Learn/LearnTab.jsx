@@ -56,6 +56,13 @@ import {
   RESET_ALL_ACTION,
  }  from '../../actions/learnPageLock';
 
+
+ import {
+  UPDATE_INVERSE_ACTION,
+  UPDATE_PUBLIC_KEY_STRING_ACTION,
+  UPDATE_PUBLIC_KEY_ARRAY_ACTION,
+ } from '../../actions/updateParameters';
+
  import KeyPage from './content/key/page1';
 // begin redux imports
 import { connect } from 'react-redux';
@@ -120,15 +127,31 @@ class LearnTab extends Component{
     canNavigate = () => {
       const { lockState } = this.props;
       let isUnlockable = lockState.lessonPageTabAndPages.allowNextPage
+      console.log("Next page is "+isUnlockable)
+      console.log("Inverse is "+lockState.updateParameters.inverse)
       return isUnlockable ? true: false; // redundant true/false but to be a little more explicit
     }
 
     getTouchablePreviousAction = () => {
       const { lockState, actions } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
+      let currentPage = lockState.lessonPageTabAndPages.tabPage
       switch(currentTab){
         case "intro": return actions.PREVIOUS_INTRO_PAGE_ACTION();
-        case "key": return actions.PREVIOUS_KEY_PAGE_ACTION();
+        case "key": 
+          if(currentPage == 4){
+            actions.UPDATE_INVERSE_ACTION(0);
+            return actions.PREVIOUS_KEY_PAGE_ACTION()
+          
+          }else if (currentPage == 5){
+            actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION([])
+            actions.UPDATE_PUBLIC_KEY_STRING_ACTION("")
+            return actions.PREVIOUS_KEY_PAGE_ACTION()
+
+          }else{
+
+            return actions.PREVIOUS_KEY_PAGE_ACTION();
+          }
         default: return actions.PREVIOUS_INTRO_PAGE_ACTION();
       }
 
@@ -290,6 +313,9 @@ const mapDispatchToProps = (dispatch) => ({
     RESET_ALL_ACTION,
     NEXT_KEY_PAGE_ACTION,
     PREVIOUS_KEY_PAGE_ACTION,
+    UPDATE_INVERSE_ACTION,
+    UPDATE_PUBLIC_KEY_STRING_ACTION,
+    UPDATE_PUBLIC_KEY_ARRAY_ACTION,
   }, dispatch)
 });
 
