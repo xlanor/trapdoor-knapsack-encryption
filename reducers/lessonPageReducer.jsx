@@ -31,7 +31,7 @@ const initialState = {
     decryptSelected: false,
     decryptLocked: true,
     encryptSelected: false,
-    encryptLocked: true,
+    encryptLocked: false,
     knapSackSelected: false,
     knapSackLocked: true, 
 };

@@ -4,6 +4,8 @@ import {
   PREVIOUS_INTRO_PAGE,
   NEXT_KEY_PAGE,
   PREVIOUS_KEY_PAGE,
+  PREVIOUS_ENCRYPT_PAGE,
+  NEXT_ENCRYPT_PAGE,
   RESET_PAGE,
   CHANGE_TAB,
   SET_NEXT_TAB,
@@ -33,6 +35,18 @@ import {
  export const PREVIOUS_KEY_PAGE_ACTION = () => {
    return {
      type: PREVIOUS_KEY_PAGE,
+   }
+ }
+
+ export const PREVIOUS_ENCRYPT_PAGE_ACTION = () => {
+   return {
+     type: PREVIOUS_ENCRYPT_PAGE,
+   }
+ }
+
+ export const NEXT_ENCRYPT_PAGE_ACTION = () => {
+   return {
+     type: NEXT_ENCRYPT_PAGE,
    }
  }
 

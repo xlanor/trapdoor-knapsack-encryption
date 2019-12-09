@@ -20,7 +20,7 @@ import {
   introPageFour,
   gcdPageOne,
   keyPageOne,
-
+  EncryptTutorial
 } from './content'
 
 import {
@@ -211,6 +211,13 @@ class LearnTab extends Component{
               default: 
                 return keyPageOne;
             }
+        case "encrypt":
+          switch(currentPage){
+            case 1:
+              return EncryptTutorial;
+            default:
+              return EncryptTutorial;
+          }
         default: return null;
       }
     }
@@ -220,20 +227,17 @@ class LearnTab extends Component{
       let currentTab = lockState.lessonPageTabAndPages.tabName
       let currentPage = lockState.lessonPageTabAndPages.tabPage
       let CurPage = this.getContent()
+      console.log("Current page:" + currentPage)
       console.log(CurPage);
       // for dynamic pages, we render component, while for static
       // we render a page.
-      if (currentTab == "key"){
-        console.log("Returning dynamic page")
-        console.log(CurPage);
+      if (currentTab == "key" || currentTab == "encrypt"){
         return (
           <View>
             <CurPage />
 
           </View>
-        );
-       
-        
+        );   
       }else{ 
         console.log("Returning static page")
         console.log(currentTab);
