@@ -15,6 +15,10 @@ import {
 } from './key';
 console.log(keyPageOne);
 
+import {
+    EncryptTutorial
+} from './encrypt'
+
 
 export { 
     introPageOne as introPageOne,
@@ -23,4 +27,5 @@ export {
     introPageFour as introPageFour,
     gcdPageOne as gcdPageOne,
     keyPageOne as keyPageOne,
+    EncryptTutorial as EncryptTutorial,
 };

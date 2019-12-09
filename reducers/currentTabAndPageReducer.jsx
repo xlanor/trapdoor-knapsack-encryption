@@ -3,6 +3,8 @@ import {
   PREVIOUS_INTRO_PAGE,
   NEXT_KEY_PAGE,
   PREVIOUS_KEY_PAGE,
+  PREVIOUS_ENCRYPT_PAGE,
+  NEXT_ENCRYPT_PAGE,
   RESET_PAGE,
   CHANGE_TAB,
   SET_NEXT_TAB,
@@ -12,6 +14,7 @@ import {
 const MAX_INTRO_PAGES=4;
 const MAX_GCD_PAGES=1;
 const MAX_KEY_PAGES=6;
+const MAX_ENCRYPT_PAGES=2;
 // we will have different tab names
 // to be determined.
 const initialState = {
@@ -22,6 +25,7 @@ const initialState = {
   maxIntroPages: MAX_INTRO_PAGES,
   maxGcdPages: MAX_GCD_PAGES,
   maxKeyPages: MAX_KEY_PAGES,
+  maxEncryptPages: MAX_ENCRYPT_PAGES,
   allowNextPage:true, // set to true by default. we turn it off as and when we need to.
   showErrorMessage: false, // set to fals eby default, we dont need to show an error
   errorMessage: "", // empty by default.
@@ -46,6 +50,23 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
             showErrorMessage: false,
             errorMessage: "",
           }
+      case PREVIOUS_ENCRYPT_PAGE:
+       return {
+         ...state,
+         tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
+       }
+      case NEXT_ENCRYPT_PAGE:
+          if(state.allowNextPage === true){
+            return {
+              ...state,
+              tabPage: (state.tabPage+1 > state.maxPage) ?  state.tabPage: state.tabPage+1,
+              allowNextPage: false, // so that you cant turn to the next page on the new page.
+            }
+          }else{
+            return {
+               ...state,
+            }
+          }
           
       case NEXT_KEY_PAGE:
           // action to be passed in as a state.
@@ -66,6 +87,7 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
         if(state.tabName === "key"){
           console.log("Resetting key")
           console.log("TabPage is "+state.tabPage)
+          // this entire part is to prevent the damn thing from having an infinite loop in render.
           if(state.tabPage === 4){
             console.log("Resetting the inverse,")
             console.log(state)
@@ -116,6 +138,9 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
                   newMaxPages = MAX_KEY_PAGES;
                   newTabName = 'key';
                   break;
+              case "encrypt":
+                  newMaxPages = MAX_ENCRYPT_PAGES,
+                  newTabName = "encrypt"
               default: break;
 
           }
@@ -130,7 +155,18 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
                   errorMessage: "",
                   tabPage: 1
               }
-            }else{
+            }else if (newTabName == "encrypt"){
+                return {
+                  ...state,
+                  tabName: newTabName,
+                  maxPage: newMaxPages,
+                  allowNextPage: false, // these pages do NOT allow next page to be navigatable by default.
+                  showErrorMessage: false,
+                  errorMessage: "",
+                  tabPage: 1
+              }
+            }
+            else{
 
               return {
                 ...state,
