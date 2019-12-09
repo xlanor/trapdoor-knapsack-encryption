@@ -180,7 +180,7 @@ class LearnParent extends Component {
   }
   getEncryptIcon = () => {
       //lockState is the result of our redux state
-      const { lockState } = this.props;
+      const { lockState, actions } = this.props;
       if (lockState.lessonPage.encryptLocked === true){
         return (
           <TouchableOpacity onPress = {()=>{
@@ -197,18 +197,29 @@ class LearnParent extends Component {
       }else if (lockState.lessonPage.encryptSelected === true){
           return (
             // to be replaced when kevin is done with selected icon
+            <TouchableOpacity  onPress={() =>{
+              actions.ENCRYPT_SELECT_ACTION();
+              actions.CHANGE_TAB_ACTION("encrypt");
+            }}>
             <Image 
               style={ styles.learnParent.imageSize }
-              source= { Encrypt }
+              source= { EncryptSelected }
               />
+            </TouchableOpacity>
           );
       }else{
         // not selected, but unlocked.
         return (
+          <TouchableOpacity  onPress={() =>{
+            actions.ENCRYPT_SELECT_ACTION();
+            actions.CHANGE_TAB_ACTION("encrypt");
+  
+          }}>
             <Image 
               style={ styles.learnParent.imageSize }
               source= { Encrypt }
               />
+          </TouchableOpacity>
           );
       }
 
