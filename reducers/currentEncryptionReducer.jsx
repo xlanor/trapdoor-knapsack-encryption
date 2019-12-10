@@ -3,7 +3,8 @@ import {
   UPDATE_ENCRYPTION_ASCII_STRING,
   UPDATE_ENCRYPTION_BINARY_STRING,
   UPDATE_ENCRYPTION_PADDING,
-  UPDATE_ENCRYPTION_BLOCKS, 
+  UPDATE_ENCRYPTION_BLOCKS,
+  UPDATE_ENCRYPTED_STRING, 
 } from '../constants'
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
     binaryString:"",
     padding: 0,
     binaryBlocks: [],
+    encryptedText: [],
 }
 
 const currentEncryptionReducer = (state=initialState, action) => {
@@ -40,6 +42,11 @@ const currentEncryptionReducer = (state=initialState, action) => {
         return {
           ...state,
           binaryBlocks: action.payload
+        }
+      case UPDATE_ENCRYPTED_STRING:
+        return {
+          ...state,
+          encryptedText: action.payload,
         }
       default:
           return {
