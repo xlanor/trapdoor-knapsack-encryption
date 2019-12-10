@@ -80,7 +80,7 @@ import Next from '../../assets/images/Next.png';
 import styles from './styles';
 
 
-import BackArrow from  '../../assets/images/BackArrow.png';
+import BackArrow from  '../../assets/images/backArrow.png';
 import FrontArrow from  '../../assets/images/FrontArrow.png';
 
 // we will use ONE tab that will contain state
