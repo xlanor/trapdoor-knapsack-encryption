@@ -23,21 +23,25 @@ class Block extends Component{
   constructor(props){
     super(props);
   }
+
+  multiplyTwoArrays = ( array1, array2 ) => {
+    let returnArr = []
+    for(let i = 0; i < array1.length; i++){
+      returnArr[i] = array1[i] * array2[i]
+    }
+    return returnArr
+  } 
+  //new Array(tableData.length).fill('')
   constructRowData = () => {
     const { tableData, currentPublicKey, tableType } = this.props;
     let rArr =  tableType === "binary" ?
-          [ currentPublicKey, tableData, new Array(tableData.length).fill('')]
+          [ currentPublicKey, tableData, this.multiplyTwoArrays(currentPublicKey,tableData) ]
         : [currentPublicKey, tableData ]
     return rArr
   }
   render(){
-    const { flexArr, tableTitle, tableData, currentPublicKey } = this.props;
-    console.log("Flex arr"+flexArr)
-    console.log("Table title"+ tableTitle)
-    console.log("Table Data "+tableData)
-    console.log( styles )
+    const { flexArr, tableTitle, } = this.props;
     return (
-      
       <View style={styles.containerStyle}>
         <Table borderStyle={{borderWidth: 1}}>
           <TableWrapper style={styles.wrapperStyle}>

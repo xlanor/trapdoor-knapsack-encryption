@@ -22,6 +22,7 @@ import {
     UPDATE_ENCRYPTION_BINARY_STRING_ACTION,
     UPDATE_ENCRYPTION_PADDING_ACTION,
     UPDATE_ENCRYPTION_BLOCKS_ACTION,
+    UPDATE_ENCRYPTED_STRING_ACTION,
  } from '../../../../actions/updateEncryption';
 
  import {
@@ -144,28 +145,35 @@ class EncryptTutorial extends Component{
   }
 
   getSecondPage = () => {
-    const { lockState } = this.props;
+    const { lockState, actions } = this.props;
     
     console.log("lockstate enc"+lockState.encryption)
     console.log("lockstate enc block"+lockState.encryption.binaryBlocks)
     let lockStateArr = null;
     if(lockState.encryption.binaryBlocks.length != 0){
+      let encryptedArr = [];
       lockStateArr = lockState.encryption.binaryBlocks.map((block, idx)=>{
+        encryptedArr.push( block.map((x, index)=>{
+            return lockState.updateParameters.publicKeyArr[index] + x
+        }))   
         return (
-          <>
+          <View key={'binary-'+idx}>
             <Text>Block #{idx}</Text>
             <Block 
-                key={`binary${idx+1}`}
+                key={'binary-'+idx}
                 tableTitle={["Key","Binary","Total"]}
                 flexArr={new Array(lockState.encryption.binaryBlocks.length+1).fill(1)}
                 tableData={block} 
                 currentPublicKey={lockState.updateParameters.publicKeyArr}
                 tableType="binary"
             />
-          </>
+          </View>
           )
         })
-      console.log(lockStateArr)
+        if(lockState.encryption.encryptedText.length == 0){
+          actions.UPDATE_ENCRYPTED_STRING_ACTION(encryptedArr)
+        }
+         
     }
     
     return(
@@ -189,6 +197,11 @@ class EncryptTutorial extends Component{
           */
          lockStateArr
           
+        }
+        {
+          lockState.encryption.encryptedText.length != 0 ? 
+            <Text>{lockState.encryption.encryptedText}</Text>
+            : null
         }
       </ScrollView>
     )
@@ -250,6 +263,7 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_ENCRYPTION_BINARY_STRING_ACTION,
     UPDATE_ENCRYPTION_PADDING_ACTION,
     UPDATE_ENCRYPTION_BLOCKS_ACTION,
+    UPDATE_ENCRYPTED_STRING_ACTION,
     ALLOW_NEXT_PAGE_ACTION,
   }, dispatch)
 });
