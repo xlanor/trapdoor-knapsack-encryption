@@ -28,6 +28,10 @@ import {
   PREVIOUS_INTRO_PAGE_ACTION,
   NEXT_KEY_PAGE_ACTION,
   PREVIOUS_KEY_PAGE_ACTION,
+  NEXT_ENCRYPT_PAGE_ACTION,
+  NEXT_DECRYPT_PAGE_ACTION,
+  PREVIOUS_DECRYPT_PAGE_ACTION,
+  PREVIOUS_ENCRYPT_PAGE_ACTION,
   RESET_PAGE_ACTION,
   CHANGE_TAB_ACTION,
 } from '../../actions/tabPage';
@@ -100,6 +104,8 @@ class LearnTab extends Component{
           isFound = true; break;
         case "key":
           isFound = true; break
+        case "encrypt":
+          isFound = true; break;
         default: break;
       }
 
@@ -116,6 +122,8 @@ class LearnTab extends Component{
                 return actions.KEY_UNLOCK_ACTION();
             case "key":
                 return actions.ENCRYPT_UNLOCK_ACTION();
+            case "encrypt":
+                return actions.DECRYPT_UNLOCK_ACTION();
             default: return null;
           }
         }} />
@@ -162,6 +170,8 @@ class LearnTab extends Component{
       switch(currentTab){
         case "intro": return actions.NEXT_INTRO_PAGE_ACTION();
         case "key": return actions.NEXT_KEY_PAGE_ACTION();
+        case "encrypt": return actions.NEXT_ENCRYPT_PAGE_ACTION();
+        case "decrypt": return actions.NEXT_DECRYPT_PAGE_ACTION();
         default: return actions.NEXT_INTRO_PAGE_ACTION();
       }
 
@@ -218,6 +228,9 @@ class LearnTab extends Component{
             default:
               return EncryptTutorial;
           }
+        case "decrypt":
+            switch(currentPage){
+            }
         default: return null;
       }
     }
@@ -231,7 +244,7 @@ class LearnTab extends Component{
       console.log(CurPage);
       // for dynamic pages, we render component, while for static
       // we render a page.
-      if (currentTab == "key" || currentTab == "encrypt"){
+      if (currentTab == "key" || currentTab == "encrypt" || currentTab == "decrypt"){
         return (
           <View>
             <CurPage />
@@ -293,6 +306,10 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
     NEXT_INTRO_PAGE_ACTION,
     PREVIOUS_INTRO_PAGE_ACTION,
+    NEXT_ENCRYPT_PAGE_ACTION,
+    NEXT_DECRYPT_PAGE_ACTION,
+    PREVIOUS_DECRYPT_PAGE_ACTION,
+    PREVIOUS_ENCRYPT_PAGE_ACTION,
     RESET_PAGE_ACTION,
     CHANGE_TAB_ACTION,
     INTRO_SELECT_ACTION,

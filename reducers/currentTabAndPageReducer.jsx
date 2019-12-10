@@ -14,7 +14,8 @@ import {
 const MAX_INTRO_PAGES=4;
 const MAX_GCD_PAGES=1;
 const MAX_KEY_PAGES=6;
-const MAX_ENCRYPT_PAGES=2;
+const MAX_ENCRYPT_PAGES=3;
+const MAX_DECRYPT_PAGES=3;
 // we will have different tab names
 // to be determined.
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   maxGcdPages: MAX_GCD_PAGES,
   maxKeyPages: MAX_KEY_PAGES,
   maxEncryptPages: MAX_ENCRYPT_PAGES,
+  maxDecryptPages: MAX_DECRYPT_PAGES,
   allowNextPage:true, // set to true by default. we turn it off as and when we need to.
   showErrorMessage: false, // set to fals eby default, we dont need to show an error
   errorMessage: "", // empty by default.
@@ -139,23 +141,19 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
                   newTabName = 'key';
                   break;
               case "encrypt":
-                  newMaxPages = MAX_ENCRYPT_PAGES,
+                  newMaxPages = MAX_ENCRYPT_PAGES
                   newTabName = "encrypt"
+                  break;
+              case "decrypt":
+                  newMaxPages = MAX_DECRYPT_PAGES
+                  newTabName = "decrypt"
+                  break;
               default: break;
 
           }
           if (newTabName != null && newMaxPages != null){
-            if (newTabName == "key"){
-                return {
-                  ...state,
-                  tabName: newTabName,
-                  maxPage: newMaxPages,
-                  allowNextPage: false, // these pages do NOT allow next page to be navigatable by default.
-                  showErrorMessage: false,
-                  errorMessage: "",
-                  tabPage: 1
-              }
-            }else if (newTabName == "encrypt"){
+            if (newTabName === "key" || newTabName === "decrypt" || newTabName === "encrypt"){
+                console.log("Switching tab to "+newTabName)
                 return {
                   ...state,
                   tabName: newTabName,

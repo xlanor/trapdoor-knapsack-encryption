@@ -40,6 +40,10 @@ class EncryptTutorial extends Component{
     }
   }
 
+  sumReducer = (accumulator, currentValue) => {
+      return Number(accumulator)+Number(currentValue);
+  }
+
   checkPageNo = () =>{
     const { lockState } = this.props;
     return lockState.lessonPageTabAndPages.tabPage;
@@ -144,6 +148,17 @@ class EncryptTutorial extends Component{
       actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
   }
 
+  getThirdPage = () => {
+    const { actions } = this.props;
+    
+    return (
+      <View>
+        <Text>Quiz Time</Text>
+        <Text>W.I.P</Text>
+      </View>
+    )
+  }
+
   getSecondPage = () => {
     const { lockState, actions } = this.props;
     
@@ -154,7 +169,7 @@ class EncryptTutorial extends Component{
       let encryptedArr = [];
       lockStateArr = lockState.encryption.binaryBlocks.map((block, idx)=>{
         encryptedArr.push( block.map((x, index)=>{
-            return lockState.updateParameters.publicKeyArr[index] + x
+            return Number(lockState.updateParameters.publicKeyArr[index]) * Number(x)
         }))   
         return (
           <View key={'binary-'+idx}>
@@ -170,6 +185,10 @@ class EncryptTutorial extends Component{
           </View>
           )
         })
+        console.log(encryptedArr)
+        for(let i = 0; i < encryptedArr.length; i++){
+          encryptedArr[i] = encryptedArr[i].reduce(this.sumReducer)
+        }
         if(lockState.encryption.encryptedText.length == 0){
           actions.UPDATE_ENCRYPTED_STRING_ACTION(encryptedArr)
         }
@@ -200,7 +219,7 @@ class EncryptTutorial extends Component{
         }
         {
           lockState.encryption.encryptedText.length != 0 ? 
-            <Text>{lockState.encryption.encryptedText}</Text>
+            <Text>{lockState.encryption.encryptedText.join(", ")}</Text>
             : null
         }
       </ScrollView>
