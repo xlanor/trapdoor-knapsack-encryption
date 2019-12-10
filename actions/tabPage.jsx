@@ -46,7 +46,7 @@ import {
 
  export const NEXT_ENCRYPT_PAGE_ACTION = () => {
    return {
-     type: NEXT_ENCRYPT_PAGE,
+     type: NEXT_ENCRYPT_PAGE, 
    }
  }
 
