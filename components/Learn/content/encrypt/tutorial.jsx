@@ -20,7 +20,16 @@ import {
     UPDATE_ENCRYPTION_STRING_ACTION,
     UPDATE_ENCRYPTION_ASCII_STRING_ACTION,
     UPDATE_ENCRYPTION_BINARY_STRING_ACTION,
+    UPDATE_ENCRYPTION_PADDING_ACTION,
+    UPDATE_ENCRYPTION_BLOCKS_ACTION,
  } from '../../../../actions/updateEncryption';
+
+ import {
+  ALLOW_NEXT_PAGE_ACTION
+ } from '../../../../actions/tabPage';
+import { ScrollView } from 'react-native-gesture-handler';
+
+import Block from '../../../Common/Blocks'
 
 class EncryptTutorial extends Component{
   constructor(props){
@@ -50,6 +59,7 @@ class EncryptTutorial extends Component{
           .join('')
     );
   }
+
   getBinaryString = (knapsack, yVal) => {
     let binList = [];
     yVal.forEach(( y )=>{
@@ -68,6 +78,46 @@ class EncryptTutorial extends Component{
     return binList
   }
 
+  chunk = (binaryString, trapdoorSize) => {
+    const { actions } = this.props;
+    let binBlocks = []
+    let upper = binaryString.length - trapdoorSize
+    console.log("Upper limit "+upper)
+    console.log("Trapdoor size:"+trapdoorSize)
+    for(let i = 0; i <= upper; i+= trapdoorSize){
+      binBlocks.push(binaryString.substring(i,i+trapdoorSize));
+    }
+    // need to pad
+    if(binaryString.length % trapdoorSize != 0){
+      let padding =  trapdoorSize - (binaryString.length % trapdoorSize);
+      let start = binaryString.length - (binaryString.length % trapdoorSize);
+      let blockStr = binaryString.substring(start);
+      console.log(`Padding to ${padding}`)
+      for (let j = 0; j < padding; j++){
+        blockStr += '0';
+      }
+      binBlocks.push(blockStr);
+      actions.UPDATE_ENCRYPTION_PADDING_ACTION(padding);
+    }
+    let binBlocksNumeric = []
+    for(let i = 0; i < binBlocks.length; i++){
+      // for each number string inside bin blocks, cast it to an array of numbers.
+      console.log(binBlocks[i]);
+      let binLen = binBlocks[i].length;
+      let numeric = binBlocks[i].split('').map(Number)
+      let differential = binLen-numeric.length;
+      while(differential != 0){
+        numeric.unshift(0) // prepends
+        differential -= 1
+      }
+      binBlocksNumeric.push(
+          numeric
+      )
+      
+    }
+    return binBlocksNumeric;
+  }
+
   validateInput = () => {
     const { lockState, actions } = this.props;
     const { currentTextBox } = this.state;
@@ -79,12 +129,69 @@ class EncryptTutorial extends Component{
       let binString = this.getBinaryOfInput();
       actions.UPDATE_ENCRYPTION_BINARY_STRING_ACTION(binString)
       actions.UPDATE_ENCRYPTION_ASCII_STRING_ACTION(currentTextBox)
-
-      // set the state in redux.
-      // not empty input.
-      //
-      //actions.UPDATE_ENCRYPTION_STRING()
+      actions.ALLOW_NEXT_PAGE_ACTION()
     }
+  }
+
+  generateBinaryBlocks = () => {
+      const { lockState, actions } = this.props
+      let binUserInput = lockState.encryption.binaryString;
+      let binPubKeyString = lockState.updateParameters.publicKeyString;
+      let binPubKeyArr = lockState.updateParameters.publicKeyArr;
+      let binaryBlocks = this.chunk(binUserInput,binPubKeyArr.length)
+      console.log(binaryBlocks)
+      actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
+  }
+
+  getSecondPage = () => {
+    const { lockState } = this.props;
+    
+    console.log("lockstate enc"+lockState.encryption)
+    console.log("lockstate enc block"+lockState.encryption.binaryBlocks)
+    let lockStateArr = null;
+    if(lockState.encryption.binaryBlocks.length != 0){
+      lockStateArr = lockState.encryption.binaryBlocks.map((block, idx)=>{
+        return (
+          <>
+            <Text>Block #{idx}</Text>
+            <Block 
+                key={`binary${idx+1}`}
+                tableTitle={["Key","Binary","Total"]}
+                flexArr={new Array(lockState.encryption.binaryBlocks.length+1).fill(1)}
+                tableData={block} 
+                currentPublicKey={lockState.updateParameters.publicKeyArr}
+                tableType="binary"
+            />
+          </>
+          )
+        })
+      console.log(lockStateArr)
+    }
+    
+    return(
+      <ScrollView>
+        <Text style={styles.tutorial.textStyle}>Encryption</Text>
+        <Text style={styles.tutorial.textStyle}>Depending on the number of elements in your public key b, the binary values are assigned into blocks. (size of binary / size of b)</Text>
+        <Text style={styles.tutorial.textStyle}>Your public key b:</Text>
+        <Text style={styles.tutorial.textStyle}>Padding may have to be applied based on the length of the public key and the message</Text>
+        <Text style={styles.tutorial.textStyle}>The following blocks chart out the additional process of obtaining the first encryption using b.</Text>
+        <Button title="Generate Blocks" onPress={()=>{
+          this.generateBinaryBlocks()
+        }}/>
+        {
+          /*
+            Block.propTypes = {
+              flexArr: PropTypes.array.isRequired,
+              tableTitle: PropTypes.array.isRequired,
+              tableData: PropTypes.array.isRequired,
+            };
+
+          */
+         lockStateArr
+          
+        }
+      </ScrollView>
+    )
   }
 
   getFirstPage = () => {
@@ -114,21 +221,24 @@ class EncryptTutorial extends Component{
     switch(pageNo){
       case 1: 
         return this.getFirstPage()
+      case 2: 
+        return this.getSecondPage()
       default:  
         return this.getFirstPage()
    }
   }
 
   render(){
-    return(
-        <View>
-          {
-            this.getPageElements()
-          }
-        </View>  
-    );
-  }
+      return(
+          <View>
+            {
+              this.getPageElements()
+            }
+          </View>  
+      );
+    }
 }
+
 const mapStateToProps = state => ({
   lockState: state
 })
@@ -138,6 +248,9 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_ENCRYPTION_STRING_ACTION,
     UPDATE_ENCRYPTION_ASCII_STRING_ACTION,
     UPDATE_ENCRYPTION_BINARY_STRING_ACTION,
+    UPDATE_ENCRYPTION_PADDING_ACTION,
+    UPDATE_ENCRYPTION_BLOCKS_ACTION,
+    ALLOW_NEXT_PAGE_ACTION,
   }, dispatch)
 });
 export default connect(mapStateToProps,mapDispatchToProps)(EncryptTutorial);
