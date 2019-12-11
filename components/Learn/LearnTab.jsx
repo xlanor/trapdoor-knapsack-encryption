@@ -20,7 +20,8 @@ import {
   introPageFour,
   gcdPageOne,
   keyPageOne,
-  EncryptTutorial
+  EncryptTutorial,
+  DecryptTutorial,
 } from './content'
 
 import {
@@ -230,6 +231,10 @@ class LearnTab extends Component{
           }
         case "decrypt":
             switch(currentPage){
+              case 1:
+                return DecryptTutorial;
+              default: 
+                return DecryptTutorial;
             }
         default: return null;
       }

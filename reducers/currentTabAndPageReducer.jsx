@@ -5,6 +5,8 @@ import {
   PREVIOUS_KEY_PAGE,
   PREVIOUS_ENCRYPT_PAGE,
   NEXT_ENCRYPT_PAGE,
+  NEXT_DECRYPT_PAGE,
+  PREVIOUS_DECRYPT_PAGE,
   RESET_PAGE,
   CHANGE_TAB,
   SET_NEXT_TAB,
@@ -117,7 +119,17 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
             tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
           }
         }
-
+      case NEXT_DECRYPT_PAGE:
+          return {
+            ...state,
+            tabPage: (state.tabPage+1 > state.maxPage) ?  state.tabPage: state.tabPage+1,
+            allowNextPage: false, // so that you cant turn to the next page on the new page.
+          }
+      case PREVIOUS_DECRYPT_PAGE:
+          return {
+            ...state,
+            tabPage: (state.tabPage-1 < 0) ? 0 : state.tabPage-1,
+          }
       case ALLOW_NEXT_PAGE:
           return {
             ...state,
