@@ -242,7 +242,7 @@ class KeyPage extends Component {
    }
    getSixthPage = () => {
      return (
-       <View> 
+       <View style={{alignItems:'center', justifyContent:'center', display:'flex'}}> 
        <Text style={styles.page1.textStyle}> Quiz Time</Text>
          <Text style={styles.page1.textStyle}> WIP</Text>
        </View>
@@ -258,16 +258,20 @@ class KeyPage extends Component {
      }
      return (
        <View>
-         <Text style={styles.page1.textStyle}> Compute the public key b:</Text>
-         <Text style={styles.page1.textStyle}>For every element in a, multiply it by</Text>
-         <Text style={styles.page1.textStyle}>the multiplier you chose in step 3 and </Text>
-         <Text style={styles.page1.textStyle}>get the remainder when divided by the modulo m you </Text>
-         <Text style={styles.page1.textStyle}>chose in step 2</Text>
-         <Text style={styles.page1.textStyle}>Example to be added later</Text>
-          <Text style={styles.page1.textStyle}>Public key: b = {lockState.updateParameters.publicKeyString}</Text>
-          <Text style={styles.page1.textStyle}>Private key: a = {lockState.updateParameters.privateKeyString}</Text>
-          <Text style={styles.page1.textStyle}>w = {lockState.updateParameters.multiplier} m = {lockState.updateParameters.modulo}</Text>
-         <Text style={styles.page1.textStyle}>Inverse of multiplier = {lockState.updateParameters.inverse}</Text>
+         <Text style={styles.page1.textStyleTitle}>Compute the public key <Text style={styles.page1.boldFont}>b</Text>:</Text>
+         <Text style={styles.page1.textStyleHeader3}>For every element in <Text style={styles.page1.boldFont}>a</Text>, multiply it by the multiplier 
+            <Text style={styles.page1.boldFont}> w</Text> you chose in step 3 and get the remainder when divided by the modulo <Text style={styles.page1.boldFont}>m</Text> you chose in 
+            <Text style={styles.page1.boldFont}>step 2</Text>
+          </Text>
+         <Text style={styles.page1.textStyleHeader3}>Example to be added later</Text>
+          <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>Private key: a = {lockState.updateParameters.privateKeyString}</Text></Text>
+          <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>w = {lockState.updateParameters.multiplier} m = {lockState.updateParameters.modulo}</Text></Text>
+         <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>Inverse of multiplier = {lockState.updateParameters.inverse}</Text></Text>
+         {
+           lockState.updateParameters.publicKeyArr.length === 0
+           ? null
+           : <Text style={styles.page1.textStyleHeader3}>Your Public key: <Text style={styles.page1.boldFont}>b</Text> = {lockState.updateParameters.publicKeyString}</Text>
+         }
        </View>
      )
    }
@@ -276,11 +280,11 @@ class KeyPage extends Component {
      this.loadInverse()
      return (
        <View>
-         <Text style={styles.page1.textStyle}>Calculate the multiplicative inverse of your multiplier w({lockState.updateParameters.multiplier}):</Text>
-         <Text style={styles.page1.textStyle}>(Using Extended Euclidean's algorithm)</Text>
-         <Text style={styles.page1.textStyle}>This is needed for decryption</Text>
-         <Text style={styles.page1.textStyle}>E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)</Text>
-          <Text style={styles.page1.textStyle}>Multiplicative inverse of your multiplier ({lockState.updateParameters.multiplier}): {lockState.updateParameters.inverse}</Text>
+         <Text style={styles.page1.textStyleTitle}>Calculate the multiplicative inverse of your multiplier <Text style={styles.page1.boldFont}>w ({lockState.updateParameters.multiplier})</Text>:</Text>
+         <Text style={styles.page1.textStyleHeader3}>(Using Extended Euclidean's algorithm)</Text>
+         <Text style={styles.page1.textStyleHeader2}>This is needed for decryption</Text>
+         <Text style={styles.page1.textStyleHeader2}>E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)</Text>
+          <Text style={styles.page1.textStyleTitle}>Multiplicative inverse of your multiplier <Text style={styles.page1.boldFont}>w ({lockState.updateParameters.multiplier})</Text>: {lockState.updateParameters.inverse}</Text>
        </View>
      )
    }
@@ -289,35 +293,59 @@ class KeyPage extends Component {
       const { lockState } = this.props;
       return (
         <View>
-          <Text style={styles.page1.textStyle}>Choose your multiplier w:</Text>
-          <Text style={styles.page1.textStyle}>(GCD will be taught in the next level)</Text>
-          <Text style={styles.page1.textStyle}>This multiplier W must be a co-prime to your modulus m</Text>
-          <Text style={styles.page1.textStyle}>This means gcd({lockState.updateParameters.modulo},w) = 1</Text>
-          <Text style={styles.page1.textStyle}>E.G: w = 11, where gcd (39,11) = 1</Text>
-          <TextInput keyboardType={'numeric'} style = {styles.page1.textBoxStyle} onChangeText={(text)=>{
+          <Text style={styles.page1.textStyleTitle}>Choose your multiplier <Text style={styles.page1.boldFont}>w</Text>:</Text>
+          <Text style={styles.page1.textStyleHeader3}>(<Text style={styles.page1.boldFont}>GCD</Text> will be taught in the next level)</Text>
+          <Text style={styles.page1.textStyleHeader2}>This multiplier <Text style={styles.page1.boldFont}>w</Text> must be a co-prime to your modulus <Text style={styles.page1.boldFont}>m</Text></Text>
+          <Text style={styles.page1.textStyleHeader3}>This means <Text style={styles.page1.boldFont}>gcd({lockState.updateParameters.modulo},w)</Text> = 1</Text>
+          <Text style={styles.page1.textStyleHeader2}>E.G: <Text style={styles.page1.boldFont}>w</Text> = 11, where <Text style={styles.page1.boldFont}>gcd (39,11)</Text> = 1</Text>
+          <TextInput
+            defaultValue={
+              lockState.updateParameters.multiplier === 0 ?
+              null:
+              lockState.updateParameters.multiplier.toString()
+            }
+           keyboardType={'numeric'} style = {styles.page1.textBoxStyle} onChangeText={(text)=>{
             this.setState({currentMultiplier:text})
           }}/>
           <Button title="Check Multiplier" onPress={()=>{
             this.validateMultiplier()
           }}/>
+          {
+              lockState.updateParameters.multiplier === 0 ?
+              null:
+              <Text style={styles.page1.textStyleHeader3}>Multiplier <Text style={styles.page1.boldFont}>w: </Text>{lockState.updateParameters.multiplier.toString()}</Text>
+
+          }
         </View>
       )
    }
 
    getSecondPage = () =>{
      const { lockState } = this.props;
+     console.log(lockState.updateParameters.modulo)
       return(
           <View>
-            <Text style={styles.page1.textStyle}>Choose your modulus m:</Text>
-            <Text style={styles.page1.textStyle}>Sum of a is: {lockState.updateParameters.privateKeySum}</Text>
-            <Text style={styles.page1.textStyle}>m should be bigger than the sum of a</Text>
-            <Text style={styles.page1.textStyle}>E.g: m = 39 which is > 38 (sum of a)</Text>
-            <TextInput keyboardType={'numeric'} style={styles.page1.textBoxStyle} onChangeText={(text)=>{
+            <Text style={styles.page1.textStyleTitle}>Choose your modulus <Text style={styles.page1.boldFont}>m</Text>:</Text>
+            <Text style={styles.page1.textStyleHeader3}>Sum of <Text style={styles.page1.boldFont}>a</Text> is: {lockState.updateParameters.privateKeySum}</Text>
+            <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>m</Text> should be bigger than the sum of <Text style={styles.page1.boldFont}>a</Text></Text>
+            <Text style={styles.page1.textStyleHeader2}>E.g: <Text style={styles.page1.boldFont}>m</Text> = 39 which is > 38 (sum of <Text style={styles.page1.boldFont}>a</Text>)</Text>
+            <TextInput defaultValue = {
+              lockState.updateParameters.modulo === 0 ?
+              null:
+              lockState.updateParameters.modulo.toString()
+            }
+            keyboardType={'numeric'} style={styles.page1.textBoxStyle} onChangeText={(text)=>{
                 this.setState({ currentModulo:text})
             }}/>
             <Button title="Check Modulus" onPress={()=>{
                 this.validateModulus();
             }}/>
+            {
+              lockState.updateParameters.modulo === 0 ?
+              null:
+            <Text style={styles.page1.textStyleHeader3}>Modulus <Text style={styles.page1.boldFont}>m: </Text>{lockState.updateParameters.modulo.toString()}</Text>
+
+            }
           </View>
       )
    }
@@ -327,9 +355,13 @@ class KeyPage extends Component {
 
      return (
        <View>
-         <Text style={styles.page1.textStyle}>Enter your private key A</Text>
-         <Text style={styles.page1.textStyle}> This private key A should be in a super increasing sequence</Text>
-         <TextInput style={styles.page1.textBoxStyle} onChangeText={(text)=>{
+         <Text style={styles.page1.textStyleTitle}>Enter your private key <Text style={styles.page1.boldFont}>A</Text>:</Text>
+         <Text style={styles.page1.textStyleHeader1}>(This private key A should be in a super increasing sequence)</Text>
+         <TextInput defaultValue={
+            lockState.updateParameters.privateKeyString === "" 
+            ? null: 
+            lockState.updateParameters.privateKeyString 
+          } style={styles.page1.textBoxStyle} onChangeText={(text)=>{
             this.setState({
               currentPrivateKey: text,
             })
@@ -337,10 +369,10 @@ class KeyPage extends Component {
          <Button title="Check Private Key" onPress={()=>{
             this.validatePrivateKey();
          }}/>
-         <Text style={styles.page1.textStyle}>
-            Private key a: {isEntered ? lockState.updateParameters.privateKeyString : null}
+         <Text style={styles.page1.textStyleHeader2}>
+            Private key <Text style={styles.page1.boldFont}>a</Text>: {isEntered ? lockState.updateParameters.privateKeyString : null}
           </Text>
-        <Text style={styles.page1.textStyle}>Knapsack Size n: {isEntered? lockState.updateParameters.privateKeyArr.length-1:null}</Text>
+        <Text style={styles.page1.textStyleHeader2}>Knapsack Size <Text style={styles.page1.boldFont}>n</Text>: {isEntered? lockState.updateParameters.privateKeyArr.length:null}</Text>
        </View>
      )
    }

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList 
 } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import { Algo } from '../../assets/images'
 
@@ -114,7 +115,7 @@ class LearnTab extends Component{
         return null;
       else{
         // return a button. to be designed.
-        return (<Button title={"Unlock next tab"} onPress={()=>{
+        return (<Button title={"Unlock"} onPress={()=>{
           console.log(currentTab)
           switch(currentTab){
             case "intro":
@@ -161,6 +162,10 @@ class LearnTab extends Component{
 
             return actions.PREVIOUS_KEY_PAGE_ACTION();
           }
+        case "encrypt":
+          return actions.PREVIOUS_ENCRYPT_PAGE_ACTION();
+        case "decrypt":
+          return actions.PREVIOUS_DECRYPT_PAGE_ACTION();
         default: return actions.PREVIOUS_INTRO_PAGE_ACTION();
       }
 
@@ -251,10 +256,7 @@ class LearnTab extends Component{
       // we render a page.
       if (currentTab == "key" || currentTab == "encrypt" || currentTab == "decrypt"){
         return (
-          <View>
             <CurPage />
-
-          </View>
         );   
       }else{ 
         console.log("Returning static page")
@@ -273,31 +275,47 @@ class LearnTab extends Component{
 
     render(){
       return(
-        <View>
-          {this.loadPage()}
-          {
-            this.isFirstPage()?
-            null:
-            <TouchableOpacity onPress = {()=>{
-                this.getTouchablePreviousAction()
-            }}>
-            <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } />
-            </TouchableOpacity>
-          }
-          {
-            this.isFinalPage()?
-            this.getNextTab():
-              this.canNavigate()?
-                <TouchableOpacity onPress = {()=>{
-                    this.getTouchableNextAction()
-                }}>
-                  
-                  <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow} />
-                </TouchableOpacity>
-                : null
-          }
+        <>
+          <ScrollView > 
+          <View style={styles.learnTab.scrollViewWrapper}>
 
-        </View>
+              {this.loadPage()}
+          </View>
+
+          </ScrollView>
+          <View style={styles.learnTab.bottom}>
+              <View style={styles.learnTab.borderWrapper}>
+                <View style={styles.learnTab.leftArrowWrapper}>
+                  {
+                    this.isFirstPage()?
+                    null:
+                    <TouchableOpacity onPress = {()=>{
+                        this.getTouchablePreviousAction()
+                    }}>
+                    <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } />
+                    </TouchableOpacity>
+                  }
+                </View>
+                <View style={styles.learnTab.centerFooterWrapper}>
+                  {/* To put the center footer here later. */}
+                </View>
+                <View style={styles.learnTab.rightArrowWrapper}>
+                    {
+                      this.isFinalPage()?
+                      this.getNextTab():
+                        this.canNavigate()?
+                          <TouchableOpacity onPress = {()=>{
+                              this.getTouchableNextAction()
+                          }}>
+                            
+                            <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow} />
+                          </TouchableOpacity>
+                          : null
+                    }
+                </View>
+              </View>
+          </View>
+        </>
       );
     }
 };

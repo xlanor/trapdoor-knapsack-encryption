@@ -166,12 +166,13 @@ class LearnParent extends Component {
           <TouchableOpacity onPress = {()=>{
             actions.KEY_SELECT_ACTION();
             actions.CHANGE_TAB_ACTION("decrypt");
+            console.log("Changing to decrypt")
           }}>
             <Image 
               style={ styles.learnParent.imageSize }
               source= { DecryptSelected }
               />
-            </TouchableOpacity>
+          </TouchableOpacity>
           );
       }else{
         // not selected, but unlocked.
@@ -179,6 +180,7 @@ class LearnParent extends Component {
           <TouchableOpacity onPress = {()=>{
             actions.KEY_SELECT_ACTION();
             actions.CHANGE_TAB_ACTION("decrypt");
+            console.log("Changing to decrypt")
           }}>
             <Image 
               style={ styles.learnParent.imageSize }
@@ -415,10 +417,10 @@ class LearnParent extends Component {
             callback={() => this.setState({ displayPopup: false })}
             visibility={displayPopup}
         />
-        <ScrollView style={styles.learnParent.scrollViewBackground}>
+        <View style={styles.learnParent.scrollViewBackground}>
           <LearnTab/>
 
-        </ScrollView>
+        </View>
       </View>
     );
   }
