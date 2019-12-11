@@ -19,6 +19,9 @@ import {
     EncryptTutorial
 } from './encrypt'
 
+import {
+    DecryptTutorial
+} from './decrypt'
 
 export { 
     introPageOne as introPageOne,
@@ -28,4 +31,5 @@ export {
     gcdPageOne as gcdPageOne,
     keyPageOne as keyPageOne,
     EncryptTutorial as EncryptTutorial,
+    DecryptTutorial as DecryptTutorial,
 };

@@ -146,6 +146,7 @@ class EncryptTutorial extends Component{
       let binaryBlocks = this.chunk(binUserInput,binPubKeyArr.length)
       console.log(binaryBlocks)
       actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
+      actions.ALLOW_NEXT_PAGE_ACTION()
   }
 
   getThirdPage = () => {
@@ -255,6 +256,8 @@ class EncryptTutorial extends Component{
         return this.getFirstPage()
       case 2: 
         return this.getSecondPage()
+      case 3:
+        return this.getThirdPage()
       default:  
         return this.getFirstPage()
    }
