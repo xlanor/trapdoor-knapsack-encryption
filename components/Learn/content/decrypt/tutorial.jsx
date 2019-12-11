@@ -140,11 +140,12 @@ class DecryptTutorial extends Component{
     const { actions,lockState } = this.props;
     if (! lockState.lessonPageTabAndPages.allowNextPage){
       actions.ALLOW_NEXT_PAGE_ACTION()
+      console.log(lockState);
 
     }
     return (
       <>
-        <Text style={styles.tutorial.textStyle}>Decryption</Text>
+        <Text style={styles.tutorial.textStyleTitle}>Decryption</Text>
         <Text style={styles.tutorial.textStyle}>Decrypting the cipher text.</Text>
         <Text style={styles.tutorial.textStyle}>Use the inverse multiplier w^-1 to compute: R= w^-1 * ciphertext mod m</Text>
         <Text style={styles.tutorial.textStyle}>R1 = </Text>

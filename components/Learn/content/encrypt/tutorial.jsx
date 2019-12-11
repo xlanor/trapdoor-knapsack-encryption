@@ -131,7 +131,8 @@ class EncryptTutorial extends Component{
       console.log("Empty input!")
     }else{
       // compute binary equivalent
-      let binString = this.getBinaryOfInput();
+      let binString = this.getBinaryOfInput()
+      actions.UPDATE_ENCRYPTION_STRING_ACTION(currentTextBox)
       actions.UPDATE_ENCRYPTION_BINARY_STRING_ACTION(binString)
       actions.UPDATE_ENCRYPTION_ASCII_STRING_ACTION(currentTextBox)
       actions.ALLOW_NEXT_PAGE_ACTION()
@@ -198,11 +199,10 @@ class EncryptTutorial extends Component{
     
     return(
       <ScrollView>
-        <Text style={styles.tutorial.textStyle}>Encryption</Text>
-        <Text style={styles.tutorial.textStyle}>Depending on the number of elements in your public key b, the binary values are assigned into blocks. (size of binary / size of b)</Text>
-        <Text style={styles.tutorial.textStyle}>Your public key b:</Text>
-        <Text style={styles.tutorial.textStyle}>Padding may have to be applied based on the length of the public key and the message</Text>
-        <Text style={styles.tutorial.textStyle}>The following blocks chart out the additional process of obtaining the first encryption using b.</Text>
+        <Text style={styles.tutorial.textStyleTitle}>Encryption</Text>
+        <Text style={styles.tutorial.textStyleHeader2}>Depending on the number of elements in your public key b, the binary values are assigned into blocks. (size of binary / size of b)</Text>
+        <Text style={styles.tutorial.textStyleHeader2}>Your public key b, padding may have to be applied based on the length of the public key and the message. </Text>
+        <Text style={styles.tutorial.textStyleHeader2}>The following blocks chart out the additional process of obtaining the first encryption using b.</Text>
         <Button title="Generate Blocks" onPress={()=>{
           this.generateBinaryBlocks()
         }}/>
@@ -228,12 +228,19 @@ class EncryptTutorial extends Component{
   }
 
   getFirstPage = () => {
+    const { lockState } = this.props;
     return (
       <View>
-          <Text style={styles.tutorial.textStyle}>Encryption:</Text>
-          <Text style={styles.tutorial.textStyle}>Now, to encrypt a message, you need to first convert the message into and then to binary</Text>
-          <Text style={styles.tutorial.textStyle}>Enter your message to encrypt:</Text>
-          <TextInput style={styles.tutorial.textBoxStyle} onChangeText={(text)=>{
+          <Text style={styles.tutorial.textStyleTitle}>Encryption:</Text>
+          <Text style={styles.tutorial.textStyleHeader2}>Now, to encrypt a message, you need to first convert the message into ASCII and then to binary</Text>
+          <Text style={styles.tutorial.textStyleHeader1}>Enter your message to encrypt:</Text>
+          <TextInput defaultValue={
+            lockState.encryption.textToEncrypt === ""
+            ? null
+            : lockState.encryption.textToEncrypt
+            
+          }
+            style={styles.tutorial.textBoxStyle} onChangeText={(text)=>{
               this.setState({
                   currentTextBox: text,
               })
@@ -241,10 +248,17 @@ class EncryptTutorial extends Component{
           <Button title="Validate Text" onPress={()=>{
             this.validateInput()
           }}/>
-          <Text style={styles.tutorial.textStyle}>Your message:</Text>
-          <Text style={styles.tutorial.textStyle}>Binary value:</Text>
-          <Text style={styles.tutorial.textStyle}>Now, add the public key elements that corresponds to the value 1 in your binary.</Text>
-          <Text style={styles.tutorial.textStyle}>Move on to the following pages to see the encryption of your message using your public key!</Text>
+          {
+            lockState.encryption.textToEncrypt === ""
+            ? null
+            :<>
+              <Text style={styles.tutorial.textStyleHeader1}>Your message: {lockState.encryption.textToEncrypt}</Text>
+              <Text style={styles.tutorial.textStyleHeader1}>Binary value: {lockState.encryption.binaryString}</Text>
+              <Text style={styles.tutorial.textStyleHeader1}>Now, add the public key elements that corresponds to the value 1 in your binary.</Text>
+              <Text style={styles.tutorial.textStyleHeader1}>Move on to the following pages to see the encryption of your message using your public key!</Text>
+            </>
+
+          }
         </View>
     )
   }
