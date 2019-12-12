@@ -39,11 +39,17 @@ import {
 class KeyPage extends Component {
    constructor(props){
       super(props);
+      const { lockState } = this.props;
+      
+      let reduxMod = lockState.updateParameters.modulo
+      let reduxMultipler = lockState.updateParameters.multiplier
+      
+      
       // local state not affected by redux
       this.state = {
-        currentPrivateKey: "", //we do not need to persist this state, nor do we need to store this state elsewhere yet.
-        currentModulo: "", //we do not need to persist this state, nor do we need to store this state elsewhere yet.
-        currentMultiplier: "", //we do not need to persist this state, nor do we need to store this state elsewhere yet.
+        currentPrivateKey: lockState.updateParameters.privateKeyString, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
+        currentModulo: reduxMod == 0 ? "" : reduxMod, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
+        currentMultiplier: reduxMultipler == 0 ? "": reduxMultipler, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
       }
     
    }
@@ -152,6 +158,7 @@ class KeyPage extends Component {
       const { currentPrivateKey } = this.state;
       if (!this.validateNumeric()){
         // TODO: show an error message
+        console.log(currentPrivateKey)
         console.log("Not numeric!")
       }else{
         // check if it is superincreasing
