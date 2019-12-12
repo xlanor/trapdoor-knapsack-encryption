@@ -425,6 +425,10 @@ class KeyPage extends Component {
     let pageNo = this.checkPageNo()
      return(
        <View>
+         <View style={styles.page1.textStyleTitleWrapper}>
+          <Text style={styles.page1.textStyleTitleCenter}>Key Generation</Text>
+
+         </View>
          {
            pageNo <= 5 ? 
            <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image>:
