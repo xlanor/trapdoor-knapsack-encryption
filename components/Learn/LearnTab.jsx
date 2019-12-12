@@ -186,10 +186,19 @@ class LearnTab extends Component{
     getTouchableNextAction = () => {
       const { lockState, actions } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
+      let currentPage = lockState.lessonPageTabAndPages.tabPage
       switch(currentTab){
         case "intro": return actions.NEXT_INTRO_PAGE_ACTION();
         case "key": return actions.NEXT_KEY_PAGE_ACTION();
-        case "encrypt": return actions.NEXT_ENCRYPT_PAGE_ACTION();
+        case "encrypt": 
+            if(currentPage == 1){
+              // reset
+              actions.UPDATE_ENCRYPTION_PADDING_ACTION(0);
+              actions.UPDATE_ENCRYPTION_BLOCKS_ACTION([]);
+              actions.UPDATE_ENCRYPTED_STRING_ACTION([]);
+              return actions.NEXT_ENCRYPT_PAGE_ACTION();
+            }
+            return actions.NEXT_ENCRYPT_PAGE_ACTION();
         case "decrypt": return actions.NEXT_DECRYPT_PAGE_ACTION();
         default: return actions.NEXT_INTRO_PAGE_ACTION();
       }
