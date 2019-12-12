@@ -109,13 +109,16 @@ class DecryptTutorial extends Component{
     }
     return (
       <>
+        <View style={styles.tutorial.textStyleTitleWrapper}>
+          <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
+        </View>
         <Text style={styles.tutorial.textStyle}>Convert the binary values to decimal, this decimal is the ascii value of the message.</Text>
         <Text style={styles.tutorial.textStyle}>Now, convert the ascii value back to characters to get back the plaintext message.</Text>
         <Text style={styles.tutorial.textStyle}>Don't forget to subtract the padding applied!</Text>
       <Text style={styles.tutorial.textStyle}>Current Padding: {lockState.encryption.padding}</Text>
       { decryptedText != ""
         ? <>
-          <Text> Ciphertext:</Text> 
+          <Text> Decrypted Text:</Text> 
           <Text> {decryptedText}</Text>
           </>
         : null
@@ -132,7 +135,9 @@ class DecryptTutorial extends Component{
     }
     return (
       <>
-        <Text style={styles.tutorial.textStyle}>WIP - to be done</Text> 
+        <View style={styles.tutorial.textStyleTitleWrapper}>
+          <Text style={styles.tutorial.textStyleTitleCenter}>WIP - to be done</Text> 
+        </View>
       </>
     )
   }
@@ -145,14 +150,15 @@ class DecryptTutorial extends Component{
     }
     return (
       <>
-        <Text style={styles.tutorial.textStyleTitle}>Decryption</Text>
-        <Text style={styles.tutorial.textStyle}>Decrypting the cipher text.</Text>
-        <Text style={styles.tutorial.textStyle}>Use the inverse multiplier w^-1 to compute: R= w^-1 * ciphertext mod m</Text>
-        <Text style={styles.tutorial.textStyle}>R1 = </Text>
-        <Text style={styles.tutorial.textStyle}>R2 = </Text>
-        <Text style={styles.tutorial.textStyle}>Then, use a to decrypt R1 and R2 and find plaintext binary X</Text>
-        <Text style={styles.tutorial.textStyle}>By comparing with a, we then obtain the binary value.</Text>
-        <Text style={styles.tutorial.textStyle}>As the knapsack is super-increasing, it is comparatively easier to get the binary values.</Text>
+        <View style={styles.tutorial.textStyleTitleWrapper}>
+          <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
+        </View>
+        <Text style={styles.tutorial.textStyleCiphertext}>The current ciphertext is:</Text>
+        <Text style={styles.tutorial.textStyleCiphertext}>({lockState.encryption.encryptedText.join(', ')})</Text>
+        <Text style={styles.tutorial.textStyleSmallerText}>Use the inverse multiplier w^-1 to compute: R= w^-1 * ciphertext mod m</Text>
+        <Text style={styles.tutorial.textStyleSmallerText}>Then, use a to decrypt R1 and R2 and find plaintext binary X</Text>
+        <Text style={styles.tutorial.textStyleSmallerText}>By comparing with a, we then obtain the binary value.</Text>
+        <Text style={styles.tutorial.textStyleSmallerText}>As the knapsack is super-increasing, it is comparatively easier to get the binary values.</Text>
       </>
     )
   }
