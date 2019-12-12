@@ -158,7 +158,7 @@ class DecryptTutorial extends Component{
         <Text style={styles.tutorial.textStyleSmallerText}>Use the inverse multiplier w^-1 to compute: R= w^-1 * ciphertext mod m</Text>
         <Text style={styles.tutorial.textStyleSmallerText}>Then, use a to decrypt R1 and R2 and find plaintext binary X</Text>
         <Text style={styles.tutorial.textStyleSmallerText}>By comparing with a, we then obtain the binary value.</Text>
-        <Text style={styles.tutorial.textStyleSmallerText}>As the knapsack is super-increasing, it is comparatively easier to get the binary values.</Text>
+        <Text style={styles.tutorial.textStyleSmallerText1}>As the knapsack is super-increasing, it is comparatively easier to get the binary values.</Text>
       </>
     )
   }

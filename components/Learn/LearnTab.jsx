@@ -62,6 +62,11 @@ import {
   RESET_ALL_ACTION,
  }  from '../../actions/learnPageLock';
 
+ import {
+  UPDATE_ENCRYPTION_PADDING_ACTION,
+  UPDATE_ENCRYPTION_BLOCKS_ACTION,
+  UPDATE_ENCRYPTED_STRING_ACTION,
+ } from '../../actions/updateEncryption';
 
  import {
   UPDATE_INVERSE_ACTION,
@@ -163,7 +168,15 @@ class LearnTab extends Component{
             return actions.PREVIOUS_KEY_PAGE_ACTION();
           }
         case "encrypt":
-          return actions.PREVIOUS_ENCRYPT_PAGE_ACTION();
+          if(currentPage == 2){
+            // reset
+            actions.UPDATE_ENCRYPTION_PADDING_ACTION(0);
+            actions.UPDATE_ENCRYPTION_BLOCKS_ACTION([]);
+            actions.UPDATE_ENCRYPTED_STRING_ACTION([]);
+            return actions.PREVIOUS_ENCRYPT_PAGE_ACTION();
+          }else{
+            return actions.PREVIOUS_ENCRYPT_PAGE_ACTION();
+          }
         case "decrypt":
           return actions.PREVIOUS_DECRYPT_PAGE_ACTION();
         default: return actions.PREVIOUS_INTRO_PAGE_ACTION();
@@ -360,6 +373,9 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_INVERSE_ACTION,
     UPDATE_PUBLIC_KEY_STRING_ACTION,
     UPDATE_PUBLIC_KEY_ARRAY_ACTION,
+    UPDATE_ENCRYPTION_PADDING_ACTION,
+    UPDATE_ENCRYPTION_BLOCKS_ACTION,
+    UPDATE_ENCRYPTED_STRING_ACTION,
   }, dispatch)
 });
 

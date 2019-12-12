@@ -35,8 +35,10 @@ import Block from '../../../Common/Blocks'
 class EncryptTutorial extends Component{
   constructor(props){
     super(props);
+    const { lockState } = this.props;
+    let currentEncryptText = lockState.encryption.textToEncrypt;
     this.state = {
-      currentTextBox: "", // temporary, to be stored in redux - this is only for use in onTextChange
+      currentTextBox: currentEncryptText === "" ? "" : currentEncryptText, // temporary, to be stored in redux - this is only for use in onTextChange
     }
   }
 
@@ -51,7 +53,6 @@ class EncryptTutorial extends Component{
 
   isEmptyInput = () => {
     const { currentTextBox } = this.state;
-    console.log("Checking "+currentTextBox)
     return currentTextBox.trim() === ""? true: false;
   }
 
@@ -221,7 +222,6 @@ class EncryptTutorial extends Component{
     const { lockState } = this.props;
     return (
       <View>
-          <Text style={styles.tutorial.textStyleTitle}>Encryption:</Text>
           <Text style={styles.tutorial.textStyleHeader2}>Now, to encrypt a message, you need to first convert the message into ASCII and then to binary</Text>
           <Text style={styles.tutorial.textStyleHeader1}>Enter your message to encrypt:</Text>
           <TextInput defaultValue={
@@ -242,7 +242,8 @@ class EncryptTutorial extends Component{
             lockState.encryption.textToEncrypt === ""
             ? null
             :<>
-              <Text style={styles.tutorial.textStyleHeader1}>Your message: {lockState.encryption.textToEncrypt}</Text>
+              <Text style={styles.tutorial.textStyleHeader1}>Your message:</Text>
+              <Text style={styles.tutorial.textStyleHeader1}>{lockState.encryption.textToEncrypt}</Text>
               <Text style={styles.tutorial.textStyleHeader1}>Binary value: {lockState.encryption.binaryString}</Text>
               <Text style={styles.tutorial.textStyleHeader1}>Now, add the public key elements that corresponds to the value 1 in your binary.</Text>
               <Text style={styles.tutorial.textStyleHeader1}>Move on to the following pages to see the encryption of your message using your public key!</Text>
@@ -270,6 +271,11 @@ class EncryptTutorial extends Component{
   render(){
       return(
           <View>
+            <View style={styles.tutorial.textStyleTitleWrapper}>
+            {
+                <Text style={styles.tutorial.textStyleTitleCenter}>Encryption</Text>
+            }
+            </View>
             {
               this.getPageElements()
             }
