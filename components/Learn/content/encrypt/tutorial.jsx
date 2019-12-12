@@ -152,7 +152,6 @@ class EncryptTutorial extends Component{
 
   getThirdPage = () => {
     const { actions } = this.props;
-    
     return (
       <View>
         <Text>Quiz Time</Text>
@@ -207,16 +206,7 @@ class EncryptTutorial extends Component{
           this.generateBinaryBlocks()
         }}/>
         {
-          /*
-            Block.propTypes = {
-              flexArr: PropTypes.array.isRequired,
-              tableTitle: PropTypes.array.isRequired,
-              tableData: PropTypes.array.isRequired,
-            };
-
-          */
          lockStateArr
-          
         }
         {
           lockState.encryption.encryptedText.length != 0 ? 

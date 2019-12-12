@@ -27,7 +27,7 @@ const initialState = {
     algoSelected: false,
     algoLocked: true,
     keySelected: false,
-    keyLocked: false,
+    keyLocked: true,
     decryptSelected: false,
     decryptLocked: true,
     encryptSelected: false,
@@ -103,6 +103,7 @@ const lessonPageReducer = (state = initialState, action ) => {
             algoLocked: false,
         }
     case KEY_SELECT:
+        console.log("key select triggered!")
       return {
         ...state,
         keySelected: true,
@@ -128,6 +129,7 @@ const lessonPageReducer = (state = initialState, action ) => {
         keyLocked: false,
       }
     case DECRYPT_SELECT:
+      console.log("decrypt select triggered!")
       return {
         ...state,
         decryptSelected: true,

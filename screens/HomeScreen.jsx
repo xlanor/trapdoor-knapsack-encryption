@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ScrollView,
+  View,
 } from 'react-native';
 
 import { SafeAreaView } from 'react-navigation'
@@ -11,11 +11,11 @@ import HomePageParent from '../components/HomePage/HomePageParent'
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.homeScreen.backGroundContainer}>
-      <ScrollView
+      <View
         style={styles.homeScreen.backGroundContainer}>
           <HomePageParent/>
           
-      </ScrollView>
+      </View>
 
       
     </SafeAreaView>

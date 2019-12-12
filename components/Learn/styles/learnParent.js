@@ -1,5 +1,6 @@
 import { COLORS } from '../../../constants/Colors';
 
+import { Dimensions } from 'react-native';
 
 const borderLine = {
   borderBottomColor: COLORS.BLACK_1,
@@ -20,8 +21,20 @@ const scrollViewBackground = {
 };
 
 const imageSize = {
-  width:60,
-  height:60,
+  width: 60,
+  height: 60,
+}
+
+const nestedIconView ={
+  flexDirection: 'row',
+}
+
+const wrappingIconView = {
+  alignItems: 'center',
+  paddingLeft: Dimensions.get('screen').width * 0.15,
+  paddingRight: Dimensions.get('screen').width * 0.15,
+  paddingTop: Dimensions.get('screen').height * 0.007,
+  paddingBottom: Dimensions.get('screen').height * 0.007,
 }
 
 const listStyle = {
@@ -35,4 +48,6 @@ export default {
   wrapperViewBackground,
   imageSize,
   listStyle,
+  wrappingIconView,
+  nestedIconView,
 }

@@ -9,3 +9,6 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+dist/
+*.keystore
+*.apk

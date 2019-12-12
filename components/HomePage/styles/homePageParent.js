@@ -1,4 +1,5 @@
 import { COLORS } from '../../../constants/Colors';
+import { Dimensions } from 'react-native';
 
 const imageStyleArrow = {
   alignSelf: 'center',
@@ -13,29 +14,23 @@ const imageStyle = {
 };
 
 const iconsView = {
-  flex:1,
-  marginTop:100,
-  marginBottom: 40,
+  marginTop:Dimensions.get('screen').height * 0.15,
+  marginBottom: Dimensions.get('screen').height * 0.05,
 }
 
 
 const textBox = {
-  backgroundColor: COLORS.RED_1,
   alignSelf: 'center',
-  fontFamily: 'open-sans',
+  fontFamily: 'comfortaa',
   fontSize: 40,
-  color: COLORS.YELLOW_1,
+  color: COLORS.RED_1,
   minWidth: 350,
   textAlign: 'center',
-  borderRadius: 10,
-  borderColor: COLORS.RED_1,
-  borderWidth: 1,
   overflow: 'hidden',
   padding:10,
 }
 
 const textWrapperStyle = { 
-    flex:1, 
     alignItems: 'center', 
 }
 export default {

@@ -164,7 +164,7 @@ class LearnParent extends Component {
           return (
 
           <TouchableOpacity onPress = {()=>{
-            actions.KEY_SELECT_ACTION();
+            actions.DECRYPT_SELECT_ACTION();
             actions.CHANGE_TAB_ACTION("decrypt");
             console.log("Changing to decrypt")
           }}>
@@ -178,7 +178,7 @@ class LearnParent extends Component {
         // not selected, but unlocked.
         return (
           <TouchableOpacity onPress = {()=>{
-            actions.KEY_SELECT_ACTION();
+            actions.DECRYPT_SELECT_ACTION();
             actions.CHANGE_TAB_ACTION("decrypt");
             console.log("Changing to decrypt")
           }}>
@@ -366,9 +366,9 @@ class LearnParent extends Component {
   }
   getImages = () => {
       return (
-        <View style={{alignItems: 'center'}}>
+        <View style={ styles.learnParent.wrappingIconView }>
           {/* Must have the nested view to allow flexdirection to be preserved! */}
-          <View style={{ flexDirection: 'row'}}>
+          <View style={ styles.learnParent.nestedIconView }>
             {
               this.getIntroIcon()
             }

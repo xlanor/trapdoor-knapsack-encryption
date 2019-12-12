@@ -24,7 +24,10 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.traplearn.info"
+    },
+    "android": {
+      "package": "com.traplearn.info"
     },
     "packagerOpts": {
       "config": "metro.config.js",
