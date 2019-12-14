@@ -168,6 +168,10 @@ class EncryptTutorial extends Component{
     console.log("lockstate enc block"+lockState.encryption.binaryBlocks)
     let lockStateArr = null;
     if(lockState.encryption.binaryBlocks.length != 0){
+      let flexLength = []
+      for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++){
+        flexLength.push(1);
+      }
       let encryptedArr = [];
       lockStateArr = lockState.encryption.binaryBlocks.map((block, idx)=>{
         encryptedArr.push( block.map((x, index)=>{
@@ -179,7 +183,7 @@ class EncryptTutorial extends Component{
             <Block 
                 key={'binary-'+idx}
                 tableTitle={["Key","Binary","Total"]}
-                flexArr={new Array(lockState.encryption.binaryBlocks.length+1).fill(1)}
+                flexArr={flexLength}
                 tableData={block} 
                 currentPublicKey={lockState.updateParameters.publicKeyArr}
                 tableType="binary"
