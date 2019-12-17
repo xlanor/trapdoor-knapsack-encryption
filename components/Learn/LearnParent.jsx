@@ -62,6 +62,7 @@ import KeyLocked from '../../assets/images/KeyLocked.png';
 //selected
 import EncryptSelected from  '../../assets/images/EncryptSelected.png';
 import DecryptSelected from  '../../assets/images/DecryptSelected.png';
+import KnapSackSelected from  '../../assets/images/KnapSackSelected.png';
 import AlgoSelected from  '../../assets/images/AlgoSelected.png';
 import KeySelected from  '../../assets/images/KeySelected.png';
 import IntroSelected from  '../../assets/images/IntroSelected.png';
@@ -86,8 +87,6 @@ class LearnParent extends Component {
       displayPopup: false,
       popupMessage: "An error has occured",
     }
-    console.log(this.props);
-    console.log(this.state);
   }
 
   updatePopupMessage = (messageString) => {
@@ -240,7 +239,7 @@ class LearnParent extends Component {
   }
   getKnapsackIcon = () => {
         //lockState is the result of our redux state
-      const { lockState } = this.props;
+      const { lockState,actions } = this.props;
       if (lockState.lessonPage.knapSackLocked === true){
         return (
           <TouchableOpacity onPress = {()=>{
@@ -256,19 +255,31 @@ class LearnParent extends Component {
         );
       }else if (lockState.lessonPage.knapSackSelected === true){
           return (
-            // to be replaced when kevin is done with selected icon
-            <Image 
-              style={ styles.learnParent.imageSize }
-              source= { KnapSack }
-              />
+            <TouchableOpacity  onPress={() =>{
+              actions.KNAPSACK_SELECT_ACTION();
+              actions.CHANGE_TAB_ACTION("simulator");
+    
+            }}>
+              <Image 
+                style={ styles.learnParent.imageSize }
+                source= { KnapSackSelected }
+                />
+            </TouchableOpacity>
           );
       }else{
         // not selected, but unlocked.
         return (
+          
+          <TouchableOpacity  onPress={() =>{
+            actions.KNAPSACK_SELECT_ACTION();
+            actions.CHANGE_TAB_ACTION("simulator");
+  
+          }}>
             <Image 
               style={ styles.learnParent.imageSize }
               source= { KnapSack }
               />
+            </TouchableOpacity>
           );
       } 
 

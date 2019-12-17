@@ -33,7 +33,7 @@ const initialState = {
     encryptSelected: false,
     encryptLocked: true,
     knapSackSelected: false,
-    knapSackLocked: true, 
+    knapSackLocked: false, 
 };
 
 const allUnlocked = {

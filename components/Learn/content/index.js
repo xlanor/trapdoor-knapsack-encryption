@@ -23,6 +23,10 @@ import {
     DecryptTutorial
 } from './decrypt'
 
+import {
+    SimulatorPage
+} from './simulator'
+
 export { 
     introPageOne as introPageOne,
     introPageTwo as introPageTwo,
@@ -32,4 +36,5 @@ export {
     keyPageOne as keyPageOne,
     EncryptTutorial as EncryptTutorial,
     DecryptTutorial as DecryptTutorial,
+    SimulatorPage as SimulatorPage,
 };

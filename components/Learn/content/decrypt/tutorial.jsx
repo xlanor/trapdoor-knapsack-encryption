@@ -116,7 +116,7 @@ class DecryptTutorial extends Component{
         <Text style={styles.tutorial.textStyle}>Don't forget to subtract the padding applied!</Text>
       <Text style={styles.tutorial.textStyle}>Current Padding: {lockState.encryption.padding}</Text>
       <Button title="decrypt" onPress={()=>{
-      this.decrypt()
+          this.decrypt()
       }}/>
       { decryptedText != ""
         ? <>
