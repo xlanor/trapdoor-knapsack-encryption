@@ -1,9 +1,9 @@
 import alertPopUp from './alertPopUp';
 import blocks from './blocks';
-import safeAreaWrapper from './popUp';
+import popUp from './popUp';
 
 export {
   alertPopUp,
   blocks,
-  safeAreaWrapper,
+  popUp,
 };
