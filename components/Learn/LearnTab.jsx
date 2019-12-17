@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withNavigation } from 'react-navigation';
+import { withNavigation, SafeAreaView } from 'react-navigation';
 import { 
   View, 
   Button,  
@@ -291,13 +291,28 @@ class LearnTab extends Component{
       }else{ 
         console.log("Returning static page")
         console.log(currentTab);
-        return (
-        <Pages
-          key={`${currentTab}-${currentPage}-page`}
-          title={CurPage.title}
-          renderText={CurPage.text}
-        />
-        )
+        if (currentPage == 4 && currentTab == "intro"){
+          // we need to do this for every static page that has long ass text.
+          return (
+            <ScrollView>
+              
+              <Pages
+                key={`${currentTab}-${currentPage}-page`}
+                title={CurPage.title}
+                renderText={CurPage.text}
+              />  
+            </ScrollView>
+          )
+        }else{
+          return (
+            <Pages
+              key={`${currentTab}-${currentPage}-page`}
+              title={CurPage.title}
+              renderText={CurPage.text}
+            />
+          )
+        }
+       
       }
      
         
@@ -305,47 +320,45 @@ class LearnTab extends Component{
 
     render(){
       return(
-        <>
-          <ScrollView > 
-          <View style={styles.learnTab.scrollViewWrapper}>
+        <View style={{flex:1}}>
+            <SafeAreaView style={styles.learnTab.scrollViewWrapper}>
 
-              {this.loadPage()}
-          </View>
+                {this.loadPage()}
+            </SafeAreaView>
 
-          </ScrollView>
-          <View style={styles.learnTab.bottom}>
-              <View style={styles.learnTab.borderWrapper}>
-                <View style={styles.learnTab.leftArrowWrapper}>
-                  {
-                    this.isFirstPage()?
-                    null:
-                    <TouchableOpacity onPress = {()=>{
-                        this.getTouchablePreviousAction()
-                    }}>
-                    <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } />
-                    </TouchableOpacity>
-                  }
-                </View>
-                <View style={styles.learnTab.centerFooterWrapper}>
-                  {/* To put the center footer here later. */}
-                </View>
-                <View style={styles.learnTab.rightArrowWrapper}>
+            <View style={styles.learnTab.bottom}>
+                <View style={styles.learnTab.borderWrapper}>
+                  <View style={styles.learnTab.leftArrowWrapper}>
                     {
-                      this.isFinalPage()?
-                      this.getNextTab():
-                        this.canNavigate()?
-                          <TouchableOpacity onPress = {()=>{
-                              this.getTouchableNextAction()
-                          }}>
-                            
-                            <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow} />
-                          </TouchableOpacity>
-                          : null
+                      this.isFirstPage()?
+                      null:
+                      <TouchableOpacity onPress = {()=>{
+                          this.getTouchablePreviousAction()
+                      }}>
+                      <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } />
+                      </TouchableOpacity>
                     }
+                  </View>
+                  <View style={styles.learnTab.centerFooterWrapper}>
+                    {/* To put the center footer here later. */}
+                  </View>
+                  <View style={styles.learnTab.rightArrowWrapper}>
+                      {
+                        this.isFinalPage()?
+                        this.getNextTab():
+                          this.canNavigate()?
+                            <TouchableOpacity onPress = {()=>{
+                                this.getTouchableNextAction()
+                            }}>
+                              
+                              <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow} />
+                            </TouchableOpacity>
+                            : null
+                      }
+                  </View>
                 </View>
-              </View>
           </View>
-        </>
+        </View>
       );
     }
 };
