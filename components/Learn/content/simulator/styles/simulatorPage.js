@@ -15,7 +15,14 @@ const textStyleBold = {
     textAlign: 'center',
 }
 
+const flexContainerWrapper = {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'red',
+}
+
 export default {
     textStyle,
     textStyleBold,
+    flexContainerWrapper,
 }

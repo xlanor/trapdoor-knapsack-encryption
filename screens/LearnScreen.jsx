@@ -12,9 +12,13 @@ import LearnParent from '../components/Learn/LearnParent'
 
 export default function HomeScreen() {
   return (
+    <>
+    {/* This is to pad the bottom for iphone X+ */}
+    <SafeAreaView style={styles.learnScreen.safeAreaHeader} />
     <SafeAreaView style={styles.learnScreen.backGroundContainer}>
           <LearnParent/>
     </SafeAreaView>
+    </>
   );
 }
 

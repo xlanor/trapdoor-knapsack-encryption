@@ -26,20 +26,16 @@ const centerFooterWrapper = {
 }
 
 const bottom =  {
-    position: 'absolute',
-    bottom: 0,
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.12,
+    flex: 1,
+    width: '100%',
     paddingLeft: Dimensions.get('window').width * 0.05,
     paddingRight: Dimensions.get('window').width * 0.05,
-    backgroundColor: COLORS.WHITE_1,
     justifyContent: 'center',
+    backgroundColor: COLORS.WHITE_1,
   }
 
 const scrollViewWrapper = {
-    paddingBottom: 50, 
-    backgroundColor: COLORS.WHITE_1,
-    paddingBottom: Dimensions.get('window').height * 0.15,
+    flex: 5,
 }
 
 export default {

@@ -415,24 +415,27 @@ class LearnParent extends Component {
 
     return(
       // flex set to 1 so that the white box will take up all the remaining space!
-      <View style={styles.learnParent.wrapperViewBackground}>
-        {
-          this.getImages()
-        }
-        <View
-          style={styles.learnParent.borderLine}
-        />
+      <>
+
         {/* Callback function to hide the popup */}
         <AlertPopUp
             messageContent={popupMessage}
             callback={() => this.setState({ displayPopup: false })}
             visibility={displayPopup}
         />
-        <View style={styles.learnParent.scrollViewBackground}>
-          <LearnTab/>
+        <View style={styles.learnParent.wrapperViewBackground}>
+          {
+            this.getImages()
+          }
+          <View
+            style={styles.learnParent.borderLine}
+          />
+          <View style={styles.learnParent.scrollViewBackground}>
+            <LearnTab/>
 
+          </View>
         </View>
-      </View>
+      </>
     );
   }
 

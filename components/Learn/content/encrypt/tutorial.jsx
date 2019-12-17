@@ -220,7 +220,7 @@ class EncryptTutorial extends Component{
     }
     
     return(
-      <ScrollView>
+      <ScrollView style={{ marginBottom: 100}}>
         <Text style={styles.tutorial.textStyleTitle}>Encryption</Text>
         <Text style={styles.tutorial.textStyleHeader2}>Depending on the number of elements in your public key b, the binary values are assigned into blocks. (size of binary / size of b)</Text>
         <Text style={styles.tutorial.textStyleHeader2}>Your public key b, padding may have to be applied based on the length of the public key and the message. </Text>

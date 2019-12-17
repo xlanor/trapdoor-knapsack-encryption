@@ -26,14 +26,36 @@ class SimulatorPage extends Component{
     selectGenKey = () => {
 
     }
+    mainMenu = () => {
+        return (
+            <View style={{flex: 1}}>
+                <View style={{flex: 3}}>
+
+                    <Text style={styles.SimulatorPage.textStyleBold}>Trapdoor Knapsack Simulator</Text>
+                </View>
+                <View style={styles.SimulatorPage.flexContainerWrapper}>
+                    <View style={{flex: 2}}/>
+                    <View style={{flex: 1}}>
+                        <CustomButton callback={this.selectGenKey} text="Generate Keys" />
+                    </View>
+                    <View style={{flex: 1}}>
+                        <CustomButton callback={this.selectGenKey} text="Encrypt Message" />
+                    </View>
+                    <View style={{flex: 1}}>
+                        <CustomButton callback={this.selectGenKey} text="Decrypt Message" />
+                    </View>
+                    <View style={{flex: 2}}/>
+
+                </View>
+            </View>
+        )
+    }
     render(){
         return(
             <View>
-                <Text style={styles.SimulatorPage.textStyleBold}>Trapdoor Knapsack Simulator</Text>
-                <CustomButton callback={this.selectGenKey} text="Generate Keys" />
-                <CustomButton callback={this.selectGenKey} text="Encrypt Message" />
-                <CustomButton callback={this.selectGenKey} text="Decrypt Message" />
+                {this.mainMenu()}
             </View>
+           
         );
     }
 }
