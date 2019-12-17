@@ -18,6 +18,7 @@ const MAX_GCD_PAGES=1;
 const MAX_KEY_PAGES=6;
 const MAX_ENCRYPT_PAGES=3;
 const MAX_DECRYPT_PAGES=3;
+const MAX_SIMULATOR_PAGES=1;
 // we will have different tab names
 // to be determined.
 const initialState = {
@@ -160,6 +161,9 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
                   newMaxPages = MAX_DECRYPT_PAGES
                   newTabName = "decrypt"
                   break;
+              case "simulator":
+                  newMaxPages = MAX_SIMULATOR_PAGES
+                  newTabName = "simulator"
               default: break;
 
           }

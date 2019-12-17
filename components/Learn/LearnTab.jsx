@@ -23,6 +23,7 @@ import {
   keyPageOne,
   EncryptTutorial,
   DecryptTutorial,
+  SimulatorPage,
 } from './content'
 
 import {
@@ -263,6 +264,13 @@ class LearnTab extends Component{
               default: 
                 return DecryptTutorial;
             }
+        case "simulator":
+            switch(currentPage){
+              case 1:
+                return SimulatorPage;
+              default:
+                return SimulatorPage;
+            }
         default: return null;
       }
     }
@@ -276,7 +284,7 @@ class LearnTab extends Component{
       console.log(CurPage);
       // for dynamic pages, we render component, while for static
       // we render a page.
-      if (currentTab == "key" || currentTab == "encrypt" || currentTab == "decrypt"){
+      if (currentTab == "key" || currentTab == "encrypt" || currentTab == "decrypt" || currentTab == "simulator"){
         return (
             <CurPage />
         );   
