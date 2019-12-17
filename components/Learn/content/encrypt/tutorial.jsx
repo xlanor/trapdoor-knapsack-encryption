@@ -32,6 +32,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Block from '../../../Common/Blocks'
 
+import PopUp from '../../../Common/PopUp';
+import Error from '../../../../assets/images/Error.png'
+
 class EncryptTutorial extends Component{
   constructor(props){
     super(props);
@@ -39,7 +42,22 @@ class EncryptTutorial extends Component{
     let currentEncryptText = lockState.encryption.textToEncrypt;
     this.state = {
       currentTextBox: currentEncryptText === "" ? "" : currentEncryptText, // temporary, to be stored in redux - this is only for use in onTextChange
+      showError: false,
+      errorMessage: "",
     }
+  }
+
+  showError = ( message ) => {
+    this.setState({
+      showError: true,
+      errorMessage: message,
+    })
+  }
+
+  hideError = () => {
+    this.setState({
+      showError: false,
+    })
   }
 
   sumReducer = (accumulator, currentValue) => {
@@ -129,7 +147,7 @@ class EncryptTutorial extends Component{
     const { currentTextBox } = this.state;
     if(this.isEmptyInput()){
       // TODO: show popup error
-      console.log("Empty input!")
+      this.showError("Encryption String cannot be empty!")
     }else{
       // compute binary equivalent
       let binString = this.getBinaryOfInput()
@@ -179,7 +197,7 @@ class EncryptTutorial extends Component{
         }))   
         return (
           <View key={'binary-'+idx}>
-            <Text>Block #{idx}</Text>
+            <Text style={styles.tutorial.textStyleHeader3}>Block #{idx}</Text>
             <Block 
                 key={'binary-'+idx}
                 tableTitle={["Key","Binary","Total"]}
@@ -273,8 +291,15 @@ class EncryptTutorial extends Component{
   }
 
   render(){
+      const { showError, errorMessage } = this.state;
       return(
           <View>
+            {
+              showError
+              ? <PopUp visibility={showError} close={this.hideError}  message={errorMessage} icon={Error}/>
+              : null
+
+            }
             <View style={styles.tutorial.textStyleTitleWrapper}>
             {
                 <Text style={styles.tutorial.textStyleTitleCenter}>Encryption</Text>

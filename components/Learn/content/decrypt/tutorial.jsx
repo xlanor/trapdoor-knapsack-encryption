@@ -104,7 +104,6 @@ class DecryptTutorial extends Component{
     const { actions,lockState } = this.props;
     if (! lockState.lessonPageTabAndPages.allowNextPage){
       actions.ALLOW_NEXT_PAGE_ACTION()
-      this.decrypt()
 
     }
     return (
@@ -116,6 +115,9 @@ class DecryptTutorial extends Component{
         <Text style={styles.tutorial.textStyle}>Now, convert the ascii value back to characters to get back the plaintext message.</Text>
         <Text style={styles.tutorial.textStyle}>Don't forget to subtract the padding applied!</Text>
       <Text style={styles.tutorial.textStyle}>Current Padding: {lockState.encryption.padding}</Text>
+      <Button title="decrypt" onPress={()=>{
+      this.decrypt()
+      }}/>
       { decryptedText != ""
         ? <>
           <Text> Decrypted Text:</Text> 
