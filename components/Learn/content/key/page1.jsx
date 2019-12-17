@@ -21,6 +21,8 @@ import ProgressBar3 from '../../../../assets/images/FiveStepProgress/ProgressBar
 import ProgressBar4 from '../../../../assets/images/FiveStepProgress/ProgressBar4.png'
 import ProgressBar5 from '../../../../assets/images/FiveStepProgress/ProgressBar5.png'
 
+import Error from '../../../../assets/images/Error.png'
+
 import { 
   ALLOW_NEXT_PAGE_ACTION
  }  from '../../../../actions/tabPage';
@@ -35,6 +37,8 @@ import {
   UPDATE_PUBLIC_KEY_STRING_ACTION,
   UPDATE_PUBLIC_KEY_ARRAY_ACTION,
  } from '../../../../actions/updateParameters';
+
+ import PopUp from '../../../Common/PopUp';
 // dynamic pages not static pages.
 class KeyPage extends Component {
    constructor(props){
@@ -50,8 +54,24 @@ class KeyPage extends Component {
         currentPrivateKey: lockState.updateParameters.privateKeyString, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
         currentModulo: reduxMod == 0 ? "" : reduxMod, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
         currentMultiplier: reduxMultipler == 0 ? "": reduxMultipler, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
+        showError: false,
+        errorMessage: "",
       }
     
+   }
+  
+   disableError = () => {
+     this.setState({
+       showError: false,
+       errorMessage: "",
+     })
+   }
+
+   enableError = (message) => {
+      this.setState({
+        showError: true,
+        errorMessage: message,
+      })
    }
 
    isValidNumber = (stringToVerify) => {
@@ -159,14 +179,13 @@ class KeyPage extends Component {
       if (!this.validateNumeric()){
         // TODO: show an error message
         console.log(currentPrivateKey)
-        console.log("Not numeric!")
+        this.enableError("Non numeric message received!")
       }else{
         // check if it is superincreasing
         let total = { total: 0, size: 0, arrOfVals: [] } // create object to pass by reference1
         if(!this.validateSuperIncreasing(total)){
-          console.log("Not superincreasing!")
+          this.enableError("Sequence is not superincreasing!")
         }else{
-          console.log("Allowing next page")
           // sets the state.
           actions.ALLOW_NEXT_PAGE_ACTION()
           actions.UPDATE_PRIVATE_KEY_SUM_ACTION(total.total)
@@ -180,14 +199,13 @@ class KeyPage extends Component {
      const { lockState, actions } = this.props;
      const { currentModulo } = this.state;
       if(!this.isValidNumber(currentModulo)){
-          // TODO: add error message
+        this.enableError("Non numeric modulo received!")
       }else{
         // check if is bigger
         let curMod = Number(currentModulo)
         if(!this.isGreaterInteger( lockState.updateParameters.privateKeySum , curMod )){
-            // TODO: return error
+          this.enableError(`Modulus is not larger than ${lockState.updateParameters.privateKeySum}!`)
         }else{
-            console.log("Allowing next page")
             // integer is greater.
             actions.ALLOW_NEXT_PAGE_ACTION();
             actions.UPDATE_MODULO_ACTION(curMod);
@@ -203,13 +221,12 @@ class KeyPage extends Component {
     let mod = Number(lockState.updateParameters.modulo)
    
      if (!this.isValidNumber(currentMultiplier)){
-        // TODO: add error message
+        this.enableError("Non numeric multiplier received!")
      }else{
        let curMult = Number(currentMultiplier)
 
        if(!this.calculateGCD(mod,curMult)){
-         // TODO: add error message
-         console.log("Invalid gcd!")
+        this.enableError(`GCD of ${mod} and ${curMult} is not 1!`)
        }else{
         console.log("Allowing next page")
         // integer is greater.
@@ -421,10 +438,15 @@ class KeyPage extends Component {
     }
    }
    render(){
-
+    const { showError, errorMessage } = this.state;
     let pageNo = this.checkPageNo()
      return(
        <View>
+         {
+           showError?
+           <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
+           : null
+         }
          <View style={styles.page1.textStyleTitleWrapper}>
           <Text style={styles.page1.textStyleTitleCenter}>Key Generation</Text>
 
