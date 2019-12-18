@@ -5,6 +5,7 @@ import lessonPageReducer from '../reducers/lessonPageReducer';
 import currentTabAndPageReducer from '../reducers/currentTabAndPageReducer';
 import currentParametersReducer from '../reducers/currentParametersReducer';
 import currentEncryptionReducer from '../reducers/currentEncryptionReducer';
+import simulatorReducer from '../reducers/simulatorReducer';
 
 const rootReducer = combineReducers(
   { 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers(
     lessonPageTabAndPages: currentTabAndPageReducer,
     updateParameters: currentParametersReducer,
     encryption: currentEncryptionReducer,
+    simulator: simulatorReducer,
   }
 );
 
