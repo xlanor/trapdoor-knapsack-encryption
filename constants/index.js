@@ -67,3 +67,29 @@ export const UPDATE_ENCRYPTED_STRING="UPDATE_ENCRYPTED_STRING";
 
 
 // for handling state of decryption
+
+/*
+
+    privateKey: "",
+    privateKeyValid: false,
+    modulus: "",
+    modulusValid: false,
+    publicKey: "",
+    genKeyCompleted: false,
+    textToEncrypt: "",
+    textToEncryptValid: false,
+    textToDecrypt: "",
+    decryptedText: "",
+*/
+
+// for handling state of simulator
+export const UPDATE_SIMULATOR_PRIVATE_KEY="UPDATE_SIMULATOR_PRIVATE_KEY";
+export const UPDATE_SIMULATOR_PRIVATE_KEY_VALID="UPDATE_SIMULATOR_PRIVATE_KEY_VALID";
+export const UPDATE_SIMULATOR_MODULO="UPDATE_SIMULATOR_MODULO";
+export const UPDATE_SIMULATOR_MODULO_VALID="UPDATE_SIMULATOR_MODULO_VALID";
+export const UPDATE_SIMULATOR_PUBLIC_KEY="UPDATE_SIMULATOR_PUBLIC_KEY";
+export const UPDATE_SIMULATOR_GEN_KEY_COMPLETED="UPDATE_SIMULATOR_GEN_KEY_COMPLETED";
+export const UPDATE_SIMULATOR_TEXT_TO_ENC="UPDATE_SIMULATOR_TEXT_TO_ENC";
+export const UPDATE_SIMULATOR_TEXT_TO_ENC_VALID="UPDATE_SIMULATOR_TEXT_TO_ENC_VALID";
+export const UPDATE_SIMULATOR_TEXT_TO_DECRYPT="UPDATE_SIMULATOR_TEXT_TO_DECRYPT";
+export const UPDATE_SIMULATOR_DECRYPTED_TEXT="UPDATE_SIMULATOR_DECRYPTED_TEXT";
