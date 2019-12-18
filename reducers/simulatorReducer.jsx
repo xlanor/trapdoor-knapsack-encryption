@@ -10,14 +10,20 @@
     UPDATE_SIMULATOR_TEXT_TO_ENC_VALID,
     UPDATE_SIMULATOR_TEXT_TO_DECRYPT,
     UPDATE_SIMULATOR_DECRYPTED_TEXT,
+    UPDATE_SIMULATOR_PRIVATE_KEY_SUM,
+    UPDATE_SIMULATOR_MULTIPLIER,
+    UPDATE_SIMULATOR_MULTIPLIER_VALID,
  } from '../constants';
  
   
 const initialState = {
     privateKey: "",
+    privateKeySum: 0,
     privateKeyValid: false,
     modulus: "",
     modulusValid: false,
+    multiplier: "",
+    multiplierValid: false,
     publicKey: "",
     genKeyCompleted: false,
     textToEncrypt: "",
@@ -47,10 +53,13 @@ const simulatorReducer = (state = initialState, action ) => {
                     return {
                         ...state,
                         privateKey: "", // resets the private key.
+                        privateKeySum: 0,
                         privateKeyValid: false,
                         /* If we update the private key, everything else becomes invalid. */
                         modulus: "",
                         modulusValid: false,
+                        multiplier: "",
+                        multiplierValid: false,
                         publicKey: "",
                         genKeyCompleted: false,
 
@@ -61,6 +70,11 @@ const simulatorReducer = (state = initialState, action ) => {
                         privateKeyValid: true,
                     }
 
+                }
+            case UPDATE_SIMULATOR_PRIVATE_KEY_SUM:
+                return {
+                    ...state,
+                    privateKeySum: action.payload
                 }
             case UPDATE_SIMULATOR_MODULO:
                 return {
@@ -77,6 +91,8 @@ const simulatorReducer = (state = initialState, action ) => {
                         ...state,
                         modulus: "",
                         modulusValid: false,
+                        multiplier: "",
+                        multiplierValid: false,
                         publicKey: false,
                         genKeyCompleted: false,
                     }
@@ -86,12 +102,39 @@ const simulatorReducer = (state = initialState, action ) => {
                         modulusValid: true,
                     }
                 }
+            
+            case UPDATE_SIMULATOR_MULTIPLIER:
+                return {
+                    ...state,
+                    multiplier: action.payload,
+                    multiplierValid: true,
+                    publicKey: false,
+                    genKeyCompleted: false,
+                }
+            case UPDATE_SIMULATOR_MULTIPLIER_VALID:{
+                if (!action.payload){
+                    // multiplier is valid
+                    return {
+                        ...state,
+                        multiplier: "",
+                        multiplierValid: false,
+                        publicKey: false,
+                        genKeyCompleted: false,
+                    }
+                }else{
+                    return {
+                        ...state,
+                        multiplierValid: true,
+                    }
+                }
+            }
             case UPDATE_SIMULATOR_PUBLIC_KEY:
                 return {
                     ...state,
                     publicKey: action.payload,
                     genKeyCompleted: true,
                 }
+                
             case UPDATE_SIMULATOR_TEXT_TO_ENC:
                 return {
                     ...state,
@@ -107,6 +150,8 @@ const simulatorReducer = (state = initialState, action ) => {
                     ...state,
                     decryptedText: action.payload,
                 }
+            default:
+                return state;
         }
 }
 export default simulatorReducer;
