@@ -22,40 +22,67 @@ import styles from './styles';
 class SimulatorPage extends Component{
     constructor(props){
         super(props);
+        this.state = {
+            currentSimulatorPage: "menu", // menu by default.
+        }
+    }
+    setCurrentSimulatorPage = (curPage) => {
+        this.setState({
+            currentSimulatorPage: curPage,
+        })
     }
     selectGenKey = () => {
 
     }
     mainMenu = () => {
-        return (
-            <View style={{flex: 1}}>
-                <View style={{flex: 3}}>
+        /*
+        <View style={{flex: 3}}>
 
                     <Text style={styles.SimulatorPage.textStyleBold}>Trapdoor Knapsack Simulator</Text>
                 </View>
                 <View style={styles.SimulatorPage.flexContainerWrapper}>
                     <View style={{flex: 2}}/>
                     <View style={{flex: 1}}>
-                        <CustomButton callback={this.selectGenKey} text="Generate Keys" />
                     </View>
                     <View style={{flex: 1}}>
-                        <CustomButton callback={this.selectGenKey} text="Encrypt Message" />
                     </View>
                     <View style={{flex: 1}}>
-                        <CustomButton callback={this.selectGenKey} text="Decrypt Message" />
                     </View>
                     <View style={{flex: 2}}/>
 
                 </View>
-            </View>
+                */
+        return (
+            // Don't anyhow remove empty views, they are there to provide flex.
+            <>
+                <View style={styles.SimulatorPage.rowView}>
+                    <View style={styles.SimulatorPage.buttonWrapper}>
+                        <CustomButton callback={this.selectGenKey} text="Generate Keys" />
+                    </View>
+
+                </View>
+                <View style={styles.SimulatorPage.rowView}>
+                    <View style={styles.SimulatorPage.buttonWrapper}>
+                        <CustomButton callback={this.selectGenKey} text="Encrypt Message" />
+                    </View>
+                </View>
+                <View style={styles.SimulatorPage.rowView}>
+                    <View style={styles.SimulatorPage.buttonWrapper}>
+                        <CustomButton callback={this.selectGenKey} text="Decrypt Message" />
+                    </View>
+                </View>
+            </>
         )
     }
     render(){
         return(
-            <View>
-                {this.mainMenu()}
-            </View>
+            <>
+            <Text style={styles.SimulatorPage.textStyleBold}>Trapdoor Knapsack Simulator</Text>
+                <View  style={{ flex:1 }}>
+                    {this.mainMenu()}
+                </View>
            
+            </>
         );
     }
 }
