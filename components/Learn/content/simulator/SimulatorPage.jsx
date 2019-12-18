@@ -62,12 +62,19 @@ class SimulatorPage extends Component{
             currentPrivateKeyInput: "",
             currentModulusInput: "",
             currentMultiplierInput: "",
-            currentMultiplierInput: "",
             showError: false,
             errorMessage: "",
         }
     }
+    isValidNumber = (stringToVerify) => {
+        let str = String(stringToVerify);
+        let reg = new RegExp('^[0-9]+$');
+        return str.match(reg) === null ? false: true;
+      }
 
+      isGreaterInteger = ( a, b )  =>{
+        return a < b;
+     }
     isGreater = (a, b, idx) => {
         // returns true by default if idx is 0, if not whether a > b.
         return idx == 0 ? true: a < b;
@@ -93,6 +100,26 @@ class SimulatorPage extends Component{
             errorMessage: "",
         })
     }
+
+
+   computePublicKey = () => {
+        const { lockState, actions } = this.props;
+        // for every element in the public key, multiply by the multiplier and get the remainder.
+        let privateKeyString = lockState.simulator.privateKey
+        let privateKey = privateKeyString.split(',')
+        let modulo = lockState.simulator.modulus
+        let multiplier = lockState.simulator.multiplier
+        let newPk = []
+        console.log(`Modulo ${modulo} Multiplier ${multiplier} Private Key ${privateKey}`)
+        for (let i = 0; i < privateKey.length; i++){
+            let pub = (privateKey[i] * multiplier) % modulo
+            newPk.push(pub);
+        }
+        if( !lockState.simulator.genKeyCompleted ){
+            actions.UPDATE_SIMULATOR_PUBLIC_KEY_ACTION(newPk);
+        }
+    }
+    
     calculateGCD = (mod,multiplier) => {
         if(mod > multiplier) {
            // swap them around.
@@ -143,15 +170,17 @@ class SimulatorPage extends Component{
     validateCurrentPrivateKey = () => {
         const { actions } = this.props;
         const { currentPrivateKeyInput } = this.state;
+        console.log("Validating "+currentPrivateKeyInput)
         if (!this.validateNumeric(currentPrivateKeyInput)){
             this.enableError("Non numeric message received!")
-            actions.UPDATE_SIMULATOR_PRIVATE_KEY_VALID(false);
+            console.log("here")
+            actions.UPDATE_SIMULATOR_PRIVATE_KEY_VALID_ACTION(false);
         }else{
             // check if it is superincreasing
             let total = { total: 0, size: 0, arrOfVals: [] } // create object to pass by reference1
-            if(!this.validateSuperIncreasing(total)){
+            if(!this.validateSuperIncreasing(total, currentPrivateKeyInput)){
                 this.enableError("Sequence is not superincreasing!")
-                actions.UPDATE_SIMULATOR_PRIVATE_KEY_VALID(false);
+                actions.UPDATE_SIMULATOR_PRIVATE_KEY_VALID_ACTION(false);
             }else{
                 // sets the state.
                 actions.UPDATE_SIMULATOR_PRIVATE_KEY_SUM_ACTION(total.total);
@@ -161,8 +190,10 @@ class SimulatorPage extends Component{
 
     }
     validateCurrentModulus = () => {
+        const { actions, lockState } = this.props;
         const { currentModulusInput } = this.state;
-        if(!this.isValidNumber(currentModulusInput)){
+        console.log(actions)
+        if(!this.validateNumeric(currentModulusInput)){
             this.enableError("Non numeric modulo received!")
             actions.UPDATE_SIMULATOR_MODULO_VALID_ACTION(false);
           }else{
@@ -178,10 +209,11 @@ class SimulatorPage extends Component{
           }
     }
     validateCurrentMultiplier = () => {
+        const { actions, lockState } = this.props;
         const { currentMultiplierInput } = this.state;
         let mod = Number(lockState.simulator.modulus)
    
-        if (!this.isValidNumber(currentMultiplierInput)){
+        if (!this.validateNumeric(currentMultiplierInput)){
            this.enableError("Non numeric multiplier received!")
            actions.UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION(false);
         }else{
@@ -191,6 +223,7 @@ class SimulatorPage extends Component{
             this.enableError(`GCD of ${mod} and ${curMult} is not 1!`)
             actions.UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION(false);
           }else{
+              console.log(`Dispatching ${curMult}`)
               actions.UPDATE_SIMULATOR_MULTIPLIER_ACTION(curMult);
           }
         }
@@ -226,51 +259,66 @@ class SimulatorPage extends Component{
                     )
                 }
                 {
-                    lockState.simulator.modulusValid
-                    ?  (
-                        <>
-                            <Text>Modulus: </Text>
-                            <Text>{lockState.simulator.modulus}</Text>
-                        </>
-                    )
-                    : (
-                        <>
-                            <Text> Choose your modulus:</Text>
-                            <TextInput onChangeText={(text)=>{
-                                this.setState({
-                                    currentModulusInput: text,
-                                })
-                            }}/>
-                            <Button title="Validate Modulus" onPress={()=>{this.validateCurrentModulus()}}/>
-                        </>
-                    )
-                }
-                {
-                    lockState.simulator.multiplierValid 
+                    lockState.simulator.privateKeyValid
                     ? (
-                        <>
-                            <Text> Multiplier: </Text>
-                            <Text>{lockState.simulator.multiplier}</Text>
-                        </>
-                    )
-                    : (
-                    <>
-                        <Text> Choose your multiplier:</Text>
-                        <TextInput onChangeText = {(text)=>{
-                            this.setState({
-                                currentMultiplierInput: text,
-                            })
-                        }}/>
-                        <Button title="Validate Multiplier" onPress={()=>{}}/>
-                    </>
-                    )
+                        lockState.simulator.modulusValid
+                        ?  (
+                            <>
+                                <Text>Modulus: </Text>
+                                <Text>{lockState.simulator.modulus}</Text>
+                            </>
+                        )
+                        : (
+                            <>
+                                <Text> Choose your modulus:</Text>
+                                <TextInput onChangeText={(text)=>{
+                                    this.setState({
+                                        currentModulusInput: text,
+                                    })
+                                }}/>
+                                <Button title="Validate Modulus" onPress={()=>{this.validateCurrentModulus()}}/>
+                            </>
+                        )
+                    ): null
+                   
                 }
                 {
-                    (lockState.simulator.modulusValid && lockState.simulator.privateKeyValid) 
-                    ?  ( 
+
+                    (lockState.simulator.modulusValid 
+                        && lockState.simulator.privateKeyValid )
+                        ? (
+                            lockState.simulator.multiplierValid 
+                            ? (
+                                <>
+                                    <Text> Multiplier: </Text>
+                                    <Text>{lockState.simulator.multiplier}</Text>
+                                </>
+                            )
+                            : (
+                            <>
+                                <Text> Choose your multiplier:</Text>
+                                <TextInput onChangeText = {(text)=>{
+                                    this.setState({
+                                        currentMultiplierInput: text,
+                                    })
+                                }}/>
+                                <Button title="Validate Multiplier" onPress={()=>{this.validateCurrentMultiplier()}}/>
+                            </>
+                            )
+                        ) : null
+                                    
+                }
+                {
+                    (lockState.simulator.modulusValid 
+                        && lockState.simulator.privateKeyValid 
+                        && lockState.simulator.multiplierValid) 
+                    ?  (
+
                         <>
+                            {this.computePublicKey()}
                             <Text> Public Key: </Text>
-                            <Text> {}</Text>
+                             <Text>{typeof(lockState.simulator.publicKey) === "object" ? lockState.simulator.publicKey.join(", "):null}</Text>
+                             <Button title="Return to menu" onPress={()=>{this.setState({currentSimulatorPage: "menu"})}}/>
                         </>
                     )
                     : null

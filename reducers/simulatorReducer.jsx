@@ -24,7 +24,7 @@ const initialState = {
     modulusValid: false,
     multiplier: "",
     multiplierValid: false,
-    publicKey: "",
+    publicKey: [],
     genKeyCompleted: false,
     textToEncrypt: "",
     textToDecrypt: "",
@@ -104,6 +104,7 @@ const simulatorReducer = (state = initialState, action ) => {
                 }
             
             case UPDATE_SIMULATOR_MULTIPLIER:
+                console.log(`Activating state update with ${action.payload}`)
                 return {
                     ...state,
                     multiplier: action.payload,
@@ -129,6 +130,7 @@ const simulatorReducer = (state = initialState, action ) => {
                 }
             }
             case UPDATE_SIMULATOR_PUBLIC_KEY:
+                console.log(`Setting pk to ${action.payload}`)
                 return {
                     ...state,
                     publicKey: action.payload,
