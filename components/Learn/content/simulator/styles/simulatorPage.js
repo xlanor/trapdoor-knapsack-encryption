@@ -21,8 +21,17 @@ const flexContainerWrapper = {
     backgroundColor: 'red',
 }
 
+const buttonWrapper = {
+    paddingLeft: Dimensions.get('window').width * 0.4,
+}
+
+const rowView = {
+    flex:2, justifyContent: 'center'
+}
 export default {
     textStyle,
     textStyleBold,
     flexContainerWrapper,
+    buttonWrapper,
+    rowView,
 }
