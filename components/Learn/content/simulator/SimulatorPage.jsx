@@ -500,25 +500,32 @@ class SimulatorPage extends Component{
     keyGenerationPage = () => {
         const { actions, lockState } = this.props;
         return (
-            <>
+            <View style={styles.SimulatorPage.keyGenWrapperView}>
                 {
                     lockState.simulator.privateKeyValid
                     ? (
-                        <>
-                            <Text>Private Key: </Text>
-                            <Text>{lockState.simulator.privateKey}</Text>
-                        </>
+                        <View style={styles.SimulatorPage.rowKeyGen}>
+                            <Text style={styles.SimulatorPage.textStyleRow}>Private Key: </Text>
+                            <TextInput 
+                                style={styles.SimulatorPage.textStyleInput}
+                                editable={false}
+                            >
+                                {lockState.simulator.privateKey}
+                            </TextInput>
+                        </View>
                     )
                     : (
-                        <>
-                            <Text> Enter your private key: </Text>
-                            <TextInput onChangeText={(text)=>{
+                        <View style={styles.SimulatorPage.rowKeyGen}>
+                            <Text style={styles.SimulatorPage.textStyleRow}>Enter your private key: </Text>
+                            <TextInput style={styles.SimulatorPage.textStyleInput} onChangeText={(text)=>{
                                 this.setState({
                                     currentPrivateKeyInput: text,
                                 })
                             }}/>
-                            <Button title="Validate Key" onPress={()=>{this.validateCurrentPrivateKey()}}></Button>
-                        </>
+                            <View style={styles.SimulatorPage.genKeyButtonView}>
+                                <CustomButton text="Validate Key" callback={()=>{this.validateCurrentPrivateKey()}} />
+                            </View>
+                        </View>
                     )
                 }
                 {
@@ -526,21 +533,31 @@ class SimulatorPage extends Component{
                     ? (
                         lockState.simulator.modulusValid
                         ?  (
-                            <>
-                                <Text>Modulus: </Text>
-                                <Text>{lockState.simulator.modulus}</Text>
-                            </>
+                            <View style={styles.SimulatorPage.rowKeyGen}>
+                                <Text style={styles.SimulatorPage.textStyleRow}>
+                                    Modulus: 
+                                </Text>
+                                <TextInput 
+                                    style={styles.SimulatorPage.textStyleInput}
+                                    editable={false}
+                                >
+                                {lockState.simulator.modulus}</TextInput>
+                            </View>
                         )
                         : (
-                            <>
-                                <Text> Choose your modulus:</Text>
-                                <TextInput onChangeText={(text)=>{
+                            <View style={styles.SimulatorPage.rowKeyGen}>
+                                <Text style={styles.SimulatorPage.textStyleRow}>
+                                    Choose your modulus:
+                                </Text>
+                                <TextInput style={styles.SimulatorPage.textStyleInput} onChangeText={(text)=>{
                                     this.setState({
                                         currentModulusInput: text,
                                     })
                                 }}/>
-                                <Button title="Validate Modulus" onPress={()=>{this.validateCurrentModulus()}}/>
-                            </>
+                                <View style={styles.SimulatorPage.genKeyButtonView}>
+                                    <CustomButton text="Validate Modulus" callback={()=>{this.validateCurrentModulus()}} />
+                                </View>
+                            </View>
                         )
                     ): null
                    
@@ -552,21 +569,32 @@ class SimulatorPage extends Component{
                         ? (
                             lockState.simulator.multiplierValid 
                             ? (
-                                <>
-                                    <Text> Multiplier: </Text>
-                                    <Text>{lockState.simulator.multiplier}</Text>
-                                </>
+                                <View style={styles.SimulatorPage.rowKeyGen}>
+                                    <Text style={styles.SimulatorPage.textStyleRow}>
+                                        Multiplier: 
+                                    </Text>
+                                    <TextInput 
+                                        style={styles.SimulatorPage.textStyleInput}
+                                        editable={false}
+                                    >
+                                        {lockState.simulator.multiplier}
+                                    </TextInput>
+                                </View>
                             )
                             : (
-                            <>
-                                <Text> Choose your multiplier:</Text>
-                                <TextInput onChangeText = {(text)=>{
+                            <View style={styles.SimulatorPage.rowKeyGen}>
+                                <Text style={styles.SimulatorPage.textStyleRow}>
+                                    Choose your multiplier:
+                                </Text>
+                                <TextInput style={styles.SimulatorPage.textStyleInput} onChangeText={(text)=>{
                                     this.setState({
                                         currentMultiplierInput: text,
                                     })
                                 }}/>
-                                <Button title="Validate Multiplier" onPress={()=>{this.validateCurrentMultiplier()}}/>
-                            </>
+                                <View style={styles.SimulatorPage.genKeyButtonView}>
+                                    <CustomButton text="Validate Multiplier" callback={()=>{this.validateCurrentMultiplier()}} />
+                                </View>
+                            </View>
                             )
                         ) : null
                                     
@@ -577,16 +605,30 @@ class SimulatorPage extends Component{
                         && lockState.simulator.multiplierValid) 
                     ?  (
 
-                        <>
+                        <View style={styles.SimulatorPage.rowKeyGen}>
                             {this.computePublicKey()}
-                            <Text> Public Key: </Text>
-                             <Text>{typeof(lockState.simulator.publicKey) === "object" ? lockState.simulator.publicKey.join(", "):null}</Text>
-                             <Button title="Return to menu" onPress={()=>{this.setState({currentSimulatorPage: "menu"})}}/>
-                        </>
+                            <Text style={styles.SimulatorPage.textStyleRow}>
+                                    Public Key: 
+                            </Text>
+                            <TextInput 
+                                style={styles.SimulatorPage.textStyleInput}
+                                editable={false}
+                            >
+                                {
+                                    typeof(lockState.simulator.publicKey) === "object" 
+                                    ? lockState.simulator.publicKey.join(", ")
+                                    :null
+                                }
+                            </TextInput>
+
+                             <View style={styles.SimulatorPage.genKeyButtonView}>
+                                    <CustomButton text="Return to Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} />
+                                </View>
+                        </View>
                     )
                     : null
                 }
-            </>
+            </View>
         )
         
     }
@@ -644,7 +686,7 @@ class SimulatorPage extends Component{
                 <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
                 : null
             }
-            <Text style={styles.SimulatorPage.textStyleBold}>Trapdoor Knapsack Simulator</Text>
+            <Text style={styles.SimulatorPage.textStyleTitle}>Trapdoor Knapsack Simulator</Text>
                 <View  style={{ flex:1 }}>
                     {  
                         this.getCurrentPage()
