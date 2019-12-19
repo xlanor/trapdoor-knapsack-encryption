@@ -7,14 +7,26 @@ const textStyle = {
     fontSize: 20,
     textAlign: 'center',
 }
-
+const keyGenWrapperView = {
+    marginTop: Dimensions.get('screen').height * 0.02,
+}
+const textStyleTitle = {
+    fontFamily: 'comfortaa-bold',
+    fontWeight: 'bold',
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: Dimensions.get('screen').height * 0.05,
+}
 const textStyleBold = {
     fontFamily: 'comfortaa-bold',
     fontWeight: 'bold',
     fontSize: 20,
     textAlign: 'center',
 }
-
+const textStyleRow = {
+    fontFamily: 'comfortaa',
+    fontSize: 16
+}
 const flexContainerWrapper = {
     flex: 1,
     flexDirection: 'column',
@@ -25,13 +37,41 @@ const buttonWrapper = {
     paddingLeft: Dimensions.get('window').width * 0.4,
 }
 
-const rowView = {
-    flex:2, justifyContent: 'center'
+const genKeyButtonView = {
+    alignItems: 'center',
+    marginTop: Dimensions.get('window').height * 0.01,
 }
+
+const textStyleInput = {
+    fontFamily: 'comfortaa-bold',
+    backgroundColor: COLORS.YELLOW_1,
+    borderColor:'black',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    height:  Dimensions.get('screen').height * 0.04,
+    fontSize: 16,
+    padding: Dimensions.get('screen').height * 0.009,
+}
+
+const rowView = {
+    flex:2, 
+    justifyContent: 'center'
+}
+
+const rowKeyGen = {
+    marginTop: Dimensions.get('screen').height * 0.01,
+}
+
 export default {
     textStyle,
+    textStyleTitle,
     textStyleBold,
+    textStyleRow,
     flexContainerWrapper,
     buttonWrapper,
     rowView,
+    keyGenWrapperView,
+    textStyleInput,
+    rowKeyGen,
+    genKeyButtonView,
 }
