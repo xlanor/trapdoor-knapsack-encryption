@@ -12,6 +12,7 @@ const AlertPopUp = (props) => {
           <View style={styles.modalContainer}>
             <Text>{messageContent}</Text>
           </View>
+        
         </TouchableWithoutFeedback>
       </TouchableOpacity>
     </Modal>

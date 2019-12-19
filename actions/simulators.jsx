@@ -13,6 +13,7 @@
     UPDATE_SIMULATOR_PRIVATE_KEY_SUM,
     UPDATE_SIMULATOR_MULTIPLIER,
     UPDATE_SIMULATOR_MULTIPLIER_VALID,
+    UPDATE_SIMULATOR_PADDING
  } from '../constants';
 
  export const UPDATE_SIMULATOR_PRIVATE_KEY_ACTION = (payload) =>{
@@ -103,6 +104,13 @@ export const UPDATE_SIMULATOR_MULTIPLIER_ACTION = (payload) => {
 export const UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION = (payload) => {
     return {
         type: UPDATE_SIMULATOR_MULTIPLIER_VALID,
+        payload: payload,
+    }
+}
+
+export const UPDATE_SIMULATOR_PADDING_ACTION = (payload) =>{
+    return {
+        type: UPDATE_SIMULATOR_PADDING,
         payload: payload,
     }
 }

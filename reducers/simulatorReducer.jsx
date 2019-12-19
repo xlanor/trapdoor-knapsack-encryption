@@ -13,6 +13,7 @@
     UPDATE_SIMULATOR_PRIVATE_KEY_SUM,
     UPDATE_SIMULATOR_MULTIPLIER,
     UPDATE_SIMULATOR_MULTIPLIER_VALID,
+    UPDATE_SIMULATOR_PADDING,
  } from '../constants';
  
   
@@ -27,6 +28,7 @@ const initialState = {
     publicKey: [],
     genKeyCompleted: false,
     textToEncrypt: "",
+    padding: 0,
     textToDecrypt: "",
     decryptedText: "",
 }
@@ -151,6 +153,11 @@ const simulatorReducer = (state = initialState, action ) => {
                 return {
                     ...state,
                     decryptedText: action.payload,
+                }
+            case UPDATE_SIMULATOR_PADDING:
+                return {
+                    ...state,
+                    padding: action.payload,
                 }
             default:
                 return state;
