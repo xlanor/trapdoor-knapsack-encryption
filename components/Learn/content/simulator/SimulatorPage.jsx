@@ -4,6 +4,7 @@ import {
   View, 
   Button,  
   Text, 
+  Clipboard,
   Image, 
   TouchableOpacity,
   TextInput,
@@ -29,6 +30,7 @@ import{
     UPDATE_SIMULATOR_PRIVATE_KEY_SUM_ACTION,
     UPDATE_SIMULATOR_MULTIPLIER_ACTION,
     UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION,
+    UPDATE_SIMULATOR_PADDING_ACTION,
  } from '../../../../actions/simulators'
 
 import Error from '../../../../assets/images/Error.png'
@@ -64,8 +66,19 @@ class SimulatorPage extends Component{
             currentMultiplierInput: "",
             showError: false,
             errorMessage: "",
+            currentPlainTextInput:"",
+            encryptedOutput: [],
+            currentEncryptedTextInput:"",
+
         }
     }
+
+    sumReducer = (accumulator, currentValue) => {
+        return Number(accumulator)+Number(currentValue);
+    }
+    isEmptyInput = (textToCheck) => {
+        return textToCheck.trim() === ""? true: false;
+      }
     isValidNumber = (stringToVerify) => {
         let str = String(stringToVerify);
         let reg = new RegExp('^[0-9]+$');
@@ -135,6 +148,62 @@ class SimulatorPage extends Component{
         return (multiplier == 1)
    
      }
+    
+    getBinaryOfInput = (textToGet) => {
+        return (
+            Array.from(textToGet)
+              .reduce((acc, char) => acc.concat(char.charCodeAt().toString(2)), [])
+              .map(bin => '0'.repeat(8 - bin.length) + bin )
+              .join('')
+        );
+    }
+
+    generateBinaryBlocks = (binaryString) => {
+        const { lockState, actions } = this.props
+        let binUserInput = binaryString
+        let binPubKeyArr = lockState.simulator.publicKey
+        let binaryBlocks = this.chunk(binUserInput,binPubKeyArr.length)
+        return binaryBlocks
+    }
+    chunk = (binaryString, trapdoorSize) => {
+        const { actions } = this.props;
+        let binBlocks = []
+        let upper = binaryString.length - trapdoorSize
+        console.log("Upper limit "+upper)
+        console.log("Trapdoor size:"+trapdoorSize)
+        for(let i = 0; i <= upper; i+= trapdoorSize){
+          binBlocks.push(binaryString.substring(i,i+trapdoorSize));
+        }
+        // need to pad
+        if(binaryString.length % trapdoorSize != 0){
+            let padding =  trapdoorSize - (binaryString.length % trapdoorSize);
+            let start = binaryString.length - (binaryString.length % trapdoorSize);
+            let blockStr = binaryString.substring(start);
+            console.log(`Padding to ${padding}`)
+            for (let j = 0; j < padding; j++){
+                blockStr += '0';
+            }
+            binBlocks.push(blockStr);
+            actions.UPDATE_SIMULATOR_PADDING_ACTION(padding);
+        }
+        let binBlocksNumeric = []
+        for(let i = 0; i < binBlocks.length; i++){
+            // for each number string inside bin blocks, cast it to an array of numbers.
+            console.log(binBlocks[i]);
+            let binLen = binBlocks[i].length;
+            let numeric = binBlocks[i].split('').map(Number)
+            let differential = binLen-numeric.length;
+            while(differential != 0){
+                numeric.unshift(0) // prepends
+                differential -= 1
+            }
+            binBlocksNumeric.push(
+                numeric
+            ) 
+        }
+        return binBlocksNumeric;
+      }
+  
 
     validateNumeric = (numericString) => {
         // splits the private key.
@@ -228,11 +297,75 @@ class SimulatorPage extends Component{
           }
         }
     }
-    encryptionPage = () => {
+    validateEncryptionText = () => {
+        const { lockState } = this.props;
+        const { currentPlainTextInput } = this.state;
+        if (this.isEmptyInput(currentPlainTextInput)){
+            this.enableError("Input cannot be empty!")
+        }else{
+            let binString = this.getBinaryOfInput(currentPlainTextInput)
+            let binBlocks = this.generateBinaryBlocks(binString)
+            let encryptedArr = [];
+            let lockStateArr = binBlocks.map((block, idx)=>{
+              encryptedArr.push( block.map((x, index)=>{
+                  
+                  return Number(lockState.simulator.publicKey[index]) * Number(x)
+              }))   
+            })
+            for(let i = 0; i < encryptedArr.length; i++){
+                encryptedArr[i] = encryptedArr[i].reduce(this.sumReducer)
+            }
+            this.setState({
+                encryptedOutput: encryptedArr,
+            })
 
+        }
+    }
+    encryptionPage = () => {
+        const { encryptedOutput } = this.state;
+        return (
+            <>
+            {
+                encryptedOutput.length === 0
+                ?(
+                    <>
+                        <TextInput onChangeText = {(text)=>{
+                            this.setState({
+                                currentPlainTextInput: text,
+                            })
+                        }}/>
+                        <Button title="Encrypt" onPress={()=>{this.validateEncryptionText()}}/>
+                        </>
+                )
+                :
+                (
+                    <>
+                        <Text>Ciphertext</Text>
+                        <Text>{encryptedOutput.join(',')}</Text>
+                        <Button title="copy" onPress={()=>{
+                            Clipboard.setString(encryptedOutput.join(','))
+                        }}/>
+                         <Button title="Return to menu" onPress={()=>{this.setState({currentSimulatorPage: "menu"})}}/>
+                    </>
+
+                )
+
+            }
+                
+            </>
+        )
     }
     decryptionPage = () => {
-
+        return (
+            <>
+                <TextInput onChangeText = {(text)=>{
+                    this.setState({
+                        currentEncryptedText: text,
+                    })
+                }}/>
+                <Button title="Decrypt" />
+            </>
+        )
     }
     keyGenerationPage = () => {
         const { actions, lockState } = this.props;
@@ -413,6 +546,7 @@ const mapDispatchToProps = (dispatch) => ({
         UPDATE_SIMULATOR_PRIVATE_KEY_SUM_ACTION,
         UPDATE_SIMULATOR_MULTIPLIER_ACTION,
         UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION,
+        UPDATE_SIMULATOR_PADDING_ACTION
     }, dispatch)
   });
 
