@@ -69,14 +69,33 @@ class SimulatorPage extends Component{
             currentPlainTextInput:"",
             encryptedOutput: [],
             currentEncryptedTextInput:"",
+            currentPaddingInput: 0,
+            decrypted: "",
 
         }
     }
+    convertBinToText = (binaryString) => {
+        let dec = []
+        // characters are done in blocks of 8.
+        for (let i = 0; i <= binaryString.length-8; i+= 8){
+            let ascii = parseInt(binaryString.substring(i, i+8), 2)
+            dec.push(String.fromCharCode(ascii))
+        }
+        return dec.join('')
+    }
 
+    removePadding = (binStringList, padNumber) => {
+        let binString = binStringList.join('')
+        return padNumber == 0 ? (
+            binString.substring(0,(binString.length-padNumber))
+        ): binString
+    }
     sumReducer = (accumulator, currentValue) => {
         return Number(accumulator)+Number(currentValue);
     }
     isEmptyInput = (textToCheck) => {
+        if (typeof(textToCheck) === undefined)
+            return true
         return textToCheck.trim() === ""? true: false;
       }
     isValidNumber = (stringToVerify) => {
@@ -132,7 +151,34 @@ class SimulatorPage extends Component{
             actions.UPDATE_SIMULATOR_PUBLIC_KEY_ACTION(newPk);
         }
     }
-    
+    xgcd = (a,m) =>{ // validate inputs
+        [a, m] = [Number(a), Number(m)]
+        if (Number.isNaN(a) || Number.isNaN(m)) {
+            return NaN // invalid input
+        }
+        a = (a % m + m) % m
+        if (!a || m < 2) {
+            return NaN // invalid input
+        }
+        // find the gcd
+        const s = []
+        let b = m
+        while(b) {
+            [a, b] = [b, a % b]
+            s.push({a, b})
+        }
+        if (a !== 1) {
+            return NaN // inverse does not exists
+        }
+        // find the inverse
+        let x = 1
+        let y = 0
+        for(let i = s.length - 2; i >= 0; --i) {
+            [x, y] = [y,  x - y * Math.floor(s[i].a / s[i].b)]
+        }
+        return (y % m + m) % m
+      
+    }
     calculateGCD = (mod,multiplier) => {
         if(mod > multiplier) {
            // swap them around.
@@ -164,6 +210,24 @@ class SimulatorPage extends Component{
         let binPubKeyArr = lockState.simulator.publicKey
         let binaryBlocks = this.chunk(binUserInput,binPubKeyArr.length)
         return binaryBlocks
+    }
+
+    getBinaryString = (knapsack, yVal) => {
+        let binList = [];
+        yVal.forEach(( y )=>{
+            let binaryStr = "";
+            for(let i = knapsack.length-1; i >=0; i--){
+            console.log(`Current y ${y} Current Knapsack ${knapsack[i]}`)
+            if(y >= knapsack[i]){
+                binaryStr = `1${binaryStr}`
+                y -= knapsack[i]
+            }else{
+                binaryStr = `0${binaryStr}`
+            }
+            }
+            binList.push(binaryStr)
+        })
+        return binList
     }
     chunk = (binaryString, trapdoorSize) => {
         const { actions } = this.props;
@@ -206,7 +270,7 @@ class SimulatorPage extends Component{
   
 
     validateNumeric = (numericString) => {
-        // splits the private key.
+        // splits the numeric.
         let splitKey = numericString.split(',');
         for(let i = 0; i < splitKey.length; i++){
           let checkNum = this.isValidNumber(splitKey[i]);
@@ -321,6 +385,44 @@ class SimulatorPage extends Component{
 
         }
     }
+    validateDecryptionText = () => {
+        const { lockState } = this.props
+        const { currentEncryptedTextInput, currentPaddingInput } = this.state
+
+        if (this.isEmptyInput(currentEncryptedTextInput)){
+            this.enableError("Encrypted Input cannot be empty!")
+        }else if (!this.validateNumeric(currentEncryptedTextInput)){
+            // check if they are valid numbers.
+            this.enableError("Text input is NOT numeric!")
+        }else if (!this.isValidNumber(currentPaddingInput)){
+            this.enableError("Padding is not a numerical value!")
+        }else if (this.isEmptyInput(currentPaddingInput)) {
+            this.enableError("Padding Input cannot be empty!")
+        }else{
+            let padding = Number(currentPaddingInput)
+            // convert the text to an array of numbers.
+            let encryptedNumberArray = currentEncryptedTextInput.replace(/, +/g, ",").split(",").map(Number);
+            let decrypted = []
+            // compute the current inverse
+            let currentInverse = this.xgcd(lockState.simulator.multiplier,lockState.simulator.modulus)
+            encryptedNumberArray.forEach((enc)=>{
+                let multiplied = enc * currentInverse;
+                let modVal = multiplied % lockState.simulator.modulus;
+                decrypted.push(modVal)
+            })
+            // convert private key to an array of numbers
+            let privateKeyArr = lockState.simulator.privateKey.replace(/, +/g, ",").split(",").map(Number);
+
+            let binStringList = this.getBinaryString(privateKeyArr, decrypted)
+
+            let unpadded = this.removePadding(binStringList,padding)
+            let dec = this.convertBinToText(unpadded)
+            this.setState({
+                decrypted: dec,
+            })
+        }
+       
+    }
     encryptionPage = () => {
         const { lockState } = this.props;
         const { encryptedOutput } = this.state;
@@ -345,7 +447,7 @@ class SimulatorPage extends Component{
                         <Text>{encryptedOutput.join(',')}</Text>
                         <Text>Padding:</Text>
                         <Text>{lockState.simulator.padding}</Text>
-                        <Button title="copy" onPress={()=>{
+                        <Button title="Copy Ciphertext" onPress={()=>{
                             Clipboard.setString(encryptedOutput.join(','))
                         }}/>
                          <Button title="Return to menu" onPress={()=>{this.setState({currentSimulatorPage: "menu"})}}/>
@@ -359,14 +461,39 @@ class SimulatorPage extends Component{
         )
     }
     decryptionPage = () => {
+        const { decrypted } = this.state;
         return (
+
             <>
-                <TextInput onChangeText = {(text)=>{
-                    this.setState({
-                        currentEncryptedText: text,
-                    })
-                }}/>
-                <Button title="Decrypt" />
+                {
+                    decrypted == ""
+                    ?(
+                        <>
+                          <TextInput onChangeText = {(text)=>{
+                            this.setState({
+                                currentEncryptedTextInput: text,
+                            })
+                        }}/>
+                        <Text>Enter padding:</Text>
+                        <TextInput onChangeText = {
+                            (text)=>{
+                                this.setState({
+                                    currentPaddingInput: text,
+                                })
+                            }
+                        }/>
+                        <Button title="Decrypt" onPress={()=>{this.validateDecryptionText()}} />
+                        </>
+                    )
+                    :(
+                        <>
+                            <Text>{decrypted}</Text>
+            
+                            <Button title="Return to menu" onPress={()=>{this.setState({currentSimulatorPage: "menu"})}}/>
+                        </>
+                    )
+                }
+              
             </>
         )
     }
