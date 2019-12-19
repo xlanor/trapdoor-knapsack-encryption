@@ -322,7 +322,8 @@ class SimulatorPage extends Component{
         }
     }
     encryptionPage = () => {
-        const { encryptedOutput, lockState } = this.state;
+        const { lockState } = this.props;
+        const { encryptedOutput } = this.state;
         return (
             <>
             {
