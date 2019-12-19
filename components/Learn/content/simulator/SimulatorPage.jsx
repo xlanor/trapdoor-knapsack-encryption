@@ -322,7 +322,7 @@ class SimulatorPage extends Component{
         }
     }
     encryptionPage = () => {
-        const { encryptedOutput } = this.state;
+        const { encryptedOutput, lockState } = this.state;
         return (
             <>
             {
@@ -342,6 +342,8 @@ class SimulatorPage extends Component{
                     <>
                         <Text>Ciphertext</Text>
                         <Text>{encryptedOutput.join(',')}</Text>
+                        <Text>Padding:</Text>
+                        <Text>{lockState.simulator.padding}</Text>
                         <Button title="copy" onPress={()=>{
                             Clipboard.setString(encryptedOutput.join(','))
                         }}/>
