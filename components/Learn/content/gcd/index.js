@@ -1,5 +1,5 @@
-import pageOne from './page1';
+import GCDPage from './gcdTutorial';
 
 export { 
-  pageOne as gcdPageOne,
+  GCDPage as gcdPageOne,
 };
