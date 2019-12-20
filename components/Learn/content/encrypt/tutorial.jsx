@@ -2,6 +2,7 @@ import React, { Component } from 'React';
 
 import { 
   View, 
+  KeyboardAvoidingView,
   Button,  
   Text, 
   Image, 
@@ -243,7 +244,7 @@ class EncryptTutorial extends Component{
   getFirstPage = () => {
     const { lockState } = this.props;
     return (
-      <View>
+      <KeyboardAvoidingView style={{flex: 1}} behavior="padding" enabled>
           <Text style={styles.tutorial.textStyleHeader2}>Now, to encrypt a message, you need to first convert the message into ASCII and then to binary</Text>
           <Text style={styles.tutorial.textStyleHeader1}>Enter your message to encrypt:</Text>
           <TextInput defaultValue={
@@ -272,7 +273,7 @@ class EncryptTutorial extends Component{
             </>
 
           }
-        </View>
+        </KeyboardAvoidingView>
     )
   }
 
