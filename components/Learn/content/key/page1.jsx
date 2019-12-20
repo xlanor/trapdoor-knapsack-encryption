@@ -2,6 +2,7 @@ import React, { Component } from 'React';
 
 import { 
   View, 
+  KeyboardAvoidingView, 
   Button,  
   Text, 
   Image, 
@@ -378,7 +379,7 @@ class KeyPage extends Component {
       let isEntered = lockState.lessonPageTabAndPages.allowNextPage
 
      return (
-       <View>
+       <>
          <Text style={styles.page1.textStyleTitle}>Enter your private key <Text style={styles.page1.boldFont}>A</Text>:</Text>
          <Text style={styles.page1.textStyleHeader1}>(This private key A should be in a super increasing sequence)</Text>
          <TextInput defaultValue={
@@ -397,7 +398,7 @@ class KeyPage extends Component {
             Private key <Text style={styles.page1.boldFont}>a</Text>: {isEntered ? lockState.updateParameters.privateKeyString : null}
           </Text>
         <Text style={styles.page1.textStyleHeader2}>Knapsack Size <Text style={styles.page1.boldFont}>n</Text>: {isEntered? lockState.updateParameters.privateKeyArr.length:null}</Text>
-       </View>
+      </>
      )
    }
 

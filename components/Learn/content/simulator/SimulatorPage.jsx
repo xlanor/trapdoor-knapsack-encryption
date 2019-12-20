@@ -32,6 +32,8 @@ import{
     UPDATE_SIMULATOR_MULTIPLIER_ACTION,
     UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION,
     UPDATE_SIMULATOR_PADDING_ACTION,
+    UPDATE_SIMULATOR_RESET_ENC_ACTION,
+    UPDATE_SIMULATOR_RESET_DEC_ACTION
  } from '../../../../actions/simulators'
 
 import Error from '../../../../assets/images/Error.png'
@@ -427,7 +429,7 @@ class SimulatorPage extends Component{
        
     }
     encryptionPage = () => {
-        const { lockState } = this.props;
+        const { actions, lockState } = this.props;
         const { encryptedOutput } = this.state;
         return (
             <>
@@ -456,7 +458,8 @@ class SimulatorPage extends Component{
                 )
                 :
                 (
-                    <View style={styles.SimulatorPage.rowKeyGen}>
+                    <>
+                      <View style={styles.SimulatorPage.rowKeyGen}>
                         <Text style={styles.SimulatorPage.textStyleRow}>
                             Ciphertext
                         </Text>
@@ -489,15 +492,55 @@ class SimulatorPage extends Component{
                             </View>
                                    
                         </View>
+                      </View>
+                      <View style={styles.SimulatorPage.rowKeyGen}>
                         <Text style={styles.SimulatorPage.textStyleRow}>
                             Padding:
                         </Text>
-                        <Text>{lockState.simulator.padding}</Text>
-                        <Button title="Copy Ciphertext" onPress={()=>{
-                            Clipboard.setString(encryptedOutput.join(','))
-                        }}/>
-                         <Button title="Return to menu" onPress={()=>{this.setState({currentSimulatorPage: "menu"})}}/>
+                        <View style={{flexDirection: 'row'}}>
+                            <TextInput 
+                                style={{
+                                    ...styles.SimulatorPage.textStyleInputUneditable,
+                                    ...styles.SimulatorPage.roundLeftCorner,
+                                }}
+                                editable={false}
+                            >
+                                {lockState.simulator.padding}
+                            </TextInput>
+                        </View>
+                        <View style={styles.SimulatorPage.genKeyButtonView}>
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={{flex: 1}}>
+                                    <CustomButton 
+                                        text="Encrypt another input" 
+                                        callback={
+                                            ()=>{
+                                                actions.UPDATE_SIMULATOR_RESET_ENC_ACTION()
+                                                this.setState({
+                                                    currentEncryptedTextInput:"",
+                                                    currentPaddingInput: 0,
+                                                    encryptedOutput: []
+                                                })
+                                            }
+                                    }/>
+                                </View>
+                                <View style={{flex: 1}}>
+                                    <CustomButton 
+                                    text="Return to menu" 
+                                    callback={
+                                        ()=>{
+                                            this.setState({currentSimulatorPage: "menu"
+                                            })
+                                        }
+                                    }/>
+                                </View>
+
+                            </View>
+                            
+                        </View>
                     </View>
+                    </>
+                  
 
                 )
 
@@ -611,7 +654,7 @@ class SimulatorPage extends Component{
                                 })
                             }}/>
                             <View style={styles.SimulatorPage.genKeyButtonView}>
-                                <CustomButton text="Validate Key" callback={()=>{this.validateCurrentPrivateKey()}} />
+                                <CustomButton text="Validate" callback={()=>{this.validateCurrentPrivateKey()}} />
                             </View>
                         </View>
                     )
@@ -684,7 +727,7 @@ class SimulatorPage extends Component{
                                     })
                                 }}/>
                                 <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Validate Modulus" callback={()=>{this.validateCurrentModulus()}} />
+                                    <CustomButton text="Validate" callback={()=>{this.validateCurrentModulus()}} />
                                 </View>
                             </View>
                         )
@@ -759,7 +802,7 @@ class SimulatorPage extends Component{
                                     })
                                 }}/>
                                 <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Validate Multiplier" callback={()=>{this.validateCurrentMultiplier()}} />
+                                    <CustomButton text="Validate" callback={()=>{this.validateCurrentMultiplier()}} />
                                 </View>
                             </View>
                             )
@@ -814,7 +857,7 @@ class SimulatorPage extends Component{
                             </View>
 
                              <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Return to Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} />
+                                    <CustomButton text="Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} />
                                 </View>
                         </View>
                     )
@@ -910,7 +953,9 @@ const mapDispatchToProps = (dispatch) => ({
         UPDATE_SIMULATOR_PRIVATE_KEY_SUM_ACTION,
         UPDATE_SIMULATOR_MULTIPLIER_ACTION,
         UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION,
-        UPDATE_SIMULATOR_PADDING_ACTION
+        UPDATE_SIMULATOR_PADDING_ACTION,
+        UPDATE_SIMULATOR_RESET_ENC_ACTION,
+        UPDATE_SIMULATOR_RESET_DEC_ACTION
     }, dispatch)
   });
 

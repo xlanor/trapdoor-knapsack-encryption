@@ -10,6 +10,7 @@ const textStyle = {
 }
 const keyGenWrapperView = {
     marginTop: Dimensions.get('screen').height * 0.02,
+    flex: 1,
 }
 const textStyleTitle = {
     fontFamily: 'comfortaa-bold',
@@ -51,7 +52,7 @@ const textStyleInput = {
     borderStyle: 'solid',
     height:  Dimensions.get('screen').height * 0.04,
     fontSize: 16,
-    padding: Dimensions.get('screen').height * 0.009,
+    paddingLeft: Dimensions.get('screen').height * 0.003,
 }
 
 const textStyleInputUneditable = {
@@ -63,7 +64,7 @@ const textStyleInputUneditable = {
     borderStyle: 'solid',
     height:  Dimensions.get('screen').height * 0.04,
     fontSize: 16,
-    padding: Dimensions.get('screen').height * 0.009,
+    padding: Dimensions.get('screen').height * 0.003,
 
 }
 
