@@ -2,6 +2,7 @@ import { COLORS } from '../../../../../constants/Colors';
 
 import { Dimensions } from 'react-native';
 
+const iconDim = Dimensions.get('screen').height * 0.03;
 const textStyle = {
     fontFamily: 'comfortaa',
     fontSize: 20,
@@ -53,6 +54,47 @@ const textStyleInput = {
     padding: Dimensions.get('screen').height * 0.009,
 }
 
+const textStyleInputUneditable = {
+    flex: 4.6,
+    fontFamily: 'comfortaa-bold',
+    backgroundColor: COLORS.YELLOW_1,
+    borderColor:'black',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    height:  Dimensions.get('screen').height * 0.04,
+    fontSize: 16,
+    padding: Dimensions.get('screen').height * 0.009,
+
+}
+
+const imageButtonStyle = {
+    flex:0.7, 
+    justifyContent:'center',
+    alignItems:'center',
+    borderBottomWidth: 2,
+    borderBottomColor:'black',
+    borderRightWidth: 2,
+    borderRightColor:'black',
+    borderTopWidth: 2,
+    borderTopColor:'black',
+    borderStyle: 'solid',
+    
+}
+
+const roundRightCorner = {
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5
+}
+const roundLeftCorner = {
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5
+}
+
+const copyStyle={
+    height: iconDim,
+    width: iconDim,
+}
+
 const rowView = {
     flex:2, 
     justifyContent: 'center'
@@ -74,4 +116,9 @@ export default {
     textStyleInput,
     rowKeyGen,
     genKeyButtonView,
+    copyStyle,
+    textStyleInputUneditable,
+    imageButtonStyle,
+    roundRightCorner,
+    roundLeftCorner,
 }

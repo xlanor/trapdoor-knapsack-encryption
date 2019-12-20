@@ -34,6 +34,8 @@ import{
  } from '../../../../actions/simulators'
 
 import Error from '../../../../assets/images/Error.png'
+import EditButton from '../../../../assets/images/EditButton.png'
+import Copy from '../../../../assets/images/Copy.png'
 
 import PopUp from '../../../Common/PopUp'
 
@@ -506,18 +508,60 @@ class SimulatorPage extends Component{
                     ? (
                         <View style={styles.SimulatorPage.rowKeyGen}>
                             <Text style={styles.SimulatorPage.textStyleRow}>Private Key: </Text>
-                            <TextInput 
-                                style={styles.SimulatorPage.textStyleInput}
-                                editable={false}
-                            >
-                                {lockState.simulator.privateKey}
-                            </TextInput>
+                                <View style={{flexDirection: 'row'}}>
+                                    <TextInput 
+                                        style={{
+                                            ...styles.SimulatorPage.textStyleInputUneditable,
+                                            ...styles.SimulatorPage.roundLeftCorner,
+                                        }}
+                                        editable={false}
+                                    >
+                                        {lockState.simulator.privateKey}
+                                    </TextInput>
+                                    <View style={styles.SimulatorPage.imageButtonStyle}>
+                                        <TouchableOpacity
+                                            onPress={()=>{
+                                                    actions.UPDATE_SIMULATOR_PRIVATE_KEY_VALID_ACTION(false)
+                                                }
+                                            }
+                                        >
+                                        <Image 
+                                            style={styles.SimulatorPage.copyStyle}  
+                                            source={EditButton}
+                                        />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View 
+                                        style={{
+                                            ...styles.SimulatorPage.imageButtonStyle,
+                                            ...styles.SimulatorPage.roundRightCorner
+                                        }}
+                                    >
+                                        <TouchableOpacity 
+                                            onPress={()=>{
+                                                Clipboard.setString(lockState.simulator.privateKey)
+                                            }}
+                                        >
+                                        <Image 
+                                            style={styles.SimulatorPage.copyStyle}  
+                                            source={Copy}
+                                        />
+                                        </TouchableOpacity>
+                                    </View>
+                                   
+                                </View>
+                           
+                          
                         </View>
                     )
                     : (
                         <View style={styles.SimulatorPage.rowKeyGen}>
                             <Text style={styles.SimulatorPage.textStyleRow}>Enter your private key: </Text>
-                            <TextInput style={styles.SimulatorPage.textStyleInput} onChangeText={(text)=>{
+                            <TextInput style={{
+                                ...styles.SimulatorPage.textStyleInput,
+                                ...styles.SimulatorPage.roundRightCorner,
+                                ...styles.SimulatorPage.roundLeftCorner,
+                            }} onChangeText={(text)=>{
                                 this.setState({
                                     currentPrivateKeyInput: text,
                                 })
@@ -537,11 +581,48 @@ class SimulatorPage extends Component{
                                 <Text style={styles.SimulatorPage.textStyleRow}>
                                     Modulus: 
                                 </Text>
-                                <TextInput 
-                                    style={styles.SimulatorPage.textStyleInput}
-                                    editable={false}
-                                >
-                                {lockState.simulator.modulus}</TextInput>
+                                <View style={{flexDirection: 'row'}}>
+                                    <TextInput 
+                                        style={{
+                                            ...styles.SimulatorPage.textStyleInputUneditable,
+                                            ...styles.SimulatorPage.roundLeftCorner,
+                                        }}
+                                        editable={false}
+                                    >
+                                        {lockState.simulator.modulus}
+                                    </TextInput>
+                                    <View style={styles.SimulatorPage.imageButtonStyle}>
+                                        <TouchableOpacity
+                                            onPress = {()=>{
+                                                actions.UPDATE_SIMULATOR_MODULO_VALID_ACTION(false)
+                                            }}
+                                        >
+                                        <Image 
+                                            style={styles.SimulatorPage.copyStyle}  
+                                            source={EditButton}
+                                        />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View 
+                                        style={{
+                                            ...styles.SimulatorPage.imageButtonStyle,
+                                            ...styles.SimulatorPage.roundRightCorner
+                                        }}
+                                    >
+                                        <TouchableOpacity
+                                            onPress={()=>{
+                                                Clipboard.setString(lockState.simulator.modulus)
+                                            }}
+                                        >
+                                        <Image 
+                                            style={styles.SimulatorPage.copyStyle}  
+                                            source={Copy}
+                                        />
+                                        </TouchableOpacity>
+                                    </View>
+                                   
+                                </View>
+                             
                             </View>
                         )
                         : (
@@ -549,7 +630,11 @@ class SimulatorPage extends Component{
                                 <Text style={styles.SimulatorPage.textStyleRow}>
                                     Choose your modulus:
                                 </Text>
-                                <TextInput style={styles.SimulatorPage.textStyleInput} onChangeText={(text)=>{
+                                <TextInput style={{
+                                    ...styles.SimulatorPage.textStyleInput,
+                                    ...styles.SimulatorPage.roundRightCorner,
+                                    ...styles.SimulatorPage.roundLeftCorner,
+                                }} onChangeText={(text)=>{
                                     this.setState({
                                         currentModulusInput: text,
                                     })
@@ -573,12 +658,46 @@ class SimulatorPage extends Component{
                                     <Text style={styles.SimulatorPage.textStyleRow}>
                                         Multiplier: 
                                     </Text>
-                                    <TextInput 
-                                        style={styles.SimulatorPage.textStyleInput}
-                                        editable={false}
-                                    >
-                                        {lockState.simulator.multiplier}
-                                    </TextInput>
+                                    <View style={{flexDirection: 'row'}}>
+                                        <TextInput 
+                                            style={{
+                                                ...styles.SimulatorPage.textStyleInputUneditable,
+                                                ...styles.SimulatorPage.roundLeftCorner,
+                                            }}
+                                            editable={false}
+                                        >
+                                            {lockState.simulator.multiplier}
+                                        </TextInput>
+                                        <View style={styles.SimulatorPage.imageButtonStyle}>
+                                            <TouchableOpacity
+                                                onPress = {()=>{
+                                                    actions.UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION(false)
+                                                }}
+                                            >
+                                            <Image 
+                                                style={styles.SimulatorPage.copyStyle}  
+                                                source={EditButton}
+                                            />
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View 
+                                            style={{
+                                                ...styles.SimulatorPage.imageButtonStyle,
+                                                ...styles.SimulatorPage.roundRightCorner
+                                            }}
+                                        >
+                                            <TouchableOpacity
+                                                onPress={()=>{
+                                                    Clipboard.setString(lockState.simulator.multiplier)
+                                                }}
+                                            >
+                                            <Image 
+                                                style={styles.SimulatorPage.copyStyle}  
+                                                source={Copy}
+                                            />
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
                                 </View>
                             )
                             : (
@@ -586,7 +705,11 @@ class SimulatorPage extends Component{
                                 <Text style={styles.SimulatorPage.textStyleRow}>
                                     Choose your multiplier:
                                 </Text>
-                                <TextInput style={styles.SimulatorPage.textStyleInput} onChangeText={(text)=>{
+                                <TextInput style={{
+                                    ...styles.SimulatorPage.textStyleInput,
+                                    ...styles.SimulatorPage.roundRightCorner,
+                                    ...styles.SimulatorPage.roundLeftCorner,
+                                }} onChangeText={(text)=>{
                                     this.setState({
                                         currentMultiplierInput: text,
                                     })
