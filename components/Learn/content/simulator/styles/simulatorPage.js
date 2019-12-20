@@ -57,7 +57,7 @@ const textStyleInput = {
 const textStyleInputUneditable = {
     flex: 4.6,
     fontFamily: 'comfortaa-bold',
-    backgroundColor: COLORS.YELLOW_1,
+    backgroundColor: COLORS.YELLOW_2,
     borderColor:'black',
     borderWidth: 2,
     borderStyle: 'solid',

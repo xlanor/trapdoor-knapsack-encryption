@@ -8,6 +8,7 @@ import {
   Image, 
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
   FlatList 
 } from 'react-native';
 
@@ -433,27 +434,70 @@ class SimulatorPage extends Component{
             {
                 encryptedOutput.length === 0
                 ?(
-                    <>
-                        <TextInput onChangeText = {(text)=>{
-                            this.setState({
-                                currentPlainTextInput: text,
-                            })
-                        }}/>
-                        <Button title="Encrypt" onPress={()=>{this.validateEncryptionText()}}/>
-                        </>
+                    <View style={styles.SimulatorPage.rowKeyGen}>
+                         <Text style={styles.SimulatorPage.textStyleRow}>Enter your encryption string: </Text>
+                            <TextInput 
+                                style={{
+                                    ...styles.SimulatorPage.textStyleInput,
+                                    ...styles.SimulatorPage.roundLeftCorner,
+                                }}
+                                onChangeText =
+                                {(text)=>{
+                                this.setState({
+                                    currentPlainTextInput: text,
+                                })
+                            }}/>
+
+
+                            <View style={styles.SimulatorPage.genKeyButtonView}>
+                                <CustomButton text="Encrypt" callback={()=>{this.validateEncryptionText()}} />
+                            </View>
+                    </View>
                 )
                 :
                 (
-                    <>
-                        <Text>Ciphertext</Text>
-                        <Text>{encryptedOutput.join(',')}</Text>
-                        <Text>Padding:</Text>
+                    <View style={styles.SimulatorPage.rowKeyGen}>
+                        <Text style={styles.SimulatorPage.textStyleRow}>
+                            Ciphertext
+                        </Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <TextInput 
+                                style={{
+                                    ...styles.SimulatorPage.textStyleInputUneditable,
+                                    ...styles.SimulatorPage.roundLeftCorner,
+                                }}
+                                editable={false}
+                            >
+                                {encryptedOutput.join(',')}
+                            </TextInput>
+                            <View 
+                                style={{
+                                    ...styles.SimulatorPage.imageButtonStyle,
+                                    ...styles.SimulatorPage.roundRightCorner
+                                }}
+                            >
+                                <TouchableOpacity 
+                                    onPress={()=>{
+                                        Clipboard.setString(encryptedOutput.join(','))
+                                    }}
+                                >
+                                <Image 
+                                    style={styles.SimulatorPage.copyStyle}  
+                                    source={Copy}
+                                />
+                                </TouchableOpacity>
+                            </View>
+                                   
+                        </View>
+                        <Text style={styles.SimulatorPage.textStyleRow}>
+                            Padding:
+                        </Text>
                         <Text>{lockState.simulator.padding}</Text>
                         <Button title="Copy Ciphertext" onPress={()=>{
                             Clipboard.setString(encryptedOutput.join(','))
                         }}/>
                          <Button title="Return to menu" onPress={()=>{this.setState({currentSimulatorPage: "menu"})}}/>
-                    </>
+                    </View>
 
                 )
 
@@ -470,7 +514,7 @@ class SimulatorPage extends Component{
                 {
                     decrypted == ""
                     ?(
-                        <>
+                        <View style={styles.SimulatorPage.rowKeyGen}>
                           <TextInput onChangeText = {(text)=>{
                             this.setState({
                                 currentEncryptedTextInput: text,
@@ -485,7 +529,7 @@ class SimulatorPage extends Component{
                             }
                         }/>
                         <Button title="Decrypt" onPress={()=>{this.validateDecryptionText()}} />
-                        </>
+                        </View>
                     )
                     :(
                         <>
@@ -502,7 +546,7 @@ class SimulatorPage extends Component{
     keyGenerationPage = () => {
         const { actions, lockState } = this.props;
         return (
-            <View style={styles.SimulatorPage.keyGenWrapperView}>
+            <KeyboardAvoidingView style={styles.SimulatorPage.keyGenWrapperView}>
                 {
                     lockState.simulator.privateKeyValid
                     ? (
@@ -733,16 +777,41 @@ class SimulatorPage extends Component{
                             <Text style={styles.SimulatorPage.textStyleRow}>
                                     Public Key: 
                             </Text>
-                            <TextInput 
-                                style={styles.SimulatorPage.textStyleInput}
-                                editable={false}
-                            >
-                                {
-                                    typeof(lockState.simulator.publicKey) === "object" 
-                                    ? lockState.simulator.publicKey.join(", ")
-                                    :null
-                                }
-                            </TextInput>
+                            <View style={{flexDirection: 'row'}}>
+                                <TextInput 
+                                    style={styles.SimulatorPage.textStyleInputUneditable}
+                                    editable={false}
+                                >
+                                    {
+                                        typeof(lockState.simulator.publicKey) === "object" 
+                                        ? lockState.simulator.publicKey.join(", ")
+                                        :null
+                                    }
+                                </TextInput>
+
+                                <View 
+                                    style={{
+                                        ...styles.SimulatorPage.imageButtonStyle,
+                                        ...styles.SimulatorPage.roundRightCorner
+                                    }}
+                                >
+                                    <TouchableOpacity
+                                        onPress={()=>{
+                                            Clipboard.setString(
+
+                                            typeof(lockState.simulator.publicKey) === "object" 
+                                            ? lockState.simulator.publicKey.join(",")
+                                            :null
+                                            )
+                                        }}
+                                    >
+                                    <Image 
+                                        style={styles.SimulatorPage.copyStyle}  
+                                        source={Copy}
+                                    />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
 
                              <View style={styles.SimulatorPage.genKeyButtonView}>
                                     <CustomButton text="Return to Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} />
@@ -751,7 +820,7 @@ class SimulatorPage extends Component{
                     )
                     : null
                 }
-            </View>
+            </KeyboardAvoidingView>
         )
         
     }
