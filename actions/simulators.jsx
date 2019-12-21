@@ -13,7 +13,9 @@
     UPDATE_SIMULATOR_PRIVATE_KEY_SUM,
     UPDATE_SIMULATOR_MULTIPLIER,
     UPDATE_SIMULATOR_MULTIPLIER_VALID,
-    UPDATE_SIMULATOR_PADDING
+    UPDATE_SIMULATOR_PADDING,
+    UPDATE_SIMULATOR_RESET_ENC,
+    UPDATE_SIMULATOR_RESET_DEC,
  } from '../constants';
 
  export const UPDATE_SIMULATOR_PRIVATE_KEY_ACTION = (payload) =>{
@@ -112,5 +114,16 @@ export const UPDATE_SIMULATOR_PADDING_ACTION = (payload) =>{
     return {
         type: UPDATE_SIMULATOR_PADDING,
         payload: payload,
+    }
+}
+export const UPDATE_SIMULATOR_RESET_DEC_ACTION = () =>{
+    return{
+        type: UPDATE_SIMULATOR_RESET_DEC,
+    }
+}
+
+export const UPDATE_SIMULATOR_RESET_ENC_ACTION = () => {
+    return {
+        type: UPDATE_SIMULATOR_RESET_ENC,
     }
 }

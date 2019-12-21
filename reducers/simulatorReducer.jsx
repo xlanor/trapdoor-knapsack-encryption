@@ -14,6 +14,8 @@
     UPDATE_SIMULATOR_MULTIPLIER,
     UPDATE_SIMULATOR_MULTIPLIER_VALID,
     UPDATE_SIMULATOR_PADDING,
+    UPDATE_SIMULATOR_RESET_ENC,
+    UPDATE_SIMULATOR_RESET_DEC,
  } from '../constants';
  
   
@@ -158,6 +160,19 @@ const simulatorReducer = (state = initialState, action ) => {
                 return {
                     ...state,
                     padding: action.payload,
+                }
+            case UPDATE_SIMULATOR_RESET_ENC:
+                return {
+                    ...state,
+                    textToEncrypt: "",
+                    padding: 0,
+                }
+            
+            case UPDATE_SIMULATOR_RESET_DEC:
+                return {
+                    ...state,
+                    textToDecrypt: "",
+                    decryptedText: "",
                 }
             default:
                 return state;

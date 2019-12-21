@@ -6,6 +6,7 @@ export const COLORS = {
   RED_1: '#FF3D3D',
   WHITE_1: '#FFFFFF',
   YELLOW_1: '#FEF6A7',
+  YELLOW_2: '#d1cda1',
   GREEN_1: '#2FBB7A',
 };
 

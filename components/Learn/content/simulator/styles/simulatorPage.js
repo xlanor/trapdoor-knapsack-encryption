@@ -2,6 +2,7 @@ import { COLORS } from '../../../../../constants/Colors';
 
 import { Dimensions } from 'react-native';
 
+const iconDim = Dimensions.get('screen').height * 0.03;
 const textStyle = {
     fontFamily: 'comfortaa',
     fontSize: 20,
@@ -9,6 +10,7 @@ const textStyle = {
 }
 const keyGenWrapperView = {
     marginTop: Dimensions.get('screen').height * 0.02,
+    flex: 1,
 }
 const textStyleTitle = {
     fontFamily: 'comfortaa-bold',
@@ -39,6 +41,7 @@ const buttonWrapper = {
 
 const genKeyButtonView = {
     alignItems: 'center',
+    justifyContent: 'center',
     marginTop: Dimensions.get('window').height * 0.01,
 }
 
@@ -50,7 +53,48 @@ const textStyleInput = {
     borderStyle: 'solid',
     height:  Dimensions.get('screen').height * 0.04,
     fontSize: 16,
-    padding: Dimensions.get('screen').height * 0.009,
+    paddingLeft: Dimensions.get('screen').height * 0.003,
+}
+
+const textStyleInputUneditable = {
+    flex: 4.6,
+    fontFamily: 'comfortaa-bold',
+    backgroundColor: COLORS.YELLOW_2,
+    borderColor:'black',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    height:  Dimensions.get('screen').height * 0.04,
+    fontSize: 16,
+    padding: Dimensions.get('screen').height * 0.003,
+
+}
+
+const imageButtonStyle = {
+    flex:0.7, 
+    justifyContent:'center',
+    alignItems:'center',
+    borderBottomWidth: 2,
+    borderBottomColor:'black',
+    borderRightWidth: 2,
+    borderRightColor:'black',
+    borderTopWidth: 2,
+    borderTopColor:'black',
+    borderStyle: 'solid',
+    
+}
+
+const roundRightCorner = {
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5
+}
+const roundLeftCorner = {
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5
+}
+
+const copyStyle={
+    height: iconDim,
+    width: iconDim,
 }
 
 const rowView = {
@@ -74,4 +118,9 @@ export default {
     textStyleInput,
     rowKeyGen,
     genKeyButtonView,
+    copyStyle,
+    textStyleInputUneditable,
+    imageButtonStyle,
+    roundRightCorner,
+    roundLeftCorner,
 }
