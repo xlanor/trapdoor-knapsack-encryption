@@ -42,7 +42,7 @@ const buttonWrapper = {
 const genKeyButtonView = {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: Dimensions.get('window').height * 0.01,
+    marginTop: Dimensions.get('window').height * 0.02,
 }
 
 const textStyleInput = {
