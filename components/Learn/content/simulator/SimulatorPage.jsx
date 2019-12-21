@@ -666,7 +666,7 @@ class SimulatorPage extends Component{
                                     }} />
                                 </View>
 
-                            </View>
+                             </View>
                             
                         </View>
                         </>
@@ -744,7 +744,21 @@ class SimulatorPage extends Component{
                                 })
                             }}/>
                             <View style={styles.SimulatorPage.genKeyButtonView}>
-                                <CustomButton text="Validate" callback={()=>{this.validateCurrentPrivateKey()}} />
+                                <View style={{flexDirection: 'row'}}>
+                                    <View style={{flex: 1}}>
+                                        <CustomButton text="Menu" callback={
+                                            ()=>{
+                                                this.setState({currentSimulatorPage: "menu"
+                                                })
+                                            }
+                                        }/>
+                                    </View>
+                                    <View style={{flex: 1}}>
+                                        <CustomButton text="Validate" callback={()=>{this.validateCurrentPrivateKey()}} />
+                                    </View>
+
+                                </View>
+                                
                             </View>
                         </View>
                     )
@@ -817,7 +831,19 @@ class SimulatorPage extends Component{
                                     })
                                 }}/>
                                 <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Validate" callback={()=>{this.validateCurrentModulus()}} />
+                                    <View style={{flexDirection: 'row'}}>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Menu" callback={
+                                                ()=>{
+                                                    this.setState({currentSimulatorPage: "menu"
+                                                    })
+                                                }
+                                            }/>
+                                        </View>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Validate" callback={()=>{this.validateCurrentModulus()}} />
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
                         )
@@ -892,7 +918,19 @@ class SimulatorPage extends Component{
                                     })
                                 }}/>
                                 <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Validate" callback={()=>{this.validateCurrentMultiplier()}} />
+                                    <View style={{flexDirection: 'row'}}>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Menu" callback={
+                                                ()=>{
+                                                    this.setState({currentSimulatorPage: "menu"
+                                                    })
+                                                }
+                                            }/>
+                                        </View>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Validate" callback={()=>{this.validateCurrentMultiplier()}} />
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
                             )
@@ -945,10 +983,10 @@ class SimulatorPage extends Component{
                                     </TouchableOpacity>
                                 </View>
                             </View>
-
+                            
                              <View style={styles.SimulatorPage.genKeyButtonView}>
                                     <CustomButton text="Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} />
-                                </View>
+                            </View>
                         </View>
                     )
                     : null
