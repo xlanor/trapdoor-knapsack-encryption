@@ -1,6 +1,8 @@
 import {
   NEXT_INTRO_PAGE,
   PREVIOUS_INTRO_PAGE,
+  NEXT_GCD_PAGE,
+  PREVIOUS_GCD_PAGE,
   NEXT_KEY_PAGE,
   PREVIOUS_KEY_PAGE,
   PREVIOUS_ENCRYPT_PAGE,
@@ -14,7 +16,7 @@ import {
 } from '../constants';
 
 const MAX_INTRO_PAGES=4;
-const MAX_GCD_PAGES=1;
+const MAX_GCD_PAGES=15;
 const MAX_KEY_PAGES=6;
 const MAX_ENCRYPT_PAGES=3;
 const MAX_DECRYPT_PAGES=3;
@@ -55,6 +57,22 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
             showErrorMessage: false,
             errorMessage: "",
           }
+      case NEXT_GCD_PAGE:
+        return{
+          ...state,
+          tabPage: (state.tabPage + 1 > state.maxPage) ? state.tabPage : state.tabPage + 1,
+          allowNextPage: true,
+          showErrorMessage: false,
+          errorMessage: "",
+        }
+      case PREVIOUS_GCD_PAGE:
+        return{
+          ...state,
+          tabPage: (state.tabPage - 1 < 0) ? 0 : state.tabPage - 1,
+          allowNextPage: true, // gcd does not have any requirements that we cant navigate to the next tab.
+          showErrorMessage: false,
+          errorMessage: "",
+        }
       case PREVIOUS_ENCRYPT_PAGE:
        return {
          ...state,

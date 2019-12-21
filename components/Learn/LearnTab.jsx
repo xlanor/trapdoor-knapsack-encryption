@@ -29,6 +29,8 @@ import {
 import {
   NEXT_INTRO_PAGE_ACTION,
   PREVIOUS_INTRO_PAGE_ACTION,
+  NEXT_GCD_PAGE_ACTION,
+  PREVIOUS_GCD_PAGE_ACTION,
   NEXT_KEY_PAGE_ACTION,
   PREVIOUS_KEY_PAGE_ACTION,
   NEXT_ENCRYPT_PAGE_ACTION,
@@ -154,6 +156,7 @@ class LearnTab extends Component{
       let currentPage = lockState.lessonPageTabAndPages.tabPage
       switch(currentTab){
         case "intro": return actions.PREVIOUS_INTRO_PAGE_ACTION();
+        case "gcd": return actions.PREVIOUS_GCD_PAGE_ACTION();
         case "key": 
           if(currentPage == 4){
             actions.UPDATE_INVERSE_ACTION(0);
@@ -190,6 +193,7 @@ class LearnTab extends Component{
       let currentPage = lockState.lessonPageTabAndPages.tabPage
       switch(currentTab){
         case "intro": return actions.NEXT_INTRO_PAGE_ACTION();
+        case "gcd": return actions.NEXT_GCD_PAGE_ACTION();
         case "key": return actions.NEXT_KEY_PAGE_ACTION();
         case "encrypt": 
             if(currentPage == 1){
@@ -372,6 +376,8 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
     NEXT_INTRO_PAGE_ACTION,
     PREVIOUS_INTRO_PAGE_ACTION,
+    NEXT_GCD_PAGE_ACTION,
+    PREVIOUS_GCD_PAGE_ACTION,
     NEXT_ENCRYPT_PAGE_ACTION,
     NEXT_DECRYPT_PAGE_ACTION,
     PREVIOUS_DECRYPT_PAGE_ACTION,

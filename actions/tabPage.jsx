@@ -2,6 +2,8 @@
 import { 
   NEXT_INTRO_PAGE,
   PREVIOUS_INTRO_PAGE,
+  NEXT_GCD_PAGE,
+  PREVIOUS_GCD_PAGE,
   NEXT_KEY_PAGE,
   PREVIOUS_KEY_PAGE,
   PREVIOUS_ENCRYPT_PAGE,
@@ -25,6 +27,17 @@ import {
  export const PREVIOUS_INTRO_PAGE_ACTION = () => {
    return {
      type: PREVIOUS_INTRO_PAGE,
+   }
+ }
+
+ export const NEXT_GCD_PAGE_ACTION = () =>{
+   return{
+     type: NEXT_GCD_PAGE,
+   }
+ }
+ export const PREVIOUS_GCD_PAGE_ACTION = () =>{
+   return {
+     type: PREVIOUS_GCD_PAGE,
    }
  }
 

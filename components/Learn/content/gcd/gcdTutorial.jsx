@@ -19,8 +19,15 @@ import {
 import HTML from 'react-native-render-html';
 import PropTypes from 'prop-types';
 
-// import stylesheet.
+// import stylesheet
 import styles from './styles';
+
+// begin redux imports
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  ALLOW_NEXT_PAGE_ACTION
+} from '../../../../actions/tabPage';
 
 //contents
 import contents from './contents';
@@ -29,7 +36,7 @@ import contents from './contents';
 class GCDPage extends Component {
   constructor(props) {
     super(props);
-    let pageNo = this.pageNo;
+    const { lockState } = this.props;
   }
   getPage15 = () => {
     return (
@@ -216,7 +223,14 @@ class GCDPage extends Component {
       </View>
     )
   }
+  checkPageNo = () => {
+    const { lockState } = this.props;
+    console.log("TESTCURRENT: " + lockState.lessonPageTabAndPages.tabPage);
+    console.log("TESTMAX:     " + lockState.lessonPageTabAndPages.maxPage);
+    return lockState.lessonPageTabAndPages.tabPage;
+  }
   getPageElements = () => {
+    let pageNo = this.checkPageNo()
     switch (pageNo) {
       case 1: return this.getPage1();
       case 2: return this.getPage2();
@@ -237,8 +251,24 @@ class GCDPage extends Component {
     }
   }
   render() {
-    return this.getPage15();
+    let pageNo = this.checkPageNo()
+    return (
+      <View>
+        {
+          this.getPageElements()
+        }
+      </View>
+    )
   }
 }
 
-export default GCDPage;
+const mapStateToProps = state => ({
+  lockState: state
+})
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({
+    ALLOW_NEXT_PAGE_ACTION,
+  }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GCDPage);
