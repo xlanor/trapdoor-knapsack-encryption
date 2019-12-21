@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  KeyboardAvoidingView,
   ScrollView, 
   View,
   Platform, StatusBar
@@ -12,13 +13,15 @@ import LearnParent from '../components/Learn/LearnParent'
 
 export default function HomeScreen() {
   return (
-    <>
-    {/* This is to pad the bottom for iphone X+ */}
-    <SafeAreaView style={styles.learnScreen.safeAreaHeader} />
-    <SafeAreaView style={styles.learnScreen.backGroundContainer}>
-          <LearnParent/>
-    </SafeAreaView>
-    </>
+     
+          <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+             {/* This is to pad the bottom for iphone X+ */}
+        <SafeAreaView style={styles.learnScreen.safeAreaHeader} />
+        <SafeAreaView style={styles.learnScreen.backGroundContainer}>
+              <LearnParent/>
+        </SafeAreaView>
+      
+        </KeyboardAvoidingView> 
   );
 }
 
