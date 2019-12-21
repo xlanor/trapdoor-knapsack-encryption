@@ -442,6 +442,7 @@ class SimulatorPage extends Component{
                                 style={{
                                     ...styles.SimulatorPage.textStyleInput,
                                     ...styles.SimulatorPage.roundLeftCorner,
+                                    ...styles.SimulatorPage.roundRightCorner,
                                 }}
                                 onChangeText =
                                 {(text)=>{
@@ -450,10 +451,23 @@ class SimulatorPage extends Component{
                                 })
                             }}/>
 
+                                <View style={styles.SimulatorPage.genKeyButtonView}>
+                                    <View style={{flexDirection: 'row', }}>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Menu" callback={
+                                                ()=>{
+                                                    this.setState({currentSimulatorPage: "menu"
+                                                    })
+                                                }
+                                            }/>
+                                        </View>
+                                        <View style={{flex: 1}}>
+                                                <CustomButton text="Encrypt" callback={()=>{this.validateEncryptionText()}} />
+                                        </View>
 
-                            <View style={styles.SimulatorPage.genKeyButtonView}>
-                                <CustomButton text="Encrypt" callback={()=>{this.validateEncryptionText()}} />
-                            </View>
+                                    </View>
+                                   
+                                </View>
                     </View>
                 )
                 :
@@ -509,10 +523,10 @@ class SimulatorPage extends Component{
                             </TextInput>
                         </View>
                         <View style={styles.SimulatorPage.genKeyButtonView}>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <View style={{flex: 1}}>
                                     <CustomButton 
-                                        text="Encrypt another input" 
+                                        text="Clear" 
                                         callback={
                                             ()=>{
                                                 actions.UPDATE_SIMULATOR_RESET_ENC_ACTION()
@@ -526,7 +540,7 @@ class SimulatorPage extends Component{
                                 </View>
                                 <View style={{flex: 1}}>
                                     <CustomButton 
-                                    text="Return to menu" 
+                                    text="Menu" 
                                     callback={
                                         ()=>{
                                             this.setState({currentSimulatorPage: "menu"
@@ -551,34 +565,110 @@ class SimulatorPage extends Component{
     }
     decryptionPage = () => {
         const { decrypted } = this.state;
+        const { actions } = this.props;
         return (
 
             <>
                 {
                     decrypted == ""
                     ?(
-                        <View style={styles.SimulatorPage.rowKeyGen}>
-                          <TextInput onChangeText = {(text)=>{
-                            this.setState({
-                                currentEncryptedTextInput: text,
-                            })
-                        }}/>
-                        <Text>Enter padding:</Text>
-                        <TextInput onChangeText = {
-                            (text)=>{
-                                this.setState({
-                                    currentPaddingInput: text,
-                                })
-                            }
-                        }/>
-                        <Button title="Decrypt" onPress={()=>{this.validateDecryptionText()}} />
-                        </View>
+                        <>
+                            <View style={styles.SimulatorPage.rowKeyGen}>
+                                <Text style={styles.SimulatorPage.textStyleRow}>Enter your encryption string: </Text>
+                                <TextInput 
+                                    style={{
+                                        ...styles.SimulatorPage.textStyleInput,
+                                        ...styles.SimulatorPage.roundLeftCorner,
+                                        ...styles.SimulatorPage.roundRightCorner,
+                                    }}
+                                    onChangeText =
+                                    {(text)=>{ 
+                                        this.setState({
+                                            currentEncryptedTextInput: text,
+                                        })
+                                }}/>
+                            </View>
+                            <View style={styles.SimulatorPage.rowKeyGen}>
+                                <Text style={styles.SimulatorPage.textStyleRow}>
+                                    Enter padding:
+                                </Text>
+                                <TextInput style={{
+                                        ...styles.SimulatorPage.textStyleInput,
+                                        ...styles.SimulatorPage.roundLeftCorner,
+                                        ...styles.SimulatorPage.roundRightCorner,
+                                    }}
+                                    onChangeText =
+                                    {(text)=>{ 
+                                            this.setState({
+                                                currentPaddingInput: text,
+                                            })
+                                        }
+                                    }/>
+                                <View style={styles.SimulatorPage.genKeyButtonView}>
+                                    <View style={{flexDirection: 'row'}}>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Menu" callback={
+                                                ()=>{
+                                                    this.setState({currentSimulatorPage: "menu"
+                                                    })
+                                                }
+                                            }/>
+                                        </View>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Decrypt" callback={()=>{this.validateDecryptionText()}} />
+                                        </View>
+
+                                    </View>
+                                   
+                                </View>
+                                
+                            </View>
+                        </>
+                      
                     )
                     :(
                         <>
-                            <Text>{decrypted}</Text>
-            
-                            <Button title="Return to menu" onPress={()=>{this.setState({currentSimulatorPage: "menu"})}}/>
+                        <View style={styles.SimulatorPage.rowKeyGen}>
+                            <Text style={styles.SimulatorPage.textStyleRow}> 
+                                Decrypted Text: 
+                            </Text>
+                            <View style={{flexDirection: 'row'}}>
+                                <TextInput 
+                                    style={{
+                                        ...styles.SimulatorPage.textStyleInputUneditable,
+                                        ...styles.SimulatorPage.roundLeftCorner,
+                                        ...styles.SimulatorPage.roundRightCorner,
+                                    }}
+                                    editable={false}
+                                >
+                                    {decrypted}
+                                </TextInput>
+                            </View>
+                           
+                        </View>
+                        <View style={styles.SimulatorPage.genKeyButtonView}>
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={{flex: 1}}>
+                                    <CustomButton text="Menu" callback={
+                                        ()=>{
+                                            this.setState({currentSimulatorPage: "menu"
+                                            })
+                                        }
+                                    }/>
+                                </View>
+                                <View style={{flex: 1}}>
+                                    <CustomButton text="Clear" callback={()=>{
+                                        this.setState({
+                                            decrypted: "",
+                                            currentPaddingInput: 0,
+                                        })
+                                        actions.UPDATE_SIMULATOR_RESET_DEC_ACTION()
+                                    }} />
+                                </View>
+
+                            </View>
+                            
+                        </View>
                         </>
                     )
                 }
@@ -874,7 +964,7 @@ class SimulatorPage extends Component{
             <>
                 <View style={styles.SimulatorPage.rowView}>
                     <View style={styles.SimulatorPage.buttonWrapper}>
-                        <CustomButton callback={() => {this.setCurrentSimulatorPage("genkey")}} text="Generate Keys" />
+                        <CustomButton callback={() => {this.setCurrentSimulatorPage("genkey")}} text="KeyGen" />
                     </View>
 
                 </View>
@@ -883,12 +973,12 @@ class SimulatorPage extends Component{
                     ? <>
                         <View style={styles.SimulatorPage.rowView}>
                             <View style={styles.SimulatorPage.buttonWrapper}>
-                                <CustomButton callback={() => {this.setCurrentSimulatorPage("encrypt")}} text="Encrypt Message" />
+                                <CustomButton callback={() => {this.setCurrentSimulatorPage("encrypt")}} text="Encrypt" />
                             </View>
                         </View>
                         <View style={styles.SimulatorPage.rowView}>
                             <View style={styles.SimulatorPage.buttonWrapper}>
-                                <CustomButton callback={() => {this.setCurrentSimulatorPage("decrypt")}} text="Decrypt Message" />
+                                <CustomButton callback={() => {this.setCurrentSimulatorPage("decrypt")}} text="Decrypt" />
                             </View>
                         </View>
                     </>

@@ -171,8 +171,8 @@ const simulatorReducer = (state = initialState, action ) => {
             case UPDATE_SIMULATOR_RESET_DEC:
                 return {
                     ...state,
-                    textToEncrypt: "",
-                    padding: 0,
+                    textToDecrypt: "",
+                    decryptedText: "",
                 }
             default:
                 return state;
