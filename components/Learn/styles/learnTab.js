@@ -38,6 +38,11 @@ const scrollViewWrapper = {
     flex: 5,
 }
 
+const learnTabPad = {
+    marginLeft: Dimensions.get('window').height * 0.05,
+    marginRight: Dimensions.get('window').height * 0.05,
+}
+
 export default {
     nextArrowSize,
     borderWrapper,
@@ -46,5 +51,6 @@ export default {
     centerFooterWrapper,
     bottom,
     scrollViewWrapper,
+    learnTabPad,
     
 }
