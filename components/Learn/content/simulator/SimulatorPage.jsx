@@ -679,7 +679,7 @@ class SimulatorPage extends Component{
     keyGenerationPage = () => {
         const { actions, lockState } = this.props;
         return (
-            <KeyboardAvoidingView style={styles.SimulatorPage.keyGenWrapperView}>
+            <>
                 {
                     lockState.simulator.privateKeyValid
                     ? (
@@ -991,7 +991,7 @@ class SimulatorPage extends Component{
                     )
                     : null
                 }
-            </KeyboardAvoidingView>
+            </>
         )
         
     }
@@ -1002,9 +1002,9 @@ class SimulatorPage extends Component{
             <>
                 <View style={styles.SimulatorPage.rowView}>
                     <View style={styles.SimulatorPage.buttonWrapper}>
-                        <CustomButton callback={() => {this.setCurrentSimulatorPage("genkey")}} text="KeyGen" />
+                        <CustomButton callback={()=>{this.setState({currentSimulatorPage: "genkey"})}} text="KeyGen" />
                     </View>
-
+                
                 </View>
                 {
                     lockState.simulator.genKeyCompleted
@@ -1019,10 +1019,10 @@ class SimulatorPage extends Component{
                                 <CustomButton callback={() => {this.setCurrentSimulatorPage("decrypt")}} text="Decrypt" />
                             </View>
                         </View>
+                        
                     </>
                     : null
                 }
-               
             </>
         )
     }
@@ -1043,19 +1043,16 @@ class SimulatorPage extends Component{
         const { currentSimulatorPage, errorMessage, showError } = this.state;
         return(
             <>
-
-            {
-                showError?
-                <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
-                : null
-            }
-            <Text style={styles.SimulatorPage.textStyleTitle}>Trapdoor Knapsack Simulator</Text>
-                <View  style={{ flex:1 }}>
-                    {  
-                        this.getCurrentPage()
-                    }
-                </View>
-           
+                {
+                    showError?
+                    <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
+                    : null
+                }
+                <Text style={styles.SimulatorPage.textStyleTitle}>Trapdoor Knapsack Simulator</Text>
+                {  
+                    this.getCurrentPage()
+                    
+                }
             </>
         );
     }
