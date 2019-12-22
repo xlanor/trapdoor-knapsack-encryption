@@ -37,6 +37,7 @@ const flexContainerWrapper = {
 
 const buttonWrapper = {
     paddingLeft: Dimensions.get('window').width * 0.4,
+    backgroundColor:'pink',
 }
 
 const genKeyButtonView = {
@@ -98,7 +99,6 @@ const copyStyle={
 }
 
 const rowView = {
-    flex:2, 
     justifyContent: 'center'
 }
 

@@ -8,17 +8,15 @@ const borderLine = {
 };
 
 const wrapperViewBackground = {
-  flex: 1,
-  flexDirection: 'column',
   backgroundColor: COLORS.ORANGE_1,
 };
 
 const scrollViewBackground = {
-  flex: 5,
+  flex: 1,
   paddingLeft: 20,
   paddingRight: 20,
   height: '100%',
-  backgroundColor: COLORS.WHITE_1,
+  backgroundColor: COLORS.GREEN_1,
   //backgroundColor: COLORS.WHITE_1,
 };
 
