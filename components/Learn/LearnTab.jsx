@@ -328,7 +328,35 @@ class LearnTab extends Component{
             {
               this.loadPage()
             }
-           
+            <View style={{flexDirection: 'row'}}>
+              <View style={{flex: 1}}>
+              {
+                this.isFirstPage()?
+                null:
+                <TouchableOpacity onPress = {()=>{
+                    this.getTouchablePreviousAction()
+                }}>
+                <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
+                </TouchableOpacity>
+              }
+              </View>
+              <View style={{flex: 4}}/>
+              <View style={{flex: 1}}>
+              {
+                this.isFinalPage()?
+                this.getNextTab():
+                  this.canNavigate()?
+                    <TouchableOpacity onPress = {()=>{
+                        this.getTouchableNextAction()
+                    }}>
+                      
+                      <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
+                    </TouchableOpacity>
+                    : null
+              }
+              </View>
+            </View>
+          
         </View>
       );
     }

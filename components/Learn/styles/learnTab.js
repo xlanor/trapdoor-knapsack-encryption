@@ -1,9 +1,12 @@
 import { COLORS } from '../../../constants/Colors';
 import { Dimensions } from 'react-native';
 
+const arrowWidth = Dimensions.get('window').width * 0.1;
+const arrowImageWidth = 937;
+const arrowImageHeight = 906;
 const nextArrowSize = {
-    width: Dimensions.get('window').width * 0.08,
-    height: Dimensions.get('window').height * 0.08,
+    width: arrowWidth,
+    height: arrowWidth/arrowImageWidth*arrowImageHeight,
 }
 
 const borderWrapper = {
