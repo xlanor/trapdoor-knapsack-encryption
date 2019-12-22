@@ -1,26 +1,4 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Button,
-  Text,
-  Image,
-  TouchableOpacity,
-  FlatList
-} from 'react-native';
-import {
-  Table,
-  TableWrapper,
-  Rows,
-  Row,
-  Col
-}
-  from 'react-native-table-component';
-
-import HTML from 'react-native-render-html';
-import PropTypes from 'prop-types';
-
-// import stylesheet
-import styles from './styles';
 
 // begin redux imports
 import { connect } from 'react-redux';
@@ -31,206 +9,182 @@ import {
 
 //contents
 import contents from './contents';
+import GCDPages from './GCDPages';
 
 // dynamic pages not static pages.
 class GCDPage extends Component {
   constructor(props) {
     super(props);
-    const { lockState } = this.props;
   }
   getPage15 = () => {
+    let page = contents.pageFifteen;
     return (
-      <View>
-        <HTML html={contents.pageFifteen.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageFifteen.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageFifteen.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageFifteen.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage14 = () => {
+    let page = contents.pageFourteen;
     return (
-      <View>
-        <HTML html={contents.pageFourteen.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageFourteen.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageFourteen.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageFourteen.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage13 = () => {
+    let page = contents.pageThirteen;
     return (
-      <View>
-        <HTML html={contents.pageThirteen.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageThirteen.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageThirteen.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageThirteen.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage12 = () => {
+    let page = contents.pageTwelve;
     return (
-      <View>
-        <HTML html={contents.pageTwelve.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageTwelve.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageTwelve.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageTwelve.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage11 = () => {
+    let page = contents.pageEleven;
     return (
-      <View>
-        <HTML html={contents.pageEleven.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageEleven.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageEleven.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageEleven.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage10 = () => {
+    let page = contents.pageTen;
     return (
-      <View>
-        <HTML html={contents.pageTen.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageTen.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageTen.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageTen.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage9 = () => {
+    let page = contents.pageNine;
     return (
-      <View>
-        <HTML html={contents.pageNine.title} />
-        <HTML html={contents.pageNine.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        text={page.text}
+      />
     )
   }
   getPage8 = () => {
+    let page = contents.pageEight;
     return (
-      <View>
-        <HTML html={contents.pageEight.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageEight.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageEight.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageEight.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage7 = () => {
+    let page = contents.pageSeven;
     return (
-      <View>
-        <HTML html={contents.pageSeven.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageSeven.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageSeven.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageSeven.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage6 = () => {
+    let page = contents.pageSix;
     return (
-      <View>
-        <HTML html={contents.pageSix.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageSix.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageSix.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageSix.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage5 = () => {
+    let page = contents.pageFive;
     return (
-      <View>
-        <HTML html={contents.pageFive.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageFive.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageFive.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageFive.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage4 = () => {
+    let page = contents.pageFour;
     return (
-      <View>
-        <HTML html={contents.pageFour.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageFour.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageFour.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageFour.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage3 = () => {
+    let page = contents.pageThree;
     return (
-      <View>
-        <HTML html={contents.pageThree.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageThree.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageThree.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageThree.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage2 = () => {
+    let page = contents.pageTwo;
     return (
-      <View>
-        <HTML html={contents.pageTwo.title} />
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row data={contents.pageTwo.tableHead} style={styles.head} textStyle={styles.text} />
-          <Rows data={contents.pageTwo.tableData} textStyle={styles.text} />
-        </Table>
-
-        <HTML html={contents.pageTwo.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        tableHead={page.tableHead}
+        tableData={page.tableData}
+        text={page.text}
+      />
     )
   }
   getPage1 = () => {
+    let page = contents.pageOne;
     return (
-      <View>
-        <HTML html={contents.pageOne.title} />
-        <HTML html={contents.pageOne.text} />
-      </View>
+      <GCDPages
+        title={page.title}
+        text={page.text}
+      />
     )
   }
   checkPageNo = () => {
     const { lockState } = this.props;
-    console.log("TESTCURRENT: " + lockState.lessonPageTabAndPages.tabPage);
-    console.log("TESTMAX:     " + lockState.lessonPageTabAndPages.maxPage);
+
     return lockState.lessonPageTabAndPages.tabPage;
   }
   getPageElements = () => {
     let pageNo = this.checkPageNo()
+
     switch (pageNo) {
       case 1: return this.getPage1();
       case 2: return this.getPage2();
@@ -251,14 +205,7 @@ class GCDPage extends Component {
     }
   }
   render() {
-    let pageNo = this.checkPageNo()
-    return (
-      <View>
-        {
-          this.getPageElements()
-        }
-      </View>
-    )
+    return this.getPageElements()
   }
 }
 
@@ -267,7 +214,6 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    ALLOW_NEXT_PAGE_ACTION,
   }, dispatch)
 });
 

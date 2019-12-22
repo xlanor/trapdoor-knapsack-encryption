@@ -8,9 +8,8 @@ export default pageTwelve = {
         ['', '', '', '', '', '', '', '']
     ],
     "text": `<p>Remember the following formulas:<br/>
-    <b>a1 = a2, a2 = a1<br/>
-    a2 = a1 - q * a2, b2 = b1 - q * b2</b><br/>
-    Fill in the next row like in the standard Euclidean algorithm<br/>
-    Now to get a1 and b1, look at the previous row a2 and b2<br/>
-    Notice all the values shifting left?</p>`
+<b>a1 = a2<br/>a2 = a1<br/>a2 = a1 - q * a2<br/>b2 = b1 - q * b2</b><br/><br/>
+Fill in the next row like in the standard Euclidean algorithm<br/>
+Now to get a1 and b1, look at the previous row a2 and b2<br/>
+Notice all the values shifting left?</p>`
 }

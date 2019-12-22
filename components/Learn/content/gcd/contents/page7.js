@@ -7,5 +7,5 @@ export default pageSeven = {
         ['6', '5', '1', '1'],
         ['5', '1', '0', '5']
     ],
-    "text": `<p>Do for the rest of the rows</p>`
+    "text": `<p>Do for the rest of the rows.</p>`
 }
