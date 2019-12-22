@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   FlatList 
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 import { Algo } from '../../assets/images'
 
@@ -299,12 +299,50 @@ class LearnTab extends Component{
           // we need to do this for every static page that has long ass text.
           return (
             <ScrollView>
-              
+              {
+                /*
               <Pages
                 key={`${currentTab}-${currentPage}-page`}
                 title={CurPage.title}
                 renderText={CurPage.text}
               />  
+                */
+              }
+
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
+              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
             </ScrollView>
           )
         }else{

@@ -418,13 +418,12 @@ class LearnParent extends Component {
           <View style={styles.learnParent.wrapperViewBackground }>
             {this.getImages()}
           </View>
-            <View
-              style={styles.learnParent.borderLine}
-            />
-            <View>
-              <LearnTab/>
-
-            </View>
+          <View
+            style={styles.learnParent.borderLine}
+          />
+          <View>
+            <LearnTab/>
+          </View>
       </>
     );
   }
