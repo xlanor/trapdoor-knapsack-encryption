@@ -7,5 +7,6 @@ export default pageFive = {
         ['', '', '', ''],
         ['', '', '', '']
     ],
-    "text": `<p>To get the second row, a will be b and b will be q</p>`
+    "text": `<p>To get the second row,<br/>
+Let a be b and let b be q.</p>`
 }

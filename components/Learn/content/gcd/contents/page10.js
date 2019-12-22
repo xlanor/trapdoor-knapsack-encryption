@@ -7,6 +7,6 @@ export default pageTen = {
         ['', '', '', '', '', '', '', ''],
         ['', '', '', '', '', '', '', '']
     ],
-    "text": `<p>With the Extended Euclidean algorithm, the easiest way to visualise it is via a table<br/>
-    Construct a table like the original Euclidean Algorithm but with 4 more columns</p>`
+    "text": `<p>With the Extended Euclidean algorithm, the easiest way to visualise it is via a table.<br/>
+Construct a table like the original Euclidean Algorithm but with 4 more columns.</p>`
 }

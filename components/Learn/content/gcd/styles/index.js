@@ -1,5 +1,5 @@
-import page1 from './page1'
+import GCDPages from './GCDPages'
 
 export default {
-  page1
+  GCDPages
 };

@@ -7,8 +7,8 @@ export default pageEight = {
         ['6', '5', '1', '1'],
         ['5', '1', '0', '5']
     ],
-    "text": `<p>Do for the rest of the rows<br/>
-    Once r = 0, Stop<br/>
-    Now look at the last value of b.<br/>
-    <b>Since b is 1, GCD(282,23) = 1</b></p>`
+    "text": `<p>Do for the rest of the rows.<br/><br/>
+<b>Once r = 0, Stop</b><br/>
+Now look at the last value of b.<br/>
+<b>Since b is 1, GCD(282,23) = 1</b></p>`
 }
