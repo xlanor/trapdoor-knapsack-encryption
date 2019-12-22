@@ -324,7 +324,7 @@ class LearnTab extends Component{
 
     render(){
       return(
-        <View>
+        <View style={styles.learnTab.learnTabPad}>
             {
               this.loadPage()
             }

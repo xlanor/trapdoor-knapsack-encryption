@@ -37,7 +37,7 @@ const flexContainerWrapper = {
 
 const buttonWrapper = {
     paddingLeft: Dimensions.get('window').width * 0.4,
-    backgroundColor:'pink',
+    marginTop: Dimensions.get('window').height * 0.05,
 }
 
 const genKeyButtonView = {
