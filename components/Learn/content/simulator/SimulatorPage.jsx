@@ -93,9 +93,15 @@ class SimulatorPage extends Component{
 
     removePadding = (binStringList, padNumber) => {
         let binString = binStringList.join('')
-        return padNumber == 0 ? (
-            binString.substring(0,(binString.length-padNumber))
-        ): binString
+        console.log(`Removing ${padNumber}`)
+        if(padNumber != 0){
+            console.log(`Removing ${padNumber}`)
+            return binString.substring(0,(binString.length-padNumber))
+        }
+        else{
+            console.log(`It's a zero`)
+            return binString
+        }
     }
     sumReducer = (accumulator, currentValue) => {
         return Number(accumulator)+Number(currentValue);
@@ -225,7 +231,6 @@ class SimulatorPage extends Component{
         yVal.forEach(( y )=>{
             let binaryStr = "";
             for(let i = knapsack.length-1; i >=0; i--){
-            console.log(`Current y ${y} Current Knapsack ${knapsack[i]}`)
             if(y >= knapsack[i]){
                 binaryStr = `1${binaryStr}`
                 y -= knapsack[i]
@@ -408,6 +413,7 @@ class SimulatorPage extends Component{
             this.enableError("Padding Input cannot be empty!")
         }else{
             let padding = Number(currentPaddingInput)
+            console.log("Current padding input: "+padding)
             // convert the text to an array of numbers.
             let encryptedNumberArray = currentEncryptedTextInput.replace(/, +/g, ",").split(",").map(Number);
             let decrypted = []
@@ -420,10 +426,11 @@ class SimulatorPage extends Component{
             })
             // convert private key to an array of numbers
             let privateKeyArr = lockState.simulator.privateKey.replace(/, +/g, ",").split(",").map(Number);
-
             let binStringList = this.getBinaryString(privateKeyArr, decrypted)
+            console.log(binStringList)
 
             let unpadded = this.removePadding(binStringList,padding)
+            console.log(unpadded)
             let dec = this.convertBinToText(unpadded)
             this.setState({
                 decrypted: dec,
@@ -669,7 +676,7 @@ class SimulatorPage extends Component{
                                         this.setState({
                                             currentEncryptedTextInput:"",
                                             decrypted: "",
-                                            currentPaddingInput: 0,
+                                            currentPaddingInput: "0",
                                         })
                                         actions.UPDATE_SIMULATOR_RESET_DEC_ACTION()
                                     }} />
