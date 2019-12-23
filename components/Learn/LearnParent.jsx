@@ -414,7 +414,12 @@ class LearnParent extends Component {
       }, 3000);
 
     return(
-      <> 
+      <>   
+      <AlertPopUp
+          messageContent={popupMessage}
+          callback={() => this.setState({ displayPopup: false })}
+          visibility={displayPopup}
+      />
           <View style={styles.learnParent.wrapperViewBackground }>
             {this.getImages()}
           </View>
