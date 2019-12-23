@@ -299,7 +299,7 @@ class LearnTab extends Component{
         if (currentPage == 4 && currentTab == "intro"){
           // we need to do this for every static page that has long ass text.
           return (
-            <ScrollView>
+            <ScrollView style={styles.learnTab.learnTabPad}>
                  <Pages
                 key={`${currentTab}-${currentPage}-page`}
                 title={CurPage.title}
@@ -331,34 +331,39 @@ class LearnTab extends Component{
           {
               this.loadPage()
           }
-          <View style={{flexDirection: 'row'}}>
-              <View style={{flex: 1}}>
-              {
-                this.isFirstPage()?
-                null:
-                <TouchableOpacity onPress = {()=>{
-                    this.getTouchablePreviousAction()
-                }}>
-                <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
-                </TouchableOpacity>
-              }
-              </View>
-              <View style={{flex: 4}}/>
-              <View style={{flex: 1}}>
-              {
-                this.isFinalPage()?
-                this.getNextTab():
-                  this.canNavigate()?
+            <View style={{...styles.learnTab.bottom}}>
+                <View style={{flex: 1}}>
+                  {
+                    this.isFirstPage()?
+                    null:
                     <TouchableOpacity onPress = {()=>{
-                        this.getTouchableNextAction()
+                        this.getTouchablePreviousAction()
                     }}>
-                      
-                      <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
+                    <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
                     </TouchableOpacity>
-                    : null
-              }
-              </View>
-            </View>
+                  }
+                  </View>
+                  <View style={{flex: 4}}/>
+                  <View style={{flex: 1}}>
+                    <View style={{marginLeft:'auto'}}>
+                        {
+                        this.isFinalPage()?
+                        this.getNextTab():
+                          this.canNavigate()?
+                            <TouchableOpacity onPress = {()=>{
+                                this.getTouchableNextAction()
+                            }}>
+                              
+                              <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
+                            </TouchableOpacity>
+                            : null
+                      }
+                    </View>
+                
+                  </View>
+               
+           </View>
+        
           {/*
         <View style={styles.learnTab.learnTabPad}>
           

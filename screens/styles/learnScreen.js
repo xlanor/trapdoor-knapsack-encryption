@@ -6,6 +6,8 @@ const safeAreaHeader = {
   flex: 0,
   backgroundColor: COLORS.ORANGE_1,
 }
+const safeAreaHeaderKeyboard = {
+}
 const backGroundContainer = {
   flex: 1,
   justifyContent: "flex-end",
@@ -15,4 +17,5 @@ const backGroundContainer = {
 export default {
   safeAreaHeader,
   backGroundContainer,
+  safeAreaHeaderKeyboard,
 };

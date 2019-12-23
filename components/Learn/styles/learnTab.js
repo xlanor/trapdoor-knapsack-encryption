@@ -29,12 +29,9 @@ const centerFooterWrapper = {
 }
 
 const bottom =  {
-    flex: 1,
-    width: '100%',
-    paddingLeft: Dimensions.get('window').width * 0.05,
-    paddingRight: Dimensions.get('window').width * 0.05,
-    justifyContent: 'center',
-    backgroundColor: COLORS.WHITE_1,
+    flexDirection: 'row',
+    marginLeft: Dimensions.get('window').width * 0.05,
+    marginRight: Dimensions.get('window').width * 0.05,
   }
 
 const scrollViewWrapper = {

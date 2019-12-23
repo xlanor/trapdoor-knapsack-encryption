@@ -3,6 +3,8 @@ import React, { Component } from 'React';
 import { 
   View, 
   KeyboardAvoidingView, 
+  Keyboard,
+  TouchableWithoutFeedback,
   Button,  
   Text, 
   Image, 
@@ -40,6 +42,7 @@ import {
  } from '../../../../actions/updateParameters';
 
  import PopUp from '../../../Common/PopUp';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 // dynamic pages not static pages.
 class KeyPage extends Component {
    constructor(props){
@@ -317,6 +320,7 @@ class KeyPage extends Component {
    getThirdPage = () => {
       const { lockState } = this.props;
       return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
           <Text style={styles.page1.textStyleTitle}>Choose your multiplier <Text style={styles.page1.boldFont}>w</Text>:</Text>
           <Text style={styles.page1.textStyleHeader3}>(<Text style={styles.page1.boldFont}>GCD</Text> will be taught in the next level)</Text>
@@ -342,6 +346,7 @@ class KeyPage extends Component {
 
           }
         </View>
+        </TouchableWithoutFeedback>
       )
    }
 
@@ -349,6 +354,7 @@ class KeyPage extends Component {
      const { lockState } = this.props;
      console.log(lockState.updateParameters.modulo)
       return(
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View>
             <Text style={styles.page1.textStyleTitle}>Choose your modulus <Text style={styles.page1.boldFont}>m</Text>:</Text>
             <Text style={styles.page1.textStyleHeader3}>Sum of <Text style={styles.page1.boldFont}>a</Text> is: {lockState.updateParameters.privateKeySum}</Text>
@@ -372,6 +378,7 @@ class KeyPage extends Component {
 
             }
           </View>
+        </TouchableWithoutFeedback>
       )
    }
    getFirstPage = () => {
@@ -379,26 +386,35 @@ class KeyPage extends Component {
       let isEntered = lockState.lessonPageTabAndPages.allowNextPage
 
      return (
-       <>
-         <Text style={styles.page1.textStyleTitle}>Enter your private key <Text style={styles.page1.boldFont}>A</Text>:</Text>
-         <Text style={styles.page1.textStyleHeader1}>(This private key A should be in a super increasing sequence)</Text>
-         <TextInput defaultValue={
-            lockState.updateParameters.privateKeyString === "" 
-            ? null: 
-            lockState.updateParameters.privateKeyString 
-          } style={styles.page1.textBoxStyle} onChangeText={(text)=>{
-            this.setState({
-              currentPrivateKey: text,
-            })
-         }}/>
-         <Button title="Check Private Key" onPress={()=>{
-            this.validatePrivateKey();
-         }}/>
-         <Text style={styles.page1.textStyleHeader2}>
-            Private key <Text style={styles.page1.boldFont}>a</Text>: {isEntered ? lockState.updateParameters.privateKeyString : null}
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+           <View>
+          <Text style={styles.page1.textStyleTitle}>Enter your private key <Text style={styles.page1.boldFont}>A</Text>:</Text>
+          <Text style={styles.page1.textStyleHeader1}>(This private key A should be in a super increasing sequence)</Text>
+          <TextInput defaultValue={
+              lockState.updateParameters.privateKeyString === "" 
+              ? null: 
+              lockState.updateParameters.privateKeyString 
+            } style={styles.page1.textBoxStyle} onChangeText={(text)=>{
+              this.setState({
+                currentPrivateKey: text,
+              })
+          }}/>
+          <Button title="Check Private Key" onPress={()=>{
+              this.validatePrivateKey();
+          }}/>
+          <Text style={styles.page1.textStyleHeader2}>
+              Private key <Text style={styles.page1.boldFont}>a</Text>: {isEntered ? lockState.updateParameters.privateKeyString : null}
+            </Text>
+          <Text style={styles.page1.textStyleHeader2}>
+            Knapsack Size <Text style={styles.page1.boldFont}>n</Text>: 
+            {
+              isEntered
+              ? lockState.updateParameters.privateKeyArr.length
+              :null
+            }
           </Text>
-        <Text style={styles.page1.textStyleHeader2}>Knapsack Size <Text style={styles.page1.boldFont}>n</Text>: {isEntered? lockState.updateParameters.privateKeyArr.length:null}</Text>
-      </>
+          </View>
+        </TouchableWithoutFeedback>
      )
    }
 
@@ -442,7 +458,7 @@ class KeyPage extends Component {
     const { showError, errorMessage } = this.state;
     let pageNo = this.checkPageNo()
      return(
-       <View>
+       <View style={styles.page1.learnTabPad}>
          {
            showError?
            <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
