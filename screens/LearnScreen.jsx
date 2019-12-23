@@ -8,10 +8,12 @@ import {
   StyleSheet,
   ScrollView, 
   View,
+  Dimensions,
   Platform, StatusBar
 } from 'react-native';
 
 import { SafeAreaView } from 'react-navigation'
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import styles2 from './styles';
 import LearnParent from '../components/Learn/LearnParent'
@@ -22,14 +24,14 @@ export default function HomeScreen() {
      <>
 
 
-            <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-            <SafeAreaView style={styles2.learnScreen.safeAreaHeader} />
-                      <SafeAreaView style={styles2.learnScreen.backGroundContainer}>
-                          <LearnParent/>
+        <SafeAreaView style={styles2.learnScreen.safeAreaHeader} />
+        <KeyboardAvoidingView style={{flex: 1}} behavior="height">
+            <SafeAreaView style={styles2.learnScreen.backGroundContainer}>
+                <LearnParent/>
                          
-                          <View style={{flex: 1}}/>
-                    </SafeAreaView>
-            </KeyboardAvoidingView> 
+                <View style={{flex: 1}}/>
+            </SafeAreaView>
+        </KeyboardAvoidingView> 
              {/* This is to pad the bottom for iphone X+ 
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
