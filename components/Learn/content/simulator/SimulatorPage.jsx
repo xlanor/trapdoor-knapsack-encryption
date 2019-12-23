@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  Keyboard,
   FlatList 
 } from 'react-native';
 
@@ -44,6 +45,7 @@ import PopUp from '../../../Common/PopUp'
 
 // import stylesheet.
 import styles from './styles';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
     /*
 
@@ -459,7 +461,8 @@ class SimulatorPage extends Component{
                                                     this.setState({currentSimulatorPage: "menu"
                                                     })
                                                 }
-                                            }/>
+                                            }
+                                            buttonColor="blue"/>
                                         </View>
                                         <View style={{flex: 1}}>
                                                 <CustomButton text="Encrypt" callback={()=>{this.validateEncryptionText()}} />
@@ -524,6 +527,17 @@ class SimulatorPage extends Component{
                         </View>
                         <View style={styles.SimulatorPage.genKeyButtonView}>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <View style={{flex: 1}}>
+                                    <CustomButton 
+                                    text="Menu" 
+                                    callback={
+                                        ()=>{
+                                            this.setState({currentSimulatorPage: "menu"
+                                            })
+                                        }
+                                    }
+                                    buttonColor="blue"/>
+                                </View>
                                 <View style={{flex: 1}}>
                                     <CustomButton 
                                         text="Clear" 
@@ -538,16 +552,7 @@ class SimulatorPage extends Component{
                                             }
                                     }/>
                                 </View>
-                                <View style={{flex: 1}}>
-                                    <CustomButton 
-                                    text="Menu" 
-                                    callback={
-                                        ()=>{
-                                            this.setState({currentSimulatorPage: "menu"
-                                            })
-                                        }
-                                    }/>
-                                </View>
+                                
 
                             </View>
                             
@@ -612,7 +617,8 @@ class SimulatorPage extends Component{
                                                     this.setState({currentSimulatorPage: "menu"
                                                     })
                                                 }
-                                            }/>
+                                            }
+                                            buttonColor="blue"/>
                                         </View>
                                         <View style={{flex: 1}}>
                                             <CustomButton text="Decrypt" callback={()=>{this.validateDecryptionText()}} />
@@ -654,7 +660,8 @@ class SimulatorPage extends Component{
                                             this.setState({currentSimulatorPage: "menu"
                                             })
                                         }
-                                    }/>
+                                    }
+                                    buttonColor="blue"/>
                                 </View>
                                 <View style={{flex: 1}}>
                                     <CustomButton text="Clear" callback={()=>{
@@ -679,6 +686,7 @@ class SimulatorPage extends Component{
     keyGenerationPage = () => {
         const { actions, lockState } = this.props;
         return (
+           
             <>
                 {
                     lockState.simulator.privateKeyValid
@@ -751,7 +759,8 @@ class SimulatorPage extends Component{
                                                 this.setState({currentSimulatorPage: "menu"
                                                 })
                                             }
-                                        }/>
+                                        }
+                                        buttonColor="blue"/>
                                     </View>
                                     <View style={{flex: 1}}>
                                         <CustomButton text="Validate" callback={()=>{this.validateCurrentPrivateKey()}} />
@@ -761,6 +770,7 @@ class SimulatorPage extends Component{
                                 
                             </View>
                         </View>
+                           
                     )
                 }
                 {
@@ -838,7 +848,8 @@ class SimulatorPage extends Component{
                                                     this.setState({currentSimulatorPage: "menu"
                                                     })
                                                 }
-                                            }/>
+                                            }
+                                            buttonColor="blue"/>
                                         </View>
                                         <View style={{flex: 1}}>
                                             <CustomButton text="Validate" callback={()=>{this.validateCurrentModulus()}} />
@@ -925,7 +936,8 @@ class SimulatorPage extends Component{
                                                     this.setState({currentSimulatorPage: "menu"
                                                     })
                                                 }
-                                            }/>
+                                            }
+                                            buttonColor="blue"/>
                                         </View>
                                         <View style={{flex: 1}}>
                                             <CustomButton text="Validate" callback={()=>{this.validateCurrentMultiplier()}} />
@@ -985,7 +997,8 @@ class SimulatorPage extends Component{
                             </View>
                             
                              <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} />
+                                    <CustomButton text="Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} 
+                                        buttonColor="blue"/>
                             </View>
                         </View>
                     )
@@ -1042,7 +1055,7 @@ class SimulatorPage extends Component{
     render(){
         const { currentSimulatorPage, errorMessage, showError } = this.state;
         return(
-            <>
+            <View style={{...styles.SimulatorPage.learnTabPad}}>
                 {
                     showError?
                     <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
@@ -1053,7 +1066,7 @@ class SimulatorPage extends Component{
                     this.getCurrentPage()
                     
                 }
-            </>
+            </View>
         );
     }
 }

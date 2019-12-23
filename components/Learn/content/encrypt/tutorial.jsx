@@ -7,8 +7,10 @@ import {
   Text, 
   Image, 
   TouchableOpacity,
+  TouchableWithoutFeedback,
   TextInput,
-  FlatList 
+  FlatList, 
+  Keyboard
 } from 'react-native';
 // import stylesheet.
 import styles from './styles';
@@ -244,6 +246,7 @@ class EncryptTutorial extends Component{
   getFirstPage = () => {
     const { lockState } = this.props;
     return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
           <Text style={styles.tutorial.textStyleHeader2}>Now, to encrypt a message, you need to first convert the message into ASCII and then to binary</Text>
           <Text style={styles.tutorial.textStyleHeader1}>Enter your message to encrypt:</Text>
@@ -274,6 +277,7 @@ class EncryptTutorial extends Component{
 
           }
         </View>
+      </TouchableWithoutFeedback>
     )
   }
 
@@ -294,7 +298,7 @@ class EncryptTutorial extends Component{
   render(){
       const { showError, errorMessage } = this.state;
       return(
-          <>
+          <View style={styles.tutorial.learnTabPad}>
             {
               showError
               ? <PopUp visibility={showError} close={this.hideError}  message={errorMessage} icon={Error}/>
@@ -309,7 +313,7 @@ class EncryptTutorial extends Component{
             {
               this.getPageElements()
             }
-          </>  
+          </View>  
       );
     }
 }
