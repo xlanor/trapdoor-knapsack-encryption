@@ -106,6 +106,11 @@ const rowKeyGen = {
     marginTop: Dimensions.get('screen').height * 0.01,
 }
 
+const learnTabPad = {
+    marginLeft: Dimensions.get('window').height * 0.05,
+    marginRight: Dimensions.get('window').height * 0.05,
+  }
+  
 export default {
     textStyle,
     textStyleTitle,
@@ -123,4 +128,5 @@ export default {
     imageButtonStyle,
     roundRightCorner,
     roundLeftCorner,
+    learnTabPad,
 }

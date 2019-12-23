@@ -55,6 +55,11 @@ const textStyleCiphertext = {
   fontSize: 17,
   paddingBottom: Dimensions.get('screen').height * 0.01,
 }
+const learnTabPad = {
+  marginLeft: Dimensions.get('window').height * 0.05,
+  marginRight: Dimensions.get('window').height * 0.05,
+}
+
 
 const textStyleSmallerText = {
   fontFamily: 'comfortaa',
@@ -74,4 +79,5 @@ export default {
   textStyleTitleWrapper,
   textStyleCiphertext,
   textStyleSmallerText,
+  learnTabPad,
 };
