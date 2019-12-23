@@ -545,6 +545,7 @@ class SimulatorPage extends Component{
                                             ()=>{
                                                 actions.UPDATE_SIMULATOR_RESET_ENC_ACTION()
                                                 this.setState({
+                                                    currentPlainTextInput: "",
                                                     currentEncryptedTextInput:"",
                                                     currentPaddingInput: 0,
                                                     encryptedOutput: []
