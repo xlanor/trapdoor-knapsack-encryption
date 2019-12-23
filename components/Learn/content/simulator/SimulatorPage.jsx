@@ -76,7 +76,7 @@ class SimulatorPage extends Component{
             currentPlainTextInput:"",
             encryptedOutput: [],
             currentEncryptedTextInput:"",
-            currentPaddingInput: 0,
+            currentPaddingInput: "",
             decrypted: "",
 
         }
@@ -101,6 +101,7 @@ class SimulatorPage extends Component{
         return Number(accumulator)+Number(currentValue);
     }
     isEmptyInput = (textToCheck) => {
+        console.log(`Received Text to check ${textToCheck}`)
         if (typeof(textToCheck) === undefined)
             return true
         return textToCheck.trim() === ""? true: false;
@@ -546,8 +547,7 @@ class SimulatorPage extends Component{
                                                 actions.UPDATE_SIMULATOR_RESET_ENC_ACTION()
                                                 this.setState({
                                                     currentPlainTextInput: "",
-                                                    currentEncryptedTextInput:"",
-                                                    currentPaddingInput: 0,
+                                                    currentPaddingInput: "",
                                                     encryptedOutput: []
                                                 })
                                             }
@@ -667,6 +667,7 @@ class SimulatorPage extends Component{
                                 <View style={{flex: 1}}>
                                     <CustomButton text="Clear" callback={()=>{
                                         this.setState({
+                                            currentEncryptedTextInput:"",
                                             decrypted: "",
                                             currentPaddingInput: 0,
                                         })
