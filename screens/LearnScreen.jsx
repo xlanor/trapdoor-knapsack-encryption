@@ -22,17 +22,18 @@ export default function HomeScreen() {
      <>
 
 
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
             <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-                  <SafeAreaView style={styles2.learnScreen.safeAreaHeader} />
+            <SafeAreaView style={styles2.learnScreen.safeAreaHeader} />
                       <SafeAreaView style={styles2.learnScreen.backGroundContainer}>
                           <LearnParent/>
+                         
                           <View style={{flex: 1}}/>
                     </SafeAreaView>
             </KeyboardAvoidingView> 
-        </TouchableWithoutFeedback>
              {/* This is to pad the bottom for iphone X+ 
 
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+        </TouchableWithoutFeedback>
         <SafeAreaView style={styles.learnScreen.safeAreaHeader} />
             <SafeAreaView style={styles.learnScreen.backGroundContainer}>
               <LearnParent/>

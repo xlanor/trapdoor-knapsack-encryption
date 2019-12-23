@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { withNavigation, SafeAreaView } from 'react-navigation';
 import { 
   View, 
-  Button,  
+  Button,
+  FlatList,  
   Text, 
   Image, 
   TouchableOpacity,
-  FlatList 
+  Dimensions
 } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
@@ -299,59 +300,22 @@ class LearnTab extends Component{
           // we need to do this for every static page that has long ass text.
           return (
             <ScrollView>
-              {
-                /*
-              <Pages
+                 <Pages
                 key={`${currentTab}-${currentPage}-page`}
                 title={CurPage.title}
                 renderText={CurPage.text}
               />  
-                */
-              }
-
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
-              <TextInput style={{borderWidth: 2, borderColor:'black'}} />
             </ScrollView>
           )
         }else{
           return (
-            <Pages
-              key={`${currentTab}-${currentPage}-page`}
-              title={CurPage.title}
-              renderText={CurPage.text}
-            />
+            <View style={styles.learnTab.learnTabPad}>
+              <Pages
+                key={`${currentTab}-${currentPage}-page`}
+                title={CurPage.title}
+                renderText={CurPage.text}
+              />
+            </View>
           )
         }
        
@@ -362,11 +326,12 @@ class LearnTab extends Component{
 
     render(){
       return(
-        <View style={styles.learnTab.learnTabPad}>
-            {
+        <>
+            
+          {
               this.loadPage()
-            }
-            <View style={{flexDirection: 'row'}}>
+          }
+          <View style={{flexDirection: 'row'}}>
               <View style={{flex: 1}}>
               {
                 this.isFirstPage()?
@@ -394,8 +359,13 @@ class LearnTab extends Component{
               }
               </View>
             </View>
+          {/*
+        <View style={styles.learnTab.learnTabPad}>
           
-        </View>
+            
+          
+            </View>*/}
+        </>
       );
     }
 };

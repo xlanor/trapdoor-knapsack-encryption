@@ -421,9 +421,7 @@ class LearnParent extends Component {
           <View
             style={styles.learnParent.borderLine}
           />
-          <View>
-            <LearnTab/>
-          </View>
+          <LearnTab/>
       </>
     );
   }

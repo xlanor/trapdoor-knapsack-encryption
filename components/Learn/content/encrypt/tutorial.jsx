@@ -294,7 +294,7 @@ class EncryptTutorial extends Component{
   render(){
       const { showError, errorMessage } = this.state;
       return(
-          <View>
+          <>
             {
               showError
               ? <PopUp visibility={showError} close={this.hideError}  message={errorMessage} icon={Error}/>
@@ -309,7 +309,7 @@ class EncryptTutorial extends Component{
             {
               this.getPageElements()
             }
-          </View>  
+          </>  
       );
     }
 }
