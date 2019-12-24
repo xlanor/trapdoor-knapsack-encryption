@@ -42,6 +42,7 @@ import {
  } from '../../../../actions/updateParameters';
 
  import PopUp from '../../../Common/PopUp';
+ import CustomButton from '../../../Common/Button';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 // dynamic pages not static pages.
 class KeyPage extends Component {
@@ -336,9 +337,9 @@ class KeyPage extends Component {
            keyboardType={'numeric'} style = {styles.page1.textBoxStyle} onChangeText={(text)=>{
             this.setState({currentMultiplier:text})
           }}/>
-          <Button title="Check Multiplier" onPress={()=>{
-            this.validateMultiplier()
-          }}/>
+          <View style={styles.page1.buttonRow}>
+            <CustomButton text="Validate" callback={this.validateMultiplier}/>
+          </View>
           {
               lockState.updateParameters.multiplier === 0 ?
               null:
@@ -368,9 +369,9 @@ class KeyPage extends Component {
             keyboardType={'numeric'} style={styles.page1.textBoxStyle} onChangeText={(text)=>{
                 this.setState({ currentModulo:text})
             }}/>
-            <Button title="Check Modulus" onPress={()=>{
-                this.validateModulus();
-            }}/>
+            <View style={styles.page1.buttonRow}>
+              <CustomButton text="Validate" callback={this.validateModulus}/>
+            </View>
             {
               lockState.updateParameters.modulo === 0 ?
               null:
@@ -399,9 +400,9 @@ class KeyPage extends Component {
                 currentPrivateKey: text,
               })
           }}/>
-          <Button title="Check Private Key" onPress={()=>{
-              this.validatePrivateKey();
-          }}/>
+          <View style={styles.page1.buttonRow}>
+            <CustomButton text="Validate" callback={this.validatePrivateKey}/>
+          </View>
           <Text style={styles.page1.textStyleHeader2}>
               Private key <Text style={styles.page1.boldFont}>a</Text>: {isEntered ? lockState.updateParameters.privateKeyString : null}
             </Text>
