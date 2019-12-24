@@ -93,13 +93,10 @@ class SimulatorPage extends Component{
 
     removePadding = (binStringList, padNumber) => {
         let binString = binStringList.join('')
-        console.log(`Removing ${padNumber}`)
         if(padNumber != 0){
-            console.log(`Removing ${padNumber}`)
             return binString.substring(0,(binString.length-padNumber))
         }
         else{
-            console.log(`It's a zero`)
             return binString
         }
     }
