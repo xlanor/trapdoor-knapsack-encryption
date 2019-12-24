@@ -40,8 +40,10 @@ import{
 import Error from '../../../../assets/images/Error.png'
 import EditButton from '../../../../assets/images/EditButton.png'
 import Copy from '../../../../assets/images/Copy.png'
+import Success from '../../../../assets/images/success.png'
 
 import PopUp from '../../../Common/PopUp'
+import AlertPopUp from '../../../Common/AlertPopUp'
 
 // import stylesheet.
 import styles from './styles';
@@ -78,6 +80,7 @@ class SimulatorPage extends Component{
             currentEncryptedTextInput:"",
             currentPaddingInput: "",
             decrypted: "",
+            showAlertPopUp: false,
 
         }
     }
@@ -1062,9 +1065,17 @@ class SimulatorPage extends Component{
         }
     }
     render(){
-        const { currentSimulatorPage, errorMessage, showError } = this.state;
+        const { 
+            currentSimulatorPage, 
+            errorMessage, 
+            showError,
+            showAlertPopUp, 
+        } = this.state;
         return(
             <View style={{...styles.SimulatorPage.learnTabPad}}>
+                {
+                    show
+                }
                 {
                     showError?
                     <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
