@@ -58,9 +58,12 @@ class DecryptTutorial extends Component{
 
   removePadding = (binStringList, padNumber) => {
     let binString = binStringList.join('')
-    return padNumber != 0 ? (
-        binString.substring(0,(binString.length-padNumber))
-    ): binString
+    if(padNumber != 0){
+        return binString.substring(0,(binString.length-padNumber))
+    }
+    else{
+        return binString
+    }
   }
   convertBinToText = (binaryString) => {
     let dec = []
@@ -74,11 +77,12 @@ class DecryptTutorial extends Component{
 
   decrypt = () => {
     const { actions, lockState } = this.props;
+    console.log(`Decrypted lockState = ${lockState.updateParameters}`)
     let encryptedText = lockState.encryption.encryptedText;
     let modulo = lockState.updateParameters.modulo;
     let inverse = lockState.updateParameters.inverse;
     let multiplier = lockState.updateParameters.multiplier;
-    let padding = lockState.updateParameters.padding;
+    let padding = lockState.encryption.padding;
     let privateKey = lockState.updateParameters.privateKeyArr;
     let decrypted = [];
     encryptedText.forEach((enc)=>{
@@ -89,9 +93,13 @@ class DecryptTutorial extends Component{
     console.log(decrypted)
 
     let binStringList = this.getBinaryString(privateKey, decrypted)
+    console.log("Binary String List")
     console.log(binStringList)
+    console.log("Padding "+padding)
     let unpadded = this.removePadding(binStringList,padding)
+    console.log(`Unpadded ${unpadded}`)
     let dec = this.convertBinToText(unpadded)
+    console.log(dec)
     this.setState({
       decryptedText: dec,
     })
@@ -118,7 +126,8 @@ class DecryptTutorial extends Component{
       <Button title="decrypt" onPress={()=>{
           this.decrypt()
       }}/>
-      { decryptedText != ""
+      { 
+        decryptedText != ""
         ? <>
           <Text> Decrypted Text:</Text> 
           <Text> {decryptedText}</Text>

@@ -126,6 +126,8 @@ class EncryptTutorial extends Component{
       }
       binBlocks.push(blockStr);
       actions.UPDATE_ENCRYPTION_PADDING_ACTION(padding);
+    }else{
+      actions.UPDATE_ENCRYPTION_PADDING_ACTION(0);
     }
     let binBlocksNumeric = []
     for(let i = 0; i < binBlocks.length; i++){
