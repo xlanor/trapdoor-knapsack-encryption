@@ -468,11 +468,14 @@ class KeyPage extends Component {
           <Text style={styles.page1.textStyleTitleCenter}>Key Generation</Text>
 
          </View>
+         <View style={{alignItems: 'center'}}>
+
          {
            pageNo <= 5 ? 
            <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image>:
            null
          }
+         </View>
         {
           this.getPageElements()
         }

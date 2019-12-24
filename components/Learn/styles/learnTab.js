@@ -32,6 +32,7 @@ const bottom =  {
     flexDirection: 'row',
     marginLeft: Dimensions.get('window').width * 0.05,
     marginRight: Dimensions.get('window').width * 0.05,
+    marginBottom: Dimensions.get('window').width * 0.02,
   }
 
 const scrollViewWrapper = {

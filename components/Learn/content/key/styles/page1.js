@@ -2,7 +2,7 @@ import { COLORS } from '../../../../../constants/Colors';
 
 import { Dimensions } from 'react-native';
 
-const width = Dimensions.get('screen').width - 40;
+const width = Dimensions.get('screen').width - 60;
 const height = width * (337/1940);
 
 const progressBarSize = {
