@@ -67,6 +67,9 @@ import AlgoSelected from  '../../assets/images/AlgoSelected.png';
 import KeySelected from  '../../assets/images/KeySelected.png';
 import IntroSelected from  '../../assets/images/IntroSelected.png';
 
+// invalid icon
+import AlertIcon from '../../assets/images/alert.png';
+
 
 // import stylesheet.
 import styles from './styles';
@@ -103,7 +106,7 @@ class LearnParent extends Component {
      return (
       <TouchableOpacity onPress = {()=>{
 
-        this.updatePopupMessage("You have not unlocked this portion of the application!");
+        this.updatePopupMessage("You have not unlocked this tab!");
       }}>
         <Image 
           style={ styles.learnParent.imageSize }
@@ -417,6 +420,7 @@ class LearnParent extends Component {
       <>   
       <AlertPopUp
           messageContent={popupMessage}
+          icon={AlertIcon}
           callback={() => this.setState({ displayPopup: false })}
           visibility={displayPopup}
       />

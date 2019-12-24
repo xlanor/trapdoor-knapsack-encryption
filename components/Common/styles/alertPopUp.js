@@ -1,4 +1,6 @@
-  
+import { Dimensions } from 'react-native';
+
+const iconWidth = Dimensions.get('window').width * 0.15;
 const modalBackground = {
   flex: 1,
   backgroundColor: 'rgba(0,0,0,0.5)',
@@ -14,19 +16,33 @@ const modalContainer = {
   width: '80%',
 
   // margin and padding
-  paddingBottom: 20,
-  paddingLeft: 15,
-  paddingRight: 15,
-  paddingTop: 20,
-};
-
-const modalMessage = {
-  fontSize: 18,
-  color: 'black',
-  paddingTop: 15,
-  paddingLeft: 15,
-  paddingRight: 15,
+  paddingBottom: Dimensions.get('window').height * 0.05,
+  paddingLeft: Dimensions.get('window').height * 0.03,
+  paddingRight: Dimensions.get('window').height * 0.03,
+  paddingTop: Dimensions.get('window').height * 0.05,
   textAlign: 'center',
 };
 
-export default { modalBackground, modalContainer, modalMessage };
+
+const iconSize = {
+    width: iconWidth,
+    height: iconWidth,
+}
+const modalMessage = {
+  fontSize: 18,
+  color: 'black',
+  textAlign: 'center',
+};
+
+const iconViewWrapper = {
+  alignItems: 'center',
+  marginBottom: Dimensions.get('window').height * 0.02,
+}
+
+export default { 
+  modalBackground, 
+  modalContainer, 
+  modalMessage,
+  iconSize, 
+  iconViewWrapper,
+};
