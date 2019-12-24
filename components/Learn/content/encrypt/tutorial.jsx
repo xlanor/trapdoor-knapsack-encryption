@@ -36,6 +36,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Block from '../../../Common/Blocks'
 
 import PopUp from '../../../Common/PopUp';
+import CustomButton from '../../../Common/Button';
 import Error from '../../../../assets/images/Error.png'
 
 class EncryptTutorial extends Component{
@@ -261,9 +262,9 @@ class EncryptTutorial extends Component{
                   currentTextBox: text,
               })
           }}/>
-          <Button title="Validate Text" onPress={()=>{
-            this.validateInput()
-          }}/>
+          <View style={styles.tutorial.buttonRow}>
+            <CustomButton text="Validate" callback={this.validateInput}/>
+          </View>
           {
             lockState.encryption.textToEncrypt === ""
             ? null

@@ -841,7 +841,9 @@ class SimulatorPage extends Component{
                                     ...styles.SimulatorPage.textStyleInput,
                                     ...styles.SimulatorPage.roundRightCorner,
                                     ...styles.SimulatorPage.roundLeftCorner,
-                                }} onChangeText={(text)=>{
+                                }}
+                                keyboardType={'numeric'} 
+                                onChangeText={(text)=>{
                                     this.setState({
                                         currentModulusInput: text,
                                     })
@@ -884,6 +886,7 @@ class SimulatorPage extends Component{
                                                 ...styles.SimulatorPage.textStyleInputUneditable,
                                                 ...styles.SimulatorPage.roundLeftCorner,
                                             }}
+                                            keyboardType={'numeric'} 
                                             editable={false}
                                         >
                                             {lockState.simulator.multiplier}

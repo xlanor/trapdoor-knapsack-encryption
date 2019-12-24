@@ -78,6 +78,11 @@ const textStyleTitleWrapper = {
   alignItems: 'center'
 }
 
+const buttonRow = { 
+  alignItems: 'center', 
+  marginTop: Dimensions.get('window').height * 0.02,
+  marginBottom:  Dimensions.get('window').height * 0.02,
+}
 
 export default {
   textStyleTitle,
@@ -91,4 +96,5 @@ export default {
   textStyleTitleCenter,
   textStyleTitleWrapper,
   learnTabPad,
+  buttonRow,
 };

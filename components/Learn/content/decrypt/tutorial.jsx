@@ -58,7 +58,7 @@ class DecryptTutorial extends Component{
 
   removePadding = (binStringList, padNumber) => {
     let binString = binStringList.join('')
-    return padNumber == 0 ? (
+    return padNumber != 0 ? (
         binString.substring(0,(binString.length-padNumber))
     ): binString
   }
