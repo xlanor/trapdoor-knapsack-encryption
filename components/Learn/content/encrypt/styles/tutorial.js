@@ -44,9 +44,12 @@ const textBoxStyle = {
   borderColor:'black',
   borderWidth: 2,
   borderStyle: 'solid',
+  borderRadius: 5,
   height:  Dimensions.get('screen').height * 0.08,
   fontSize: 20,
-  padding: Dimensions.get('screen').height * 0.01,
+  paddingLeft: Dimensions.get('screen').height * 0.01,
+  paddingTop: Dimensions.get('screen').height * 0.01,
+  paddingBottom: Dimensions.get('screen').height * 0.01,
 }
 
 const textStyleTitleCenter = {
@@ -57,10 +60,19 @@ const textStyleTitleCenter = {
   paddingBottom: Dimensions.get('screen').height * 0.02,
 }
 
+const learnTabPad = {
+  marginLeft: Dimensions.get('window').height * 0.05,
+  marginRight: Dimensions.get('window').height * 0.05,
+}
 
 const textStyleTitleWrapper = {
   // to wrap the text in a view so that we can apply a center align to the view only,
   alignItems: 'center'
+}
+const buttonRow = { 
+  alignItems: 'center', 
+  marginTop: Dimensions.get('window').height * 0.02,
+  marginBottom:  Dimensions.get('window').height * 0.02,
 }
 
 export default {
@@ -73,4 +85,6 @@ export default {
   textStyleHeader1,
   textStyleTitleCenter,
   textStyleTitleWrapper,
+  learnTabPad,
+  buttonRow,
 };

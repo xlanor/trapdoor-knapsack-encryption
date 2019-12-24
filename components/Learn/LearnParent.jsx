@@ -1,6 +1,6 @@
 // begin react/rn imports
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { withNavigation } from 'react-navigation';
 import { 
     View, 
@@ -414,27 +414,19 @@ class LearnParent extends Component {
       }, 3000);
 
     return(
-      // flex set to 1 so that the white box will take up all the remaining space!
-      <>
-
-        {/* Callback function to hide the popup */}
-        <AlertPopUp
-            messageContent={popupMessage}
-            callback={() => this.setState({ displayPopup: false })}
-            visibility={displayPopup}
-        />
-        <View style={styles.learnParent.wrapperViewBackground}>
-          {
-            this.getImages()
-          }
+      <>   
+      <AlertPopUp
+          messageContent={popupMessage}
+          callback={() => this.setState({ displayPopup: false })}
+          visibility={displayPopup}
+      />
+          <View style={styles.learnParent.wrapperViewBackground }>
+            {this.getImages()}
+          </View>
           <View
             style={styles.learnParent.borderLine}
           />
-          <View style={styles.learnParent.scrollViewBackground}>
-            <LearnTab/>
-
-          </View>
-        </View>
+          <LearnTab/>
       </>
     );
   }
