@@ -153,7 +153,7 @@ class LearnParent extends Component {
         return (
           <TouchableOpacity onPress = {()=>{
 
-            this.updatePopupMessage("You have not unlocked this portion of the application!");
+            this.updatePopupMessage("You have not unlocked this tab!");
           }}>
             <Image 
               style={ styles.learnParent.imageSize }
@@ -201,7 +201,7 @@ class LearnParent extends Component {
         return (
           <TouchableOpacity onPress = {()=>{
 
-            this.updatePopupMessage("You have not unlocked this portion of the application!");
+            this.updatePopupMessage("You have not unlocked this tab!");
           }}>
             <Image 
               style={ styles.learnParent.imageSize }
@@ -247,7 +247,7 @@ class LearnParent extends Component {
         return (
           <TouchableOpacity onPress = {()=>{
 
-            this.updatePopupMessage("You have not unlocked this portion of the application!");
+            this.updatePopupMessage("You have not unlocked this tab!");
           }}>
             <Image 
               style={ styles.learnParent.imageSize }
@@ -294,7 +294,7 @@ class LearnParent extends Component {
         return (
           <TouchableOpacity onPress = {()=>{
 
-            this.updatePopupMessage("You have not unlocked this portion of the application!");
+            this.updatePopupMessage("You have not unlocked this tab!");
           }}>
             <Image 
               style={ styles.learnParent.imageSize }
