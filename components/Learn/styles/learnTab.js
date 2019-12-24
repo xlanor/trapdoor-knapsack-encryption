@@ -1,9 +1,12 @@
 import { COLORS } from '../../../constants/Colors';
 import { Dimensions } from 'react-native';
 
+const arrowWidth = Dimensions.get('window').width * 0.1;
+const arrowImageWidth = 937;
+const arrowImageHeight = 906;
 const nextArrowSize = {
-    width: Dimensions.get('window').width * 0.08,
-    height: Dimensions.get('window').height * 0.08,
+    width: arrowWidth,
+    height: arrowWidth/arrowImageWidth*arrowImageHeight,
 }
 
 const borderWrapper = {
@@ -26,16 +29,19 @@ const centerFooterWrapper = {
 }
 
 const bottom =  {
-    flex: 1,
-    width: '100%',
-    paddingLeft: Dimensions.get('window').width * 0.05,
-    paddingRight: Dimensions.get('window').width * 0.05,
-    justifyContent: 'center',
-    backgroundColor: COLORS.WHITE_1,
+    flexDirection: 'row',
+    marginLeft: Dimensions.get('window').width * 0.05,
+    marginRight: Dimensions.get('window').width * 0.05,
+    marginBottom: Dimensions.get('window').width * 0.02,
   }
 
 const scrollViewWrapper = {
     flex: 5,
+}
+
+const learnTabPad = {
+    marginLeft: Dimensions.get('window').height * 0.05,
+    marginRight: Dimensions.get('window').height * 0.05,
 }
 
 export default {
@@ -46,5 +52,6 @@ export default {
     centerFooterWrapper,
     bottom,
     scrollViewWrapper,
+    learnTabPad,
     
 }
