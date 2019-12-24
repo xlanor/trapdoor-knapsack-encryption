@@ -58,7 +58,7 @@ class DecryptTutorial extends Component{
 
   removePadding = (binStringList, padNumber) => {
     let binString = binStringList.join('')
-    return padNumber == 0 ? (
+    return padNumber != 0 ? (
         binString.substring(0,(binString.length-padNumber))
     ): binString
   }
@@ -161,7 +161,8 @@ class DecryptTutorial extends Component{
         <Text style={styles.tutorial.textStyleSmallerText}>Then, use a to decrypt R1 and R2 and find plaintext binary X</Text>
         <Text style={styles.tutorial.textStyleSmallerText}>By comparing with a, we then obtain the binary value.</Text>
         <Text style={styles.tutorial.textStyleSmallerText1}>As the knapsack is super-increasing, it is comparatively easier to get the binary values.</Text>
-      </>
+      
+        </>
     )
   }
 
@@ -180,11 +181,11 @@ class DecryptTutorial extends Component{
   }
   render(){
     return(
-        <>
+      <View style={styles.tutorial.learnTabPad}>
          {
            this.getPageElements()
          }
-        </>
+      </View>
     )
   }
 }

@@ -2,7 +2,6 @@ const containerStyle = {
   flex: 1, 
   padding: 16, 
   paddingTop: 30, 
-  backgroundColor: '#fff' 
 }
 
 const headStyle = { 

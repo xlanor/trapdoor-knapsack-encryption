@@ -25,13 +25,13 @@ class Pages extends Component{
   render(){
     const { title, renderText } = this.props;
     return(
-      <View style={{ alignItems: 'center'}} >
+      <>
         <HTML html={title}/>
 
         <HTML html={renderText} 
           tagsStyles={styles.pages.tagStyle}
         />
-        </View>
+      </>
     );
   }
 }

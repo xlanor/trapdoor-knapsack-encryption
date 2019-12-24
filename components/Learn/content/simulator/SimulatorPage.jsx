@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  Keyboard,
   FlatList 
 } from 'react-native';
 
@@ -44,6 +45,7 @@ import PopUp from '../../../Common/PopUp'
 
 // import stylesheet.
 import styles from './styles';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
     /*
 
@@ -74,7 +76,7 @@ class SimulatorPage extends Component{
             currentPlainTextInput:"",
             encryptedOutput: [],
             currentEncryptedTextInput:"",
-            currentPaddingInput: 0,
+            currentPaddingInput: "",
             decrypted: "",
 
         }
@@ -91,14 +93,18 @@ class SimulatorPage extends Component{
 
     removePadding = (binStringList, padNumber) => {
         let binString = binStringList.join('')
-        return padNumber == 0 ? (
-            binString.substring(0,(binString.length-padNumber))
-        ): binString
+        if(padNumber != 0){
+            return binString.substring(0,(binString.length-padNumber))
+        }
+        else{
+            return binString
+        }
     }
     sumReducer = (accumulator, currentValue) => {
         return Number(accumulator)+Number(currentValue);
     }
     isEmptyInput = (textToCheck) => {
+        console.log(`Received Text to check ${textToCheck}`)
         if (typeof(textToCheck) === undefined)
             return true
         return textToCheck.trim() === ""? true: false;
@@ -222,7 +228,6 @@ class SimulatorPage extends Component{
         yVal.forEach(( y )=>{
             let binaryStr = "";
             for(let i = knapsack.length-1; i >=0; i--){
-            console.log(`Current y ${y} Current Knapsack ${knapsack[i]}`)
             if(y >= knapsack[i]){
                 binaryStr = `1${binaryStr}`
                 y -= knapsack[i]
@@ -405,6 +410,7 @@ class SimulatorPage extends Component{
             this.enableError("Padding Input cannot be empty!")
         }else{
             let padding = Number(currentPaddingInput)
+            console.log("Current padding input: "+padding)
             // convert the text to an array of numbers.
             let encryptedNumberArray = currentEncryptedTextInput.replace(/, +/g, ",").split(",").map(Number);
             let decrypted = []
@@ -417,10 +423,11 @@ class SimulatorPage extends Component{
             })
             // convert private key to an array of numbers
             let privateKeyArr = lockState.simulator.privateKey.replace(/, +/g, ",").split(",").map(Number);
-
             let binStringList = this.getBinaryString(privateKeyArr, decrypted)
+            console.log(binStringList)
 
             let unpadded = this.removePadding(binStringList,padding)
+            console.log(unpadded)
             let dec = this.convertBinToText(unpadded)
             this.setState({
                 decrypted: dec,
@@ -459,7 +466,8 @@ class SimulatorPage extends Component{
                                                     this.setState({currentSimulatorPage: "menu"
                                                     })
                                                 }
-                                            }/>
+                                            }
+                                            buttonColor="blue"/>
                                         </View>
                                         <View style={{flex: 1}}>
                                                 <CustomButton text="Encrypt" callback={()=>{this.validateEncryptionText()}} />
@@ -524,21 +532,7 @@ class SimulatorPage extends Component{
                         </View>
                         <View style={styles.SimulatorPage.genKeyButtonView}>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                <View style={{flex: 1}}>
-                                    <CustomButton 
-                                        text="Clear" 
-                                        callback={
-                                            ()=>{
-                                                actions.UPDATE_SIMULATOR_RESET_ENC_ACTION()
-                                                this.setState({
-                                                    currentEncryptedTextInput:"",
-                                                    currentPaddingInput: 0,
-                                                    encryptedOutput: []
-                                                })
-                                            }
-                                    }/>
-                                </View>
-                                <View style={{flex: 1}}>
+                            <View style={{flex: 1}}>
                                     <CustomButton 
                                     text="Menu" 
                                     callback={
@@ -546,8 +540,24 @@ class SimulatorPage extends Component{
                                             this.setState({currentSimulatorPage: "menu"
                                             })
                                         }
+                                    }
+                                    buttonColor="blue"/>
+                                </View>
+                                <View style={{flex: 1}}>
+                                    <CustomButton 
+                                        text="Clear" 
+                                        callback={
+                                            ()=>{
+                                                actions.UPDATE_SIMULATOR_RESET_ENC_ACTION()
+                                                this.setState({
+                                                    currentPlainTextInput: "",
+                                                    currentPaddingInput: "",
+                                                    encryptedOutput: []
+                                                })
+                                            }
                                     }/>
                                 </View>
+                                
 
                             </View>
                             
@@ -612,7 +622,8 @@ class SimulatorPage extends Component{
                                                     this.setState({currentSimulatorPage: "menu"
                                                     })
                                                 }
-                                            }/>
+                                            }
+                                            buttonColor="blue"/>
                                         </View>
                                         <View style={{flex: 1}}>
                                             <CustomButton text="Decrypt" callback={()=>{this.validateDecryptionText()}} />
@@ -654,19 +665,21 @@ class SimulatorPage extends Component{
                                             this.setState({currentSimulatorPage: "menu"
                                             })
                                         }
-                                    }/>
+                                    }
+                                    buttonColor="blue"/>
                                 </View>
                                 <View style={{flex: 1}}>
                                     <CustomButton text="Clear" callback={()=>{
                                         this.setState({
+                                            currentEncryptedTextInput:"",
                                             decrypted: "",
-                                            currentPaddingInput: 0,
+                                            currentPaddingInput: "0",
                                         })
                                         actions.UPDATE_SIMULATOR_RESET_DEC_ACTION()
                                     }} />
                                 </View>
 
-                            </View>
+                             </View>
                             
                         </View>
                         </>
@@ -679,7 +692,8 @@ class SimulatorPage extends Component{
     keyGenerationPage = () => {
         const { actions, lockState } = this.props;
         return (
-            <KeyboardAvoidingView style={styles.SimulatorPage.keyGenWrapperView}>
+           
+            <>
                 {
                     lockState.simulator.privateKeyValid
                     ? (
@@ -744,9 +758,25 @@ class SimulatorPage extends Component{
                                 })
                             }}/>
                             <View style={styles.SimulatorPage.genKeyButtonView}>
-                                <CustomButton text="Validate" callback={()=>{this.validateCurrentPrivateKey()}} />
+                                <View style={{flexDirection: 'row'}}>
+                                    <View style={{flex: 1}}>
+                                        <CustomButton text="Menu" callback={
+                                            ()=>{
+                                                this.setState({currentSimulatorPage: "menu"
+                                                })
+                                            }
+                                        }
+                                        buttonColor="blue"/>
+                                    </View>
+                                    <View style={{flex: 1}}>
+                                        <CustomButton text="Validate" callback={()=>{this.validateCurrentPrivateKey()}} />
+                                    </View>
+
+                                </View>
+                                
                             </View>
                         </View>
+                           
                     )
                 }
                 {
@@ -811,13 +841,28 @@ class SimulatorPage extends Component{
                                     ...styles.SimulatorPage.textStyleInput,
                                     ...styles.SimulatorPage.roundRightCorner,
                                     ...styles.SimulatorPage.roundLeftCorner,
-                                }} onChangeText={(text)=>{
+                                }}
+                                keyboardType={'numeric'} 
+                                onChangeText={(text)=>{
                                     this.setState({
                                         currentModulusInput: text,
                                     })
                                 }}/>
                                 <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Validate" callback={()=>{this.validateCurrentModulus()}} />
+                                    <View style={{flexDirection: 'row'}}>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Menu" callback={
+                                                ()=>{
+                                                    this.setState({currentSimulatorPage: "menu"
+                                                    })
+                                                }
+                                            }
+                                            buttonColor="blue"/>
+                                        </View>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Validate" callback={()=>{this.validateCurrentModulus()}} />
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
                         )
@@ -841,6 +886,7 @@ class SimulatorPage extends Component{
                                                 ...styles.SimulatorPage.textStyleInputUneditable,
                                                 ...styles.SimulatorPage.roundLeftCorner,
                                             }}
+                                            keyboardType={'numeric'} 
                                             editable={false}
                                         >
                                             {lockState.simulator.multiplier}
@@ -892,7 +938,20 @@ class SimulatorPage extends Component{
                                     })
                                 }}/>
                                 <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Validate" callback={()=>{this.validateCurrentMultiplier()}} />
+                                    <View style={{flexDirection: 'row'}}>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Menu" callback={
+                                                ()=>{
+                                                    this.setState({currentSimulatorPage: "menu"
+                                                    })
+                                                }
+                                            }
+                                            buttonColor="blue"/>
+                                        </View>
+                                        <View style={{flex: 1}}>
+                                            <CustomButton text="Validate" callback={()=>{this.validateCurrentMultiplier()}} />
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
                             )
@@ -945,15 +1004,16 @@ class SimulatorPage extends Component{
                                     </TouchableOpacity>
                                 </View>
                             </View>
-
+                            
                              <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <CustomButton text="Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} />
-                                </View>
+                                    <CustomButton text="Menu" callback={()=>{this.setState({currentSimulatorPage: "menu"})}} 
+                                        buttonColor="blue"/>
+                            </View>
                         </View>
                     )
                     : null
                 }
-            </KeyboardAvoidingView>
+            </>
         )
         
     }
@@ -964,9 +1024,9 @@ class SimulatorPage extends Component{
             <>
                 <View style={styles.SimulatorPage.rowView}>
                     <View style={styles.SimulatorPage.buttonWrapper}>
-                        <CustomButton callback={() => {this.setCurrentSimulatorPage("genkey")}} text="KeyGen" />
+                        <CustomButton callback={()=>{this.setState({currentSimulatorPage: "genkey"})}} text="KeyGen" />
                     </View>
-
+                
                 </View>
                 {
                     lockState.simulator.genKeyCompleted
@@ -981,10 +1041,10 @@ class SimulatorPage extends Component{
                                 <CustomButton callback={() => {this.setCurrentSimulatorPage("decrypt")}} text="Decrypt" />
                             </View>
                         </View>
+                        
                     </>
                     : null
                 }
-               
             </>
         )
     }
@@ -1004,21 +1064,18 @@ class SimulatorPage extends Component{
     render(){
         const { currentSimulatorPage, errorMessage, showError } = this.state;
         return(
-            <>
-
-            {
-                showError?
-                <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
-                : null
-            }
-            <Text style={styles.SimulatorPage.textStyleTitle}>Trapdoor Knapsack Simulator</Text>
-                <View  style={{ flex:1 }}>
-                    {  
-                        this.getCurrentPage()
-                    }
-                </View>
-           
-            </>
+            <View style={{...styles.SimulatorPage.learnTabPad}}>
+                {
+                    showError?
+                    <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
+                    : null
+                }
+                <Text style={styles.SimulatorPage.textStyleTitle}>Trapdoor Knapsack Simulator</Text>
+                {  
+                    this.getCurrentPage()
+                    
+                }
+            </View>
         );
     }
 }

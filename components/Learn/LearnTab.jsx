@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { withNavigation, SafeAreaView } from 'react-navigation';
 import { 
   View, 
-  Button,  
+  Button,
+  FlatList,  
   Text, 
   Image, 
   TouchableOpacity,
-  FlatList 
+  Dimensions
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 import { Algo } from '../../assets/images'
 
@@ -298,9 +299,8 @@ class LearnTab extends Component{
         if (currentPage == 4 && currentTab == "intro"){
           // we need to do this for every static page that has long ass text.
           return (
-            <ScrollView>
-              
-              <Pages
+            <ScrollView style={styles.learnTab.learnTabPad}>
+                 <Pages
                 key={`${currentTab}-${currentPage}-page`}
                 title={CurPage.title}
                 renderText={CurPage.text}
@@ -309,11 +309,13 @@ class LearnTab extends Component{
           )
         }else{
           return (
-            <Pages
-              key={`${currentTab}-${currentPage}-page`}
-              title={CurPage.title}
-              renderText={CurPage.text}
-            />
+            <View style={styles.learnTab.learnTabPad}>
+              <Pages
+                key={`${currentTab}-${currentPage}-page`}
+                title={CurPage.title}
+                renderText={CurPage.text}
+              />
+            </View>
           )
         }
        
@@ -324,30 +326,27 @@ class LearnTab extends Component{
 
     render(){
       return(
-        <View style={{flex:1}}>
-            <SafeAreaView style={styles.learnTab.scrollViewWrapper}>
-
-                {this.loadPage()}
-            </SafeAreaView>
-
-            <View style={styles.learnTab.bottom}>
-                <View style={styles.learnTab.borderWrapper}>
-                  <View style={styles.learnTab.leftArrowWrapper}>
-                    {
-                      this.isFirstPage()?
-                      null:
-                      <TouchableOpacity onPress = {()=>{
-                          this.getTouchablePreviousAction()
-                      }}>
-                      <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } />
-                      </TouchableOpacity>
-                    }
+        <>
+            
+          {
+              this.loadPage()
+          }
+            <View style={{...styles.learnTab.bottom}}>
+                <View style={{flex: 1}}>
+                  {
+                    this.isFirstPage()?
+                    null:
+                    <TouchableOpacity onPress = {()=>{
+                        this.getTouchablePreviousAction()
+                    }}>
+                    <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
+                    </TouchableOpacity>
+                  }
                   </View>
-                  <View style={styles.learnTab.centerFooterWrapper}>
-                    {/* To put the center footer here later. */}
-                  </View>
-                  <View style={styles.learnTab.rightArrowWrapper}>
-                      {
+                  <View style={{flex: 4}}/>
+                  <View style={{flex: 1}}>
+                    <View style={{marginLeft:'auto'}}>
+                        {
                         this.isFinalPage()?
                         this.getNextTab():
                           this.canNavigate()?
@@ -355,14 +354,23 @@ class LearnTab extends Component{
                                 this.getTouchableNextAction()
                             }}>
                               
-                              <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow} />
+                              <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
                             </TouchableOpacity>
                             : null
                       }
+                    </View>
+                
                   </View>
-                </View>
-          </View>
-        </View>
+               
+           </View>
+        
+          {/*
+        <View style={styles.learnTab.learnTabPad}>
+          
+            
+          
+            </View>*/}
+        </>
       );
     }
 };

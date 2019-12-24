@@ -37,12 +37,13 @@ const flexContainerWrapper = {
 
 const buttonWrapper = {
     paddingLeft: Dimensions.get('window').width * 0.4,
+    marginTop: Dimensions.get('window').height * 0.05,
 }
 
 const genKeyButtonView = {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: Dimensions.get('window').height * 0.01,
+    marginTop: Dimensions.get('window').height * 0.02,
 }
 
 const textStyleInput = {
@@ -98,7 +99,6 @@ const copyStyle={
 }
 
 const rowView = {
-    flex:2, 
     justifyContent: 'center'
 }
 
@@ -106,6 +106,11 @@ const rowKeyGen = {
     marginTop: Dimensions.get('screen').height * 0.01,
 }
 
+const learnTabPad = {
+    marginLeft: Dimensions.get('window').height * 0.05,
+    marginRight: Dimensions.get('window').height * 0.05,
+  }
+  
 export default {
     textStyle,
     textStyleTitle,
@@ -123,4 +128,5 @@ export default {
     imageButtonStyle,
     roundRightCorner,
     roundLeftCorner,
+    learnTabPad,
 }
