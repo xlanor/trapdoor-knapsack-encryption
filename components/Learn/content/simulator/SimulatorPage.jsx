@@ -10,7 +10,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Keyboard,
-  FlatList 
+  FlatList, 
+  Alert
 } from 'react-native';
 
 import CustomButton from '../../../Common/Button';
@@ -81,7 +82,7 @@ class SimulatorPage extends Component{
             currentPaddingInput: "",
             decrypted: "",
             showAlertPopUp: false,
-
+            alertPopUpMessage: "",
         }
     }
     convertBinToText = (binaryString) => {
@@ -507,6 +508,10 @@ class SimulatorPage extends Component{
                                 <TouchableOpacity 
                                     onPress={()=>{
                                         Clipboard.setString(encryptedOutput.join(','))
+                                        this.setState({
+                                            showAlertPopUp: true,
+                                            alertPopUpMessage: "Successfully copied the encrypted string to your clipboard!"
+                                        })
                                     }}
                                 >
                                 <Image 
@@ -651,12 +656,32 @@ class SimulatorPage extends Component{
                                     style={{
                                         ...styles.SimulatorPage.textStyleInputUneditable,
                                         ...styles.SimulatorPage.roundLeftCorner,
-                                        ...styles.SimulatorPage.roundRightCorner,
                                     }}
                                     editable={false}
                                 >
                                     {decrypted}
                                 </TextInput>
+                                <View 
+                                    style={{
+                                        ...styles.SimulatorPage.imageButtonStyle,
+                                        ...styles.SimulatorPage.roundRightCorner
+                                    }}
+                                >
+                                    <TouchableOpacity 
+                                        onPress={()=>{
+                                            Clipboard.setString(decrypted)
+                                            this.setState({
+                                                showAlertPopUp: true,
+                                                alertPopUpMessage: "Successfully copied the plaintext to your clipboard!"
+                                            })
+                                        }}
+                                    >
+                                    <Image 
+                                        style={styles.SimulatorPage.copyStyle}  
+                                        source={Copy}
+                                    />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                            
                         </View>
@@ -734,6 +759,10 @@ class SimulatorPage extends Component{
                                         <TouchableOpacity 
                                             onPress={()=>{
                                                 Clipboard.setString(lockState.simulator.privateKey)
+                                                this.setState({
+                                                    showAlertPopUp: true,
+                                                    alertPopUpMessage: "Successfully copied the private key to your clipboard!"
+                                                })
                                             }}
                                         >
                                         <Image 
@@ -822,6 +851,10 @@ class SimulatorPage extends Component{
                                         <TouchableOpacity
                                             onPress={()=>{
                                                 Clipboard.setString(lockState.simulator.modulus)
+                                                this.setState({
+                                                    showAlertPopUp: true,
+                                                    alertPopUpMessage: "Successfully copied the modulus to your clipboard!"
+                                                })
                                             }}
                                         >
                                         <Image 
@@ -915,6 +948,10 @@ class SimulatorPage extends Component{
                                             <TouchableOpacity
                                                 onPress={()=>{
                                                     Clipboard.setString(lockState.simulator.multiplier)
+                                                    this.setState({
+                                                        showAlertPopUp: true,
+                                                        alertPopUpMessage: "Successfully copied the multiplier to your clipboard!"
+                                                    })
                                                 }}
                                             >
                                             <Image 
@@ -998,6 +1035,12 @@ class SimulatorPage extends Component{
                                             ? lockState.simulator.publicKey.join(",")
                                             :null
                                             )
+
+                                            this.setState({
+                                                showAlertPopUp: true,
+                                                alertPopUpMessage: "Successfully copied the public key to your clipboard!"
+                                            })
+                                            
                                         }}
                                     >
                                     <Image 
@@ -1070,11 +1113,22 @@ class SimulatorPage extends Component{
             errorMessage, 
             showError,
             showAlertPopUp, 
+            alertPopUpMessage,
         } = this.state;
+        setTimeout(() => {
+          if (showAlertPopUp) this.setState({ showAlertPopUp: false, alertPopUpMessage: "" });
+        }, 3000);
         return(
             <View style={{...styles.SimulatorPage.learnTabPad}}>
                 {
-                    show
+                    showAlertPopUp?
+                    <AlertPopUp 
+                        icon={Success}
+                        messageContent={alertPopUpMessage }
+                        callback = {() => this.setState({ showAlertPopUp: false, alertPopUpMessage: "" })}
+                        visibility = {showAlertPopUp}
+                    />
+                    : null
                 }
                 {
                     showError?
