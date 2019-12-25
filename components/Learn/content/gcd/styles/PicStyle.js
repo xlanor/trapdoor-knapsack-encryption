@@ -8,8 +8,8 @@ const picStyle = {
     resizeMode: 'stretch',
 }
 const containerStyle = { 
-    height: Dimensions.get('window').height * 0.8,
-    alignItems: 'stretch',
+    height: Dimensions.get('window').height * 0.75,
+    //alignItems: 'stretch',
     backgroundColor: '#fff'
 }
 const titleStyle ={
