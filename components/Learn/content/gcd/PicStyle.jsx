@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import HTML from 'react-native-render-html'
-import PropTypes from 'prop-types'
 
 import styles from './styles'
 
@@ -21,7 +20,9 @@ class PicStyle extends Component {
         const { title, img } = this.props;
         return (
             <View style={styles.PicStyle.containerStyle} >
-                <HTML html={title} style={styles.PicStyle.titleStyle} />
+                <View style={styles.PicStyle.titleStyle}>
+                    <HTML html={title}/>
+                </View>
                 <Image source={img} style={styles.PicStyle.picStyle} />
             </View>
         )

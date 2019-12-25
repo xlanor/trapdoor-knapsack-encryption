@@ -9,11 +9,11 @@ const picStyle = {
 }
 const containerStyle = { 
     height: Dimensions.get('window').height * 0.8,
-    alignItems: 'stretch',
+    //alignItems: 'stretch',
     backgroundColor: '#fff'
 }
 const titleStyle ={
-    justifyContent: 'center'
+    alignItems: 'center'
 }
 
 export default {

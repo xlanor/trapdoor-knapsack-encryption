@@ -1,9 +1,8 @@
-//ignore content first. Not done
+import { Dimensions } from 'react-native';
+
 const containerStyle = { 
-  //flex: 1, 
-  //padding: 16, 
-  //paddingTop: 30, 
-  //backgroundColor: '#fff'
+  padding: Dimensions.get('window').height * 0.01,
+  backgroundColor: '#fff',
   textAlign: 'center',
   fontFamily: 'comfortaa',
 }
@@ -20,8 +19,11 @@ const wrapperStyle = {
 }
 
 const titleStyle = { 
-  //flex: 1, 
-  backgroundColor: '#f6f8fa' 
+  alignItems: 'center'
+}
+
+const headerStyle={
+  backgroundColor: '#f6f8fa'
 }
 
 const rowStyle = {
@@ -45,6 +47,7 @@ export default {
   headStyle,
   wrapperStyle,
   titleStyle,
+  headerStyle,
   rowStyle,
   textStyle,
   tagStyle
