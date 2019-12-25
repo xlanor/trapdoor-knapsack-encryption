@@ -17,7 +17,6 @@ import {
 } from 'react-native-table-component';
 
 import HTML from 'react-native-render-html'
-import PropTypes from 'prop-types'
 
 import styles from './styles'
 
@@ -29,10 +28,12 @@ class GCDPages extends Component {
         const { title, tableHead, tableData, text } = this.props;
         if (tableHead != null) {
             return (
-                <ScrollView>
-                    <HTML html={title} />
+                <ScrollView style={styles.GCDPages.containerStyle}>
+                    <View style={styles.PicStyle.titleStyle}>
+                        <HTML html={title} />
+                    </View>
                     <Table borderStyle={{ borderWidth: 1 }}>
-                        <Row data={tableHead} style={styles.GCDPages.titleStyle} textStyle={styles.GCDPages.textStyle} />
+                        <Row data={tableHead} style={styles.GCDPages.headerStyle} textStyle={styles.GCDPages.textStyle} />
                         <Rows data={tableData} textStyle={styles.GCDPages.textStyle} />
                     </Table>
                     <HTML html={text}
@@ -43,7 +44,9 @@ class GCDPages extends Component {
         } else {
             return (
                 <ScrollView style={styles.GCDPages.containerStyle}>
-                    <HTML html={title} />
+                    <View style={styles.PicStyle.titleStyle}>
+                        <HTML html={title} />
+                    </View>
                     <HTML html={text}
                         tagStyles={styles.GCDPages.tagStyle}
                     />

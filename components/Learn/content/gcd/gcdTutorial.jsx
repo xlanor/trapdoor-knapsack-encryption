@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {
-  ALLOW_NEXT_PAGE_ACTION
-} from '../../../../actions/tabPage';
 
 //contents
 import contents from './contents';
