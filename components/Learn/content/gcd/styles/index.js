@@ -1,5 +1,7 @@
-import page1 from './page1'
+import GCDPages from './GCDPages'
+import PicStyle from './PicStyle'
 
 export default {
-  page1
+  GCDPages,
+  PicStyle,
 };

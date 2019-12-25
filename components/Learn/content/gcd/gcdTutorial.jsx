@@ -31,10 +31,8 @@ import {
 
 //contents
 import contents from './contents';
-
-//pic displays picture content instead
-//Remember to replace redux values
-const DISPLAY = "pic";
+import GCDPages from './GCDPages';
+import PicStyle from './PicStyle';
 
 // dynamic pages not static pages.
 class GCDPage extends Component {
@@ -229,11 +227,10 @@ class GCDPage extends Component {
       />
     )
   }
-  // Picture content version
   getpic28 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic28}
       />
     )
@@ -241,7 +238,7 @@ class GCDPage extends Component {
   getpic27 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic27}
       />
     )
@@ -249,7 +246,7 @@ class GCDPage extends Component {
   getpic26 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic26}
       />
     )
@@ -257,7 +254,7 @@ class GCDPage extends Component {
   getpic25 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic25}
       />
     )
@@ -265,7 +262,7 @@ class GCDPage extends Component {
   getpic24 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic24}
       />
     )
@@ -273,7 +270,7 @@ class GCDPage extends Component {
   getpic23 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic23}
       />
     )
@@ -281,7 +278,7 @@ class GCDPage extends Component {
   getpic22 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic22}
       />
     )
@@ -289,7 +286,7 @@ class GCDPage extends Component {
   getpic21 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic21}
       />
     )
@@ -297,7 +294,7 @@ class GCDPage extends Component {
   getpic20 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic20}
       />
     )
@@ -305,7 +302,7 @@ class GCDPage extends Component {
   getpic19 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic19}
       />
     )
@@ -313,7 +310,7 @@ class GCDPage extends Component {
   getpic18 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic18}
       />
     )
@@ -321,7 +318,7 @@ class GCDPage extends Component {
   getpic17 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic17}
       />
     )
@@ -329,7 +326,7 @@ class GCDPage extends Component {
   getpic16 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic16}
       />
     )
@@ -337,7 +334,7 @@ class GCDPage extends Component {
   getpic15 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic15}
       />
     )
@@ -345,7 +342,7 @@ class GCDPage extends Component {
   getpic14 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic14}
       />
     )
@@ -353,7 +350,7 @@ class GCDPage extends Component {
   getpic13 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic13}
       />
     )
@@ -361,7 +358,7 @@ class GCDPage extends Component {
   getpic12 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic12}
       />
     )
@@ -369,7 +366,7 @@ class GCDPage extends Component {
   getpic11 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic11}
       />
     )
@@ -377,7 +374,7 @@ class GCDPage extends Component {
   getpic10 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic10}
       />
     )
@@ -385,7 +382,7 @@ class GCDPage extends Component {
   getpic9 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic9}
       />
     )
@@ -393,7 +390,7 @@ class GCDPage extends Component {
   getpic8 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic8}
       />
     )
@@ -401,7 +398,7 @@ class GCDPage extends Component {
   getpic7 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic7}
       />
     )
@@ -409,7 +406,7 @@ class GCDPage extends Component {
   getpic6 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic6}
       />
     )
@@ -417,7 +414,7 @@ class GCDPage extends Component {
   getpic5 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic5}
       />
     )
@@ -425,7 +422,7 @@ class GCDPage extends Component {
   getpic4 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic4}
       />
     )
@@ -433,7 +430,7 @@ class GCDPage extends Component {
   getpic3 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic3}
       />
     )
@@ -441,7 +438,7 @@ class GCDPage extends Component {
   getpic2 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic2}
       />
     )
@@ -449,7 +446,7 @@ class GCDPage extends Component {
   getpic1 = () => {
     return (
       <PicStyle
-        title={"Extended Euclidean Algorithm"}
+        title={"<h1>Euclidean Algorithm</h1>"}
         img={contents.pic1}
       />
     )
@@ -461,24 +458,62 @@ class GCDPage extends Component {
     return lockState.lessonPageTabAndPages.tabPage;
   }
   getPageElements = () => {
+    //pic displays picture content instead
+    //Remember to replace redux values
+    const DISPLAY = "pic";
+
     let pageNo = this.checkPageNo()
-    switch (pageNo) {
-      case 1: return this.getPage1();
-      case 2: return this.getPage2();
-      case 3: return this.getPage3();
-      case 4: return this.getPage4();
-      case 5: return this.getPage5();
-      case 6: return this.getPage6();
-      case 7: return this.getPage7();
-      case 8: return this.getPage8();
-      case 9: return this.getPage9();
-      case 10: return this.getPage10();
-      case 11: return this.getPage11();
-      case 12: return this.getPage12();
-      case 13: return this.getPage13();
-      case 14: return this.getPage14();
-      case 15: return this.getPage15();
-      default: return this.getPage1();
+    if (DISPLAY == "pic") {
+      switch (pageNo) {
+        case 1: return this.getpic1();
+        case 2: return this.getpic2();
+        case 3: return this.getpic3();
+        case 4: return this.getpic4();
+        case 5: return this.getpic5();
+        case 6: return this.getpic6();
+        case 7: return this.getpic7();
+        case 8: return this.getpic8();
+        case 9: return this.getpic9();
+        case 10: return this.getpic10();
+        case 11: return this.getpic11();
+        case 12: return this.getpic12();
+        case 13: return this.getpic13();
+        case 14: return this.getpic14();
+        case 15: return this.getpic15();
+        case 16: return this.getpic16();
+        case 17: return this.getpic17();
+        case 18: return this.getpic18();
+        case 19: return this.getpic19();
+        case 20: return this.getpic20();
+        case 21: return this.getpic21();
+        case 22: return this.getpic22();
+        case 23: return this.getpic23();
+        case 24: return this.getpic24();
+        case 25: return this.getpic25();
+        case 26: return this.getpic26();
+        case 27: return this.getpic27();
+        case 28: return this.getpic28();
+        default: return this.getpic1();
+      }
+    } else {
+      switch (pageNo) {
+        case 1: return this.getPage1();
+        case 2: return this.getPage2();
+        case 3: return this.getPage3();
+        case 4: return this.getPage4();
+        case 5: return this.getPage5();
+        case 6: return this.getPage6();
+        case 7: return this.getPage7();
+        case 8: return this.getPage8();
+        case 9: return this.getPage9();
+        case 10: return this.getPage10();
+        case 11: return this.getPage11();
+        case 12: return this.getPage12();
+        case 13: return this.getPage13();
+        case 14: return this.getPage14();
+        case 15: return this.getPage15();
+        default: return this.getPage1();
+      }
     }
   }
   render() {
