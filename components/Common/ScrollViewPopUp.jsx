@@ -20,11 +20,11 @@ const ScrollViewPopUp = (props) => {
     return (
     <Modal animationType="fade" transparent visible={visibility}>
                 <SafeAreaView style = {styles.blackBackground}>
-                    <View style={{backgroundColor:'pink'}}>
+                    <View style={styles.navbarBackGround}>
+                        <View style={{ flex: 1}}/>
                         <TouchableOpacity onPress={callback}>
                                 <Image style={styles.closeStyle} source={closeIcon}/>
                         </TouchableOpacity>
-
 
                     </View>
 
