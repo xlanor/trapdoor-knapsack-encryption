@@ -7,13 +7,15 @@ const picStyle = {
     alignItems: 'stretch',
     resizeMode: 'stretch',
 }
-const containerStyle = { 
+const containerStyle = {
     height: Dimensions.get('window').height * 0.75,
     //alignItems: 'stretch',
     backgroundColor: '#fff'
 }
-const titleStyle ={
-    alignItems: 'center'
+const titleStyle = {
+    fontSize: 30,
+    fontFamily: 'comfortaa-bold',
+    textAlign: 'center',
 }
 
 export default {

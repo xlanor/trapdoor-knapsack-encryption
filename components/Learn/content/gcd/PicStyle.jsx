@@ -20,9 +20,7 @@ class PicStyle extends Component {
         const { title, img } = this.props;
         return (
             <View style={styles.PicStyle.containerStyle} >
-                <View style={styles.PicStyle.titleStyle}>
-                    <HTML html={title}/>
-                </View>
+                <Text style={styles.PicStyle.titleStyle}>{title}</Text>
                 <Image source={img} style={styles.PicStyle.picStyle} />
             </View>
         )

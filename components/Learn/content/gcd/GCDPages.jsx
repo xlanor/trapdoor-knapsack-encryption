@@ -29,9 +29,7 @@ class GCDPages extends Component {
         if (tableHead != null) {
             return (
                 <ScrollView style={styles.GCDPages.containerStyle}>
-                    <View style={styles.PicStyle.titleStyle}>
-                        <HTML html={title} />
-                    </View>
+                    <Text style={styles.GCDPages.titleStyle}>{title}</Text>
                     <Table borderStyle={{ borderWidth: 1 }}>
                         <Row data={tableHead} style={styles.GCDPages.headerStyle} textStyle={styles.GCDPages.textStyle} />
                         <Rows data={tableData} textStyle={styles.GCDPages.textStyle} />
@@ -44,9 +42,7 @@ class GCDPages extends Component {
         } else {
             return (
                 <ScrollView style={styles.GCDPages.containerStyle}>
-                    <View style={styles.PicStyle.titleStyle}>
-                        <HTML html={title} />
-                    </View>
+                    <Text style={styles.GCDPages.titleStyle}>{title}</Text>
                     <HTML html={text}
                         tagStyles={styles.GCDPages.tagStyle}
                     />

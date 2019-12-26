@@ -1,5 +1,5 @@
 export default pageThirteen = {
-    "title":"<h1>Extended Euclidean Algorithm</h1>",
+    "title":"Extended Euclidean Algorithm",
     "tableHead": ['a', 'b', 'r', 'q', 'a1', 'a2', 'b1', 'b2'],
     "tableData": [
         ['282', '23', '6', '12', '1', '0', '0', '1'],
