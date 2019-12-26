@@ -40,12 +40,14 @@ const scrollViewWrapper = {
 }
 
 const learnTabPad = {
+    height: Dimensions.get('window').height * 0.8,
     marginLeft: Dimensions.get('window').height * 0.05,
     marginRight: Dimensions.get('window').height * 0.05,
+    //backgroundColor: '#bbb'
 }
 
 const pageContainer = {
-    height: Dimensions.get('window').height * 0.8,
+    //height: Dimensions.get('window').height * 0.8,
     //backgroundColor: '#bbb'
 }
 const pageFooter ={

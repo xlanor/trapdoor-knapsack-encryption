@@ -327,50 +327,47 @@ class LearnTab extends Component{
     render(){
       return(
         <>
-          <View style={styles.learnTab.pageContainer}>
           {
-              this.loadPage()
+            this.loadPage()
           }
-          </View>
-            <View style={{...styles.learnTab.bottom}}>
-                <View style={{flex: 1}}>
-                  {
-                    this.isFirstPage()?
-                    null:
-                    <TouchableOpacity onPress = {()=>{
-                        this.getTouchablePreviousAction()
-                    }}>
-                    <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
-                    </TouchableOpacity>
+          <View style={{...styles.learnTab.bottom}}>
+            <View style={{flex: 1}}>
+              {
+                this.isFirstPage()?
+                null:
+                <TouchableOpacity onPress = {()=>{
+                    this.getTouchablePreviousAction()
+                }}>
+                <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
+                </TouchableOpacity>
+              }
+              </View>
+              <View style={{flex: 4}}/>
+              <View style={{flex: 1}}>
+                <View style={{marginLeft:'auto'}}>
+                    {
+                    this.isFinalPage()?
+                    this.getNextTab():
+                      this.canNavigate()?
+                        <TouchableOpacity onPress = {()=>{
+                            this.getTouchableNextAction()
+                        }}>
+                          
+                          <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
+                        </TouchableOpacity>
+                        : null
                   }
-                  </View>
-                  <View style={{flex: 4}}/>
-                  <View style={{flex: 1}}>
-                    <View style={{marginLeft:'auto'}}>
-                        {
-                        this.isFinalPage()?
-                        this.getNextTab():
-                          this.canNavigate()?
-                            <TouchableOpacity onPress = {()=>{
-                                this.getTouchableNextAction()
-                            }}>
-                              
-                              <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
-                            </TouchableOpacity>
-                            : null
-                      }
-                    </View>
-                
-                  </View>
-               
-           </View>
+                </View>
+              </View>
+            </View>
         
           {/*
-        <View style={styles.learnTab.learnTabPad}>
+            <View style={styles.learnTab.learnTabPad}>
           
             
           
-            </View>*/}
+            </View>*/
+          }
         </>
       );
     }
