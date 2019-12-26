@@ -32,12 +32,17 @@ import {
 //contents
 import contents from './contents';
 
+//pic displays picture content instead
+//Remember to replace redux values
+const DISPLAY = "pic";
+
 // dynamic pages not static pages.
 class GCDPage extends Component {
   constructor(props) {
     super(props);
     const { lockState } = this.props;
   }
+  // Direct hardcode content version
   getPage15 = () => {
     return (
       <View>
@@ -216,11 +221,245 @@ class GCDPage extends Component {
     )
   }
   getPage1 = () => {
+<<<<<<< HEAD
     return (
       <View>
         <HTML html={contents.pageOne.title} />
         <HTML html={contents.pageOne.text} />
       </View>
+=======
+    let page = contents.pageOne;
+    return (
+      <GCDPages
+        title={page.title}
+        text={page.text}
+      />
+    )
+  }
+  // Picture content version
+  getpic28 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic28}
+      />
+    )
+  }
+  getpic27 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic27}
+      />
+    )
+  }
+  getpic26 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic26}
+      />
+    )
+  }
+  getpic25 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic25}
+      />
+    )
+  }
+  getpic24 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic24}
+      />
+    )
+  }
+  getpic23 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic23}
+      />
+    )
+  }
+  getpic22 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic22}
+      />
+    )
+  }
+  getpic21 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic21}
+      />
+    )
+  }
+  getpic20 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic20}
+      />
+    )
+  }
+  getpic19 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic19}
+      />
+    )
+  }
+  getpic18 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic18}
+      />
+    )
+  }
+  getpic17 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic17}
+      />
+    )
+  }
+  getpic16 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic16}
+      />
+    )
+  }
+  getpic15 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic15}
+      />
+    )
+  }
+  getpic14 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic14}
+      />
+    )
+  }
+  getpic13 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic13}
+      />
+    )
+  }
+  getpic12 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic12}
+      />
+    )
+  }
+  getpic11 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic11}
+      />
+    )
+  }
+  getpic10 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic10}
+      />
+    )
+  }
+  getpic9 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic9}
+      />
+    )
+  }
+  getpic8 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic8}
+      />
+    )
+  }
+  getpic7 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic7}
+      />
+    )
+  }
+  getpic6 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic6}
+      />
+    )
+  }
+  getpic5 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic5}
+      />
+    )
+  }
+  getpic4 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic4}
+      />
+    )
+  }
+  getpic3 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic3}
+      />
+    )
+  }
+  getpic2 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic2}
+      />
+    )
+  }
+  getpic1 = () => {
+    return (
+      <PicStyle
+        title={"Extended Euclidean Algorithm"}
+        img={contents.pic1}
+      />
+>>>>>>> 899b01d... fixed gcd section fontstyling for title
     )
   }
   checkPageNo = () => {
