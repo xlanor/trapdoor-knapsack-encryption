@@ -22,7 +22,7 @@ class HomePageParent extends Component{
     super(props);
     
     this.state = {
-      selectedText: 'Trapdoor Knapsack',
+      selectedText: 'TrapLearn',
       optionChosen: false,
       selectedOption: null,
     };
@@ -30,8 +30,8 @@ class HomePageParent extends Component{
 
   updateIconPressed = (keyName) => {
       let newKey = keyName == "creditsIcon" ? "Credits":
-                        keyName == "lightBulbIcon" ? "Start Learning":
-                        keyName == "progressIcon" ? "Progress" : "Trapdoor Knapsack";
+                        keyName == "lightBulbIcon" ? "Tutorial & Simulator":
+                        keyName == "progressIcon" ? "Progress" : "TrapLearn";
       let selectedOption = keyName == "creditsIcon" ? 1:
                   keyName == "lightBulbIcon" ? 2:
                   keyName == "progressIcon" ? 3 : null ;
