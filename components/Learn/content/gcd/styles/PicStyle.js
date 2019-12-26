@@ -8,7 +8,7 @@ const picStyle = {
     resizeMode: 'stretch',
 }
 const containerStyle = {
-    height: Dimensions.get('window').height * 0.75,
+    height: Dimensions.get('window').height * 0.79,
     //alignItems: 'stretch',
     backgroundColor: '#fff'
 }
