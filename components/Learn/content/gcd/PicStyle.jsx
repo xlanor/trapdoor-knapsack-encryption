@@ -5,6 +5,7 @@ import {
     Text,
     Image,
     TouchableOpacity,
+    KeyboardAvoidingView,
     FlatList
 } from 'react-native';
 
@@ -19,10 +20,12 @@ class PicStyle extends Component {
     render() {
         const { title, img } = this.props;
         return (
-            <View style={styles.PicStyle.containerStyle} >
-                <Text style={styles.PicStyle.titleStyle}>{title}</Text>
-                <Image source={img} style={styles.PicStyle.picStyle} />
-            </View>
+            <KeyboardAvoidingView animated={true}>
+                <View style={styles.PicStyle.containerStyle} >
+                    <Text style={styles.PicStyle.titleStyle}>{title}</Text>
+                    <Image source={img} style={styles.PicStyle.picStyle} />
+                </View>
+            </KeyboardAvoidingView>
         )
     }
 }

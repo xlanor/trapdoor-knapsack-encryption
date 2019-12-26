@@ -327,10 +327,11 @@ class LearnTab extends Component{
     render(){
       return(
         <>
-            
+          <View style={styles.learnTab.pageContainer}>
           {
               this.loadPage()
           }
+          </View>
             <View style={{...styles.learnTab.bottom}}>
                 <View style={{flex: 1}}>
                   {

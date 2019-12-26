@@ -44,6 +44,14 @@ const learnTabPad = {
     marginRight: Dimensions.get('window').height * 0.05,
 }
 
+const pageContainer = {
+    height: Dimensions.get('window').height * 0.8,
+    //backgroundColor: '#bbb'
+}
+const pageFooter ={
+    //height: Dimensions.get('window').height * 0.1,
+}
+
 export default {
     nextArrowSize,
     borderWrapper,
@@ -53,5 +61,6 @@ export default {
     bottom,
     scrollViewWrapper,
     learnTabPad,
-    
+    pageContainer,
+    pageFooter
 }

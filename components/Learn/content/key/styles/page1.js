@@ -71,6 +71,7 @@ const textStyleTitleCenter = {
 const learnTabPad = {
   marginLeft: Dimensions.get('window').height * 0.05,
   marginRight: Dimensions.get('window').height * 0.05,
+  //backgroundColor: '#888'
 }
 
 const textStyleTitleWrapper = {
