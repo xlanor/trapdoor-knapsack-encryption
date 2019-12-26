@@ -334,6 +334,9 @@ class KeyPage extends Component {
               null:
               lockState.updateParameters.multiplier.toString()
             }
+            onSubmitEditing={
+              Keyboard.dismiss
+            }
            keyboardType={'numeric'} style = {styles.page1.textBoxStyle} onChangeText={(text)=>{
             this.setState({currentMultiplier:text})
           }}/>
@@ -366,6 +369,9 @@ class KeyPage extends Component {
               null:
               lockState.updateParameters.modulo.toString()
             }
+            onSubmitEditing={
+              Keyboard.dismiss
+            }
             keyboardType={'numeric'} style={styles.page1.textBoxStyle} onChangeText={(text)=>{
                 this.setState({ currentModulo:text})
             }}/>
@@ -397,9 +403,13 @@ class KeyPage extends Component {
               lockState.updateParameters.privateKeyString 
             } style={styles.page1.textBoxStyle} onChangeText={(text)=>{
               this.setState({
-                currentPrivateKey: text,
-              })
-          }}/>
+                  currentPrivateKey: text,
+                })
+              }}
+              onSubmitEditing={
+                Keyboard.dismiss
+              }
+          />
           <View style={styles.page1.buttonRow}>
             <CustomButton text="Validate" callback={this.validatePrivateKey}/>
           </View>
@@ -465,18 +475,22 @@ class KeyPage extends Component {
            <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
            : null
          }
-         <View style={styles.page1.textStyleTitleWrapper}>
-          <Text style={styles.page1.textStyleTitleCenter}>Key Generation</Text>
+         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+           <View>
+              <View style={styles.page1.textStyleTitleWrapper}>
+                <Text style={styles.page1.textStyleTitleCenter}>Key Generation</Text>
 
-         </View>
-         <View style={{alignItems: 'center'}}>
+              </View>
+            <View style={{alignItems: 'center'}}>
 
-         {
-           pageNo <= 5 ? 
-           <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image>:
-           null
-         }
-         </View>
+              {
+                pageNo <= 5 ? 
+                <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image>:
+                null
+              }
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
         {
           this.getPageElements()
         }
