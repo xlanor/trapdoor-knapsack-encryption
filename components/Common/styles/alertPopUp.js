@@ -32,6 +32,7 @@ const modalMessage = {
   fontSize: 18,
   color: 'black',
   textAlign: 'center',
+  fontFamily: 'comfortaa'
 };
 
 const iconViewWrapper = {
