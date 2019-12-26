@@ -9,7 +9,7 @@ export const scrollViewStyle = {
     paddingRight: Dimensions.get('window').width * 0.03,
     marginLeft: Dimensions.get('window').width * 0.05,
     marginRight: Dimensions.get('window').width * 0.05,
-    width: '100%',
+    width: '90%',
 }
 
 export const blackBackground = {
@@ -19,8 +19,18 @@ export const blackBackground = {
     justifyContent: 'center',
     alignItems: 'center',
 }
+const navbarBackGround = {
+    backgroundColor: COLORS.YELLOW_1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    maxHeight: 45,
+    width: '90%',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+}
 
 export default {
     scrollViewStyle,
     blackBackground,
+    navbarBackGround,
 }
