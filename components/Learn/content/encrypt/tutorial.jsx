@@ -233,11 +233,19 @@ class EncryptTutorial extends Component{
 
           </View>
         }
-        {
-          lockState.encryption.encryptedText.length != 0 ? 
-            <Text>{lockState.encryption.encryptedText.join(", ")}</Text>
-            : null
-        }
+        <View style={{marginTop: 10}}>
+          <Text style={styles.tutorial.textStyle}>
+            Ciphertext:
+          </Text>
+          {
+            lockState.encryption.encryptedText.length != 0 ? 
+              <Text tyle={styles.tutorial.textStyle}>
+                {lockState.encryption.encryptedText.join(", ")}
+              </Text>
+              : null
+          }
+        </View>
+       
       </View>
     )
   }
