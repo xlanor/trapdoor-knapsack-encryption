@@ -9,11 +9,16 @@ import contents from './contents';
 import GCDPages from './GCDPages';
 import PicStyle from './PicStyle';
 
+//pic displays picture content instead
+//Remember to replace redux values
+const DISPLAY = "pic";
+
 // dynamic pages not static pages.
 class GCDPage extends Component {
   constructor(props) {
     super(props);
   }
+  // Direct hardcode content version
   getPage15 = () => {
     let page = contents.pageFifteen;
     return (
@@ -175,10 +180,11 @@ class GCDPage extends Component {
       />
     )
   }
+  // Picture content version
   getpic28 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic28}
       />
     )
@@ -186,7 +192,7 @@ class GCDPage extends Component {
   getpic27 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic27}
       />
     )
@@ -194,7 +200,7 @@ class GCDPage extends Component {
   getpic26 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic26}
       />
     )
@@ -202,7 +208,7 @@ class GCDPage extends Component {
   getpic25 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic25}
       />
     )
@@ -210,7 +216,7 @@ class GCDPage extends Component {
   getpic24 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic24}
       />
     )
@@ -218,7 +224,7 @@ class GCDPage extends Component {
   getpic23 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic23}
       />
     )
@@ -226,7 +232,7 @@ class GCDPage extends Component {
   getpic22 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic22}
       />
     )
@@ -234,7 +240,7 @@ class GCDPage extends Component {
   getpic21 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic21}
       />
     )
@@ -242,7 +248,7 @@ class GCDPage extends Component {
   getpic20 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic20}
       />
     )
@@ -250,7 +256,7 @@ class GCDPage extends Component {
   getpic19 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic19}
       />
     )
@@ -258,7 +264,7 @@ class GCDPage extends Component {
   getpic18 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic18}
       />
     )
@@ -266,7 +272,7 @@ class GCDPage extends Component {
   getpic17 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic17}
       />
     )
@@ -274,7 +280,7 @@ class GCDPage extends Component {
   getpic16 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic16}
       />
     )
@@ -282,7 +288,7 @@ class GCDPage extends Component {
   getpic15 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic15}
       />
     )
@@ -290,7 +296,7 @@ class GCDPage extends Component {
   getpic14 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic14}
       />
     )
@@ -298,7 +304,7 @@ class GCDPage extends Component {
   getpic13 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic13}
       />
     )
@@ -306,7 +312,7 @@ class GCDPage extends Component {
   getpic12 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic12}
       />
     )
@@ -314,7 +320,7 @@ class GCDPage extends Component {
   getpic11 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic11}
       />
     )
@@ -322,7 +328,7 @@ class GCDPage extends Component {
   getpic10 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic10}
       />
     )
@@ -330,7 +336,7 @@ class GCDPage extends Component {
   getpic9 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic9}
       />
     )
@@ -338,7 +344,7 @@ class GCDPage extends Component {
   getpic8 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic8}
       />
     )
@@ -346,7 +352,7 @@ class GCDPage extends Component {
   getpic7 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic7}
       />
     )
@@ -354,7 +360,7 @@ class GCDPage extends Component {
   getpic6 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic6}
       />
     )
@@ -362,7 +368,7 @@ class GCDPage extends Component {
   getpic5 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic5}
       />
     )
@@ -370,7 +376,7 @@ class GCDPage extends Component {
   getpic4 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic4}
       />
     )
@@ -378,7 +384,7 @@ class GCDPage extends Component {
   getpic3 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic3}
       />
     )
@@ -386,7 +392,7 @@ class GCDPage extends Component {
   getpic2 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic2}
       />
     )
@@ -394,7 +400,7 @@ class GCDPage extends Component {
   getpic1 = () => {
     return (
       <PicStyle
-        title={"<h1>Euclidean Algorithm</h1>"}
+        title={"Extended Euclidean Algorithm"}
         img={contents.pic1}
       />
     )
@@ -405,10 +411,6 @@ class GCDPage extends Component {
     return lockState.lessonPageTabAndPages.tabPage;
   }
   getPageElements = () => {
-    //pic displays picture content instead
-    //Remember to replace redux values
-    const DISPLAY = "pic";
-
     let pageNo = this.checkPageNo()
     if (DISPLAY == "pic") {
       switch (pageNo) {

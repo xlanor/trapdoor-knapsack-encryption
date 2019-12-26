@@ -1,5 +1,5 @@
 export default pageTwo = {
-    "title":"<h1>Euclidean Algorithm</h1>",
+    "title":"Euclidean Algorithm",
     "tableHead": ['a', 'b', 'r', 'q'],
     "tableData": [
         ['', '', '', ''],

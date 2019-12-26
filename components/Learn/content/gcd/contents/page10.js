@@ -1,5 +1,5 @@
 export default pageTen = {
-    "title":"<h1>Extended Euclidean Algorithm</h1>",
+    "title":"Extended Euclidean Algorithm",
     "tableHead": ['a', 'b', 'r', 'q', 'a1', 'a2', 'b1', 'b2'],
     "tableData": [
         ['', '', '', '', '', '', '', ''],

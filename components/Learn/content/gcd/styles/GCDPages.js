@@ -19,7 +19,9 @@ const wrapperStyle = {
 }
 
 const titleStyle = { 
-  alignItems: 'center'
+  fontSize: 30,
+  fontFamily: 'comfortaa-bold',
+  textAlign: 'center',
 }
 
 const headerStyle={
