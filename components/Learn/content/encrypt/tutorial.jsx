@@ -36,6 +36,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Block from '../../../Common/Blocks'
 
 import PopUp from '../../../Common/PopUp';
+import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
 import CustomButton from '../../../Common/Button';
 import Error from '../../../../assets/images/Error.png'
 
@@ -47,6 +48,7 @@ class EncryptTutorial extends Component{
     this.state = {
       currentTextBox: currentEncryptText === "" ? "" : currentEncryptText, // temporary, to be stored in redux - this is only for use in onTextChange
       showError: false,
+      showBlocks: false,
       errorMessage: "",
     }
   }
@@ -173,6 +175,9 @@ class EncryptTutorial extends Component{
       console.log(binaryBlocks)
       actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
       actions.ALLOW_NEXT_PAGE_ACTION()
+      this.setState({
+        showBlocks: true,
+      })
   }
 
   getThirdPage = () => {
@@ -186,63 +191,54 @@ class EncryptTutorial extends Component{
   }
 
   getSecondPage = () => {
+    const { showBlocks } = this.state
     const { lockState, actions } = this.props;
     
     console.log("lockstate enc"+lockState.encryption)
     console.log("lockstate enc block"+lockState.encryption.binaryBlocks)
-    let lockStateArr = null;
-    if(lockState.encryption.binaryBlocks.length != 0){
-      let flexLength = []
-      for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++){
-        flexLength.push(1);
-      }
-      let encryptedArr = [];
-      lockStateArr = lockState.encryption.binaryBlocks.map((block, idx)=>{
-        encryptedArr.push( block.map((x, index)=>{
-            return Number(lockState.updateParameters.publicKeyArr[index]) * Number(x)
-        }))   
-        return (
-          <View key={'binary-'+idx}>
-            <Text style={styles.tutorial.textStyleHeader3}>Block #{idx}</Text>
-            <Block 
-                key={'binary-'+idx}
-                tableTitle={["Key","Binary","Total"]}
-                flexArr={flexLength}
-                tableData={block} 
-                currentPublicKey={lockState.updateParameters.publicKeyArr}
-                tableType="binary"
-            />
-          </View>
-          )
-        })
-        console.log(encryptedArr)
-        for(let i = 0; i < encryptedArr.length; i++){
-          encryptedArr[i] = encryptedArr[i].reduce(this.sumReducer)
-        }
-        if(lockState.encryption.encryptedText.length == 0){
-          actions.UPDATE_ENCRYPTED_STRING_ACTION(encryptedArr)
-        }
-         
-    }
-    
+  
     return(
-      <ScrollView style={{ marginBottom: 100}}>
-        <Text style={styles.tutorial.textStyleTitle}>Encryption</Text>
+      <View>
         <Text style={styles.tutorial.textStyleHeader2}>Depending on the number of elements in your public key b, the binary values are assigned into blocks. (size of binary / size of b)</Text>
         <Text style={styles.tutorial.textStyleHeader2}>Your public key b, padding may have to be applied based on the length of the public key and the message. </Text>
         <Text style={styles.tutorial.textStyleHeader2}>The following blocks chart out the additional process of obtaining the first encryption using b.</Text>
-        <Button title="Generate Blocks" onPress={()=>{
-          this.generateBinaryBlocks()
-        }}/>
+       
         {
-         lockStateArr
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{ flex:1}}>
+                <CustomButton text="Encrypt" callback={()=>{
+                    this.generateBinaryBlocks()
+                  }}/>
+              </View>
+              {
+
+                  lockState.encryption.binaryBlocks.length != 0
+                  ? 
+                    <View style={{ flex:1}}>
+                        <CustomButton text="Blocks" 
+                          callback={
+                            ()=>{
+                                this.setState({
+                                  showBlocks: true,
+                                })
+                            }
+                          }
+                          />
+                       </View>
+                    
+                  : null
+              }
+             
+
+
+          </View>
         }
         {
           lockState.encryption.encryptedText.length != 0 ? 
             <Text>{lockState.encryption.encryptedText.join(", ")}</Text>
             : null
         }
-      </ScrollView>
+      </View>
     )
   }
 
@@ -299,14 +295,64 @@ class EncryptTutorial extends Component{
   }
 
   render(){
-      const { showError, errorMessage } = this.state;
+      const { showError, errorMessage, showBlocks } = this.state;
+      const { lockState ,actions } = this.props;
+      let lockStateArr = null;
+      if(lockState.encryption.binaryBlocks.length != 0){
+        let flexLength = []
+        for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++){
+          flexLength.push(1);
+        }
+        let encryptedArr = [];
+        lockStateArr = lockState.encryption.binaryBlocks.map((block, idx)=>{
+          encryptedArr.push( block.map((x, index)=>{
+              return Number(lockState.updateParameters.publicKeyArr[index]) * Number(x)
+          }))   
+          return (
+            <View key={'binary-'+idx}>
+              <Text style={styles.tutorial.textStyleHeader3}>Block #{idx}</Text>
+              <Block 
+                  key={'binary-'+idx}
+                  tableTitle={["Key","Binary","Total"]}
+                  flexArr={flexLength}
+                  tableData={block} 
+                  currentPublicKey={lockState.updateParameters.publicKeyArr}
+                  tableType="binary"
+              />
+            </View>
+            )
+          })
+          console.log(encryptedArr)
+          for(let i = 0; i < encryptedArr.length; i++){
+            encryptedArr[i] = encryptedArr[i].reduce(this.sumReducer)
+          }
+          if(lockState.encryption.encryptedText.length == 0){
+            actions.UPDATE_ENCRYPTED_STRING_ACTION(encryptedArr)
+          }
+           
+      }
+  
+    
       return(
           <View style={styles.tutorial.learnTabPad}>
             {
               showError
               ? <PopUp visibility={showError} close={this.hideError}  message={errorMessage} icon={Error}/>
               : null
-
+            }
+            {
+               showBlocks
+               ? <ScrollViewPopUp   
+                    visibility={showBlocks}
+                    lockStateArr={lockStateArr} 
+                    callback={
+                      ()=>{
+                        this.setState({
+                          showBlocks: false,
+                        })
+                      }
+                    }/>
+               : null
             }
             <View style={styles.tutorial.textStyleTitleWrapper}>
             {
