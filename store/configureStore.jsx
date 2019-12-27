@@ -12,7 +12,6 @@ import simulatorReducer from '../reducers/simulatorReducer';
 const persistConfig = {
   key:"root",
   storage: AsyncStorage,
-  blacklist: ['simulator'],
 }
 
 const rootReducer = combineReducers(
@@ -26,11 +25,11 @@ const rootReducer = combineReducers(
   }
 );
 
-const configureStore = () => {
-  return createStore(rootReducer);
+const configureStore = (persistedReducer) => {
+  return createStore(persistedReducer);
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const store = configureStore();
+const store = configureStore(persistedReducer);
 const persistor = persistStore(store);
 
 

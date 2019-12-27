@@ -28,11 +28,17 @@ export default function App(props) {
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <Provider store = { myStore }>
+      
+      <PersistGate 
+                   persistor={myPersistor} 
+                   loading={null}
+               >
         <AppLoading
           startAsync={loadResourcesAsync}
           onError={handleLoadingError}
           onFinish={() => handleFinishLoading(setLoadingComplete)}
         />
+        </PersistGate>
       </Provider>
     );
   } else {
@@ -41,7 +47,7 @@ export default function App(props) {
       
        <PersistGate 
                     persistor={myPersistor} 
-                    loading={this.renderLoading()}
+                    loading={null}
                 >
             <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
