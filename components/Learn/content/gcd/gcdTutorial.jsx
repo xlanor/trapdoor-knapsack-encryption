@@ -221,13 +221,6 @@ class GCDPage extends Component {
     )
   }
   getPage1 = () => {
-<<<<<<< HEAD
-    return (
-      <View>
-        <HTML html={contents.pageOne.title} />
-        <HTML html={contents.pageOne.text} />
-      </View>
-=======
     let page = contents.pageOne;
     return (
       <GCDPages
@@ -459,7 +452,6 @@ class GCDPage extends Component {
         title={"Extended Euclidean Algorithm"}
         img={contents.pic1}
       />
->>>>>>> 899b01d... fixed gcd section fontstyling for title
     )
   }
   checkPageNo = () => {
