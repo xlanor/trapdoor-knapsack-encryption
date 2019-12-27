@@ -70,7 +70,7 @@ class HomePageParent extends Component{
     const { navigation, count } = this.props;
     const { selectedText, optionChosen, selectedOption } = this.state;
     return(
-        <View>
+        <View style={styles.homePageParent.wrapHomePage}>
             <View style={styles.homePageParent.iconsView}>
               <TouchableOpacity onPress={() => {this.updateIconPressed("creditsIcon")}}>        
                 <Image

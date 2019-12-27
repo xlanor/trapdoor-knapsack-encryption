@@ -14,7 +14,6 @@ const imageStyle = {
 };
 
 const iconsView = {
-  marginTop:Dimensions.get('screen').height * 0.15,
   marginBottom: Dimensions.get('screen').height * 0.05,
 }
 
@@ -33,10 +32,16 @@ const textBox = {
 const textWrapperStyle = { 
     alignItems: 'center', 
 }
+
+const wrapHomePage = {
+    justifyContent: 'center',
+    height: '100%',
+}
 export default {
   imageStyle,
   textBox,
   textWrapperStyle,
   imageStyleArrow,
-  iconsView
+  iconsView,
+  wrapHomePage,
 }
