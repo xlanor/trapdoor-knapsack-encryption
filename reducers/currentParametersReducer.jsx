@@ -66,9 +66,7 @@ const currentParametersReducer = ( state=initialState, action ) => {
             publicKeyString: action.payload,
           }
         default:
-          return {
-            ...state,
-          }
+          return state
     } 
 }
 

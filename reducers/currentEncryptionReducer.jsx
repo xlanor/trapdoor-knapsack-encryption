@@ -49,9 +49,7 @@ const currentEncryptionReducer = (state=initialState, action) => {
           encryptedText: action.payload,
         }
       default:
-          return {
-            ...state,
-          }
+          return state
   }
 }
 

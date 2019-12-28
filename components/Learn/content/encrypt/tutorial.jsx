@@ -171,6 +171,9 @@ class EncryptTutorial extends Component{
       let binUserInput = lockState.encryption.binaryString;
       let binPubKeyString = lockState.updateParameters.publicKeyString;
       let binPubKeyArr = lockState.updateParameters.publicKeyArr;
+      console.log(lockState)
+      console.log(` User Input: ${binUserInput}`)
+      console.log(` Public Key: ${binPubKeyArr}`)
       let binaryBlocks = this.chunk(binUserInput,binPubKeyArr.length)
       console.log(binaryBlocks)
       actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)

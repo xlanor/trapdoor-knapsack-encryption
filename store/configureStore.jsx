@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from 'redux';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { persistStore, persistReducer } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
 import countReducer from '../reducers/countReducer';
@@ -12,6 +13,8 @@ import simulatorReducer from '../reducers/simulatorReducer';
 const persistConfig = {
   key:"root",
   storage: AsyncStorage,
+  stateReconciler: autoMergeLevel2,
+  whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption']
 }
 
 const rootReducer = combineReducers(

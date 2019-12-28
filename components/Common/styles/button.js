@@ -12,6 +12,7 @@ const buttonStyle = {
     borderBottomRightRadius: 4,
     paddingLeft:  Dimensions.get('window').width * 0.05,
     paddingRight:  Dimensions.get('window').width * 0.05,
+    flexDirection: 'column',
     justifyContent: 'center',
 }
 const buttonStyleBlue = {
