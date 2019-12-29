@@ -8,24 +8,30 @@ import {
     KeyboardAvoidingView,
     FlatList
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-
+import { Dimensions } from 'react-native';
 // import stylesheet.
 import styles from '../styles';
 
 export default class page1 extends Component {
     render() {
         let style = styles.PageStyle
+        let u = Dimensions.get('window').height
         return (
             <View style={style.containerStyle}>
-                <Text style={style.titleStyle}>Knapsack Problem</Text>
+                <Text style={style.titleStyle}>Introduction</Text>
+                <Text style={style.contentHead}>Knapsack Problem</Text>
                 <Text style={style.contentStyle}>
-                    Knapsack problem is derived from the notion of packing an odd assortment of packages into a container or in other words,
-                    how to pack a single container <Text style={style.bold}>most efficiently or <Text style={style.underline}>with the highest value</Text></Text>
-                    {"\n\n"}
-                    An example of a knapsack problem: What boxes should be chosen to <Text style={style.bold}>maximize</Text> the amount of money
-                    while still keeping the overall weight <Text style={style.bold}>under or equal</Text> to 15 kg?
+                    Knapsack problem is derived from the notion of packing an odd assortment of packages into a container. How to pack a single container most efficiently or with the highest value.
                     {"\n"}
+                </Text>
+                <Image 
+                    source={require('./Intro.gif')}  
+                    style={{width: u * 0.400, height: u * 0.328, alignSelf:'center' }}
+                />
+                <Text style={style.contentStyle}>
+                    {"\n"}
+                    Example of a knapsack problem:{"\n"}
+                    which boxes should be chosen to maximize the amount of money while still keeping the overall weight under or equal to 15kg?
                 </Text>
             </View>
         )
