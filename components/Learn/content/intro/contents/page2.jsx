@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
-import HTML from 'react-native-render-html'
+import { Dimensions } from 'react-native';
 
 // import stylesheet.
 import styles from '../styles';
@@ -15,6 +15,7 @@ import styles from '../styles';
 export default class page2 extends Component {
     render() {
         let style = styles.PageStyle
+        let u = Dimensions.get('window').height
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Introduction</Text>

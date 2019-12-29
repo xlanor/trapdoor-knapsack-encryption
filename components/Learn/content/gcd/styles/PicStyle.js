@@ -13,7 +13,7 @@ const containerStyle = {
     backgroundColor: '#fff'
 }
 const titleStyle = {
-    fontSize: 30,
+    fontSize: 25,
     fontFamily: 'comfortaa-bold',
     textAlign: 'center',
 }
