@@ -22,13 +22,17 @@ import { bindActionCreators } from 'redux';
 
 import { ScrollView } from 'react-native-gesture-handler';
 
-import Block from '../../../Common/Blocks'
+import BlocksDecrypt from '../../../Common/BlocksDecrypt';
+import CustomButton from '../../../Common/Button';
+import Block from '../../../Common/Blocks';
 
 class DecryptTutorial extends Component{
   constructor(props){
     super(props);
     this.state = {
       decryptedText: "",
+      currentDecryptedBlocks: null,
+      showBlocks: false,
     }
   }
 
@@ -38,21 +42,37 @@ class DecryptTutorial extends Component{
   }
 
   getBinaryString = (knapsack, yVal) => {
-    let binList = [];
-    yVal.forEach(( y )=>{
+    const { lockState } = this.props;
+    let returnObj = {
+        ['binlist']: [],
+        ['blocks']:[],
+    }
+    yVal.forEach(( y, idx )=>{
         let binaryStr = "";
+        let blocksInner = {
+          ['inital_enc']: lockState.encryption.encryptedText[idx],
+          ['initial_r']: Number(y), // get new object so its not mutated
+          ['current_r']:[],
+          ['knapsack']:[],
+          ['decrypted']: [],
+        }
         for(let i = knapsack.length-1; i >=0; i--){
           console.log(`Current y ${y} Current Knapsack ${knapsack[i]}`)
+          blocksInner.knapsack.push(knapsack[i])
+          blocksInner.current_r.push(Number(y))
           if(y >= knapsack[i]){
             binaryStr = `1${binaryStr}`
             y -= knapsack[i]
+            blocksInner.decrypted.push(1)
           }else{
             binaryStr = `0${binaryStr}`
+            blocksInner.decrypted.push(0)
           }
         }
-        binList.push(binaryStr)
+        returnObj.blocks.push(blocksInner)
+        returnObj.binlist.push(binaryStr)
     })
-    return binList
+    return returnObj
   }
 
 
@@ -89,19 +109,22 @@ class DecryptTutorial extends Component{
         let multiplied = enc * inverse;
         let modVal = multiplied % modulo;
         decrypted.push(modVal)
+        console.log ("Enc "+enc)
+        console.log ("multiplied "+multiplied)
+        console.log ("modVal "+modVal)
     })
-    console.log(decrypted)
-
     let binStringList = this.getBinaryString(privateKey, decrypted)
     console.log("Binary String List")
     console.log(binStringList)
     console.log("Padding "+padding)
-    let unpadded = this.removePadding(binStringList,padding)
+    let unpadded = this.removePadding(binStringList.binlist,padding)
     console.log(`Unpadded ${unpadded}`)
     let dec = this.convertBinToText(unpadded)
-    console.log(dec)
+  
+
     this.setState({
       decryptedText: dec,
+      currentDecryptedBlocks: binStringList,
     })
 
 
@@ -116,6 +139,7 @@ class DecryptTutorial extends Component{
     }
     return (
       <>
+    
         <View style={styles.tutorial.textStyleTitleWrapper}>
           <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
         </View>
@@ -123,7 +147,7 @@ class DecryptTutorial extends Component{
         <Text style={styles.tutorial.textStyle}>Now, convert the ascii value back to characters to get back the plaintext message.</Text>
         <Text style={styles.tutorial.textStyle}>Don't forget to subtract the padding applied!</Text>
       <Text style={styles.tutorial.textStyle}>Current Padding: {lockState.encryption.padding}</Text>
-      <Button title="decrypt" onPress={()=>{
+      <CustomButton text="Decrypt" callback={()=>{
           this.decrypt()
       }}/>
       { 
@@ -189,7 +213,34 @@ class DecryptTutorial extends Component{
     }
   }
   render(){
+      {
+        /*
+
+
+          BlockDecrypt.propTypes = {
+            flexArr: PropTypes.array.isRequired,
+            tableTitle: PropTypes.array.isRequired,
+            currentR: PropTypes.array.isRequired,
+            pubKey: PropTypes.array.isRequired,
+            postSub: PropTypes.array.isRequired,
+            binary: PropTypes.array.isRequired,
+            binaryOrdered: PropTypes.array.isRequired,
+            encryptedInput: PropTypes.number.isRequired,
+            currentPublicKey: PropTypes.array.isRequired,
+            tableType:PropTypes.string.isRequired,
+            inverse: PropTypes.number.isRequired,
+            modulo: PropTypes.number.isRequired,
+            rVal: PropTypes.number.isRequired,
+          };
+        */
+      }
+    const { currentDecryptedBlocks } = this.state;
+    let blockArray = null;
+    if (currentDecryptedBlocks !== null){
+      
+    }
     return(
+      
       <View style={styles.tutorial.learnTabPad}>
          {
            this.getPageElements()
