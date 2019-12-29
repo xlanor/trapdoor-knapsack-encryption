@@ -13,13 +13,8 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 import { Algo } from '../../assets/images'
 
-import Pages  from './Pages'
-
 import { 
   introPageOne,
-  introPageTwo,
-  introPageThree,
-  introPageFour,
   gcdPageOne,
   keyPageOne,
   EncryptTutorial,
@@ -233,13 +228,8 @@ class LearnTab extends Component{
             switch(currentPage){
               case 1:
                 return introPageOne;
-              case 2:
-                return introPageTwo;
-              case 3:
-                return introPageThree;
-              case 4:
-                return introPageFour;
-              default: return introPageOne;
+              default:
+                return introPageOne;
             }
         case "gcd":
             switch(currentPage){
@@ -289,39 +279,7 @@ class LearnTab extends Component{
       console.log(CurPage);
       // for dynamic pages, we render component, while for static
       // we render a page.
-      if (currentTab == "gcd" ||currentTab == "key" || currentTab == "encrypt" || currentTab == "decrypt" || currentTab == "simulator"){
-        return (
-            <CurPage />
-        );   
-      }else{ 
-        console.log("Returning static page")
-        console.log(currentTab);
-        if (currentPage == 4 && currentTab == "intro"){
-          // we need to do this for every static page that has long ass text.
-          return (
-            <ScrollView style={styles.learnTab.learnTabPad}>
-                 <Pages
-                key={`${currentTab}-${currentPage}-page`}
-                title={CurPage.title}
-                renderText={CurPage.text}
-              />  
-            </ScrollView>
-          )
-        }else{
-          return (
-            <View style={styles.learnTab.learnTabPad}>
-              <Pages
-                key={`${currentTab}-${currentPage}-page`}
-                title={CurPage.title}
-                renderText={CurPage.text}
-              />
-            </View>
-          )
-        }
-       
-      }
-     
-        
+      return <CurPage />
     }
 
     render(){
