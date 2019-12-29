@@ -27,6 +27,9 @@ const navbarBackGround = {
     width: '90%',
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
+    paddingTop: Dimensions.get('window').height * 0.01,
+    paddingBottom: Dimensions.get('window').height * 0.01,
+    paddingRight: Dimensions.get('window').width * 0.01,
 }
 
 export default {
