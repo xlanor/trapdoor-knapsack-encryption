@@ -55,6 +55,7 @@ class DecryptTutorial extends Component{
           ['current_r']:[],
           ['knapsack']:[],
           ['decrypted']: [],
+          ['new_r']: [],
         }
         for(let i = knapsack.length-1; i >=0; i--){
           console.log(`Current y ${y} Current Knapsack ${knapsack[i]}`)
@@ -63,11 +64,12 @@ class DecryptTutorial extends Component{
           if(y >= knapsack[i]){
             binaryStr = `1${binaryStr}`
             y -= knapsack[i]
-            blocksInner.decrypted.push(1)
+            blocksInner.decrypted.push('1')
           }else{
             binaryStr = `0${binaryStr}`
-            blocksInner.decrypted.push(0)
+            blocksInner.decrypted.push('0')
           }
+          blocksInner.new_r.push(Number(y))
         }
         returnObj.blocks.push(blocksInner)
         returnObj.binlist.push(binaryStr)
@@ -213,10 +215,9 @@ class DecryptTutorial extends Component{
     }
   }
   render(){
+      const { lockState } = this.props;
       {
         /*
-
-
           BlockDecrypt.propTypes = {
             flexArr: PropTypes.array.isRequired,
             tableTitle: PropTypes.array.isRequired,
@@ -226,8 +227,6 @@ class DecryptTutorial extends Component{
             binary: PropTypes.array.isRequired,
             binaryOrdered: PropTypes.array.isRequired,
             encryptedInput: PropTypes.number.isRequired,
-            currentPublicKey: PropTypes.array.isRequired,
-            tableType:PropTypes.string.isRequired,
             inverse: PropTypes.number.isRequired,
             modulo: PropTypes.number.isRequired,
             rVal: PropTypes.number.isRequired,
@@ -237,7 +236,59 @@ class DecryptTutorial extends Component{
     const { currentDecryptedBlocks } = this.state;
     let blockArray = null;
     if (currentDecryptedBlocks !== null){
-      
+      let flexLength = []
+      for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++){
+        flexLength.push(1);
+      }
+      let decryptedArr = []
+      decryptedArr.push(
+        currentDecryptedBlocks.blocks.map ((x, idx)=> {
+          return (
+            <View>
+              <BlocksDecrypt
+                key = {`${idx}`}
+                flexArr={flexLength}
+                tableTitle={
+                  [
+                    'Current R',
+                    'Public Key',
+                    'Decrypted',
+                    'Binary',
+                    'Ordered'
+                ]}
+                currentR={
+                  currentDecryptedBlocks.blocks.current_r
+                }
+                pubKey={
+                  currentDecryptedBlocks.blocks.knapsack
+                }
+                postSub = {
+                  currentDecryptedBlocks.blocks.new_r
+                }
+                binary = {
+                  currentDecryptedBlocks.blocks.decrypted
+                }
+                binaryOrdered = {
+                  currentDecryptedBlocks.blocks.decrypted.reverse()
+                }
+                encryptedInput = {
+                  currentDecryptedBlocks.blocks.inital_enc
+                }
+                inverse = {
+                  lockState.updateParameters.inverse
+                }
+                modulo = {
+                  lockState.updateParameters.modulo
+                }
+                rVal = {
+                  currentDecryptedBlocks.blocks.initial_r
+                }
+              />
+            </View>
+          )
+        })
+
+      )
     }
     return(
       
