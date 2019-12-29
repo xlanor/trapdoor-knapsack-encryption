@@ -24,22 +24,12 @@ class BlockDecrypt extends Component{
     super(props);
   }
 
-  //new Array(tableData.length).fill('')
-  constructRowData = () => {
-    const { tableData, currentPublicKey, tableType } = this.props;
-    let rArr =  tableType === "binary" ?
-          [ currentPublicKey, tableData, this.multiplyTwoArrays(currentPublicKey,tableData) ]
-        : [currentPublicKey, tableData ]
-    return rArr
-  }
   render(){
     const { 
         flexArr, 
         tableTitle, 
         tableData,
         encryptedInput,
-        currentPublicKey,
-        tableType,
         inverse,
         modulo,
     } = this.props;
@@ -72,8 +62,6 @@ BlockDecrypt.propTypes = {
   binary: PropTypes.array.isRequired,
   binaryOrdered: PropTypes.array.isRequired,
   encryptedInput: PropTypes.number.isRequired,
-  currentPublicKey: PropTypes.array.isRequired,
-  tableType:PropTypes.string.isRequired,
   inverse: PropTypes.number.isRequired,
   modulo: PropTypes.number.isRequired,
   rVal: PropTypes.number.isRequired,
