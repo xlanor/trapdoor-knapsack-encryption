@@ -1,23 +1,28 @@
 import { Dimensions } from 'react-native';
 
 const containerStyle = {
-    backgroundColor: '#aaa',
+    backgroundColor: '#fff',
+    marginLeft: Dimensions.get('window').width * 0.05,
+    marginRight: Dimensions.get('window').width * 0.05,
 }
 
 const titleStyle = {
     fontFamily: 'comfortaa-bold',
-    fontSize: 30,
-    textDecorationLine: 'underline',
-    paddingTop: Dimensions.get('screen').height * 0.02,
-    paddingBottom: Dimensions.get('screen').height * 0.02,
+    fontSize: 25,
+    paddingTop: Dimensions.get('screen').height * 0.01,
+    paddingBottom: Dimensions.get('screen').height * 0.01,
     textAlign: 'center',
+}
+const contentHead = {
+    fontFamily: 'comfortaa-bold',
+    fontSize: 20,
+    //textAlign: 'center',
 }
 
 const contentStyle = {
     fontFamily: 'comfortaa',
-    fontSize: 20,
-    paddingBottom: Dimensions.get('screen').height * 0.02,
-    textAlign: 'center',
+    fontSize: 18,
+    //textAlign: 'center',
 }
 
 const bold = {
@@ -40,6 +45,7 @@ export default {
     picStyle,
     containerStyle,
     titleStyle,
+    contentHead,
     contentStyle,
     bold,
     underline,

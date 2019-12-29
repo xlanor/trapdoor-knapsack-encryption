@@ -15,7 +15,7 @@ import {
   ALLOW_NEXT_PAGE,
 } from '../constants';
 
-const MAX_INTRO_PAGES=4;
+const MAX_INTRO_PAGES=6;
 const MAX_GCD_PAGES=28;
 const MAX_KEY_PAGES=6;
 const MAX_ENCRYPT_PAGES=3;

@@ -14,6 +14,12 @@ class IntroPage extends Component {
     constructor(props) {
         super(props);
     }
+    getPage6 = () => {
+        return contents.page6
+    }
+    getPage5 = () => {
+        return contents.page5
+    }
     getPage4 = () => {
         return contents.page4
     }
@@ -39,6 +45,8 @@ class IntroPage extends Component {
             case 2: return this.getPage2();
             case 3: return this.getPage3();
             case 4: return this.getPage4();
+            case 5: return this.getPage5();
+            case 6: return this.getPage6();
             default: return this.getPage1();
         }
     }
