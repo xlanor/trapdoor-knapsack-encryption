@@ -16,13 +16,13 @@ const titleStyle = {
 const contentHead = {
     fontFamily: 'comfortaa-bold',
     fontSize: 20,
-    //textAlign: 'center',
+    textAlign: 'center',
 }
 
 const contentStyle = {
     fontFamily: 'comfortaa',
     fontSize: 18,
-    //textAlign: 'center',
+    textAlign: 'justify',
 }
 
 const bold = {

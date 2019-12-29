@@ -9,7 +9,7 @@ const containerStyle = {
 
 const headStyle = { 
   fontFamily: 'comfortaa',
-  height: 40, 
+  height: 25, 
   backgroundColor: '#f1f8ff',
 }
 
@@ -19,7 +19,7 @@ const wrapperStyle = {
 }
 
 const titleStyle = { 
-  fontSize: 30,
+  fontSize: 20,
   fontFamily: 'comfortaa-bold',
   textAlign: 'center',
 }
