@@ -8,6 +8,7 @@ export const COLORS = {
   YELLOW_1: '#FEF6A7',
   YELLOW_2: '#d1cda1',
   GREEN_1: '#2FBB7A',
-  BLUE_1: '#2C3E50'
+  BLUE_1: '#2C3E50',
+  GREY_1: '#7E7E7E',
 };
 

@@ -850,7 +850,7 @@ class SimulatorPage extends Component{
                                     >
                                         <TouchableOpacity
                                             onPress={()=>{
-                                                Clipboard.setString(lockState.simulator.modulus)
+                                                Clipboard.setString(lockState.simulator.modulus.toString())
                                                 this.setState({
                                                     showAlertPopUp: true,
                                                     alertPopUpMessage: "Successfully copied the modulus to your clipboard!"
@@ -947,7 +947,7 @@ class SimulatorPage extends Component{
                                         >
                                             <TouchableOpacity
                                                 onPress={()=>{
-                                                    Clipboard.setString(lockState.simulator.multiplier)
+                                                    Clipboard.setString(lockState.simulator.multiplier.toString())
                                                     this.setState({
                                                         showAlertPopUp: true,
                                                         alertPopUpMessage: "Successfully copied the multiplier to your clipboard!"

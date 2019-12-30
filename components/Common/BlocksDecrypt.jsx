@@ -43,7 +43,7 @@ class BlockDecrypt extends Component{
     return (
       <View style={styles.containerStyle}>
         <Text>Encrypted Value: {encryptedInput}</Text>
-        <Text>Multiplied with Inverse {inverse}:</Text>
+        <Text>Multiplied with Inverse ({inverse}): {Number(encryptedInput) * inverse}</Text>
         <Text>Modulo by {modulo}: </Text>
         <Text>R: {rVal}</Text>
         <Table borderStyle={{borderWidth: 1}}>
