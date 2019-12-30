@@ -22,13 +22,18 @@ import { bindActionCreators } from 'redux';
 
 import { ScrollView } from 'react-native-gesture-handler';
 
-import Block from '../../../Common/Blocks'
+import BlocksDecrypt from '../../../Common/BlocksDecrypt';
+import CustomButton from '../../../Common/Button';
+import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
+import Block from '../../../Common/Blocks';
 
 class DecryptTutorial extends Component{
   constructor(props){
     super(props);
     this.state = {
       decryptedText: "",
+      currentDecryptedBlocks: null,
+      showBlocks: false,
     }
   }
 
@@ -38,21 +43,39 @@ class DecryptTutorial extends Component{
   }
 
   getBinaryString = (knapsack, yVal) => {
-    let binList = [];
-    yVal.forEach(( y )=>{
+    const { lockState } = this.props;
+    let returnObj = {
+        ['binlist']: [],
+        ['blocks']:[],
+    }
+    yVal.forEach(( y, idx )=>{
         let binaryStr = "";
+        let blocksInner = {
+          ['inital_enc']: lockState.encryption.encryptedText[idx],
+          ['initial_r']: Number(y), // get new object so its not mutated
+          ['current_r']:[],
+          ['knapsack']:[],
+          ['decrypted']: [],
+          ['new_r']: [],
+        }
         for(let i = knapsack.length-1; i >=0; i--){
           console.log(`Current y ${y} Current Knapsack ${knapsack[i]}`)
+          blocksInner.knapsack.push(knapsack[i])
+          blocksInner.current_r.push(Number(y))
           if(y >= knapsack[i]){
             binaryStr = `1${binaryStr}`
             y -= knapsack[i]
+            blocksInner.decrypted.push('1')
           }else{
             binaryStr = `0${binaryStr}`
+            blocksInner.decrypted.push('0')
           }
+          blocksInner.new_r.push(Number(y))
         }
-        binList.push(binaryStr)
+        returnObj.blocks.push(blocksInner)
+        returnObj.binlist.push(binaryStr)
     })
-    return binList
+    return returnObj
   }
 
 
@@ -89,26 +112,30 @@ class DecryptTutorial extends Component{
         let multiplied = enc * inverse;
         let modVal = multiplied % modulo;
         decrypted.push(modVal)
+        console.log ("Enc "+enc)
+        console.log ("multiplied "+multiplied)
+        console.log ("modVal "+modVal)
     })
-    console.log(decrypted)
-
     let binStringList = this.getBinaryString(privateKey, decrypted)
     console.log("Binary String List")
     console.log(binStringList)
     console.log("Padding "+padding)
-    let unpadded = this.removePadding(binStringList,padding)
+    let unpadded = this.removePadding(binStringList.binlist,padding)
     console.log(`Unpadded ${unpadded}`)
     let dec = this.convertBinToText(unpadded)
-    console.log(dec)
+  
+
     this.setState({
       decryptedText: dec,
+      currentDecryptedBlocks: binStringList,
+      showBlocks: true,
     })
 
 
     
   }
   getThirdPage = () => {
-    const { decryptedText } = this.state;
+    const { decryptedText,currentDecryptedBlocks } = this.state;
     const { actions,lockState } = this.props;
     if (! lockState.lessonPageTabAndPages.allowNextPage){
       actions.ALLOW_NEXT_PAGE_ACTION()
@@ -116,6 +143,7 @@ class DecryptTutorial extends Component{
     }
     return (
       <>
+    
         <View style={styles.tutorial.textStyleTitleWrapper}>
           <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
         </View>
@@ -123,9 +151,36 @@ class DecryptTutorial extends Component{
         <Text style={styles.tutorial.textStyle}>Now, convert the ascii value back to characters to get back the plaintext message.</Text>
         <Text style={styles.tutorial.textStyle}>Don't forget to subtract the padding applied!</Text>
       <Text style={styles.tutorial.textStyle}>Current Padding: {lockState.encryption.padding}</Text>
-      <Button title="decrypt" onPress={()=>{
-          this.decrypt()
-      }}/>
+      {
+          currentDecryptedBlocks !== null?
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={styles.tutorial.multipleButtonLeft}>
+              <CustomButton text="Decrypt" callback={()=>{
+                  this.decrypt()
+                }}/>
+            </View>
+
+            <View style={styles.tutorial.multipleButtonRight}>
+                <CustomButton text="Blocks" 
+                  callback={
+                    ()=>{
+                        this.setState({
+                          showBlocks: true,
+                        })
+                    }
+                  }
+                  buttonColor="blue"
+                  />
+              </View>
+          </View>
+       
+          :
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+              <CustomButton text="Decrypt" callback={()=>{
+                  this.decrypt()
+                }}/>
+          </View>
+      }
       { 
         decryptedText != ""
         ? <>
@@ -189,11 +244,103 @@ class DecryptTutorial extends Component{
     }
   }
   render(){
+      const { lockState } = this.props;
+      const { showBlocks } = this.state;
+      {
+        /*
+          BlockDecrypt.propTypes = {
+            flexArr: PropTypes.array.isRequired,
+            tableTitle: PropTypes.array.isRequired,
+            currentR: PropTypes.array.isRequired,
+            pubKey: PropTypes.array.isRequired,
+            postSub: PropTypes.array.isRequired,
+            binary: PropTypes.array.isRequired,
+            binaryOrdered: PropTypes.array.isRequired,
+            encryptedInput: PropTypes.number.isRequired,
+            inverse: PropTypes.number.isRequired,
+            modulo: PropTypes.number.isRequired,
+            rVal: PropTypes.number.isRequired,
+          };
+        */
+      }
+    const { currentDecryptedBlocks } = this.state;
+    let decryptedArr = []
+    if (currentDecryptedBlocks !== null){
+      let flexLength = []
+      for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++){
+        flexLength.push(1);
+      }
+      decryptedArr.push(
+        currentDecryptedBlocks.blocks.map ((x, idx)=> {
+          return (
+            <View key = {`${idx}`}>
+              <BlocksDecrypt
+                key = {`${idx}`}
+                flexArr={flexLength}
+                tableTitle={
+                  [
+                    'Current R',
+                    'Public Key',
+                    'Decrypted',
+                    'Binary',
+                    'Ordered'
+                ]}
+                currentR={
+                  x.current_r
+                }
+                pubKey={
+                  x.knapsack
+                }
+                postSub = {
+                  x.new_r
+                }
+                binary = {
+                  x.decrypted
+                }
+                binaryOrdered = {
+                  x.decrypted.slice().reverse()
+                }
+                encryptedInput = {
+                  x.inital_enc
+                }
+                inverse = {
+                  lockState.updateParameters.inverse
+                }
+                modulo = {
+                  lockState.updateParameters.modulo
+                }
+                rVal = {
+                  x.initial_r
+                }
+              />
+            </View>
+          )
+        })
+
+      )
+    }
     return(
+      
       <View style={styles.tutorial.learnTabPad}>
          {
            this.getPageElements()
          }
+
+
+        {
+               showBlocks
+               ? <ScrollViewPopUp   
+                    visibility={showBlocks}
+                    lockStateArr={decryptedArr} 
+                    callback={
+                      ()=>{
+                        this.setState({
+                          showBlocks: false,
+                        })
+                      }
+                    }/>
+               : null
+            }
       </View>
     )
   }

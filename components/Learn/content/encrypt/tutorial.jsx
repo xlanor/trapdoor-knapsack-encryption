@@ -171,6 +171,9 @@ class EncryptTutorial extends Component{
       let binUserInput = lockState.encryption.binaryString;
       let binPubKeyString = lockState.updateParameters.publicKeyString;
       let binPubKeyArr = lockState.updateParameters.publicKeyArr;
+      console.log(lockState)
+      console.log(` User Input: ${binUserInput}`)
+      console.log(` Public Key: ${binPubKeyArr}`)
       let binaryBlocks = this.chunk(binUserInput,binPubKeyArr.length)
       console.log(binaryBlocks)
       actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
@@ -204,33 +207,39 @@ class EncryptTutorial extends Component{
         <Text style={styles.tutorial.textStyleHeader2}>The following blocks chart out the additional process of obtaining the first encryption using b.</Text>
        
         {
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <View style={{ flex:1}}>
-                <CustomButton text="Encrypt" callback={()=>{
-                    this.generateBinaryBlocks()
-                  }}/>
-              </View>
-              {
 
-                  lockState.encryption.binaryBlocks.length != 0
-                  ? 
-                    <View style={{ flex:1}}>
-                        <CustomButton text="Blocks" 
-                          callback={
-                            ()=>{
-                                this.setState({
-                                  showBlocks: true,
-                                })
-                            }
-                          }
-                          />
-                       </View>
-                    
-                  : null
+          lockState.encryption.binaryBlocks.length != 0
+          ? 
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.tutorial.multipleButtonLeft}>
+                  <CustomButton text="Encrypt" callback={()=>{
+                      this.generateBinaryBlocks()
+                    }}/>
+                </View>
+
+                <View style={styles.tutorial.multipleButtonRight}>
+                  <CustomButton text="Blocks" 
+                    callback={
+                      ()=>{
+                          this.setState({
+                            showBlocks: true,
+                          })
+                      }
+                    }
+                    buttonColor="blue"
+                    />
+                </View>
+            </View>
+          :
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <CustomButton 
+              text="Encrypt" 
+              callback={
+                ()=>{
+                  this.generateBinaryBlocks()
+                }
               }
-             
-
-
+            />
           </View>
         }
         <View style={{marginTop: 10}}>
