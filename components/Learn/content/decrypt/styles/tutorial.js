@@ -68,6 +68,23 @@ const textStyleSmallerText = {
 
 }
 
+const buttonRow = { 
+  alignItems: 'center', 
+  marginTop: Dimensions.get('window').height * 0.02,
+  marginBottom:  Dimensions.get('window').height * 0.02,
+}
+
+const multipleButtonLeft = {
+  flex: 1,
+  marginRight: Dimensions.get('window').width * 0.01,
+}
+const multipleButtonRight = {
+  flex: 1,
+  marginLeft: Dimensions.get('window').width * 0.01,
+}
+ 
+
+
 export default {
   textStyle,
   textStyleTitle,
@@ -80,4 +97,7 @@ export default {
   textStyleCiphertext,
   textStyleSmallerText,
   learnTabPad,
+  buttonRow,
+  multipleButtonLeft,
+  multipleButtonRight,
 };

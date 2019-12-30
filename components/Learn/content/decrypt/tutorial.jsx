@@ -151,22 +151,35 @@ class DecryptTutorial extends Component{
         <Text style={styles.tutorial.textStyle}>Now, convert the ascii value back to characters to get back the plaintext message.</Text>
         <Text style={styles.tutorial.textStyle}>Don't forget to subtract the padding applied!</Text>
       <Text style={styles.tutorial.textStyle}>Current Padding: {lockState.encryption.padding}</Text>
-      <CustomButton text="Decrypt" callback={()=>{
-          this.decrypt()
-      }}/>
       {
           currentDecryptedBlocks !== null?
-          <CustomButton text="Blocks" 
-                    callback={
-                      ()=>{
-                          this.setState({
-                            showBlocks: true,
-                          })
-                      }
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={styles.tutorial.multipleButtonLeft}>
+              <CustomButton text="Decrypt" callback={()=>{
+                  this.decrypt()
+                }}/>
+            </View>
+
+            <View style={styles.tutorial.multipleButtonRight}>
+                <CustomButton text="Blocks" 
+                  callback={
+                    ()=>{
+                        this.setState({
+                          showBlocks: true,
+                        })
                     }
-                    buttonColor="blue"
-                    />
-          : null
+                  }
+                  buttonColor="blue"
+                  />
+              </View>
+          </View>
+       
+          :
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+              <CustomButton text="Decrypt" callback={()=>{
+                  this.decrypt()
+                }}/>
+          </View>
       }
       { 
         decryptedText != ""
@@ -259,7 +272,6 @@ class DecryptTutorial extends Component{
       }
       decryptedArr.push(
         currentDecryptedBlocks.blocks.map ((x, idx)=> {
-          console.log(x)
           return (
             <View key = {`${idx}`}>
               <BlocksDecrypt
@@ -286,7 +298,7 @@ class DecryptTutorial extends Component{
                   x.decrypted
                 }
                 binaryOrdered = {
-                  x.decrypted
+                  x.decrypted.slice().reverse()
                 }
                 encryptedInput = {
                   x.inital_enc
