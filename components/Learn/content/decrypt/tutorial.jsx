@@ -24,6 +24,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import BlocksDecrypt from '../../../Common/BlocksDecrypt';
 import CustomButton from '../../../Common/Button';
+import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
 import Block from '../../../Common/Blocks';
 
 class DecryptTutorial extends Component{
@@ -127,6 +128,7 @@ class DecryptTutorial extends Component{
     this.setState({
       decryptedText: dec,
       currentDecryptedBlocks: binStringList,
+      showBlocks: true,
     })
 
 
@@ -216,6 +218,7 @@ class DecryptTutorial extends Component{
   }
   render(){
       const { lockState } = this.props;
+      const { showBlocks } = this.state;
       {
         /*
           BlockDecrypt.propTypes = {
@@ -234,15 +237,15 @@ class DecryptTutorial extends Component{
         */
       }
     const { currentDecryptedBlocks } = this.state;
-    let blockArray = null;
+    let decryptedArr = []
     if (currentDecryptedBlocks !== null){
       let flexLength = []
       for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++){
         flexLength.push(1);
       }
-      let decryptedArr = []
       decryptedArr.push(
         currentDecryptedBlocks.blocks.map ((x, idx)=> {
+          console.log(x)
           return (
             <View>
               <BlocksDecrypt
@@ -257,22 +260,22 @@ class DecryptTutorial extends Component{
                     'Ordered'
                 ]}
                 currentR={
-                  currentDecryptedBlocks.blocks.current_r
+                  x.current_r
                 }
                 pubKey={
-                  currentDecryptedBlocks.blocks.knapsack
+                  x.knapsack
                 }
                 postSub = {
-                  currentDecryptedBlocks.blocks.new_r
+                  x.new_r
                 }
                 binary = {
-                  currentDecryptedBlocks.blocks.decrypted
+                  x.decrypted
                 }
                 binaryOrdered = {
-                  currentDecryptedBlocks.blocks.decrypted.reverse()
+                  x.decrypted
                 }
                 encryptedInput = {
-                  currentDecryptedBlocks.blocks.inital_enc
+                  x.inital_enc
                 }
                 inverse = {
                   lockState.updateParameters.inverse
@@ -281,7 +284,7 @@ class DecryptTutorial extends Component{
                   lockState.updateParameters.modulo
                 }
                 rVal = {
-                  currentDecryptedBlocks.blocks.initial_r
+                  x.initial_r
                 }
               />
             </View>
@@ -296,6 +299,22 @@ class DecryptTutorial extends Component{
          {
            this.getPageElements()
          }
+
+
+        {
+               showBlocks
+               ? <ScrollViewPopUp   
+                    visibility={showBlocks}
+                    lockStateArr={decryptedArr} 
+                    callback={
+                      ()=>{
+                        this.setState({
+                          showBlocks: false,
+                        })
+                      }
+                    }/>
+               : null
+            }
       </View>
     )
   }

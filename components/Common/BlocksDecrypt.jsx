@@ -32,7 +32,14 @@ class BlockDecrypt extends Component{
         encryptedInput,
         inverse,
         modulo,
+        currentR,
+        pubKey,
+        postSub,
+        binary,
+        binaryOrdered,
+        rVal,
     } = this.props;
+    console.log(this.props);
     return (
       <View style={styles.containerStyle}>
         <Text>Encrypted Value: {encryptedInput}</Text>
