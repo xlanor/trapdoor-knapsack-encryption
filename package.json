@@ -19,7 +19,7 @@
     "expo": "^35.0.0",
     "expo-asset": "^7.0.0",
     "expo-cli": "^3.11.1",
-    "expo-constants": "^7.0.0",
+    "expo-constants": "~7.0.0",
     "expo-font": "^7.0.0",
     "expo-web-browser": "^7.0.0",
     "lodash": "^4.17.15",

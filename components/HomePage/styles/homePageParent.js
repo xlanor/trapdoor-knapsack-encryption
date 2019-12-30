@@ -17,6 +17,13 @@ const iconsView = {
   marginBottom: Dimensions.get('screen').height * 0.05,
 }
 
+const textBoxVersion = {
+  alignSelf: 'center',
+  fontFamily: 'comfortaa',
+  fontSize: 16,
+  textAlign: 'center',
+  color:COLORS.GREY_1,
+}
 
 const textBox = {
   alignSelf: 'center',
@@ -44,4 +51,5 @@ export default {
   imageStyleArrow,
   iconsView,
   wrapHomePage,
+  textBoxVersion,
 }
