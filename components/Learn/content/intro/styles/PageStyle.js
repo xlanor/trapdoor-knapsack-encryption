@@ -12,6 +12,7 @@ const titleStyle = {
     paddingTop: Dimensions.get('screen').height * 0.01,
     paddingBottom: Dimensions.get('screen').height * 0.01,
     textAlign: 'center',
+    textDecorationLine: 'underline'
 }
 const contentHead = {
     fontFamily: 'comfortaa-bold',

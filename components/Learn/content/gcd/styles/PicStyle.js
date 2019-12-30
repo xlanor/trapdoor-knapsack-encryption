@@ -15,7 +15,10 @@ const containerStyle = {
 const titleStyle = {
     fontSize: 25,
     fontFamily: 'comfortaa-bold',
+    paddingTop: Dimensions.get('screen').height * 0.01,
+    paddingBottom: Dimensions.get('screen').height * 0.01,
     textAlign: 'center',
+    textDecorationLine: 'underline'
 }
 
 export default {
