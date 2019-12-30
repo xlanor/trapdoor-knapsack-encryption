@@ -24,7 +24,10 @@ export default class page2 extends Component {
                     A trapdoor function is a function that is easy to solve one way but not the other.
                     {"\n"}
                 </Text>
-                <Image/>
+                <Image 
+                    source={require('./1052px-Trapdoor_permutation.svg.png')}  
+                    style={{width: u * 0.1052*3, height: u * 0.0744*3, alignSelf:'center' }}
+                />
                 
                 <Text style={style.contentStyle}>
                     {"\n"}
