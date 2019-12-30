@@ -411,6 +411,10 @@ class GCDPage extends Component {
     return lockState.lessonPageTabAndPages.tabPage;
   }
   getPageElements = () => {
+    //pic displays picture content instead
+    //Remember to replace redux values
+    const DISPLAY = "pic";
+
     let pageNo = this.checkPageNo()
     if (DISPLAY == "pic") {
       switch (pageNo) {

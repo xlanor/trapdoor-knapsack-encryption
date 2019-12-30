@@ -2,38 +2,58 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
 
 import { Provider } from 'react-redux';
 
-import configureStore from './store/configureStore';
+import { getStore, getPersistor } from './store/configureStore';
+import { PersistGate } from 'redux-persist/integration/react'
 
-const store = configureStore()
 
 export default function App(props) {
+  renderLoading = () => {
+      return (
+          <View>                
+              <ActivityIndicator size={"large"} />
+          </View>        
+      );    
+  };
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
+  const myStore = getStore();  
+  const myPersistor = getPersistor();
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
-      <Provider store = { store }>
+      <Provider store = { myStore }>
+      
+      <PersistGate 
+                   persistor={myPersistor} 
+                   loading={null}
+               >
         <AppLoading
           startAsync={loadResourcesAsync}
           onError={handleLoadingError}
           onFinish={() => handleFinishLoading(setLoadingComplete)}
         />
+        </PersistGate>
       </Provider>
     );
   } else {
     return (
-      <Provider store = { store }> 
-
+      <Provider store = { myStore }> 
+      
+       <PersistGate 
+                    persistor={myPersistor} 
+                    loading={null}
+                >
             <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             <AppNavigator />
           </View>
+          </PersistGate>
 
       </Provider>
     );

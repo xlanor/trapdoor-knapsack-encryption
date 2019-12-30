@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import { View, Button, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import Constants from 'expo-constants';
 
 // redux actions
 import { bindActionCreators } from 'redux';
@@ -69,8 +70,9 @@ class HomePageParent extends Component{
   render(){
     const { navigation, count } = this.props;
     const { selectedText, optionChosen, selectedOption } = this.state;
+    const { version } = Constants.manifest;
     return(
-        <View>
+        <View style={styles.homePageParent.wrapHomePage}>
             <View style={styles.homePageParent.iconsView}>
               <TouchableOpacity onPress={() => {this.updateIconPressed("creditsIcon")}}>        
                 <Image
@@ -107,7 +109,13 @@ class HomePageParent extends Component{
                   null
             }
             </View>
-        
+            <View style={{justifyContent:'center'}}>
+                <Text 
+                style = {styles.homePageParent.textBoxVersion} 
+              >
+                {`v${version}`}
+              </Text>
+            </View>
         </View>
     );
   }
