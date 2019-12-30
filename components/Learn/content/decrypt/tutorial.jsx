@@ -135,7 +135,7 @@ class DecryptTutorial extends Component{
     
   }
   getThirdPage = () => {
-    const { decryptedText } = this.state;
+    const { decryptedText,currentDecryptedBlocks } = this.state;
     const { actions,lockState } = this.props;
     if (! lockState.lessonPageTabAndPages.allowNextPage){
       actions.ALLOW_NEXT_PAGE_ACTION()
@@ -154,6 +154,20 @@ class DecryptTutorial extends Component{
       <CustomButton text="Decrypt" callback={()=>{
           this.decrypt()
       }}/>
+      {
+          currentDecryptedBlocks !== null?
+          <CustomButton text="Blocks" 
+                    callback={
+                      ()=>{
+                          this.setState({
+                            showBlocks: true,
+                          })
+                      }
+                    }
+                    buttonColor="blue"
+                    />
+          : null
+      }
       { 
         decryptedText != ""
         ? <>
@@ -247,7 +261,7 @@ class DecryptTutorial extends Component{
         currentDecryptedBlocks.blocks.map ((x, idx)=> {
           console.log(x)
           return (
-            <View>
+            <View key = {`${idx}`}>
               <BlocksDecrypt
                 key = {`${idx}`}
                 flexArr={flexLength}
