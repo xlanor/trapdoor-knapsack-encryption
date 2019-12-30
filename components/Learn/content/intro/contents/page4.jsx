@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Linking
 } from 'react-native';
 
 // import stylesheet.
