@@ -3,182 +3,18 @@ import React, { Component } from 'react';
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { ScrollView } from 'react-native-gesture-handler';
 
+// import stylesheet.
+import styles from './styles';
 //contents
 import contents from './contents';
-import GCDPages from './GCDPages';
 import PicStyle from './PicStyle';
-
-//pic displays picture content instead
-//Remember to replace redux values
-const DISPLAY = "pic";
 
 // dynamic pages not static pages.
 class GCDPage extends Component {
   constructor(props) {
     super(props);
-  }
-  // Direct hardcode content version
-  getPage15 = () => {
-    let page = contents.pageFifteen;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage14 = () => {
-    let page = contents.pageFourteen;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage13 = () => {
-    let page = contents.pageThirteen;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage12 = () => {
-    let page = contents.pageTwelve;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage11 = () => {
-    let page = contents.pageEleven;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage10 = () => {
-    let page = contents.pageTen;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage9 = () => {
-    let page = contents.pageNine;
-    return (
-      <GCDPages
-        title={page.title}
-        text={page.text}
-      />
-    )
-  }
-  getPage8 = () => {
-    let page = contents.pageEight;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage7 = () => {
-    let page = contents.pageSeven;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage6 = () => {
-    let page = contents.pageSix;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage5 = () => {
-    let page = contents.pageFive;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage4 = () => {
-    let page = contents.pageFour;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage3 = () => {
-    let page = contents.pageThree;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage2 = () => {
-    let page = contents.pageTwo;
-    return (
-      <GCDPages
-        title={page.title}
-        tableHead={page.tableHead}
-        tableData={page.tableData}
-        text={page.text}
-      />
-    )
-  }
-  getPage1 = () => {
-    let page = contents.pageOne;
-    return (
-      <GCDPages
-        title={page.title}
-        text={page.text}
-      />
-    )
   }
   // Picture content version
   getpic28 = () => {
@@ -405,72 +241,67 @@ class GCDPage extends Component {
       />
     )
   }
+  getPage1 = () => {
+    let Page = contents.page1;
+    return <Page />
+  }
+  getPage2 = () => {
+    let Page = contents.page2;
+    return <Page />
+  }
+  getPage3 = () => {
+    let Page = contents.page3;
+    return <Page />
+  }
   checkPageNo = () => {
     const { lockState } = this.props;
 
     return lockState.lessonPageTabAndPages.tabPage;
   }
   getPageElements = () => {
-    //pic displays picture content instead
-    //Remember to replace redux values
-    const DISPLAY = "pic";
-
     let pageNo = this.checkPageNo()
-    if (DISPLAY == "pic") {
-      switch (pageNo) {
-        case 1: return this.getpic1();
-        case 2: return this.getpic2();
-        case 3: return this.getpic3();
-        case 4: return this.getpic4();
-        case 5: return this.getpic5();
-        case 6: return this.getpic6();
-        case 7: return this.getpic7();
-        case 8: return this.getpic8();
-        case 9: return this.getpic9();
-        case 10: return this.getpic10();
-        case 11: return this.getpic11();
-        case 12: return this.getpic12();
-        case 13: return this.getpic13();
-        case 14: return this.getpic14();
-        case 15: return this.getpic15();
-        case 16: return this.getpic16();
-        case 17: return this.getpic17();
-        case 18: return this.getpic18();
-        case 19: return this.getpic19();
-        case 20: return this.getpic20();
-        case 21: return this.getpic21();
-        case 22: return this.getpic22();
-        case 23: return this.getpic23();
-        case 24: return this.getpic24();
-        case 25: return this.getpic25();
-        case 26: return this.getpic26();
-        case 27: return this.getpic27();
-        case 28: return this.getpic28();
-        default: return this.getpic1();
-      }
-    } else {
-      switch (pageNo) {
-        case 1: return this.getPage1();
-        case 2: return this.getPage2();
-        case 3: return this.getPage3();
-        case 4: return this.getPage4();
-        case 5: return this.getPage5();
-        case 6: return this.getPage6();
-        case 7: return this.getPage7();
-        case 8: return this.getPage8();
-        case 9: return this.getPage9();
-        case 10: return this.getPage10();
-        case 11: return this.getPage11();
-        case 12: return this.getPage12();
-        case 13: return this.getPage13();
-        case 14: return this.getPage14();
-        case 15: return this.getPage15();
-        default: return this.getPage1();
-      }
+
+    switch (pageNo) {
+      case 1: return this.getPage1();
+      case 2: return this.getPage2();
+      case 3: return this.getPage3();
+      case 4: return this.getpic1();
+      case 5: return this.getpic2();
+      case 6: return this.getpic3();
+      case 7: return this.getpic4();
+      case 8: return this.getpic5();
+      case 9: return this.getpic6();
+      case 10: return this.getpic7();
+      case 11: return this.getpic8();
+      case 12: return this.getpic9();
+      case 13: return this.getpic10();
+      case 14: return this.getpic11();
+      case 15: return this.getpic12();
+      case 16: return this.getpic13();
+      case 17: return this.getpic14();
+      case 18: return this.getpic15();
+      case 19: return this.getpic16();
+      case 20: return this.getpic17();
+      case 21: return this.getpic18();
+      case 22: return this.getpic19();
+      case 23: return this.getpic20();
+      case 24: return this.getpic21();
+      case 25: return this.getpic22();
+      case 26: return this.getpic23();
+      case 27: return this.getpic24();
+      case 28: return this.getpic25();
+      case 29: return this.getpic26();
+      case 30: return this.getpic27();
+      case 31: return this.getpic28();
+      default: return this.getpic1();
     }
   }
   render() {
-    return this.getPageElements()
+    return (
+      <ScrollView style={styles.ScrollStyle.scrollStyle}>
+        {this.getPageElements()}
+      </ScrollView>
+    )
   }
 }
 

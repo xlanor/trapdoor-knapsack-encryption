@@ -1,56 +1,53 @@
 import { Dimensions } from 'react-native';
 
-const containerStyle = { 
-  padding: Dimensions.get('window').height * 0.01,
-  backgroundColor: '#fff',
-  textAlign: 'center',
-  fontFamily: 'comfortaa',
+const containerStyle = {
+    backgroundColor: '#fff',
+    marginLeft: Dimensions.get('window').width * 0.05,
+    marginRight: Dimensions.get('window').width * 0.05,
 }
 
-const headStyle = { 
-  fontFamily: 'comfortaa',
-  height: 25, 
-  backgroundColor: '#f1f8ff',
+const titleStyle = {
+    fontFamily: 'comfortaa-bold',
+    fontSize: 25,
+    paddingTop: Dimensions.get('screen').height * 0.01,
+    paddingBottom: Dimensions.get('screen').height * 0.01,
+    textAlign: 'center',
+    textDecorationLine: 'underline'
+}
+const contentHead = {
+    fontFamily: 'comfortaa-bold',
+    fontSize: 20,
+    textAlign: 'center',
 }
 
-const wrapperStyle = { 
-  fontFamily: 'comfortaa',
-  flexDirection: 'row' 
+const contentStyle = {
+    fontFamily: 'comfortaa',
+    fontSize: 18,
+    textAlign: 'justify',
 }
 
-const titleStyle = { 
-  fontSize: 20,
-  fontFamily: 'comfortaa-bold',
-  textAlign: 'center',
+const bold = {
+    fontFamily: 'comfortaa-bold'
 }
 
-const headerStyle={
-  backgroundColor: '#f6f8fa'
+const underline = {
+    textDecorationLine: 'underline'
 }
 
-const rowStyle = {
-  fontFamily: 'comfortaa',
-  height: 28,
-}
-
-const textStyle = {
-  fontFamily: 'comfortaa',
-  textAlign: 'center',
-}
-
-const tagStyle = {
-  fontFamily: 'comfortaa',
-  p: { textAlign: 'center', lineHeight: 20 },
-  math: { fontSize: 20 }
+const picStyle = {
+    flex: 1,
+    width: null,
+    height: null,
+    alignItems: 'stretch',
+    resizeMode: 'stretch',
 }
 
 export default {
-  containerStyle,
-  headStyle,
-  wrapperStyle,
-  titleStyle,
-  headerStyle,
-  rowStyle,
-  textStyle,
-  tagStyle
+    picStyle,
+    containerStyle,
+    titleStyle,
+    contentHead,
+    contentStyle,
+    bold,
+    underline,
 };
