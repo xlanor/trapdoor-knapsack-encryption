@@ -143,7 +143,6 @@ class DecryptTutorial extends Component{
         }, 500);
       })
       
-      
   }
 
   getThirdPage = () => {
@@ -300,7 +299,7 @@ class DecryptTutorial extends Component{
                   [
                     'Current R',
                     'Public Key',
-                    'Decrypted',
+                    'New R',
                     'Binary',
                     'Ordered'
                 ]}
