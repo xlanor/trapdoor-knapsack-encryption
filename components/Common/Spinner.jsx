@@ -1,20 +1,50 @@
-import React from 'react';
-import { ActivityIndicator } from 'react-native';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  Modal,
+  ActivityIndicator
+} from 'react-native';
 
-const Spinner = props => {
-  const { size, color } = props;
-  return <ActivityIndicator size={size} color={color} />;
-};
+const Loader = props => {
+  const {
+    loading,
+    ...attributes
+  } = props;
+  console.log("Spinner called")
+  return (
+    <Modal
+      transparent={true}
+      animationType={'none'}
+      visible={loading}
+      onRequestClose={() => {console.log('close modal')}}>
+      <View style={styles.modalBackground}>
+        <View style={styles.activityIndicatorWrapper}>
+          <ActivityIndicator
+            animating={loading} />
+        </View>
+      </View>
+    </Modal>
+  )
+}
 
-Spinner.propTypes = {
-  size: PropTypes.string,
-  color: PropTypes.string,
-};
+const styles = StyleSheet.create({
+  modalBackground: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#00000040'
+  },
+  activityIndicatorWrapper: {
+    backgroundColor: '#FFFFFF',
+    height: 100,
+    width: 100,
+    borderRadius: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  }
+});
 
-Spinner.defaultProps = {
-  size: 'small',
-  color: '#ffffff',
-};
-
-export { Spinner };
+export default Loader;

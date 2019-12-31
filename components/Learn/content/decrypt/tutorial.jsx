@@ -25,6 +25,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BlocksDecrypt from '../../../Common/BlocksDecrypt';
 import CustomButton from '../../../Common/Button';
 import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
+import Loader from '../../../Common/Spinner';
 import Block from '../../../Common/Blocks';
 
 class DecryptTutorial extends Component{
@@ -34,6 +35,7 @@ class DecryptTutorial extends Component{
       decryptedText: "",
       currentDecryptedBlocks: null,
       showBlocks: false,
+      showSpinner: false,
     }
   }
 
@@ -59,7 +61,6 @@ class DecryptTutorial extends Component{
           ['new_r']: [],
         }
         for(let i = knapsack.length-1; i >=0; i--){
-          console.log(`Current y ${y} Current Knapsack ${knapsack[i]}`)
           blocksInner.knapsack.push(knapsack[i])
           blocksInner.current_r.push(Number(y))
           if(y >= knapsack[i]){
@@ -100,7 +101,6 @@ class DecryptTutorial extends Component{
 
   decrypt = () => {
     const { actions, lockState } = this.props;
-    console.log(`Decrypted lockState = ${lockState.updateParameters}`)
     let encryptedText = lockState.encryption.encryptedText;
     let modulo = lockState.updateParameters.modulo;
     let inverse = lockState.updateParameters.inverse;
@@ -112,28 +112,40 @@ class DecryptTutorial extends Component{
         let multiplied = enc * inverse;
         let modVal = multiplied % modulo;
         decrypted.push(modVal)
-        console.log ("Enc "+enc)
-        console.log ("multiplied "+multiplied)
-        console.log ("modVal "+modVal)
     })
     let binStringList = this.getBinaryString(privateKey, decrypted)
-    console.log("Binary String List")
-    console.log(binStringList)
-    console.log("Padding "+padding)
     let unpadded = this.removePadding(binStringList.binlist,padding)
-    console.log(`Unpadded ${unpadded}`)
     let dec = this.convertBinToText(unpadded)
   
-
+    /*
     this.setState({
       decryptedText: dec,
       currentDecryptedBlocks: binStringList,
       showBlocks: true,
-    })
-
-
-    
+    })*/
+    return {
+      decryptedText: dec,
+      currentDecryptedBlocks: binStringList,
+      showBlocks: true,
+    }
   }
+
+  async decryption() {
+      this.setState({
+          showSpinner: true,
+      }, ()=>{
+        let decryptRs = this.decrypt()
+        setTimeout(() => {
+          this.setState({
+            showSpinner: false,
+            ...decryptRs
+          });
+        }, 500);
+      })
+      
+      
+  }
+
   getThirdPage = () => {
     const { decryptedText,currentDecryptedBlocks } = this.state;
     const { actions,lockState } = this.props;
@@ -156,7 +168,7 @@ class DecryptTutorial extends Component{
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View style={styles.tutorial.multipleButtonLeft}>
               <CustomButton text="Decrypt" callback={()=>{
-                  this.decrypt()
+                  this.decryption()
                 }}/>
             </View>
 
@@ -165,7 +177,15 @@ class DecryptTutorial extends Component{
                   callback={
                     ()=>{
                         this.setState({
-                          showBlocks: true,
+                          showSpinner: true,
+
+                        }, ()=>{
+                          setTimeout(() => {
+                            this.setState({
+                              showBlocks: true,
+                              showSpinner: false,
+                            });
+                          }, 500)
                         })
                     }
                   }
@@ -177,7 +197,7 @@ class DecryptTutorial extends Component{
           :
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>
               <CustomButton text="Decrypt" callback={()=>{
-                  this.decrypt()
+                  this.decryption()
                 }}/>
           </View>
       }
@@ -211,7 +231,6 @@ class DecryptTutorial extends Component{
     const { actions,lockState } = this.props;
     if (! lockState.lessonPageTabAndPages.allowNextPage){
       actions.ALLOW_NEXT_PAGE_ACTION()
-      console.log(lockState);
 
     }
     return (
@@ -245,7 +264,7 @@ class DecryptTutorial extends Component{
   }
   render(){
       const { lockState } = this.props;
-      const { showBlocks } = this.state;
+      const { showBlocks,showSpinner } = this.state;
       {
         /*
           BlockDecrypt.propTypes = {
@@ -325,7 +344,11 @@ class DecryptTutorial extends Component{
          {
            this.getPageElements()
          }
-
+        {
+          showSpinner 
+          ? <Loader />
+          : null
+        }
 
         {
                showBlocks
