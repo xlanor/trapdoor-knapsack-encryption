@@ -8,9 +8,6 @@ import {
     FlatList
 } from 'react-native';
 
-import HTML from 'react-native-render-html'
-import PropTypes from 'prop-types'
-
 import styles from './styles'
 
 class PicStyle extends Component {
@@ -21,7 +18,7 @@ class PicStyle extends Component {
         const { title, img } = this.props;
         return (
             <View style={styles.PicStyle.containerStyle} >
-                <HTML html={title} style={styles.PicStyle.titleStyle} />
+                <Text style={styles.PicStyle.titleStyle}>{title}</Text>
                 <Image source={img} style={styles.PicStyle.picStyle} />
             </View>
         )
