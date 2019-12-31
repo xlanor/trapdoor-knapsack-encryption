@@ -13,13 +13,8 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 import { Algo } from '../../assets/images'
 
-import Pages  from './Pages'
-
 import { 
   introPageOne,
-  introPageTwo,
-  introPageThree,
-  introPageFour,
   gcdPageOne,
   keyPageOne,
   EncryptTutorial,
@@ -233,13 +228,8 @@ class LearnTab extends Component{
             switch(currentPage){
               case 1:
                 return introPageOne;
-              case 2:
-                return introPageTwo;
-              case 3:
-                return introPageThree;
-              case 4:
-                return introPageFour;
-              default: return introPageOne;
+              default:
+                return introPageOne;
             }
         case "gcd":
             switch(currentPage){
@@ -289,87 +279,53 @@ class LearnTab extends Component{
       console.log(CurPage);
       // for dynamic pages, we render component, while for static
       // we render a page.
-      if (currentTab == "gcd" ||currentTab == "key" || currentTab == "encrypt" || currentTab == "decrypt" || currentTab == "simulator"){
-        return (
-            <CurPage />
-        );   
-      }else{ 
-        console.log("Returning static page")
-        console.log(currentTab);
-        if (currentPage == 4 && currentTab == "intro"){
-          // we need to do this for every static page that has long ass text.
-          return (
-            <ScrollView style={styles.learnTab.learnTabPad}>
-                 <Pages
-                key={`${currentTab}-${currentPage}-page`}
-                title={CurPage.title}
-                renderText={CurPage.text}
-              />  
-            </ScrollView>
-          )
-        }else{
-          return (
-            <View style={styles.learnTab.learnTabPad}>
-              <Pages
-                key={`${currentTab}-${currentPage}-page`}
-                title={CurPage.title}
-                renderText={CurPage.text}
-              />
-            </View>
-          )
-        }
-       
-      }
-     
-        
+      return <CurPage />
     }
 
     render(){
       return(
         <>
-            
           {
-              this.loadPage()
+            this.loadPage()
           }
-            <View style={{...styles.learnTab.bottom}}>
-                <View style={{flex: 1}}>
-                  {
-                    this.isFirstPage()?
-                    null:
-                    <TouchableOpacity onPress = {()=>{
-                        this.getTouchablePreviousAction()
-                    }}>
-                    <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
-                    </TouchableOpacity>
+          <View style={{...styles.learnTab.bottom}}>
+            <View style={{flex: 1}}>
+              {
+                this.isFirstPage()?
+                null:
+                <TouchableOpacity onPress = {()=>{
+                    this.getTouchablePreviousAction()
+                }}>
+                <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
+                </TouchableOpacity>
+              }
+              </View>
+              <View style={{flex: 4}}/>
+              <View style={{flex: 1}}>
+                <View style={{marginLeft:'auto'}}>
+                    {
+                    this.isFinalPage()?
+                    this.getNextTab():
+                      this.canNavigate()?
+                        <TouchableOpacity onPress = {()=>{
+                            this.getTouchableNextAction()
+                        }}>
+                          
+                          <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
+                        </TouchableOpacity>
+                        : null
                   }
-                  </View>
-                  <View style={{flex: 4}}/>
-                  <View style={{flex: 1}}>
-                    <View style={{marginLeft:'auto'}}>
-                        {
-                        this.isFinalPage()?
-                        this.getNextTab():
-                          this.canNavigate()?
-                            <TouchableOpacity onPress = {()=>{
-                                this.getTouchableNextAction()
-                            }}>
-                              
-                              <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
-                            </TouchableOpacity>
-                            : null
-                      }
-                    </View>
-                
-                  </View>
-               
-           </View>
+                </View>
+              </View>
+            </View>
         
           {/*
-        <View style={styles.learnTab.learnTabPad}>
+            <View style={styles.learnTab.learnTabPad}>
           
             
           
-            </View>*/}
+            </View>*/
+          }
         </>
       );
     }

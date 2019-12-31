@@ -9,6 +9,7 @@ const borderLine = {
 
 const wrapperViewBackground = {
   backgroundColor: COLORS.ORANGE_1,
+  height: Dimensions.get('window').height * 0.09
 };
 
 const scrollViewBackground = {
