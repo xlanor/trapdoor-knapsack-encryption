@@ -319,7 +319,10 @@ class KeyPage extends Component {
           <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>Private key: a = {lockState.updateParameters.privateKeyString}</Text></Text>
           <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>w = {lockState.updateParameters.multiplier} m = {lockState.updateParameters.modulo}</Text></Text>
          <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>Inverse of multiplier = {lockState.updateParameters.inverse}</Text></Text>
+         <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
            <CustomButton text="Gen Public Key" callback = {() => {this.generatePubKey()}}/>
+         </View>
+          
          {
             pkLoaded
             ? <Text style={styles.page1.textStyleHeader3}>Your Public key: <Text style={styles.page1.boldFont}>b</Text> = {lockState.updateParameters.publicKeyString}</Text>
@@ -338,7 +341,9 @@ class KeyPage extends Component {
          <Text style={styles.page1.textStyleHeader2}>This is needed for decryption</Text>
          <Text style={styles.page1.textStyleHeader2}>E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)</Text>
 
-         <CustomButton text="Gen Inverse" callback={()=>{this.loadInverse()}}/>
+         <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+            <CustomButton text="Gen Inverse" callback={()=>{this.loadInverse()}}/>
+         </View>
 
      {
         inverseLoaded
