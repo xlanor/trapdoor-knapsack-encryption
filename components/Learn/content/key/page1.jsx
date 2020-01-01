@@ -41,6 +41,11 @@ import {
   UPDATE_PUBLIC_KEY_ARRAY_ACTION,
  } from '../../../../actions/updateParameters';
 
+ import {
+  ENCRYPT_LOCK_ACTION,
+  DECRYPT_LOCK_ACTION,
+} from '../../../../actions/learnPageLock';
+
  import PopUp from '../../../Common/PopUp';
  import CustomButton from '../../../Common/Button';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -60,6 +65,8 @@ class KeyPage extends Component {
         currentModulo: reduxMod == 0 ? "" : reduxMod, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
         currentMultiplier: reduxMultipler == 0 ? "": reduxMultipler, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
         showError: false,
+        inverseLoaded: false,
+        pkLoaded: false,
         errorMessage: "",
       }
     
@@ -233,11 +240,16 @@ class KeyPage extends Component {
        if(!this.calculateGCD(mod,curMult)){
         this.enableError(`GCD of ${mod} and ${curMult} is not 1!`)
        }else{
-        console.log("Allowing next page")
         // integer is greater.
         actions.ALLOW_NEXT_PAGE_ACTION();
         actions.UPDATE_MULTIPLIER_ACTION(curMult);
-
+        // have to relock decryption to force them to generate pk and inverse again.
+        actions.DECRYPT_LOCK_ACTION()
+        actions.ENCRYPT_LOCK_ACTION() 
+        this.setState({
+          inverseLoaded: false,
+          pkLoaded: false,
+        })
        }
      }
 
@@ -259,15 +271,31 @@ class KeyPage extends Component {
    loadInverse = () => {
 
      const { lockState, actions } = this.props;
-     if (lockState.updateParameters.inverse == 0){
-       // to prevent infinite loop, we need to ensure that inverse is reset to 0 if we go back then
-       // currently we dont handle any state from popping off the stack.
-        let currentInverse = this.xgcd(lockState.updateParameters.multiplier,lockState.updateParameters.modulo);
-        actions.UPDATE_INVERSE_ACTION(currentInverse);
-        actions.ALLOW_NEXT_PAGE_ACTION()
+      let currentInverse = this.xgcd(lockState.updateParameters.multiplier,lockState.updateParameters.modulo);
+      actions.UPDATE_INVERSE_ACTION(currentInverse);
+      actions.ALLOW_NEXT_PAGE_ACTION()
+      // have to relock decryption to force them to generate pk and inverse again.
+      actions.DECRYPT_LOCK_ACTION()
+      actions.ENCRYPT_LOCK_ACTION()
+      this.setState({
+        inverseLoaded: true,
+        pkLoaded: false,
+      })
 
-     }
+   }
+   generatePubKey = () => {
+     const { lockState, actions } = this.props;
+     let pub = this.computePublicKey()
+      actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
+      actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
+      actions.ALLOW_NEXT_PAGE_ACTION();
+      // have to relock decryption to force them to generate pk and inverse again.
+      actions.DECRYPT_LOCK_ACTION()
+      actions.ENCRYPT_LOCK_ACTION()
+      this.setState({
+        pkLoaded: true,
 
+      })
    }
    getSixthPage = () => {
      return (
@@ -279,12 +307,7 @@ class KeyPage extends Component {
    }
    getFifthPage = () => {
      const { lockState, actions } = this.props;
-     if( lockState.updateParameters.publicKeyArr.length == 0 ){
-        let pub = this.computePublicKey()
-        actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
-        actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
-        actions.ALLOW_NEXT_PAGE_ACTION();
-     }
+     const { pkLoaded } = this.state;
      return (
        <View>
          <Text style={styles.page1.textStyleTitle}>Compute the public key <Text style={styles.page1.boldFont}>b</Text>:</Text>
@@ -296,24 +319,33 @@ class KeyPage extends Component {
           <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>Private key: a = {lockState.updateParameters.privateKeyString}</Text></Text>
           <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>w = {lockState.updateParameters.multiplier} m = {lockState.updateParameters.modulo}</Text></Text>
          <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>Inverse of multiplier = {lockState.updateParameters.inverse}</Text></Text>
+           <CustomButton text="Gen Public Key" callback = {() => {this.generatePubKey()}}/>
          {
-           lockState.updateParameters.publicKeyArr.length === 0
-           ? null
-           : <Text style={styles.page1.textStyleHeader3}>Your Public key: <Text style={styles.page1.boldFont}>b</Text> = {lockState.updateParameters.publicKeyString}</Text>
+            pkLoaded
+            ? <Text style={styles.page1.textStyleHeader3}>Your Public key: <Text style={styles.page1.boldFont}>b</Text> = {lockState.updateParameters.publicKeyString}</Text>
+           : null
          }
        </View>
      )
    }
    getFourthPage = () => {
      const { lockState } = this.props;
-     this.loadInverse()
+     const { inverseLoaded } = this.state;
      return (
        <View>
          <Text style={styles.page1.textStyleTitle}>Calculate the multiplicative inverse of your multiplier <Text style={styles.page1.boldFont}>w ({lockState.updateParameters.multiplier})</Text>:</Text>
          <Text style={styles.page1.textStyleHeader3}>(Using Extended Euclidean's algorithm)</Text>
          <Text style={styles.page1.textStyleHeader2}>This is needed for decryption</Text>
          <Text style={styles.page1.textStyleHeader2}>E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)</Text>
+
+         <CustomButton text="Gen Inverse" callback={()=>{this.loadInverse()}}/>
+
+     {
+        inverseLoaded
+        ?
           <Text style={styles.page1.textStyleTitle}>Multiplicative inverse of your multiplier <Text style={styles.page1.boldFont}>w ({lockState.updateParameters.multiplier})</Text>: {lockState.updateParameters.inverse}</Text>
+        : null
+     }
        </View>
      )
    }
@@ -517,6 +549,8 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_INVERSE_ACTION,
     UPDATE_PUBLIC_KEY_ARRAY_ACTION,
     UPDATE_PUBLIC_KEY_STRING_ACTION,
+    ENCRYPT_LOCK_ACTION,
+    DECRYPT_LOCK_ACTION,
   }, dispatch)
 });
 export default connect(mapStateToProps,mapDispatchToProps)(KeyPage);
