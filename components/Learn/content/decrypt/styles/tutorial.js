@@ -2,6 +2,11 @@ import { COLORS } from '../../../../../constants/Colors';
 
 import { Dimensions } from 'react-native';
 
+const DF1Width = Dimensions.get('window').width * 0.7
+const DF1Height = DF1Width/665*75
+const DF2Width = Dimensions.get('window').width * 0.4
+const DF2Height = DF2Width/309*59
+
 const textStyleTitle = {
   fontFamily: 'comfortaa',
   fontSize: 20,
@@ -55,6 +60,7 @@ const textStyleCiphertext = {
   fontSize: 17,
   paddingBottom: Dimensions.get('screen').height * 0.01,
 }
+
 const learnTabPad = {
   //height: Dimensions.get('window').height * 0.79,
   marginLeft: Dimensions.get('window').height * 0.05,
@@ -67,6 +73,7 @@ const textStyleSmallerText = {
   fontFamily: 'comfortaa',
   fontSize: 14,
   paddingBottom: Dimensions.get('screen').height * 0.008,
+  textAlign: 'center',
 
 }
 
@@ -84,9 +91,39 @@ const multipleButtonRight = {
   flex: 1,
   marginLeft: Dimensions.get('window').width * 0.01,
 }
- 
 
+const linkStyle = {
+  color: COLORS.BLUE_2,
+  textDecorationLine: 'underline',
+}
 
+const DF1={
+    height: DF1Height,
+    width: DF1Width,
+}
+
+const DF2={
+  height: DF2Height,
+  width: DF2Width,
+}
+
+const imageView = {
+  alignItems: 'center',
+  marginTop: Dimensions.get('window').height * 0.015,
+}
+
+const popUpTextStyle = {
+
+  fontFamily: 'comfortaa',
+  fontSize: 14,
+  textAlign: 'center',
+  color: COLORS.ORANGE_1,
+}
+
+const tableMargin = {
+  marginTop: Dimensions.get('window').height * 0.015,
+  marginBottom: Dimensions.get('window').height * 0.015,
+}
 export default {
   textStyle,
   textStyleTitle,
@@ -102,4 +139,10 @@ export default {
   buttonRow,
   multipleButtonLeft,
   multipleButtonRight,
+  linkStyle,
+  DF1,
+  DF2,
+  imageView,
+  popUpTextStyle,
+  tableMargin, 
 };

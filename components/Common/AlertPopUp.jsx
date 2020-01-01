@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 import { alertPopUp as styles } from './styles';
 
 const AlertPopUp = (props) => {
-  const { callback, messageContent, visibility, icon } = props;
+  const { callback, messageContent, visibility, icon, renderedBlocks } = props;
   return (
     <Modal animationType="fade" transparent visible={visibility}>
       <TouchableOpacity style={styles.modalBackground}  onPress={() => callback()}>
@@ -25,7 +25,11 @@ const AlertPopUp = (props) => {
               </View>
               : null
             }
-            <Text style={styles.modalMessage}>{messageContent}</Text>
+            {
+              renderedBlocks
+              ? renderedBlocks
+              : <Text style={styles.modalMessage}>{messageContent}</Text>
+            } 
           </View>
         </TouchableWithoutFeedback>
       </TouchableOpacity>
@@ -34,7 +38,8 @@ const AlertPopUp = (props) => {
 }
 
 AlertPopUp.propTypes = {
-  messageContent: PropTypes.string.isRequired,
+  messageContent: PropTypes.string,
+  renderedBlocks: PropTypes.node,
   callback: PropTypes.func.isRequired,
   visibility: PropTypes.bool.isRequired,
   icon: PropTypes.node,

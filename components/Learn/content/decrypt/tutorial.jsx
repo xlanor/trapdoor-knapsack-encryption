@@ -10,6 +10,14 @@ import {
   FlatList 
 } from 'react-native';
 
+import { 
+  Table, 
+  TableWrapper, 
+  Rows, 
+  Row, 
+  Col } 
+from 'react-native-table-component';
+
 import {
   ALLOW_NEXT_PAGE_ACTION
  } from '../../../../actions/tabPage';
@@ -21,11 +29,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { ScrollView } from 'react-native-gesture-handler';
+import DF1 from '../../../../assets/images/DecryptionFormula_1.png'
+import DF2 from '../../../../assets/images/DecryptionFormula_2.png'
+import Alert from '../../../../assets/images/alert.png'
 
 import BlocksDecrypt from '../../../Common/BlocksDecrypt';
 import CustomButton from '../../../Common/Button';
 import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
 import Loader from '../../../Common/Spinner';
+import AlertPopUp from '../../../Common/AlertPopUp';
 import Block from '../../../Common/Blocks';
 
 class DecryptTutorial extends Component{
@@ -36,6 +48,9 @@ class DecryptTutorial extends Component{
       currentDecryptedBlocks: null,
       showBlocks: false,
       showSpinner: false,
+      showWInversePopUp: false,
+      showrPopUp: false,
+      showCmpPopUp: false,
     }
   }
 
@@ -98,6 +113,87 @@ class DecryptTutorial extends Component{
     }
     return dec.join('')
   }
+  comparingPopUp = () => {
+    return (
+      <View>
+        
+        <Text style={styles.tutorial.popUpTextStyle}>
+          E.G: R = 15 and use a to find binary x
+        </Text>
+        <View style={styles.tutorial.tableMargin}>
+          <Table borderStyle={{borderWidth: 1}}>
+            <TableWrapper style={{ flexDirection: 'row' }}>
+              <Col data={['a','R', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
+              <Rows data={[
+                    ['2','5','10'],
+                    ['0','5','1'],
+                    ['0','1','1'],
+                 ]} 
+                flexArr={[1, 1, 1]}
+                style={{height: 28}} 
+                textStyle={{textAlign: 'center' }}
+              />
+            </TableWrapper>
+          </Table>
+        </View>
+       
+        
+        <Text style={styles.tutorial.popUpTextStyle}>
+          15 > 10 ? -> true, x = 1
+        </Text>
+        
+        <Text style={styles.tutorial.popUpTextStyle}>
+             15 - 10 = 5
+        </Text>
+        
+        <Text style={styles.tutorial.popUpTextStyle}>
+            5 > 5 ? -> true, x = 1
+        </Text>
+        
+        <Text style={styles.tutorial.popUpTextStyle}>
+             5 - 5 = 0
+        </Text>
+        
+        <Text style={styles.tutorial.popUpTextStyle}>
+           0 > 2 ? -> false, x = 0
+        </Text>
+      </View>
+    )
+  }
+  rPopUp = () => {
+    return (
+      <View>
+        <Text style={styles.tutorial.popUpTextStyle}>
+          E.G: T = 48, w^-1 = 32, and m = 39
+        </Text>
+        
+        <Text style={styles.tutorial.popUpTextStyle}>
+          Using the formula for R 
+        </Text>
+        
+        <Text style={styles.tutorial.popUpTextStyle}>
+           R = 48 * 32 mod 39 = 15
+        </Text>
+      </View>
+    )
+  }
+  
+  wInversePopUp = () => {
+    return (
+      <View>
+        <Text style={styles.tutorial.popUpTextStyle}>
+          Using Extended Euclidean to find m^-1 such that 
+        </Text>
+        <Text style={{
+          
+            ...styles.tutorial.popUpTextStyle,
+            fontSize: 16
+          }}>
+            w^-1 * w = 1 mod m
+        </Text>
+      </View>
+    )
+  }
 
   decrypt = () => {
     const { actions, lockState } = this.props;
@@ -158,10 +254,18 @@ class DecryptTutorial extends Component{
         <View style={styles.tutorial.textStyleTitleWrapper}>
           <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
         </View>
-        <Text style={styles.tutorial.textStyle}>Convert the binary values to decimal, this decimal is the ascii value of the message.</Text>
-        <Text style={styles.tutorial.textStyle}>Now, convert the ascii value back to characters to get back the plaintext message.</Text>
-        <Text style={styles.tutorial.textStyle}>Don't forget to subtract the padding applied!</Text>
-      <Text style={styles.tutorial.textStyle}>Current Padding: {lockState.encryption.padding}</Text>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}>Convert the binary values to decimal, this decimal is the ascii value of the message.</Text>
+        </View>
+        <View style={styles.tutorial.imageView}>
+         <Text style={styles.tutorial.textStyleSmallerText}>Now, convert the ascii value back to characters to get back the plaintext message.</Text>
+        </View>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}>Don't forget to subtract the padding applied!</Text>
+        </View>
+        <View style={styles.tutorial.imageView}>
+      <Text style={styles.tutorial.textStyleSmallerText}>Current Padding: {lockState.encryption.padding}</Text>
+      </View>
       {
           currentDecryptedBlocks !== null?
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -203,8 +307,10 @@ class DecryptTutorial extends Component{
       { 
         decryptedText != ""
         ? <>
-          <Text> Decrypted Text:</Text> 
-          <Text> {decryptedText}</Text>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}> Decrypted Text:</Text> 
+          <Text style={styles.tutorial.textStyleSmallerText}> {decryptedText}</Text>
+        </View>
           </>
         : null
       }
@@ -221,7 +327,24 @@ class DecryptTutorial extends Component{
     return (
       <>
         <View style={styles.tutorial.textStyleTitleWrapper}>
-          <Text style={styles.tutorial.textStyleTitleCenter}>WIP - to be done</Text> 
+          <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
+        </View>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}>
+            {"Select the largest a which is <= R:"}
+          </Text>
+          <Text style={styles.tutorial.textStyleSmallerText}>
+            If it is true, then the corresponding x = 1
+          </Text>
+          <Text style={styles.tutorial.textStyleSmallerText}>
+            If false, then x = 0
+          </Text>
+          <Text style={styles.tutorial.textStyleSmallerText}>
+            {"Since the next largest a <= the difference, repeat until the difference is 0"}
+          </Text>
+          <Text style={styles.tutorial.textStyleSmallerText}>
+            As the knapsack is super increasing, it is comparatively easier to get the values
+          </Text>
         </View>
       </>
     )
@@ -237,12 +360,50 @@ class DecryptTutorial extends Component{
         <View style={styles.tutorial.textStyleTitleWrapper}>
           <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
         </View>
-        <Text style={styles.tutorial.textStyleCiphertext}>The current ciphertext is:</Text>
-        <Text style={styles.tutorial.textStyleCiphertext}>({lockState.encryption.encryptedText.join(', ')})</Text>
-        <Text style={styles.tutorial.textStyleSmallerText}>Use the inverse multiplier w^-1 to compute: R= w^-1 * ciphertext mod m</Text>
-        <Text style={styles.tutorial.textStyleSmallerText}>Then, use a to decrypt R1 and R2 and find plaintext binary X</Text>
-        <Text style={styles.tutorial.textStyleSmallerText}>By comparing with a, we then obtain the binary value.</Text>
-        <Text style={styles.tutorial.textStyleSmallerText1}>As the knapsack is super-increasing, it is comparatively easier to get the binary values.</Text>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}>The current ciphertext is:</Text>
+          <Text style={styles.tutorial.textStyleSmallerText}>({lockState.encryption.encryptedText.join(', ')})</Text>
+        </View>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}>Padding: </Text>
+          <Text style={styles.tutorial.textStyleSmallerText}>{lockState.encryption.padding}</Text>
+        </View>
+        <View style={styles.tutorial.imageView}>
+          <Image style={styles.tutorial.DF1} source={DF1}/>
+        </View>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}>Use the 
+            <Text 
+              style={styles.tutorial.linkStyle}
+              onPress={()=>{
+                  this.setState({showWInversePopUp: true,})
+              }}
+            > inverse multiplier w^-1 </Text> 
+            to calculate 
+            <Text 
+              style={styles.tutorial.linkStyle}
+              onPress={()=> {
+                this.setState({showrPopUp: true,})
+              }}
+            > R</Text>
+          </Text>
+        </View>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}>Use the private key a to find binary x since</Text>
+        </View>
+        <View style={styles.tutorial.imageView}>
+          <Image style={styles.tutorial.DF2} source={DF2}/>
+        </View>
+        <View style={styles.tutorial.imageView}>
+          <Text style={styles.tutorial.textStyleSmallerText}>
+            Then by 
+            <Text 
+              style={styles.tutorial.linkStyle}
+              onPress={()=>{this.setState({showCmpPopUp: true,})}}
+            > comparing with a </Text>
+            to obtain the binary value x
+          </Text>
+        </View>
       
         </>
     )
@@ -263,7 +424,13 @@ class DecryptTutorial extends Component{
   }
   render(){
       const { lockState } = this.props;
-      const { showBlocks,showSpinner } = this.state;
+      const { 
+        showBlocks,
+        showSpinner, 
+        showWInversePopUp,
+        showrPopUp,
+        showCmpPopUp
+      } = this.state;
       {
         /*
           BlockDecrypt.propTypes = {
@@ -348,7 +515,45 @@ class DecryptTutorial extends Component{
           ? <Loader />
           : null
         }
+        {
+          /*
 
+  messageContent: PropTypes.string,
+  renderedBlocks: PropTypes.node,
+  callback: PropTypes.func.isRequired,
+  visibility: PropTypes.bool.isRequired,
+  icon: PropTypes.node,*/
+        }
+        {
+          showWInversePopUp
+          ? <AlertPopUp 
+              icon={Alert}
+              renderedBlocks={this.wInversePopUp()}
+              callback={()=>{this.setState({showWInversePopUp: false,})}}
+              visibility={showWInversePopUp}
+            />
+          : null
+        }
+        {
+          showrPopUp
+          ?<AlertPopUp 
+          icon={Alert}
+          renderedBlocks={this.rPopUp()}
+          callback={()=>{this.setState({showrPopUp: false,})}}
+          visibility={showrPopUp}
+        />
+         : null
+        }
+        {
+          showCmpPopUp
+          ?<AlertPopUp 
+          icon={Alert}
+          renderedBlocks={this.comparingPopUp()}
+          callback={()=>{this.setState({showCmpPopUp: false,})}}
+          visibility={showCmpPopUp}
+        />
+          :null
+        }
         {
                showBlocks
                ? <ScrollViewPopUp   
