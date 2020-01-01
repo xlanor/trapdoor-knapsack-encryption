@@ -26,8 +26,9 @@ const contentStyle = {
     textAlign: 'justify',
 }
 
-const bold = {
-    fontFamily: 'comfortaa-bold'
+const keyword = {
+    fontFamily: 'comfortaa-bold',
+    color: 'blue',
 }
 
 const underline = {
@@ -48,6 +49,6 @@ export default {
     titleStyle,
     contentHead,
     contentStyle,
-    bold,
+    keyword,
     underline,
 };

@@ -30,7 +30,7 @@ export default class page5 extends Component {
                     {"\n\n"}
                     3. The multiplier chosen is a co-prime to the modulus, so that a multiplicative inverse can be found.
                     {"\n\n"}
-                    These three are kept as the <Text style={style.bold}>secret key</Text> by the owner and not distributed.
+                    These three are kept as the <Text style={style.keyword}>secret key</Text> by the owner and not distributed.
                     {"\n"}
                 </Text>
             </View>
