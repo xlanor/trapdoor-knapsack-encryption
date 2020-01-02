@@ -177,7 +177,7 @@ class KeyPage extends Component {
       if (checkSuperIncreasing){
         currentMax += (curNo);
       }else{
-        this.enableError(`Sequence is not superincreasing! ${currentMax}, ${curNo}`)
+        this.enableError(`Sequence is not superincreasing! ${splitKey.slice(0,i+1).join(",")} = ${currentMax}, ${curNo} is not greater than ${currentMax}!`)
         return false;
       }
     }
@@ -192,7 +192,6 @@ class KeyPage extends Component {
       const { currentPrivateKey } = this.state;
       if (!this.validateNumeric()){
         // TODO: show an error message
-        console.log(currentPrivateKey)
         this.enableError("Non numeric message received!")
       }else{
         // check if it is superincreasing
