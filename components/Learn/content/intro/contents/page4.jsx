@@ -24,14 +24,14 @@ export default class page4 extends Component {
                     {"\n"}
                     A quick reference to how he broke the system can be found in this link
                     {"\n"}
-                    <Text style={{color: 'blue'}}
+                    <Text style={{color: '#2980B9'}}
                         onPress={() => Linking.openURL('https://link.springer.com/chapter/10.1007%2F978-1-4757-0602-4_29')}>
                     https://link.springer.com/chapter/10.1007%2F978-1-4757-0602-4_29
                     </Text>
                     {"\n\n"}
                     In the same year Adi Shamir the inventor of RSA cryptosystem that is still used today posted an article on an algorithm to break the cryptosystem
                     {"\n"}
-                    <Text style={{color: 'blue'}}
+                    <Text style={{color: '#2980B9'}}
                         onPress={() => Linking.openURL('https://ieeexplore.ieee.org/document/4568386')}>
                     https://ieeexplore.ieee.org/document/4568386
                     </Text>
