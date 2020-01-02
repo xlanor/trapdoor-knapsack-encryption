@@ -25,6 +25,7 @@ import ProgressBar4 from '../../../../assets/images/FiveStepProgress/ProgressBar
 import ProgressBar5 from '../../../../assets/images/FiveStepProgress/ProgressBar5.png'
 
 import Error from '../../../../assets/images/Error.png'
+import Alert from '../../../../assets/images/alert.png'
 
 import { 
   ALLOW_NEXT_PAGE_ACTION
@@ -48,6 +49,7 @@ import {
 
  import PopUp from '../../../Common/PopUp';
  import CustomButton from '../../../Common/Button';
+ import AlertPopUp from '../../../Common/AlertPopUp';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 // dynamic pages not static pages.
 class KeyPage extends Component {
@@ -67,11 +69,24 @@ class KeyPage extends Component {
         showError: false,
         inverseLoaded: false,
         pkLoaded: false,
+        showSuperIncreasingInfoPopUp: false,
         errorMessage: "",
       }
     
    }
-  
+   superIncreasingInfoPopUp = () => {
+      return (
+        <View>
+          <Text>An example of a superincreasing sequence would be as such</Text>
+          <Text> 1,2,4,8</Text>
+          <Text> Let us step through this in sequence.</Text>
+          <Text> 2 is greater than 1.</Text>
+          <Text> 4 is greater than 2+1 (3)</Text>
+          <Text> 8 is greater than 4+2+1 (7) </Text>
+          <Text> Thus, this is a valid Sequence.</Text>
+        </View>
+      )
+   }
    disableError = () => {
      this.setState({
        showError: false,
@@ -432,7 +447,16 @@ class KeyPage extends Component {
          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
            <View>
           <Text style={styles.page1.textStyleTitle}>Enter your private key <Text style={styles.page1.boldFont}>A</Text>:</Text>
-          <Text style={styles.page1.textStyleHeader1}>(This private key A should be in a super increasing sequence)</Text>
+          <Text style={styles.page1.textStyleHeader1}>(This private key A should be in a
+              <Text 
+                style={styles.page1.linkStyle}
+                onPress={()=>{this.setState({
+                  showSuperIncreasingInfoPopUp: true,
+                })
+              }}
+              > super increasing sequence</Text>
+              )
+          </Text>
           <TextInput defaultValue={
               lockState.updateParameters.privateKeyString === "" 
               ? null: 
@@ -502,10 +526,19 @@ class KeyPage extends Component {
     }
    }
    render(){
-    const { showError, errorMessage } = this.state;
+    const { showError, errorMessage, showSuperIncreasingInfoPopUp } = this.state;
     let pageNo = this.checkPageNo()
      return(
        <View style={styles.page1.learnTabPad}>
+         {
+           showSuperIncreasingInfoPopUp
+           ?  <AlertPopUp 
+           icon={Alert}
+           renderedBlocks={this.superIncreasingInfoPopUp()}
+           callback={()=>{this.setState({showSuperIncreasingInfoPopUp: false,})}}
+           visibility={showSuperIncreasingInfoPopUp}/>
+           : null
+         }
          {
            showError?
            <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
