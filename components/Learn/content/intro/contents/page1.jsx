@@ -21,7 +21,7 @@ export default class page1 extends Component {
                 <Text style={style.titleStyle}>Introduction</Text>
                 <Text style={style.contentHead}>Knapsack Problem</Text>
                 <Text style={style.contentStyle}>
-                    Knapsack problem is derived from the notion of packing an odd assortment of packages into a container. How to pack a single container most efficiently or with the highest value.
+                    Knapsack problem is derived from the notion of packing an odd assortment of packages into a container. How to pack a single container most efficiently or with the highest value?
                     {"\n"}
                 </Text>
                 <Image 
@@ -31,7 +31,7 @@ export default class page1 extends Component {
                 <Text style={style.contentStyle}>
                     {"\n"}
                     Example of a knapsack problem:{"\n"}
-                    which boxes should be chosen to maximize the amount of money while still keeping the overall weight under or equal to 15kg?
+                    Which boxes should be chosen to maximize the amount of money while still keeping the overall weight under or equal to 15kg?
                 </Text>
             </View>
         )

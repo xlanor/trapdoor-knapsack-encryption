@@ -29,6 +29,9 @@ const keyword = {
     fontFamily: 'comfortaa-bold',
     color: 'blue'
 }
+const bold = {
+    fontFamily: 'comfortaa-bold',
+}
 
 const privateKey = {
     fontFamily: 'comfortaa-bold',
@@ -76,5 +79,6 @@ export default {
     privateKey,
     modulus,
     publicKey,
-    multiplier
+    multiplier,
+    bold
 };
