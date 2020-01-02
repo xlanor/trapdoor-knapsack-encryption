@@ -100,6 +100,16 @@ const popUpTextStyle = {
   color: COLORS.ORANGE_1,
 }
 
+const popUpTextStyleBold = {
+
+  fontFamily: 'comfortaa',
+  fontSize: 18,
+  fontWeight: 'bold',
+  textAlign: 'center',
+  color: COLORS.ORANGE_1,
+}
+
+
 export default {
   textStyleTitle,
   textStyleHeader1,
@@ -115,4 +125,5 @@ export default {
   buttonRow,
   linkStyle,
   popUpTextStyle,
+  popUpTextStyleBold,
 };
