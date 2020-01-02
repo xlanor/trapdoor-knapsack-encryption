@@ -20,15 +20,15 @@ export default class page5 extends Component {
                 <Text style={style.contentHead}>Trapdoor Knapsack Description</Text>
 
                 <Text style={style.contentStyle}>
-                    Trapdoor knapsack is basically formed around 3 different key information, the private key, the multiplier and the modulus.
+                    Trapdoor knapsack is basically formed around 3 different key information, the <Text style={style.privateKey}>private key</Text>, the <Text style={style.multiplier}>multiplier</Text> and the <Text style={style.keyword}>modulus</Text>.
                     Everything else is derived from these 3 pieces of information.
                     {"\n\n"}
-                    1. The private key is a superincreasing knapsack to ensure there will only be one answer to a ciphertext.
+                    1. The <Text style={style.privateKey}>private key</Text> is a superincreasing knapsack to ensure there will only be one answer to a ciphertext.
                     {"\n\n"}
-                    2. The modulus chosen is a random integer larger than the sum of elements in the knapsack.
+                    2. The <Text style={style.modulus}>modulus</Text> chosen is a random integer larger than the sum of elements in the knapsack.
                     This ensures the uniqueness of the ciphertext and plaintext pairs.
                     {"\n\n"}
-                    3. The multiplier chosen is a co-prime to the modulus, so that a multiplicative inverse can be found.
+                    3. The <Text style={style.multiplier}>multiplier</Text> chosen is a co-prime to the modulus, so that a multiplicative inverse can be found.
                     {"\n\n"}
                     These three are kept as the <Text style={style.keyword}>secret key</Text> by the owner and not distributed.
                     {"\n"}

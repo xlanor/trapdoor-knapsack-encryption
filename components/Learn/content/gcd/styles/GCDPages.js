@@ -23,12 +23,33 @@ const contentHead = {
 const contentStyle = {
     fontFamily: 'comfortaa',
     fontSize: 18,
-    textAlign: 'justify',
 }
 
 const keyword = {
     fontFamily: 'comfortaa-bold',
-    color: 'blue',
+    color: 'blue'
+}
+
+const privateKey = {
+    fontFamily: 'comfortaa-bold',
+    color: '#C0392B'
+}
+
+const modulus = {
+    fontFamily: 'comfortaa-bold',
+    color: '#16A085'
+}
+const publicKey = {
+    fontFamily: 'comfortaa-bold',
+    color: '#00b0f0'
+}
+const multiplier = {
+    fontFamily: 'comfortaa-bold',
+    color: '#E67E22'
+}
+
+const highlight = {
+    backgroundColor: '#5afc03',
 }
 
 const underline = {
@@ -51,4 +72,9 @@ export default {
     contentStyle,
     keyword,
     underline,
+    highlight,
+    privateKey,
+    modulus,
+    publicKey,
+    multiplier
 };
