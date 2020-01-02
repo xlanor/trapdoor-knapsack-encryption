@@ -126,7 +126,7 @@ class DecryptTutorial extends Component{
               <Col data={['a','R', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
               <Rows data={[
                     ['2','5','10'],
-                    ['0','5','1'],
+                    ['0','5','15'],
                     ['0','1','1'],
                  ]} 
                 flexArr={[1, 1, 1]}
