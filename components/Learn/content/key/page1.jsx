@@ -77,13 +77,17 @@ class KeyPage extends Component {
    superIncreasingInfoPopUp = () => {
       return (
         <View>
-          <Text style={styles.page1.popUpTextStyle}>An example of a superincreasing sequence would be as such</Text>
-          <Text style={styles.page1.popUpTextStyle}> 1,2,4,8</Text>
-          <Text style={styles.page1.popUpTextStyle}> Let us step through this in sequence.</Text>
-          <Text style={styles.page1.popUpTextStyle}> 2 is greater than 1.</Text>
-          <Text style={styles.page1.popUpTextStyle}> 4 is greater than 2+1 (3)</Text>
-          <Text style={styles.page1.popUpTextStyle}> 8 is greater than 4+2+1 (7) </Text>
-          <Text style={styles.page1.popUpTextStyle}>Thus, this is a valid Sequence.</Text>
+          <View>
+            <Text style={styles.page1.popUpTextStyle}>An example of a superincreasing sequence would be as such</Text>
+            <Text style={styles.page1.popUpTextStyleBold}> 1,2,4,8</Text>
+          </View>
+          <View style={{marginTop: 10}}>
+            <Text style={styles.page1.popUpTextStyle}> Let us step through this in sequence.</Text>
+            <Text style={styles.page1.popUpTextStyle}> 2 is greater than 1.</Text>
+            <Text style={styles.page1.popUpTextStyle}> 4 is greater than 2+1 (3)</Text>
+            <Text style={styles.page1.popUpTextStyle}> 8 is greater than 4+2+1 (7) </Text>
+            <Text style={styles.page1.popUpTextStyle}> Thus, this is a valid Sequence.</Text>
+          </View>
         </View>
       )
    }
