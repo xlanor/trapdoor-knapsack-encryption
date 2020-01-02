@@ -90,6 +90,16 @@ const linkStyle = {
   color: COLORS.BLUE_2,
   textDecorationLine: 'underline',
 }
+
+
+const popUpTextStyle = {
+
+  fontFamily: 'comfortaa',
+  fontSize: 14,
+  textAlign: 'center',
+  color: COLORS.ORANGE_1,
+}
+
 export default {
   textStyleTitle,
   textStyleHeader1,
@@ -104,4 +114,5 @@ export default {
   learnTabPad,
   buttonRow,
   linkStyle,
+  popUpTextStyle,
 };
