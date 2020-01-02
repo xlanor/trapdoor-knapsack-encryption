@@ -86,6 +86,10 @@ const buttonRow = {
   marginBottom:  Dimensions.get('window').height * 0.02,
 }
 
+const linkStyle = {
+  color: COLORS.BLUE_2,
+  textDecorationLine: 'underline',
+}
 export default {
   textStyleTitle,
   textStyleHeader1,
@@ -99,4 +103,5 @@ export default {
   textStyleTitleWrapper,
   learnTabPad,
   buttonRow,
+  linkStyle,
 };
