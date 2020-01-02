@@ -30,7 +30,7 @@ export default class page3 extends Component {
                     Always place the modulus in column a and multiplier in column b as it allows you to see
                     a shifting pattern when u fill up the table.{"\n"}
                     The weights given to <Text style={style.keyword}>a1, a2, b1, b2</Text> at the start is 1, 0, 0, 1{"\n"}
-                    r is the remainder of <Text style={style.keyword}>a</Text> divided by <Text style={style.keyword}>b</Text> and <Text style={style.keyword}>q</Text> is the quotient of this division
+                    <Text style={style.keyword}>r</Text> is the remainder of <Text style={style.keyword}>a</Text> divided by <Text style={style.keyword}>b</Text> and <Text style={style.keyword}>q</Text> is the quotient of this division
                     {"\n"}
                 </Text>
             </View>

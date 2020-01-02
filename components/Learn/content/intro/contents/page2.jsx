@@ -21,7 +21,7 @@ export default class page2 extends Component {
                 <Text style={style.titleStyle}>Introduction</Text>
                 <Text style={style.contentHead}>One-way trapdoor function</Text>
                 <Text style={style.contentStyle}>
-                    A trapdoor function is a function that is easy to solve one way but not the other.
+                    A trapdoor function is a function that is <Text style={style.keyword}>easy to solve one way but not the other.</Text>
                     {"\n"}
                 </Text>
                 <Image 
