@@ -177,7 +177,7 @@ class KeyPage extends Component {
       if (checkSuperIncreasing){
         currentMax += (curNo);
       }else{
-        this.enableError(`Sequence is not superincreasing! ${splitKey.slice(0,i).join(",")} = ${currentMax}, ${curNo} is not greater than ${currentMax}!`)
+        this.enableError(`Sequence is not superincreasing! ${splitKey.slice(0,i).join("+")} = ${currentMax}, ${curNo} is not greater than ${currentMax}!`)
         return false;
       }
     }
