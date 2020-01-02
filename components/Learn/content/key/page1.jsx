@@ -166,6 +166,7 @@ class KeyPage extends Component {
 
    validateSuperIncreasing = (total) => {
 
+
     const { currentPrivateKey } = this.state;
     // splits the private key.
     let splitKey = currentPrivateKey.split(',');
@@ -176,6 +177,7 @@ class KeyPage extends Component {
       if (checkSuperIncreasing){
         currentMax += (curNo);
       }else{
+        this.enableError(`Sequence is not superincreasing! ${currentMax}, ${curNo}`)
         return false;
       }
     }
@@ -195,9 +197,7 @@ class KeyPage extends Component {
       }else{
         // check if it is superincreasing
         let total = { total: 0, size: 0, arrOfVals: [] } // create object to pass by reference1
-        if(!this.validateSuperIncreasing(total)){
-          this.enableError("Sequence is not superincreasing!")
-        }else{
+        if(this.validateSuperIncreasing(total)){
           // sets the state.
           actions.ALLOW_NEXT_PAGE_ACTION()
           actions.UPDATE_PRIVATE_KEY_SUM_ACTION(total.total)
