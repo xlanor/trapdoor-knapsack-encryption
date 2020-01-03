@@ -327,7 +327,6 @@ class EncryptTutorial extends Component{
           }))   
           return (
             <View key={'binary-'+idx}>
-              <Text style={styles.tutorial.textStyleHeader3}>Block #{idx}</Text>
               <Block 
                   key={'binary-'+idx}
                   tableTitle={["Key","Binary","Total"]}
@@ -335,6 +334,7 @@ class EncryptTutorial extends Component{
                   tableData={block} 
                   currentPublicKey={lockState.updateParameters.publicKeyArr}
                   tableType="binary"
+                  blockNo={idx+1}
               />
             </View>
             )
