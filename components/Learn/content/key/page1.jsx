@@ -25,6 +25,7 @@ import ProgressBar4 from '../../../../assets/images/FiveStepProgress/ProgressBar
 import ProgressBar5 from '../../../../assets/images/FiveStepProgress/ProgressBar5.png'
 
 import Error from '../../../../assets/images/Error.png'
+import Alert from '../../../../assets/images/alert.png'
 
 import { 
   ALLOW_NEXT_PAGE_ACTION
@@ -41,8 +42,14 @@ import {
   UPDATE_PUBLIC_KEY_ARRAY_ACTION,
  } from '../../../../actions/updateParameters';
 
+ import {
+  ENCRYPT_LOCK_ACTION,
+  DECRYPT_LOCK_ACTION,
+} from '../../../../actions/learnPageLock';
+
  import PopUp from '../../../Common/PopUp';
  import CustomButton from '../../../Common/Button';
+ import AlertPopUp from '../../../Common/AlertPopUp';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 // dynamic pages not static pages.
 class KeyPage extends Component {
@@ -60,11 +67,30 @@ class KeyPage extends Component {
         currentModulo: reduxMod == 0 ? "" : reduxMod, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
         currentMultiplier: reduxMultipler == 0 ? "": reduxMultipler, //we do not need to persist this state, nor do we need to store this state elsewhere yet.
         showError: false,
+        inverseLoaded: false,
+        pkLoaded: false,
+        showSuperIncreasingInfoPopUp: false,
         errorMessage: "",
       }
     
    }
-  
+   superIncreasingInfoPopUp = () => {
+      return (
+        <View>
+          <View>
+            <Text style={styles.page1.popUpTextStyle}>An example of a superincreasing sequence would be as such</Text>
+            <Text style={styles.page1.popUpTextStyleBold}> 1,2,4,8</Text>
+          </View>
+          <View style={{marginTop: 10}}>
+            <Text style={styles.page1.popUpTextStyle}> Let us step through this in sequence.</Text>
+            <Text style={styles.page1.popUpTextStyle}> 2 is greater than 1.</Text>
+            <Text style={styles.page1.popUpTextStyle}> 4 is greater than 2+1 (3)</Text>
+            <Text style={styles.page1.popUpTextStyle}> 8 is greater than 4+2+1 (7) </Text>
+            <Text style={styles.page1.popUpTextStyle}> Thus, this is a valid Sequence.</Text>
+          </View>
+        </View>
+      )
+   }
    disableError = () => {
      this.setState({
        showError: false,
@@ -159,6 +185,7 @@ class KeyPage extends Component {
 
    validateSuperIncreasing = (total) => {
 
+
     const { currentPrivateKey } = this.state;
     // splits the private key.
     let splitKey = currentPrivateKey.split(',');
@@ -169,6 +196,7 @@ class KeyPage extends Component {
       if (checkSuperIncreasing){
         currentMax += (curNo);
       }else{
+        this.enableError(`Sequence is not superincreasing! ${splitKey.slice(0,i).join("+")} = ${currentMax}, ${curNo} is not greater than ${currentMax}!`)
         return false;
       }
     }
@@ -183,14 +211,11 @@ class KeyPage extends Component {
       const { currentPrivateKey } = this.state;
       if (!this.validateNumeric()){
         // TODO: show an error message
-        console.log(currentPrivateKey)
         this.enableError("Non numeric message received!")
       }else{
         // check if it is superincreasing
         let total = { total: 0, size: 0, arrOfVals: [] } // create object to pass by reference1
-        if(!this.validateSuperIncreasing(total)){
-          this.enableError("Sequence is not superincreasing!")
-        }else{
+        if(this.validateSuperIncreasing(total)){
           // sets the state.
           actions.ALLOW_NEXT_PAGE_ACTION()
           actions.UPDATE_PRIVATE_KEY_SUM_ACTION(total.total)
@@ -233,11 +258,16 @@ class KeyPage extends Component {
        if(!this.calculateGCD(mod,curMult)){
         this.enableError(`GCD of ${mod} and ${curMult} is not 1!`)
        }else{
-        console.log("Allowing next page")
         // integer is greater.
         actions.ALLOW_NEXT_PAGE_ACTION();
         actions.UPDATE_MULTIPLIER_ACTION(curMult);
-
+        // have to relock decryption to force them to generate pk and inverse again.
+        actions.DECRYPT_LOCK_ACTION()
+        actions.ENCRYPT_LOCK_ACTION() 
+        this.setState({
+          inverseLoaded: false,
+          pkLoaded: false,
+        })
        }
      }
 
@@ -259,15 +289,31 @@ class KeyPage extends Component {
    loadInverse = () => {
 
      const { lockState, actions } = this.props;
-     if (lockState.updateParameters.inverse == 0){
-       // to prevent infinite loop, we need to ensure that inverse is reset to 0 if we go back then
-       // currently we dont handle any state from popping off the stack.
-        let currentInverse = this.xgcd(lockState.updateParameters.multiplier,lockState.updateParameters.modulo);
-        actions.UPDATE_INVERSE_ACTION(currentInverse);
-        actions.ALLOW_NEXT_PAGE_ACTION()
+      let currentInverse = this.xgcd(lockState.updateParameters.multiplier,lockState.updateParameters.modulo);
+      actions.UPDATE_INVERSE_ACTION(currentInverse);
+      actions.ALLOW_NEXT_PAGE_ACTION()
+      // have to relock decryption to force them to generate pk and inverse again.
+      actions.DECRYPT_LOCK_ACTION()
+      actions.ENCRYPT_LOCK_ACTION()
+      this.setState({
+        inverseLoaded: true,
+        pkLoaded: false,
+      })
 
-     }
+   }
+   generatePubKey = () => {
+     const { lockState, actions } = this.props;
+     let pub = this.computePublicKey()
+      actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
+      actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
+      actions.ALLOW_NEXT_PAGE_ACTION();
+      // have to relock decryption to force them to generate pk and inverse again.
+      actions.DECRYPT_LOCK_ACTION()
+      actions.ENCRYPT_LOCK_ACTION()
+      this.setState({
+        pkLoaded: true,
 
+      })
    }
    getSixthPage = () => {
      return (
@@ -279,12 +325,7 @@ class KeyPage extends Component {
    }
    getFifthPage = () => {
      const { lockState, actions } = this.props;
-     if( lockState.updateParameters.publicKeyArr.length == 0 ){
-        let pub = this.computePublicKey()
-        actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
-        actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
-        actions.ALLOW_NEXT_PAGE_ACTION();
-     }
+     const { pkLoaded } = this.state;
      return (
        <View>
          <Text style={styles.page1.textStyleTitle}>Compute the public key <Text style={styles.page1.boldFont}>b</Text>:</Text>
@@ -296,24 +337,38 @@ class KeyPage extends Component {
           <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>Private key: a = {lockState.updateParameters.privateKeyString}</Text></Text>
           <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>w = {lockState.updateParameters.multiplier} m = {lockState.updateParameters.modulo}</Text></Text>
          <Text style={styles.page1.textStyleHeader2}><Text style={styles.page1.boldFont}>Inverse of multiplier = {lockState.updateParameters.inverse}</Text></Text>
+         <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+           <CustomButton text="Gen Public Key" callback = {() => {this.generatePubKey()}}/>
+         </View>
+          
          {
-           lockState.updateParameters.publicKeyArr.length === 0
-           ? null
-           : <Text style={styles.page1.textStyleHeader3}>Your Public key: <Text style={styles.page1.boldFont}>b</Text> = {lockState.updateParameters.publicKeyString}</Text>
+            pkLoaded
+            ? <Text style={styles.page1.textStyleHeader3}>Your Public key: <Text style={styles.page1.boldFont}>b</Text> = {lockState.updateParameters.publicKeyString}</Text>
+           : null
          }
        </View>
      )
    }
    getFourthPage = () => {
      const { lockState } = this.props;
-     this.loadInverse()
+     const { inverseLoaded } = this.state;
      return (
        <View>
          <Text style={styles.page1.textStyleTitle}>Calculate the multiplicative inverse of your multiplier <Text style={styles.page1.boldFont}>w ({lockState.updateParameters.multiplier})</Text>:</Text>
          <Text style={styles.page1.textStyleHeader3}>(Using Extended Euclidean's algorithm)</Text>
          <Text style={styles.page1.textStyleHeader2}>This is needed for decryption</Text>
          <Text style={styles.page1.textStyleHeader2}>E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)</Text>
+
+         <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+            <CustomButton text="Gen Inverse" callback={()=>{this.loadInverse()}}/>
+         </View>
+
+     {
+        inverseLoaded
+        ?
           <Text style={styles.page1.textStyleTitle}>Multiplicative inverse of your multiplier <Text style={styles.page1.boldFont}>w ({lockState.updateParameters.multiplier})</Text>: {lockState.updateParameters.inverse}</Text>
+        : null
+     }
        </View>
      )
    }
@@ -396,7 +451,16 @@ class KeyPage extends Component {
          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
            <View>
           <Text style={styles.page1.textStyleTitle}>Enter your private key <Text style={styles.page1.boldFont}>A</Text>:</Text>
-          <Text style={styles.page1.textStyleHeader1}>(This private key A should be in a super increasing sequence)</Text>
+          <Text style={styles.page1.textStyleHeader1}>(This private key A should be in a
+              <Text 
+                style={styles.page1.linkStyle}
+                onPress={()=>{this.setState({
+                  showSuperIncreasingInfoPopUp: true,
+                })
+              }}
+              > super increasing sequence</Text>
+              )
+          </Text>
           <TextInput defaultValue={
               lockState.updateParameters.privateKeyString === "" 
               ? null: 
@@ -466,10 +530,19 @@ class KeyPage extends Component {
     }
    }
    render(){
-    const { showError, errorMessage } = this.state;
+    const { showError, errorMessage, showSuperIncreasingInfoPopUp } = this.state;
     let pageNo = this.checkPageNo()
      return(
        <View style={styles.page1.learnTabPad}>
+         {
+           showSuperIncreasingInfoPopUp
+           ?  <AlertPopUp 
+           icon={Alert}
+           renderedBlocks={this.superIncreasingInfoPopUp()}
+           callback={()=>{this.setState({showSuperIncreasingInfoPopUp: false,})}}
+           visibility={showSuperIncreasingInfoPopUp}/>
+           : null
+         }
          {
            showError?
            <PopUp visibility={showError} close={this.disableError}  message={errorMessage} icon={Error}/>
@@ -517,6 +590,8 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_INVERSE_ACTION,
     UPDATE_PUBLIC_KEY_ARRAY_ACTION,
     UPDATE_PUBLIC_KEY_STRING_ACTION,
+    ENCRYPT_LOCK_ACTION,
+    DECRYPT_LOCK_ACTION,
   }, dispatch)
 });
 export default connect(mapStateToProps,mapDispatchToProps)(KeyPage);
