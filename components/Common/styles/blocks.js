@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 const containerStyle = { 
   flex: 1, 
   padding: 16, 
@@ -24,6 +26,15 @@ const rowStyle = {
 
 const textStyle = {
   textAlign: 'center',
+  fontFamily: 'comfortaa'
+}
+
+const blockTitleView = {
+    marginBottom: Dimensions.get('window').height * 0.01,
+}
+
+const blockTotalView = {
+   marginTop: Dimensions.get('window').height * 0.01,
 }
 
 export default {
@@ -33,4 +44,6 @@ export default {
   titleStyle,
   rowStyle,
   textStyle,
+  blockTitleView,
+  blockTotalView,
 }

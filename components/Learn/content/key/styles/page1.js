@@ -86,6 +86,30 @@ const buttonRow = {
   marginBottom:  Dimensions.get('window').height * 0.02,
 }
 
+const linkStyle = {
+  color: COLORS.BLUE_2,
+  textDecorationLine: 'underline',
+}
+
+
+const popUpTextStyle = {
+
+  fontFamily: 'comfortaa',
+  fontSize: 14,
+  textAlign: 'center',
+  color: COLORS.ORANGE_1,
+}
+
+const popUpTextStyleBold = {
+
+  fontFamily: 'comfortaa',
+  fontSize: 18,
+  fontWeight: 'bold',
+  textAlign: 'center',
+  color: COLORS.ORANGE_1,
+}
+
+
 export default {
   textStyleTitle,
   textStyleHeader1,
@@ -99,4 +123,7 @@ export default {
   textStyleTitleWrapper,
   learnTabPad,
   buttonRow,
+  linkStyle,
+  popUpTextStyle,
+  popUpTextStyleBold,
 };

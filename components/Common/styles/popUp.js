@@ -34,6 +34,7 @@ const textAreaBackGround = {
 const textAreaWrapper = {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
 }
 
 const navbarBackGround = {
@@ -54,6 +55,7 @@ const closeStyle = {
 }
 const imageView = {
     paddingTop: Dimensions.get('window').height * 0.012, 
+    marginBottom: Dimensions.get('window').height * 0.01,
 
 }
 const imageStyle = {

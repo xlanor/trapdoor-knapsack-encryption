@@ -24,7 +24,7 @@ class PopUp extends Component {
         return(
             <Modal animationType="fade" transparent visible = {visibility}>
                 <SafeAreaView style={styles.modalBackground}>
-                    <View style={{flex: 2}}/>
+                    <View style={{flex: 1}}/>
                     <View style={styles.navbarBackGround}>
                         <View style={{ flex: 1}}/>
                         <TouchableOpacity onPress={close}>
@@ -45,7 +45,7 @@ class PopUp extends Component {
 
                         </View>
                     </View>
-                    <View style={{flex: 2}}/>
+                    <View style={{flex: 1}}/>
                 </SafeAreaView>
             </Modal>
         );

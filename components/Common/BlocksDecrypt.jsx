@@ -39,7 +39,6 @@ class BlockDecrypt extends Component{
         binaryOrdered,
         rVal,
     } = this.props;
-    console.log(this.props);
     return (
       <View style={styles.containerStyle}>
         <Text>Encrypted Value: {encryptedInput}</Text>

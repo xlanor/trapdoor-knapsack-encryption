@@ -9,6 +9,7 @@ export const COLORS = {
   YELLOW_2: '#d1cda1',
   GREEN_1: '#2FBB7A',
   BLUE_1: '#2C3E50',
+  BLUE_2: '#0000EE',
   GREY_1: '#7E7E7E',
 };
 
