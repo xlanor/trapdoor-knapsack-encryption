@@ -24,16 +24,21 @@ export default class page2 extends Component {
                     A trapdoor function is a function that is <Text style={style.keyword}>easy to solve one way but not the other.</Text>
                     {"\n"}
                 </Text>
-                <Image 
-                    source={require('./1052px-Trapdoor_permutation.svg.png')}  
-                    style={{width: u * 0.1052*3, height: u * 0.0744*3, alignSelf:'center' }}
+                <Image
+                    source={require('./1052px-Trapdoor_permutation.svg.png')}
+                    style={{ width: u * 0.1052 * 3, height: u * 0.0744 * 3, alignSelf: 'center' }}
                 />
-                
+
                 <Text style={style.contentStyle}>
                     A good example of the trapdoor function is the Discrete Logarithm problem.
                     {"\n"}
-                    Assuming we have a function:{"\n"}
-                    a^k=b{"\n"}
+                    Assuming we have a function:
+                </Text>
+                <Image
+                    source={require('./DiscreteLogProblem.png')}
+                    style={{ width: u * 0.227 * 0.5, height: u * 0.076 * 0.5, alignSelf: 'center', resizeMode: 'contain' }}
+                />
+                <Text style={style.contentStyle}>
                     Given <Text style={style.keyword}>b</Text>, we would be unable to find <Text style={style.keyword}>a</Text> and <Text style={style.keyword}>k</Text> in a reasonable time.
                     {"\n"}
                 </Text>
