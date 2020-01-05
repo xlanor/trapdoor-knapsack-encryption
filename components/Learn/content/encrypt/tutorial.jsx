@@ -18,6 +18,13 @@ import styles from './styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { 
+  Table, 
+  TableWrapper, 
+  Rows, 
+  Row, 
+  Col } 
+from 'react-native-table-component';
 
 import {
     UPDATE_ENCRYPTION_STRING_ACTION,
@@ -49,6 +56,7 @@ class EncryptTutorial extends Component{
       currentTextBox: currentEncryptText === "" ? "" : currentEncryptText, // temporary, to be stored in redux - this is only for use in onTextChange
       showError: false,
       showBlocks: false,
+      showSpinner: true,
       errorMessage: "",
     }
   }
@@ -183,7 +191,7 @@ class EncryptTutorial extends Component{
       })
   }
 
-  getThirdPage = () => {
+  getFifthPage = () => {
     const { actions } = this.props;
     return (
       <View>
@@ -192,13 +200,10 @@ class EncryptTutorial extends Component{
       </View>
     )
   }
-
-  getSecondPage = () => {
+  getFourthPage = () => {
     const { showBlocks } = this.state
     const { lockState, actions } = this.props;
     
-    console.log("lockstate enc"+lockState.encryption)
-    console.log("lockstate enc block"+lockState.encryption.binaryBlocks)
   
     return(
       <View>
@@ -259,12 +264,142 @@ class EncryptTutorial extends Component{
     )
   }
 
+  getThirdPage = () => {
+    const { actions, lockState } = this.props;
+    if (!lockState.lessonPageTabAndPages.allowNextPage){
+        actions.ALLOW_NEXT_PAGE_ACTION()
+    }
+    return (
+      <View>
+        <Text style={styles.tutorial.encryptText}>The solution to it is to add padding</Text>
+        <Text style={styles.tutorial.encryptText}>To get padding value:</Text>
+        <Text style={styles.tutorial.encryptText}>- Remainder = binary length % n</Text>
+        <Text style={styles.tutorial.encryptText}>- If the remainder is 0, padding = 0</Text>
+        <Text style={styles.tutorial.encryptText}>- If the remainder is not 0, padding = n minus remainder</Text>
+        <Text style={styles.tutorial.encryptTextGray}>E.G: </Text>
+        <Text style={styles.tutorial.encryptTextGray}>Remainder = 8 % 3 = 2</Text>
+        <Text style={styles.tutorial.encryptTextGray}>Padding = 3 - 2 = 1</Text>
+        <Text style={styles.tutorial.encryptTextGray}>Add 1 '0' to the back of the binary string x</Text>
+        <View style={styles.tutorial.tableView}>
+          <Table borderStyle={{borderWidth: 1}}>
+              <TableWrapper style={{ flexDirection: 'row' }}>
+                <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
+                <Rows data={[
+                      ['22','16','32'],
+                      ['0','1','1'],
+                  ]} 
+                  flexArr={[1, 1, 1]}
+                  style={{height: 28}} 
+                  textStyle={{textAlign: 'center' }}
+                />
+              </TableWrapper>
+          </Table>
+        </View>
+        <View style={styles.tutorial.tableView}>
+          <Table borderStyle={{borderWidth: 1}}>
+              <TableWrapper style={{ flexDirection: 'row' }}>
+                <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
+                <Rows data={[
+                      ['22','16','32'],
+                      ['0','0','0'],
+                  ]} 
+                  flexArr={[1, 1, 1]}
+                  style={{height: 28}} 
+                  textStyle={{textAlign: 'center' }}
+                />
+              </TableWrapper>
+          </Table>
+        </View>
+        <View style={styles.tutorial.tableView}>
+          <Table borderStyle={{borderWidth: 1}}>
+              <TableWrapper style={{ flexDirection: 'row' }}>
+                <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
+                <Rows data={[
+                      ['22','16','32'],
+                      ['0','1','0'],
+                  ]} 
+                  flexArr={[1, 1, 1]}
+                  style={{height: 28}} 
+                  textStyle={{textAlign: 'center' }}
+                />
+              </TableWrapper>
+          </Table>
+        </View>
+      </View>
+    )
+  }
+
+  getSecondPage = () => {
+    const { actions, lockState } = this.props;
+    if (!lockState.lessonPageTabAndPages.allowNextPage){
+        actions.ALLOW_NEXT_PAGE_ACTION()
+    }
+    ALLOW_NEXT_PAGE_ACTION
+    return (
+      <View>
+        <Text style={styles.tutorial.encryptText}>However, there might be cases where binary cannot be divided into equal blocks according to knapsack size n to correspond to public key</Text>
+        <View style={styles.tutorial.secondParaView}>
+          <Text style={styles.tutorial.encryptTextGray}>E.g</Text>
+          <Text style={styles.tutorial.encryptTextGray}>Public key b = (22,16,32) where n = 3</Text>
+          <Text style={styles.tutorial.encryptTextGray}>Message = a, ASCII of a = 97</Text>
+          <Text style={styles.tutorial.encryptTextGray}>Binary of 97 = 0110 0001/Text>
+          <Text style={styles.tutorial.encryptTextGray}>Binary length / n =  8 / 3 = 3 (rounded up)</Text></Text>
+        </View>
+        <View style={styles.tutorial.tableView}>
+          <Table borderStyle={{borderWidth: 1}}>
+              <TableWrapper style={{ flexDirection: 'row' }}>
+                <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
+                <Rows data={[
+                      ['22','16','32'],
+                      ['0','1','1'],
+                  ]} 
+                  flexArr={[1, 1, 1]}
+                  style={{height: 28}} 
+                  textStyle={{textAlign: 'center' }}
+                />
+              </TableWrapper>
+          </Table>
+        </View>
+        <View style={styles.tutorial.tableView}>
+          <Table borderStyle={{borderWidth: 1}}>
+              <TableWrapper style={{ flexDirection: 'row' }}>
+                <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
+                <Rows data={[
+                      ['22','16','32'],
+                      ['0','0','0'],
+                  ]} 
+                  flexArr={[1, 1, 1]}
+                  style={{height: 28}} 
+                  textStyle={{textAlign: 'center' }}
+                />
+              </TableWrapper>
+          </Table>
+        </View>
+        <View style={styles.tutorial.tableView}>
+          <Table borderStyle={{borderWidth: 1}}>
+              <TableWrapper style={{ flexDirection: 'row' }}>
+                <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
+                <Rows data={[
+                      ['22','16','32'],
+                      ['0','1','?'],
+                  ]} 
+                  flexArr={[1, 1, 1]}
+                  style={{height: 28}} 
+                  textStyle={{textAlign: 'center' }}
+                />
+              </TableWrapper>
+          </Table>
+        </View>
+      </View>
+    )
+  }
+
   getFirstPage = () => {
     const { lockState } = this.props;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
-          <Text style={styles.tutorial.textStyleHeader2}>Now, to encrypt a message, you need to first convert the message into ASCII and then to binary</Text>
+          <Text style={styles.tutorial.textStyleHeader2}>Now, to encrypt a message, you need to first convert the message to binary</Text>
           <Text style={styles.tutorial.textStyleHeader1}>Enter your message to encrypt:</Text>
           <TextInput defaultValue={
             lockState.encryption.textToEncrypt === ""
@@ -306,6 +441,10 @@ class EncryptTutorial extends Component{
         return this.getSecondPage()
       case 3:
         return this.getThirdPage()
+      case 4:
+        return this.getFourthPage()
+      case 5:
+        return this.getFifthPage()
       default:  
         return this.getFirstPage()
    }

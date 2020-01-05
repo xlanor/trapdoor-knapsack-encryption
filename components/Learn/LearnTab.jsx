@@ -208,6 +208,7 @@ class LearnTab extends Component{
     isFinalPage = () => {
       const { lockState } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
+      console.log(`CUrrent tab ${currentTab} Max page ${lockState.lessonPageTabAndPages.maxPage} CurrentPage: ${lockState.lessonPageTabAndPages.tabPage}`)
        return lockState.lessonPageTabAndPages.tabPage >= lockState.lessonPageTabAndPages.maxPage 
                   ? true : false;
     }
