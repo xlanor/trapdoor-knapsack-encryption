@@ -73,7 +73,7 @@ const textStyleSmallerText = {
   fontFamily: 'comfortaa',
   fontSize: 14,
   paddingBottom: Dimensions.get('screen').height * 0.008,
-  textAlign: 'center',
+ 
 
 }
 
