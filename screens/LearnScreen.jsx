@@ -25,13 +25,12 @@ export default function HomeScreen() {
 
 
         <SafeAreaView style={styles2.learnScreen.safeAreaHeader} />
-        <KeyboardAvoidingView style={{flex: 1}} behavior="height">
+        {/*<KeyboardAvoidingView style={{flex: 1}} behavior="height">*/}
             <SafeAreaView style={styles2.learnScreen.backGroundContainer}>
                 <LearnParent/>
                          
-                <View style={{flex: 1}}/>
             </SafeAreaView>
-        </KeyboardAvoidingView> 
+        {/*</KeyboardAvoidingView> */}
              {/* This is to pad the bottom for iphone X+ 
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
