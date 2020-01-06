@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   TextInput,
-  FlatList, 
+  Modal, 
   Keyboard
 } from 'react-native';
 // import stylesheet.
@@ -543,19 +543,12 @@ class EncryptTutorial extends Component{
   
     
       return(
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={{
-            ...styles.tutorial.learnTabPad, height: '100%'}
-            }>
-
-            {
-              showError
-              ? <PopUp visibility={showError} close={this.hideError}  message={errorMessage} icon={Error}/>
-              : null
-            }
-            {
+        <>
+        {
+          
                showBlocks
-               ? <ScrollViewPopUp   
+               ? 
+               <ScrollViewPopUp   
                     visibility={showBlocks}
                     lockStateArr={lockStateArr} 
                     callback={
@@ -566,19 +559,32 @@ class EncryptTutorial extends Component{
                       }
                     }/>
                : null
+              
+
             }
-            <View style={styles.tutorial.textStyleTitleWrapper}>
             {
-              keyboardVisiblity
-              ? null
-              :<Text style={styles.tutorial.textStyleTitleCenter}>Encryption</Text>
+              showError
+              ? <PopUp visibility={showError} close={this.hideError}  message={errorMessage} icon={Error}/>
+              : null
             }
-            </View>
-            {
-              this.getPageElements()
-            }
-          </View>  
+            <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
+          <View style={{
+            ...styles.tutorial.learnTabPad, height: '100%'}
+            }>
+              <View style={styles.tutorial.textStyleTitleWrapper}>
+                {
+                  keyboardVisiblity
+                  ? null
+                  :<Text style={styles.tutorial.textStyleTitleCenter}>Encryption</Text>
+                }
+              </View>
+              {
+                this.getPageElements()
+              }
+          
+          </View> 
           </TouchableWithoutFeedback>
+        </>
       );
     }
 }

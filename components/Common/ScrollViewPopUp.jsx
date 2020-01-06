@@ -1,8 +1,7 @@
 import React from 'react'
 import {
    Modal, 
-   TouchableOpacity, 
-   TouchableWithoutFeedback, 
+   TouchableOpacity, TouchableHighlight,
    View, 
    Text, 
    Image
@@ -13,32 +12,41 @@ import { scrollViewPopUp as styles } from './styles';
 import { SafeAreaView } from 'react-navigation';
 
 import closeIcon from '../../assets/images/close2.png';
+//
+/*
+
+<Modal transparent >
+    <TouchableOpacity rejectResponderTermination onPress={()=>{alert("Hello")}} style={{backgroundColor:"yellow" , justifyContent: 'center' , marginTop: 50, width: 100, height: 100}}>
+    <Text>click click click!</Text>
+    </TouchableOpacity>
+</Modal>
+                    */
 
 const ScrollViewPopUp = (props) => {
     const { visibility, callback, lockStateArr } = props;
-    console.log(lockStateArr)
     return (
-    <Modal animationType="fade" transparent visible={visibility}>
-                <SafeAreaView style = {styles.blackBackground}>
-                    <View style={styles.navbarBackGround}>
-                        <View style={{ flex: 1}}/>
-                        <TouchableOpacity onPress={callback}>
-                                <Image style={styles.closeStyle} source={closeIcon}/>
+        <Modal animationType="none" transparent visible={visibility}>
+            <SafeAreaView style = {styles.blackBackground}>
+                <View style={styles.navbarBackGround}>
+                    <View style={{ flex: 1, backgroundColor: 'black'}}/>
+                        <TouchableOpacity rejectResponderTermination onPress={callback}>
+                            <Image style={{height: 40, width: 40}} source={closeIcon}/>
                         </TouchableOpacity>
+                </View>
+                <ScrollView style={styles.scrollViewStyle}> 
+                    {
+                        lockStateArr?
+                        lockStateArr
+                        : null
+                    }
+                </ScrollView>
+               
+            </SafeAreaView>
 
-                    </View>
 
-                    <ScrollView style={styles.scrollViewStyle}> 
-
-                        {
-                            lockStateArr?
-                            lockStateArr
-                            : null
-                        }
-                    </ScrollView>
-                </SafeAreaView>
+        </Modal>
+          
            
-    </Modal>
     );
 }
 
