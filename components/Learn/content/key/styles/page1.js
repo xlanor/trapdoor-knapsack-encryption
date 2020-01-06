@@ -33,7 +33,6 @@ const textStyleHeader3 = {
   fontFamily: 'comfortaa',
   fontSize: 16,
   paddingBottom: Dimensions.get('screen').height * 0.02,
-  paddingTop: Dimensions.get('screen').height * 0.02,
 }
 
 
