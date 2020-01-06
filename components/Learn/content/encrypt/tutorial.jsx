@@ -46,6 +46,7 @@ import PopUp from '../../../Common/PopUp';
 import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
 import CustomButton from '../../../Common/Button';
 import Error from '../../../../assets/images/Error.png'
+import Exclaim from '../../../../assets/images/ExclaimIcon.png'
 
 class EncryptTutorial extends Component{
   constructor(props){

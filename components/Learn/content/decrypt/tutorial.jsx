@@ -32,6 +32,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import DF1 from '../../../../assets/images/DecryptionFormula_1.png'
 import DF2 from '../../../../assets/images/DecryptionFormula_2.png'
 import Alert from '../../../../assets/images/alert.png'
+import Exclaim from '../../../../assets/images/ExclaimIcon.png'
 
 import BlocksDecrypt from '../../../Common/BlocksDecrypt';
 import CustomButton from '../../../Common/Button';
@@ -527,7 +528,7 @@ class DecryptTutorial extends Component{
         {
           showWInversePopUp
           ? <AlertPopUp 
-              icon={Alert}
+              icon={Exclaim}
               renderedBlocks={this.wInversePopUp()}
               callback={()=>{this.setState({showWInversePopUp: false,})}}
               visibility={showWInversePopUp}
@@ -537,7 +538,7 @@ class DecryptTutorial extends Component{
         {
           showrPopUp
           ?<AlertPopUp 
-          icon={Alert}
+          icon={Exclaim}
           renderedBlocks={this.rPopUp()}
           callback={()=>{this.setState({showrPopUp: false,})}}
           visibility={showrPopUp}
@@ -547,7 +548,7 @@ class DecryptTutorial extends Component{
         {
           showCmpPopUp
           ?<AlertPopUp 
-          icon={Alert}
+          icon={Exclaim}
           renderedBlocks={this.comparingPopUp()}
           callback={()=>{this.setState({showCmpPopUp: false,})}}
           visibility={showCmpPopUp}
