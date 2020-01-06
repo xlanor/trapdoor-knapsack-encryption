@@ -30,8 +30,8 @@ const scrollViewBackground = {
 };
 
 const imageSize = {
-  width: 55,
-  height: 55,
+  width: Dimensions.get('window').width * 0.12,
+  height: Dimensions.get('window').width * 0.12,
 }
 
 const nestedIconView ={
