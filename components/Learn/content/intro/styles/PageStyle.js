@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native';
+import { COLORS } from '../../../../../constants/Colors';
 
 const containerStyle = {
     backgroundColor: '#fff',
@@ -35,9 +36,17 @@ const bold = {
 const links = {
     color: '#2980B9'
 }
+const superIncreasingKnapsack = {
+    fontFamily: 'comfortaa-bold',
+    color: '#C0392B'
+}
 const privateKey = {
     fontFamily: 'comfortaa-bold',
     color: '#C0392B'
+}
+const secretKey = {
+    fontFamily: 'comfortaa-bold',
+    color: '#0404fb'
 }
 
 const modulus = {
@@ -68,6 +77,23 @@ const picStyle = {
     alignItems: 'stretch',
     resizeMode: 'stretch',
 }
+const popUpTextStyle = {
+
+    fontFamily: 'comfortaa',
+    fontSize: 14,
+    textAlign: 'center',
+    color: COLORS.ORANGE_1,
+}
+
+const popUpTextStyleBold = {
+
+    fontFamily: 'comfortaa',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: COLORS.ORANGE_1,
+}
+
 
 export default {
     picStyle,
@@ -79,9 +105,13 @@ export default {
     keyword,
     underline,
     highlight,
+    superIncreasingKnapsack,
     privateKey,
+    secretKey,
     modulus,
     publicKey,
     multiplier,
-    bold
+    bold,
+    popUpTextStyle,
+    popUpTextStyleBold
 };
