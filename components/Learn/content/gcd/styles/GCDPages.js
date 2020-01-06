@@ -9,7 +9,7 @@ const containerStyle = {
 const titleStyle = {
     fontFamily: 'comfortaa-bold',
     fontSize: 25,
-    paddingTop: Dimensions.get('screen').height * 0.01,
+    paddingTop: Dimensions.get('screen').height * 0.02,
     paddingBottom: Dimensions.get('screen').height * 0.01,
     textAlign: 'center',
     textDecorationLine: 'underline'
@@ -29,7 +29,12 @@ const keyword = {
     fontFamily: 'comfortaa-bold',
     color: 'blue'
 }
-
+const bold = {
+    fontFamily: 'comfortaa-bold',
+}
+const links = {
+    color: '#2980B9'
+}
 const privateKey = {
     fontFamily: 'comfortaa-bold',
     color: '#C0392B'
@@ -70,11 +75,13 @@ export default {
     titleStyle,
     contentHead,
     contentStyle,
+    links,
     keyword,
     underline,
     highlight,
     privateKey,
     modulus,
     publicKey,
-    multiplier
+    multiplier,
+    bold
 };
