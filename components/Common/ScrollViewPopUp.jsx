@@ -23,16 +23,33 @@ import closeIcon from '../../assets/images/close2.png';
                     */
 
 const ScrollViewPopUp = (props) => {
-    const { visibility, callback, lockStateArr } = props;
+    const { visibility, callback, lockStateArr, title } = props;
     return (
         <Modal animationType="none" transparent visible={visibility}>
             <SafeAreaView style = {styles.blackBackground}>
-                <View style={styles.navbarBackGround}>
-                    <View style={{ flex: 1, backgroundColor: 'black'}}/>
-                        <TouchableOpacity rejectResponderTermination onPress={callback}>
-                            <Image style={{height: 40, width: 40}} source={closeIcon}/>
-                        </TouchableOpacity>
-                </View>
+                    <View style={styles.navbarBackGround}>
+                        <View style={{ flex: 1 }}/>
+                        <View style={{ flex: 4}}>
+                            {
+                                title
+                                ?<Text style={styles.navBarTitle}>{title}</Text>
+                                : null
+                            }
+                        </View>
+                        <View 
+                            style={
+                                { 
+                                    flex: 1,
+                                    ...styles.closeIconView
+                                }
+                            }>
+                            <TouchableOpacity rejectResponderTermination onPress={callback}>
+                                <Image style={styles.closeIconSize} source={closeIcon}/>
+                            </TouchableOpacity>
+
+                        </View>
+                       
+                    </View>
                 <ScrollView style={styles.scrollViewStyle}> 
                     {
                         lockStateArr?
@@ -54,6 +71,7 @@ ScrollViewPopUp.propTypes = {
     visibility: PropTypes.bool.isRequired,
     callback: PropTypes.func.isRequired,
     lockStateArr: PropTypes.array,
+    title: PropTypes.string,
   };
   
 export default ScrollViewPopUp;
