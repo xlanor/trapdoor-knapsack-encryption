@@ -2,7 +2,7 @@ import React, { Component } from 'React';
 
 import { 
   View, 
-  KeyboardAvoidingView,
+  Dimensions,
   Button,  
   Text, 
   Image, 
@@ -58,8 +58,36 @@ class EncryptTutorial extends Component{
       showBlocks: false,
       showSpinner: true,
       errorMessage: "",
+      keyboardVisiblity: false,
     }
   }
+
+  componentDidMount(){
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this.handleKeyboardDidShow,
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this.keyboardDidHide,
+    );
+  }
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+  handleKeyboardDidShow = event => {
+    this.setState({
+      keyboardVisiblity: true,
+    })
+  }
+
+  keyboardDidHide = event =>  {
+    this.setState({
+      keyboardVisiblity: false,
+    })
+  }
+
 
   showError = ( message ) => {
     this.setState({
@@ -396,11 +424,25 @@ class EncryptTutorial extends Component{
 
   getFirstPage = () => {
     const { lockState } = this.props;
+    const { keyboardVisiblity } = this.state;
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
-          <Text style={styles.tutorial.textStyleHeader2}>Now, to encrypt a message, you need to first convert the message to binary</Text>
-          <Text style={styles.tutorial.textStyleHeader1}>Enter your message to encrypt:</Text>
+          {
+            keyboardVisiblity
+            ? null
+            : (
+                
+              <>
+               <Text style={styles.tutorial.textStyleHeader2}>Now, to encrypt a message, you need to first convert the message to binary</Text>
+              </>
+            )
+          }
+         
+          <Text style={
+            keyboardVisiblity
+            ? { ...styles.tutorial.textStyleHeader1, marginTop: Dimensions.get('screen').height * 0.02,}
+            : { ...styles.tutorial.textStyleHeader1, marginTop: 0}
+          }>Enter your message to encrypt:</Text>
           <TextInput defaultValue={
             lockState.encryption.textToEncrypt === ""
             ? null
@@ -419,16 +461,25 @@ class EncryptTutorial extends Component{
             lockState.encryption.textToEncrypt === ""
             ? null
             :<>
-              <Text style={styles.tutorial.textStyleHeader1}>Your message:</Text>
-              <Text style={styles.tutorial.textStyleHeader1}>{lockState.encryption.textToEncrypt}</Text>
-              <Text style={styles.tutorial.textStyleHeader1}>Binary value: {lockState.encryption.binaryString}</Text>
-              <Text style={styles.tutorial.textStyleHeader1}>Now, add the public key elements that corresponds to the value 1 in your binary.</Text>
-              <Text style={styles.tutorial.textStyleHeader1}>Move on to the following pages to see the encryption of your message using your public key!</Text>
+              {
+                keyboardVisiblity
+                ? null
+                : (
+                  <>
+                     <Text style={styles.tutorial.textStyleHeader1}>Your message:</Text>
+                    <Text style={styles.tutorial.textStyleHeader1}>{lockState.encryption.textToEncrypt}</Text>
+                    <Text style={styles.tutorial.textStyleHeader1}>Binary value: {lockState.encryption.binaryString}</Text>
+                    <Text style={styles.tutorial.textStyleHeader1}>Now, add the public key elements that corresponds to the value 1 in your binary.</Text>
+                    <Text style={styles.tutorial.textStyleHeader1}>Move on to the following pages to see the encryption of your message using your public key!</Text>
+                  </>
+                )
+              }
+             
             </>
 
           }
         </View>
-      </TouchableWithoutFeedback>
+     
     )
   }
 
@@ -451,7 +502,7 @@ class EncryptTutorial extends Component{
   }
 
   render(){
-      const { showError, errorMessage, showBlocks } = this.state;
+      const { showError, errorMessage, showBlocks, keyboardVisiblity } = this.state;
       const { lockState ,actions } = this.props;
       let lockStateArr = null;
       if(lockState.encryption.binaryBlocks.length != 0){
@@ -490,7 +541,11 @@ class EncryptTutorial extends Component{
   
     
       return(
-          <View style={styles.tutorial.learnTabPad}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={
+            styles.tutorial.learnTabPad
+            }>
+
             {
               showError
               ? <PopUp visibility={showError} close={this.hideError}  message={errorMessage} icon={Error}/>
@@ -512,13 +567,16 @@ class EncryptTutorial extends Component{
             }
             <View style={styles.tutorial.textStyleTitleWrapper}>
             {
-                <Text style={styles.tutorial.textStyleTitleCenter}>Encryption</Text>
+              keyboardVisiblity
+              ? null
+              :<Text style={styles.tutorial.textStyleTitleCenter}>Encryption</Text>
             }
             </View>
             {
               this.getPageElements()
             }
           </View>  
+          </TouchableWithoutFeedback>
       );
     }
 }

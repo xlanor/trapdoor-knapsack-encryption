@@ -418,19 +418,24 @@ class LearnParent extends Component {
 
     return(
       <>   
-      <AlertPopUp
-          messageContent={popupMessage}
-          icon={AlertIcon}
-          callback={() => this.setState({ displayPopup: false })}
-          visibility={displayPopup}
-      />
-          <View style={styles.learnParent.wrapperViewBackground }>
-            {this.getImages()}
-          </View>
-          <View
-            style={styles.learnParent.borderLine}
+          <AlertPopUp
+              messageContent={popupMessage}
+              icon={AlertIcon}
+              callback={() => this.setState({ displayPopup: false })}
+              visibility={displayPopup}
           />
-          <LearnTab/>
+          <View style={{ flex: 6}}>
+
+            <View style={styles.learnParent.wrapperViewBackground }>
+              {this.getImages()}
+            </View>
+            <View style={styles.learnParent.bodyViewBackground}>
+                <LearnTab/>
+            </View>
+         
+           
+          </View>
+         
       </>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withNavigation, SafeAreaView } from 'react-navigation';
 import { 
   View, 
+  KeyboardAvoidingView,
   Button,
   FlatList,  
   Text, 
@@ -286,48 +287,47 @@ class LearnTab extends Component{
     render(){
       return(
         <>
-          {
-            this.loadPage()
-          }
-          <View style={{...styles.learnTab.bottom}}>
-            <View style={{flex: 1}}>
-              {
-                this.isFirstPage()?
-                null:
-                <TouchableOpacity onPress = {()=>{
-                    this.getTouchablePreviousAction()
-                }}>
-                <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
-                </TouchableOpacity>
-              }
-              </View>
-              <View style={{flex: 4}}/>
-              <View style={{flex: 1}}>
-                <View style={{marginLeft:'auto'}}>
+          <View style={{flex: 5.5}}>
+            {
+              this.loadPage()
+            }
+            </View>
+            <View style={{flex:0.5}}>
+               <View style={{...styles.learnTab.bottom}}>
+                  <View style={{flex: 1}}>
                     {
-                    this.isFinalPage()?
-                    this.getNextTab():
-                      this.canNavigate()?
-                        <TouchableOpacity onPress = {()=>{
-                            this.getTouchableNextAction()
-                        }}>
-                          
-                          <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
-                        </TouchableOpacity>
-                        : null
-                  }
-                </View>
-              </View>
+                      this.isFirstPage()?
+                      null:
+                      <TouchableOpacity onPress = {()=>{
+                          this.getTouchablePreviousAction()
+                      }}>
+                      <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
+                      </TouchableOpacity>
+                    }
+                    </View>
+                    <View style={{flex: 4}}/>
+                    <View style={{flex: 1}}>
+                      <View style={{marginLeft:'auto'}}>
+                          {
+                          this.isFinalPage()?
+                          this.getNextTab():
+                            this.canNavigate()?
+                              <TouchableOpacity onPress = {()=>{
+                                  this.getTouchableNextAction()
+                              }}>
+                                
+                                <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
+                              </TouchableOpacity>
+                              : null
+                        }
+                      </View>
+                    </View>
+                  </View>
+              
             </View>
         
-          {/*
-            <View style={styles.learnTab.learnTabPad}>
-          
-            
-          
-            </View>*/
-          }
         </>
+        
       );
     }
 };

@@ -9,8 +9,16 @@ const borderLine = {
 
 const wrapperViewBackground = {
   backgroundColor: COLORS.ORANGE_1,
-  height: Dimensions.get('window').height * 0.09
+  flex:0.5,
+  borderBottomColor: COLORS.BLACK_1,
+  borderBottomWidth: 5,
+  //height: Dimensions.get('window').height * 0.09
 };
+const bodyViewBackground = {
+  flex: 5.5,
+  //height: Dimensions.get('window').height * (1-0.09)
+};
+
 
 const scrollViewBackground = {
   flex: 1,
@@ -51,4 +59,5 @@ export default {
   listStyle,
   wrappingIconView,
   nestedIconView,
+  bodyViewBackground,
 }
