@@ -544,8 +544,8 @@ class EncryptTutorial extends Component{
     
       return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={
-            styles.tutorial.learnTabPad
+          <View style={{
+            ...styles.tutorial.learnTabPad, height: '100%'}
             }>
 
             {
