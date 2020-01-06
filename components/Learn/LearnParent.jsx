@@ -8,7 +8,7 @@ import {
     Text, 
     Image, 
     TouchableOpacity,
-    FlatList 
+    FlatList , Modal
 } from 'react-native';
 
 // begin redux imports
@@ -425,7 +425,6 @@ class LearnParent extends Component {
               visibility={displayPopup}
           />
           <View style={{ flex: 6}}>
-
             <View style={styles.learnParent.wrapperViewBackground }>
               {this.getImages()}
             </View>

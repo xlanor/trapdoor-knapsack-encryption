@@ -9,7 +9,7 @@ import {
   ScrollView, 
   View,
   Dimensions,
-  Platform, StatusBar
+  Platform, TouchableOpacity, Modal
 } from 'react-native';
 
 import { SafeAreaView } from 'react-navigation'
@@ -17,19 +17,17 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import styles2 from './styles';
 import LearnParent from '../components/Learn/LearnParent'
-import { TextInput } from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler'
 
 export default function HomeScreen() {
   return (
      <>
 
-
         <SafeAreaView style={styles2.learnScreen.safeAreaHeader} />
+        <SafeAreaView style={styles2.learnScreen.backGroundContainer}>
+            <LearnParent/>                        
+        </SafeAreaView>
         {/*<KeyboardAvoidingView style={{flex: 1}} behavior="height">*/}
-            <SafeAreaView style={styles2.learnScreen.backGroundContainer}>
-                <LearnParent/>
-                         
-            </SafeAreaView>
         {/*</KeyboardAvoidingView> */}
              {/* This is to pad the bottom for iphone X+ 
 

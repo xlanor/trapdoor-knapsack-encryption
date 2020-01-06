@@ -8,7 +8,8 @@ import {
   Text, 
   Image, 
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Modal
 } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
@@ -291,7 +292,9 @@ class LearnTab extends Component{
       return(
         <>
           <View style={{flex: 5.5}}>
+            
             {
+              
               this.loadPage()
             }
             </View>
