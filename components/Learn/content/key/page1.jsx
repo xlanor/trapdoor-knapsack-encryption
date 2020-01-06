@@ -229,6 +229,7 @@ class KeyPage extends Component {
     total.size = splitKey.length - 1
     total.total = currentMax
     total.arrOfVals = splitKey
+    Keyboard.dismiss()
     return true;
    }
 
@@ -247,6 +248,7 @@ class KeyPage extends Component {
           actions.UPDATE_PRIVATE_KEY_SUM_ACTION(total.total)
           actions.UPDATE_PRIVATE_KEY_STRING_ACTION(currentPrivateKey)
           actions.UPDATE_PRIVATE_KEY_ARRAY_ACTION(total.arrOfVals)
+          Keyboard.dismiss()
         }
       }
 
@@ -265,6 +267,7 @@ class KeyPage extends Component {
             // integer is greater.
             actions.ALLOW_NEXT_PAGE_ACTION();
             actions.UPDATE_MODULO_ACTION(curMod);
+            Keyboard.dismiss()
         }
       }
 
@@ -290,6 +293,7 @@ class KeyPage extends Component {
         // have to relock decryption to force them to generate pk and inverse again.
         actions.DECRYPT_LOCK_ACTION()
         actions.ENCRYPT_LOCK_ACTION() 
+        Keyboard.dismiss()
         this.setState({
           inverseLoaded: false,
           pkLoaded: false,
