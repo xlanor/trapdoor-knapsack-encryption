@@ -200,6 +200,7 @@ class EncryptTutorial extends Component{
       actions.UPDATE_ENCRYPTION_BINARY_STRING_ACTION(binString)
       actions.UPDATE_ENCRYPTION_ASCII_STRING_ACTION(currentTextBox)
       actions.ALLOW_NEXT_PAGE_ACTION()
+      Keyboard.dismiss()
     }
   }
 
