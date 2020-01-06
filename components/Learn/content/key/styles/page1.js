@@ -19,19 +19,19 @@ const textStyleTitle = {
 
 const textStyleHeader1 = {
   fontFamily: 'comfortaa',
-  fontSize: 15,
+  fontSize: 16,
   paddingBottom: Dimensions.get('screen').height * 0.02,
 }
 
 const textStyleHeader2 = {
   fontFamily: 'comfortaa',
-  fontSize: 18,
+  fontSize: 16,
   paddingBottom: Dimensions.get('screen').height * 0.02,
 }
 
 const textStyleHeader3 = {
   fontFamily: 'comfortaa',
-  fontSize: 18,
+  fontSize: 16,
   paddingBottom: Dimensions.get('screen').height * 0.02,
   paddingTop: Dimensions.get('screen').height * 0.02,
 }
