@@ -551,6 +551,7 @@ class EncryptTutorial extends Component{
                <ScrollViewPopUp   
                     visibility={showBlocks}
                     lockStateArr={lockStateArr} 
+                    title="Encrypted Blocks"
                     callback={
                       ()=>{
                         this.setState({
