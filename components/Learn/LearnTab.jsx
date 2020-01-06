@@ -82,6 +82,7 @@ import { bindActionCreators } from 'redux';
 // importing image assets
 // unlocked
 import Next from '../../assets/images/Next.png';
+import Unlock from '../../assets/images/unlock.png';
 
 // import stylesheet.
 import styles from './styles';
@@ -120,8 +121,8 @@ class LearnTab extends Component{
         return null;
       else{
         // return a button. to be designed.
-        return (<Button title={"Unlock"} onPress={()=>{
-          console.log(currentTab)
+        return (
+        <TouchableOpacity onPress={()=>{
           switch(currentTab){
             case "intro":
                 return actions.ALGO_UNLOCK_ACTION();
@@ -133,7 +134,9 @@ class LearnTab extends Component{
                 return actions.DECRYPT_UNLOCK_ACTION();
             default: return null;
           }
-        }} />
+        }} >
+          <Image source={Unlock} style={{height: 40, width: 40}}/>
+        </TouchableOpacity>
         );
       }
       
