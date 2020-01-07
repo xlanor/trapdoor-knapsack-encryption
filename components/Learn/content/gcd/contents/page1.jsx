@@ -18,7 +18,7 @@ export default class page1 extends Component {
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 <Text style={style.contentStyle}>
-                    The Euclidean algorithm is an efficient method of finding the Greatest Common Denominator(GCD)
+                    The Euclidean algorithm is an efficient method of finding the Greatest Common Divisor(GCD)
                     of 2 different integers.
                     {"\n\n"}
                     Usually when someone asks for a notation such as gcd(a, b) = x{"\n"}

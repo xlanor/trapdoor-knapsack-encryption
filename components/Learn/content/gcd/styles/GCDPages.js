@@ -34,6 +34,7 @@ const bold = {
     fontFamily: 'comfortaa-bold',
 }
 const links = {
+    textDecorationLine: 'underline',
     fontFamily: 'comfortaa',
     color: '#2980B9'
 }
@@ -82,7 +83,7 @@ const popUpTextStyle = {
 
     fontFamily: 'comfortaa',
     fontSize: 14,
-    textAlign: 'center',
+    //textAlign: 'center',
     //color: COLORS.ORANGE_1,
     color: '#4d4d4d'
 }
@@ -92,7 +93,7 @@ const popUpTextStyleBold = {
     fontFamily: 'comfortaa',
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center',
+    //textAlign: 'center',
     //color: COLORS.ORANGE_1,
     color: '#4d4d4d'
 }
