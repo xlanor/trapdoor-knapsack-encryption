@@ -21,7 +21,7 @@ export default class page10 extends Component {
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
                 <Image
-                    source={require('./pic/ETSlide14.png')}
+                    source={require('./pic/ET4.png')}
                     style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
                 <Text style={style.contentStyle}>
