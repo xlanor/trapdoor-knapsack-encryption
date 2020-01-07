@@ -5,8 +5,10 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Linking
 } from 'react-native';
+import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
 import Alert from '../../../../../assets/images/alert.png';
@@ -23,7 +25,6 @@ export default class page3 extends Component {
             showRalphMerkleInfoPopUp: false,
             showMartinHellmanInfoPopUp: false,
             showProblemsInfoPopUp: false,
-            showBrokenInfoPopUp: false,
         }
     }
     trapdoorKnapsackAlgoPopUp = () => {
@@ -36,24 +37,42 @@ export default class page3 extends Component {
         )
     }
     ralphMerkleInfoPopUp = () => {
+        let u = Dimensions.get('window').height
+        let m = 0.8
         return (
             <View>
+                <Image
+                    source={require('./ralph_merkle.jpeg')}
+                    style={{ width: u * 0.240 * m, height: u * 0.280 * m, alignSelf: 'center' }}
+                />
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    Ralph C.Merkle (born February 2, 1952) is a computer scientist.
-                    He is one of the inventors of public key cryptography,
-                    the inventor of cryptographic hashing and more recently,
-                    a researcher and speaker of cryonics.
+                    {"\n"}
+                    Ralph C.Merkle is one of the inventors of public key cryptography and
+                    the inventor of cryptographic hashing. <Text
+                        style={styles.PageStyle.links}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Ralph_Merkle')}>
+                        wikipedia
+                    </Text>
                 </Text>
             </View>
         )
     }
     martinHellmanInfoPopUp = () => {
+        let u = Dimensions.get('window').height
+        let m = 0.65
         return (
             <View>
+                <Image
+                    source={require('./Martin-Hellman.jpg')}
+                    style={{ width: u * 0.2671 * m, height: u * 0.3851 * m, alignSelf: 'center' }}
+                />
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    Martin Edward Hellman (born October 2, 1945) is an American cryptologist,
-                    best known for his invention of public key cryptography in cooperation with
-                    Whitfield Diffie and Ralph Merkle
+                    {"\n"}
+                    Martin Edward Hellman is best known for his invention of public key cryptography. <Text
+                        style={styles.PageStyle.links}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Martin_Hellman')}>
+                        wikipedia
+                    </Text>
                 </Text>
             </View>
         )
@@ -62,23 +81,8 @@ export default class page3 extends Component {
         return (
             <View>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The 2 separate problems are defined by which one is easy to solve,
-                    given the private key,
-                    and the other being difficult to solve,
-                    given a public key.
-                </Text>
-            </View>
-        )
-    }
-    brokenInfoPopUp = () => {
-        return (
-            <View>
-                <Text style={styles.PageStyle.popUpTextStyle}>
-                    A brief history of how Trapdoor knapsack was broken is available on the next page.
-                    {"\n"}
-                </Text>
-                <Text style={styles.PageStyle.popUpTextStyleBold}>
-                    Maybe just remove?
+                    1. Easy to solve, given the private key{"\n"}
+                    2. Difficult to solve, given a public key.
                 </Text>
             </View>
         )
@@ -89,7 +93,6 @@ export default class page3 extends Component {
             showRalphMerkleInfoPopUp,
             showMartinHellmanInfoPopUp,
             showProblemsInfoPopUp,
-            showBrokenInfoPopUp
         } = this.state
         let style = styles.PageStyle
         return (
@@ -130,26 +133,17 @@ export default class page3 extends Component {
                             visibility={showProblemsInfoPopUp} />
                         : null
                 }
-                {
-                    showBrokenInfoPopUp
-                        ? <AlertPopUp
-                            icon={Alert}
-                            renderedBlocks={this.brokenInfoPopUp()}
-                            callback={() => { this.setState({ showBrokenInfoPopUp: false, }) }}
-                            visibility={showBrokenInfoPopUp} />
-                        : null
-                }
                 <Text style={style.titleStyle}>Introduction</Text>
-                <Text style={style.contentHead}>
-                    <Text style={style.links} onPress={() => { this.setState({ showTrapdoorKnapsackAlgoPopUp: true, }) }}>
-                        Trapdoor Knapsack Algorithm
-                    </Text>
-                </Text>
+
+                <Text style={style.contentHead}>Trapdoor Knapsack Algorithm</Text>
+
                 <Text style={style.contentStyle}>
-                    It was invented by <Text style={style.links} onPress={() => { this.setState({ showRalphMerkleInfoPopUp: true, }) }}>
+                    <Text style={style.links} onPress={() => { this.setState({ showRalphMerkleInfoPopUp: true, }) }}>
                         Ralph Merkle
                     </Text> and <Text style={style.links} onPress={() => { this.setState({ showMartinHellmanInfoPopUp: true, }) }}>
                         Martin Hellman
+                    </Text> invented the <Text style={style.links} onPress={() => { this.setState({ showTrapdoorKnapsackAlgoPopUp: true, }) }}>
+                        Trapdoor Knapsack Algorithm
                     </Text> in 1978.
                     {"\n\n"}
                     The general idea behind this algorithm is to create <Text style={style.links} onPress={() => { this.setState({ showProblemsInfoPopUp: true, }) }}>
@@ -157,11 +151,9 @@ export default class page3 extends Component {
                     </Text>.
                     This ensures that the private key is easy to use but the public key is difficult to compute.
                     {"\n\n"}
-                    As such, trapdoor function ensures that without proper knowledge of the "trapdoor", the encryption cannot easily be reversed.
+                    As such, trapdoor function ensures that without prior knowledge of the "trapdoor", the encryption cannot easily be reversed.
                     {"\n\n"}
-                    However, Trapdoor knapsack has been <Text style={style.links} onPress={() => { this.setState({ showBrokenInfoPopUp: true, }) }}>
-                        broken
-                    </Text>.
+                    However, Trapdoor knapsack has been broken.
                     {"\n"}
                 </Text>
             </View>

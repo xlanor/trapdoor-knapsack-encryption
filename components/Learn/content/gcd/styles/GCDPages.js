@@ -34,6 +34,7 @@ const bold = {
     fontFamily: 'comfortaa-bold',
 }
 const links = {
+    fontFamily: 'comfortaa',
     color: '#2980B9'
 }
 const superIncreasingKnapsack = {
@@ -82,7 +83,8 @@ const popUpTextStyle = {
     fontFamily: 'comfortaa',
     fontSize: 14,
     textAlign: 'center',
-    color: COLORS.ORANGE_1,
+    //color: COLORS.ORANGE_1,
+    color: '#4d4d4d'
 }
 
 const popUpTextStyleBold = {
@@ -91,7 +93,8 @@ const popUpTextStyleBold = {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: COLORS.ORANGE_1,
+    //color: COLORS.ORANGE_1,
+    color: '#4d4d4d'
 }
 
 

@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Linking
 } from 'react-native';
 import { Dimensions } from 'react-native';
 
@@ -38,16 +39,12 @@ export default class page2 extends Component {
         return (
             <View>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The discrete logarithm problem is defined as:
-                    {"\n\n"}
-                    Given a group G, a generator g of the group and an element h of G,
-                    to find the discrete logarithm to the base g of h in the group G.
-                    {"\n\n"}
-                    The hardness of finding discrete logarithms depends on the groups.
+                    A quick reference on discrete logarithm problem can be found on this link:
                 </Text>
-                <Text style={styles.PageStyle.popUpTextStyleBold}>
-                    Let's be honest. If you give this to a kid to read.
-                    Do you think he will understand?
+                <Text
+                    style={styles.PageStyle.links}
+                    onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Discrete_logarithm')}>
+                    https://en.wikipedia.org/wiki/Discrete_logarithm
                 </Text>
             </View>
         )
@@ -78,9 +75,7 @@ export default class page2 extends Component {
                 }
                 <Text style={style.titleStyle}>Introduction</Text>
                 <Text style={style.contentHead}>
-                    <Text style={style.links} onPress={() => { this.setState({ showOneWayInfoPopUp: true, }) }}>
-                        One-way
-                    </Text> trapdoor function
+                    One-way trapdoor function
                 </Text>
 
                 <Image
@@ -89,7 +84,10 @@ export default class page2 extends Component {
                 />
 
                 <Text style={style.contentStyle}>
-                    A good example of the trapdoor function is the{"\n"}
+                    A good example of the <Text style={style.links} onPress={() => { this.setState({ showOneWayInfoPopUp: true, }) }}>
+                        one-way trapdoor function
+                    </Text>:
+                    {"\n\n"}
                     <Text style={style.links} onPress={() => { this.setState({ showDiscreteLogInfoPopUp: true, }) }}>
                         Discrete Logarithm problem
                     </Text>.
