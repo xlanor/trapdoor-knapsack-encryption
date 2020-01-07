@@ -22,18 +22,8 @@ export default class page1 extends Component {
 
         // local state not affected by redux
         this.state = {
-            showKnapsackInfoPopUp: false,
             showquestionInfoPopUp: false,
         }
-    }
-    knapsackInfoPopUp = () => {
-        return (
-            <View>
-                <Text style={styles.PageStyle.popUpTextStyle}>
-                    A knapsack problem is derived from the notion of packing an odd assortment of packages into a container.
-                </Text>
-            </View>
-        )
     }
     questionInfoPopUp = () => {
         return (
@@ -45,20 +35,11 @@ export default class page1 extends Component {
         )
     }
     render() {
-        const { showKnapsackInfoPopUp, showquestionInfoPopUp } = this.state
+        const { showquestionInfoPopUp } = this.state
         let style = styles.PageStyle
         let u = Dimensions.get('window').height
         return (
             <View style={style.containerStyle}>
-                {
-                    showKnapsackInfoPopUp
-                        ? <AlertPopUp
-                            icon={Alert}
-                            renderedBlocks={this.knapsackInfoPopUp()}
-                            callback={() => { this.setState({ showKnapsackInfoPopUp: false, }) }}
-                            visibility={showKnapsackInfoPopUp} />
-                        : null
-                }
                 {
                     showquestionInfoPopUp
                         ? <AlertPopUp
@@ -69,8 +50,9 @@ export default class page1 extends Component {
                         : null
                 }
                 <Text style={style.titleStyle}>Introduction</Text>
-                <Text style={style.contentHead} onPress={() => { this.setState({ showKnapsackInfoPopUp: true, }) }} >
-                    <Text style={style.links}>Knapsack Problem</Text>
+                <Text style={style.contentHead}>Knapsack Problem</Text>
+                <Text style={style.contentStyle}>
+                    A knapsack problem is derived from the notion of packing an odd assortment of packages into a container.
                 </Text>
                 <Text style={style.contentStyle}>
                     <Text style={style.links} onPress={() => { this.setState({ showquestionInfoPopUp: true, }) }} >
