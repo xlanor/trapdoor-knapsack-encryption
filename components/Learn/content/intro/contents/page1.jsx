@@ -61,7 +61,7 @@ export default class page1 extends Component {
                     </Text>?
                 </Text>
                 <Image
-                    source={require('./Intro.gif')}
+                    source={require('./pic/Intro.gif')}
                     style={{ width: u * 0.400 * m, height: u * 0.328 * m, alignSelf: 'center' }}
                 />
             </View >

@@ -33,7 +33,7 @@ export default class page4 extends Component {
         return (
             <View>
                 <Image
-                    source={require('./leonard-adleman.jpg')}
+                    source={require('./pic/leonard-adleman.jpg')}
                     style={{ width: u * 0.220 * m, height: u * 0.345 * m, alignSelf: 'center' }}
                 />
                 <Text style={styles.PageStyle.popUpTextStyle}>
@@ -61,7 +61,7 @@ export default class page4 extends Component {
         return (
             <View>
                 <Image
-                    source={require('./adi-shamir.jpg')}
+                    source={require('./pic/adi-shamir.jpg')}
                     style={{ width: u * 0.220 * m, height: u * 0.330 * m, alignSelf: 'center' }}
                 />
                 <Text style={styles.PageStyle.popUpTextStyle}>

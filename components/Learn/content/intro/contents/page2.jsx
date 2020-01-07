@@ -79,7 +79,7 @@ export default class page2 extends Component {
                 </Text>
 
                 <Image
-                    source={require('./1052px-Trapdoor_permutation.svg.png')}
+                    source={require('./pic/1052px-Trapdoor_permutation.svg.png')}
                     style={{ width: u * 0.1052 * 4, height: u * 0.0744 * 4, alignSelf: 'center' }}
                 />
 
@@ -95,7 +95,7 @@ export default class page2 extends Component {
                     Assuming we have a function:
                 </Text>
                 <Image
-                    source={require('./DiscreteLogProblem.png')}
+                    source={require('./pic/DiscreteLogProblem.png')}
                     style={{ width: u * 0.227 * 0.5, height: u * 0.076 * 0.5, alignSelf: 'center', resizeMode: 'contain' }}
                 />
                 <Text style={style.contentStyle}>
