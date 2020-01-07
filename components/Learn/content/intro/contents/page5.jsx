@@ -58,15 +58,7 @@ export default class page5 extends Component {
         return (
             <View>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The secret key refers to the analogy of a "trapdoor" where it is easy to fall through a trapdoor,
-                    but it is very hard to climb back out and get to where you started unless you have a ladder.
-                </Text>
-                <Text style={styles.PageStyle.popUpTextStyleBold}>
-                    Something wrong. Secret key analogy makes no sense.{"\n"}
-                    Key could be referred to as hidden so nobody else can find.
-                    You are talking about a one-way trapdoor not a key.
-                    You could call the key as maybe the information of how to get out.
-                    I suggest just remove this.
+                   The secret key is a piece of information or parameter that is used to decrypt ciphertext during trapdoor knapsack.
                 </Text>
             </View>
         )
@@ -125,24 +117,24 @@ export default class page5 extends Component {
                     Trapdoor knapsack is basically formed around 3 different key information:
                     {"\n\n"}
                     1. <Text style={style.privateKey} onPress={() => { this.setState({ showPrivateKeyInfoPopUp: true, }) }}>
-                        private key
+                        <Text style={style.underline}>Private Key</Text>
                     </Text>
                     {"\n\n"}
                     2. <Text style={style.modulus} onPress={() => { this.setState({ showModulusInfoPopUp: true, }) }}>
-                        modulus
+                        <Text style={style.underline}>Modulus</Text>
                     </Text>
                     {"\n\n"}
                     3. <Text style={style.multiplier} onPress={() => { this.setState({ showMultiplierInfoPopUp: true, }) }}>
-                        multiplier
+                        <Text style={style.underline}>Multiplier</Text>
                     </Text>
                     {"\n\n"}
 
                     Everything else is derived from these 3 pieces of information.
                     {"\n\n"}
                     These three are kept as the <Text style={style.secretKey} onPress={() => { this.setState({ showSecretKeyInfoPopUp: true, }) }}>
-                        secret key
+                        <Text style={style.underline}>secret key</Text>
                     </Text> by the owner and not distributed.
-                    {"\n"}
+                    
                 </Text>
             </View>
         )
