@@ -25,7 +25,8 @@ export default class page8 extends Component {
                     style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
                 <Text style={style.contentStyle}>
-                    With the Extended Euclidean algorithm, the easiest way to visualise it is via a table{"\n"}
+                    With the Extended Euclidean algorithm, the easiest way to visualise it is via a table.
+                    {"\n\n"}
                     Construct a table like the original Euclidean algorithm but with 4 more columns
                 </Text>
             </View>
