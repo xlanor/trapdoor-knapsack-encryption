@@ -8,22 +8,23 @@ import {
     KeyboardAvoidingView,
     FlatList
 } from 'react-native';
-import { Dimensions } from 'react-native';
 // import stylesheet.
 import styles from '../styles';
 
 export default class page13 extends Component {
     render() {
         let style = styles.GCDPages
-        let u = Dimensions.get('window').height
-        let m = 1.4
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                <Image
-                    source={require('./pic/ET6.png')}
-                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
-                />
+               
+                <View style={style.imgContainer}>
+                    <Image
+                        source={require('./pic/ET6.png')}
+                        style={style.imgStyle}
+                    />
+                </View>
+                
                 <Text style={style.contentStyle}>
                     To find out the multiplicative inverse.{"\n"}
                     1. The GCD must be 1 like in this case.{"\n"}

@@ -8,22 +8,23 @@ import {
     KeyboardAvoidingView,
     FlatList
 } from 'react-native';
-import { Dimensions } from 'react-native';
 // import stylesheet.
 import styles from '../styles';
 
 export default class page4 extends Component {
     render() {
         let style = styles.GCDPages
-        let u = Dimensions.get('window').height
-        let m = 1.4
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
-                <Image
-                    source={require('./pic/NormalT2.png')}
-                    style={{ width: u * 0.220 * m, height: u * 0.165 * m, alignSelf: 'center' }}
-                />
+                
+                <View style={style.imgContainer}>
+                    <Image
+                        source={require('./pic/NormalT2.png')}
+                        style={style.imgStyle}
+                    />
+                </View>
+                
                 <Text style={style.contentStyle}>
                     Calculate the values of q and r.{"\n"}
                     282 / 23 = 12 r6.
