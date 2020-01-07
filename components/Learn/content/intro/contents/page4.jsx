@@ -44,7 +44,7 @@ export default class page4 extends Component {
                         wikipedia
                     </Text>
                 </Text>
-                <Text style={styles.PageStyle.popUpTextStyle}>
+                <Text style={styles.PageStyle.popUpTextStyle}>{"\n"}
                     A quick reference on how he broke the system can be found in this link:
                 </Text>
                 <Text
@@ -73,7 +73,7 @@ export default class page4 extends Component {
                         wikipedia
                     </Text>
                 </Text>
-                <Text style={styles.PageStyle.popUpTextStyle}>
+                <Text style={styles.PageStyle.popUpTextStyle}>{"\n"}
                     A quick reference on how he broke the system can be found in this link:
                 </Text>
                 <Text
@@ -98,7 +98,7 @@ export default class page4 extends Component {
         return (
             <View>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    Merkle awarded a price of $1000 to Brickell who broke it in 1 hour.
+                    Merkle awarded a price of $1000 to Brickell who broke it in 1 hour.{"\n"}
                     This marked the end of the trapdoor knapsack cryptosystem.{"\n"}
                 </Text>
                 <Text style={styles.PageStyle.popUpTextStyle}>
@@ -179,7 +179,7 @@ export default class page4 extends Component {
                         broke
                     </Text> the cryptosystem.
                     {"\n\n"}
-                    We can still learn its concepts of cryptography.
+                    Today, we can still learn its concepts of cryptography.
                     {"\n"}
                 </Text>
             </View>

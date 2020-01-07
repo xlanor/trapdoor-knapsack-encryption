@@ -81,7 +81,8 @@ export default class page3 extends Component {
         return (
             <View>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    1. Easy to solve, given the private key{"\n"}
+                    1. Easy to solve, given the private key
+                    {"\n\n"}
                     2. Difficult to solve, given a public key.
                 </Text>
             </View>
