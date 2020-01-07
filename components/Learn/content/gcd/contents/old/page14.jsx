@@ -8,27 +8,27 @@ import {
     KeyboardAvoidingView,
     FlatList
 } from 'react-native';
-import { Dimensions } from 'react-native';
 // import stylesheet.
 import styles from '../styles';
 
 export default class page14 extends Component {
     render() {
+        let img = './pic/EuclideanAnimationV3_11.png';
         let style = styles.GCDPages
-        let u = Dimensions.get('window').height
-        let m = 1.4
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                <Image
-                    source={require('./pic/ET6.png')}
-                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
-                />
                 <Text style={style.contentStyle}>
-                    b2 is -49 and therefore, the multiplicative inverse of 23 is -49 mod 282.{"\n"}
-                    Since -49 is negative, 282 - 49 = 233.{"\n\n"}
-                    The multiplicative inverse of 23 is 233.
+                    In each line referring to the value of the previous line:{"\n"}
+                    a is the previous b, b is the previous r{"\n"}
+                    a2 = a1 - q * a2{"\n"}
+                    b2 = b1 - q * b2
+                    {"\n\n"}
                 </Text>
+                <Text style={style.contentHead}>
+                    Fill in each line till r = 0.
+                </Text>
+                <Image source={require(img)} style={styles.PicStyle.picStyle} />
             </View>
         )
     }

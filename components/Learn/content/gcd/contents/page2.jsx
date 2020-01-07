@@ -8,33 +8,28 @@ import {
     KeyboardAvoidingView,
     FlatList
 } from 'react-native';
+import { Dimensions } from 'react-native';
 // import stylesheet.
 import styles from '../styles';
 
 export default class page2 extends Component {
     render() {
         let style = styles.GCDPages
+        let u = Dimensions.get('window').height
+        let m = 1.4
         return (
             <View style={style.containerStyle}>
-                <Text style={style.titleStyle}>GCD and Euclidean Algorithm</Text>
+                <Text style={style.titleStyle}>Euclidean Algorithm</Text>
+                <Image
+                    source={require('./pic/NormalT1.png')}
+                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
+                />
                 <Text style={style.contentStyle}>
-                    Steps for Euclidean algorithm:
-                    {"\n\n"}
-                    1. Divide the larger number by the smaller and retain the remainder
-                    {"\n\n"}
-                    2. Divide the smaller original number by the remainder, again retaining the remainder.
-                    {"\n\n"}
-                    3. Continue dividing the prior remainder by the current remainder until the remainder is zero,
-                    at which point the last (non-zero) remainder is the greatest common divisor.
-                    {"\n\n"}
-                    For Example:  gcd(84,49){"\n"}
-                    84 / 49 => remainder 35{"\n"}
-                    49 / 35 => remainder 14{"\n"}
-                    35 / 14 => remainder 7{"\n"}
-                    14 / 7 => remainder 0
-                    {"\n\n"}
-                    Therefore gcd(84/49) = 7.
-                    {"\n"}
+                    With the Euclidean algorithm, the easiest way to visualise it is via a table.{"\n"}
+                    First construct a table with 4 columns.{"\n"}
+                    a and b are your integers you want to comapre{"\n"}
+                    q is the quotient when dividing a by b{"\n"}
+                    r is the remainder when dividing a by b
                 </Text>
             </View>
         )
