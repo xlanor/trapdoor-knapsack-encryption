@@ -29,13 +29,16 @@ export default class page4 extends Component {
     }
     adlemanArticleInfoPopUp = () => {
         let u = Dimensions.get('window').height
-        let m = 0.7
+        let m = 0.24
         return (
             <View>
-                <Image
-                    source={require('./pic/leonard-adleman.jpg')}
-                    style={{ width: u * 0.220 * m, height: u * 0.345 * m, alignSelf: 'center' }}
-                />
+                <View style={{height: u * m}}>
+                    <Image
+                        source={require('./pic/leonard-adleman.jpg')}
+                        style={styles.PageStyle.imgStyle}
+                    />
+                </View>
+                
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     {"\n"}
                     Leonard Adleman is one of the creators of the RSA encryption algorithm. <Text
@@ -57,13 +60,16 @@ export default class page4 extends Component {
     }
     shamirArticleInfoPopUp = () => {
         let u = Dimensions.get('window').height
-        let m = 0.7
+        let m = 0.24
         return (
             <View>
-                <Image
-                    source={require('./pic/adi-shamir.jpg')}
-                    style={{ width: u * 0.220 * m, height: u * 0.330 * m, alignSelf: 'center' }}
-                />
+                <View style={{height: u * m}}>
+                    <Image
+                        source={require('./pic/adi-shamir.jpg')}
+                        style={styles.PageStyle.imgStyle}
+                    />
+                </View>
+
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     {"\n"}
                     Adi Shamir is a co-inventor of the Rivest–Shamir–Adleman (RSA) algorithm

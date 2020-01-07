@@ -38,7 +38,7 @@ export default class page1 extends Component {
         const { showquestionInfoPopUp } = this.state
         let style = styles.PageStyle
         let u = Dimensions.get('window').height
-        let m = 1.4
+        let m = 0.4592
         return (
             <View style={style.containerStyle}>
                 {
@@ -60,10 +60,14 @@ export default class page1 extends Component {
                         most efficiently or with the highest value
                     </Text>?
                 </Text>
-                <Image
-                    source={require('./pic/Intro.gif')}
-                    style={{ width: u * 0.400 * m, height: u * 0.328 * m, alignSelf: 'center' }}
-                />
+
+                <View style={{height: u * m}}>
+                    <Image
+                        source={require('./pic/Intro.gif')}
+                        style={style.imgStyle}
+                    />
+                </View>
+                
             </View >
         )
     }

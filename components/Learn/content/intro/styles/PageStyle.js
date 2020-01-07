@@ -98,6 +98,12 @@ const popUpTextStyleBold = {
     color: '#4d4d4d'
 }
 
+const imgStyle = {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain'
+}
 
 export default {
     picStyle,
@@ -117,5 +123,6 @@ export default {
     multiplier,
     bold,
     popUpTextStyle,
-    popUpTextStyleBold
+    popUpTextStyleBold,
+    imgStyle,
 };

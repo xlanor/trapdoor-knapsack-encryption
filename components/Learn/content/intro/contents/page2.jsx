@@ -77,11 +77,13 @@ export default class page2 extends Component {
                 <Text style={style.contentHead}>
                     One-way trapdoor function
                 </Text>
-
-                <Image
-                    source={require('./pic/1052px-Trapdoor_permutation.svg.png')}
-                    style={{ width: u * 0.1052 * 4, height: u * 0.0744 * 4, alignSelf: 'center' }}
-                />
+                
+                <View style={{height: u * 0.2976}}>
+                    <Image
+                        source={require('./pic/1052px-Trapdoor_permutation.svg.png')}
+                        style={style.imgStyle}
+                    />
+                </View>
 
                 <Text style={style.contentStyle}>
                     A good example of the <Text style={style.links} onPress={() => { this.setState({ showOneWayInfoPopUp: true, }) }}>
@@ -94,10 +96,14 @@ export default class page2 extends Component {
                     {"\n"}
                     Assuming we have a function:
                 </Text>
-                <Image
-                    source={require('./pic/DiscreteLogProblem.png')}
-                    style={{ width: u * 0.227 * 0.5, height: u * 0.076 * 0.5, alignSelf: 'center', resizeMode: 'contain' }}
-                />
+
+                <View style={{height: u * 0.038}}>
+                    <Image
+                        source={require('./pic/DiscreteLogProblem.png')}
+                        style={style.imgStyle}
+                    />
+                </View>
+
                 <Text style={style.contentStyle}>
                     Given <Text style={{color:'#9B59B6'}}>b</Text>, we would be unable to find <Text style={{color:'#1ABC9C'}}>a</Text> and <Text style={{color:'#E74C3C'}}>k</Text> in a reasonable time.
                     {"\n"}

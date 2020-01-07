@@ -38,13 +38,16 @@ export default class page3 extends Component {
     }
     ralphMerkleInfoPopUp = () => {
         let u = Dimensions.get('window').height
-        let m = 0.8
+        let m = 0.24
         return (
             <View>
-                <Image
-                    source={require('./pic/ralph_merkle.jpeg')}
-                    style={{ width: u * 0.240 * m, height: u * 0.280 * m, alignSelf: 'center' }}
-                />
+                <View style={{height: u * m}}>
+                    <Image
+                        source={require('./pic/ralph_merkle.jpeg')}
+                        style={styles.PageStyle.imgStyle}
+                    />
+                </View>
+
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     {"\n"}
                     Ralph C.Merkle is one of the inventors of public key cryptography and
@@ -59,13 +62,16 @@ export default class page3 extends Component {
     }
     martinHellmanInfoPopUp = () => {
         let u = Dimensions.get('window').height
-        let m = 0.65
+        let m = 0.24
         return (
             <View>
-                <Image
-                    source={require('./pic/Martin-Hellman.jpg')}
-                    style={{ width: u * 0.2671 * m, height: u * 0.3851 * m, alignSelf: 'center' }}
-                />
+                <View style={{height: u * m}}>
+                    <Image
+                        source={require('./pic/Martin-Hellman.jpg')}
+                        style={styles.PageStyle.imgStyle}
+                    />
+                </View>
+                
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     {"\n"}
                     Martin Edward Hellman is best known for his invention of public key cryptography. <Text
