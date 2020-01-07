@@ -8,22 +8,23 @@ import {
     KeyboardAvoidingView,
     FlatList
 } from 'react-native';
-import { Dimensions } from 'react-native';
 // import stylesheet.
 import styles from '../styles';
 
 export default class page9 extends Component {
     render() {
         let style = styles.GCDPages
-        let u = Dimensions.get('window').height
-        let m = 1.4
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                <Image
-                    source={require('./pic/ET4.png')}
-                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
-                />
+                
+                <View style={style.imgContainer}>
+                    <Image
+                        source={require('./pic/ET3.png')}
+                        style={style.imgStyle}
+                    />
+                </View>
+                
                 <Text style={style.contentStyle}>
                     For simplicity we are going to reuse the same 2 values, 282 and 23.{"\n\n"}
                     Now for the remaining boxes remember the weights{"\n"}
