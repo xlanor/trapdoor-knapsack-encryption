@@ -26,7 +26,8 @@ export default class page14 extends Component {
                 />
                 <Text style={style.contentStyle}>
                     b2 is -49 and therefore, the multiplicative inverse of 23 is -49 mod 282.{"\n"}
-                    Since -49 is negative, 282 - 49 = 233.{"\n\n"}
+                    Since -49 is negative, 282 - 49 = 233.
+                    {"\n\n"}
                     The multiplicative inverse of 23 is 233.
                 </Text>
             </View>

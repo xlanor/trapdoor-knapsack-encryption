@@ -21,7 +21,7 @@ export default class page10 extends Component {
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
                 <Image
-                    source={require('./pic/ET5.png')}
+                    source={require('./pic/ETSlide14.png')}
                     style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
                 <Text style={style.contentStyle}>
@@ -29,7 +29,8 @@ export default class page10 extends Component {
                     a1 = a2, a2 = a1 - q * a2{"\n"}
                     b1 = b2, b2 = b1 - q * b2
                     {"\n\n"}
-                    Fill in the next row like in the standard Euclidean algorithm.{"\n"}
+                    Fill in the next row like in the standard Euclidean algorithm.
+                    {"\n\n"}
                     Now to get a1 and b1,
                     look at the previous row's a2 and b2 respectively.
                 </Text>

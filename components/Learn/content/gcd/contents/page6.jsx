@@ -21,12 +21,13 @@ export default class page6 extends Component {
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 <Image
-                    source={require('./pic/NormalT4.png')}
-                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
+                    source={require('./pic/NormalT5.png')}
+                    style={{ width: u * 0.220 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
                 <Text style={style.contentStyle}>
                     Fill in the rest.{"\n"}
-                    Once r = 0, Stop.{"\n"}
+                    Once r = 0, Stop.
+                    {"\n\n"}
                     Now look at the last value of b.{"\n"}
                     Since b = 1, GCD(282, 23) = 1.
                 </Text>

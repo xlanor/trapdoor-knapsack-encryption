@@ -22,10 +22,11 @@ export default class page5 extends Component {
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 <Image
                     source={require('./pic/NormalT3.png')}
-                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
+                    style={{ width: u * 0.220 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
                 <Text style={style.contentStyle}>
-                    To get the second row,{"\n"}
+                    To get the next row:
+                    {"\n\n"}
                     Set a as previous b{"\n"}
                     Set b as previous r
                 </Text>

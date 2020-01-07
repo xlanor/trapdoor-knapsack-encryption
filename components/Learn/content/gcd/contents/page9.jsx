@@ -25,7 +25,7 @@ export default class page9 extends Component {
                     style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
                 <Text style={style.contentStyle}>
-                    For simplicity we are going to reuse the same 2 values, 282 and 23.{"\n"}
+                    For simplicity we are going to reuse the same 2 values, 282 and 23.{"\n\n"}
                     Now for the remaining boxes remember the weights{"\n"}
                     a1 = 1{"\n"}
                     a2 = 0{"\n"}

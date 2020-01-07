@@ -22,11 +22,12 @@ export default class page4 extends Component {
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 <Image
                     source={require('./pic/NormalT2.png')}
-                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
+                    style={{ width: u * 0.220 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
                 <Text style={style.contentStyle}>
-                    Calculate the values of q and r.
+                    Calculate the values of q and r.{"\n"}
                     282 / 23 = 12 r6.
+                    {"\n\n"}
                     Set r as 6 and q as 12.
                 </Text>
             </View>

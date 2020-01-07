@@ -22,10 +22,11 @@ export default class page3 extends Component {
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 <Image
                     source={require('./pic/NormalT1.png')}
-                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
+                    style={{ width: u * 0.220 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
                 <Text style={style.contentStyle}>
-                    Lets say we want to find the GCD of 23 and 282.{"\n"}
+                    Lets say we want to find the GCD of 23 and 282.
+                    {"\n\n"}
                     Always set a as the larger number and b as the smaller number.{"\n"}
                     So set a to 282 and b to 23.
                 </Text>
