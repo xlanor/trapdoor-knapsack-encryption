@@ -6,35 +6,29 @@ import {
     Image,
     TouchableOpacity,
     KeyboardAvoidingView,
-    FlatList,
-    Dimensions
+    FlatList
 } from 'react-native';
+import { Dimensions } from 'react-native';
 // import stylesheet.
 import styles from '../styles';
 
 export default class page4 extends Component {
     render() {
-        let img = './pic/EuclideanAnimationV3_1.png';
         let style = styles.GCDPages
-        let u = Dimensions.get('window').width
-
+        let u = Dimensions.get('window').height
+        let m = 1.4
         return (
             <View style={style.containerStyle}>
-                <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                <Text style={style.contentStyle}>
-                    In each line referring to the value of the previous line:{"\n"}
-                    a is the previous b, b is the previous r{"\n"}
-                    a2 = a1 - q * a2{"\n"}
-                    b2 = b1 - q * b2
-                    {"\n\n"}
-                </Text>
-                <Text style={style.contentHead}>
-                    Fill in each line till r = 0.
-                </Text>
+                <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 <Image
-                    source={require(img)}
-                    style={{ width: u * 0.9, height: u * 0.3, alignSelf: 'center', resizeMode: 'stretch', backgroundColor: '#aaa' }}
+                    source={require('./pic/NormalT2.png')}
+                    style={{ width: u * 0.414 * m, height: u * 0.165 * m, alignSelf: 'center' }}
                 />
+                <Text style={style.contentStyle}>
+                    Calculate the values of q and r.
+                    282 / 23 = 12 r6.
+                    Set r as 6 and q as 12.
+                </Text>
             </View>
         )
     }

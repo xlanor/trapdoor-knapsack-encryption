@@ -16,19 +16,13 @@ export default class page1 extends Component {
         let style = styles.GCDPages
         return (
             <View style={style.containerStyle}>
-                <Text style={style.titleStyle}>GCD and Euclidean Algorithm</Text>
+                <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 <Text style={style.contentStyle}>
-                    The greatest common divisor (GCD) of two integers n1 and n2,
-                    which are not all zero, is the largest positive integer that divides n1 and n2.
+                    The Euclidean algorithm is an efficient method of finding the Greatest Common Denominator(GCD)
+                    of 2 different integers.
                     {"\n\n"}
-                    It is denoted gcd(n1, n2)
-                    {"\n\n"}
-                    For example:{"\n"}
-                    gcd(30, 15)  = 15{"\n"}
-                    gcd(30, -12) = 6
-                    {"\n\n"}
-                    We can calculate the gcd using Euclidean algorithm.
-                    {"\n"}
+                    Usually when someone asks for a notation such as gcd(a, b) = x{"\n"}
+                    They are asking what is the GCD of a and b.
                 </Text>
             </View>
         )
