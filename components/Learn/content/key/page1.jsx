@@ -71,9 +71,35 @@ class KeyPage extends Component {
         pkLoaded: false,
         showSuperIncreasingInfoPopUp: false,
         errorMessage: "",
+        keyboardVisiblity: false,
       }
     
    }
+   componentDidMount(){
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this.handleKeyboardDidShow,
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this.keyboardDidHide,
+    );
+  }
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+  handleKeyboardDidShow = event => {
+    this.setState({
+      keyboardVisiblity: true,
+    })
+  }
+
+  keyboardDidHide = event =>  {
+    this.setState({
+      keyboardVisiblity: false,
+    })
+  }
    superIncreasingInfoPopUp = () => {
       return (
         <View>
@@ -203,6 +229,7 @@ class KeyPage extends Component {
     total.size = splitKey.length - 1
     total.total = currentMax
     total.arrOfVals = splitKey
+    Keyboard.dismiss()
     return true;
    }
 
@@ -221,6 +248,7 @@ class KeyPage extends Component {
           actions.UPDATE_PRIVATE_KEY_SUM_ACTION(total.total)
           actions.UPDATE_PRIVATE_KEY_STRING_ACTION(currentPrivateKey)
           actions.UPDATE_PRIVATE_KEY_ARRAY_ACTION(total.arrOfVals)
+          Keyboard.dismiss()
         }
       }
 
@@ -239,6 +267,7 @@ class KeyPage extends Component {
             // integer is greater.
             actions.ALLOW_NEXT_PAGE_ACTION();
             actions.UPDATE_MODULO_ACTION(curMod);
+            Keyboard.dismiss()
         }
       }
 
@@ -264,6 +293,7 @@ class KeyPage extends Component {
         // have to relock decryption to force them to generate pk and inverse again.
         actions.DECRYPT_LOCK_ACTION()
         actions.ENCRYPT_LOCK_ACTION() 
+        Keyboard.dismiss()
         this.setState({
           inverseLoaded: false,
           pkLoaded: false,
@@ -530,7 +560,7 @@ class KeyPage extends Component {
     }
    }
    render(){
-    const { showError, errorMessage, showSuperIncreasingInfoPopUp } = this.state;
+    const { showError, errorMessage, showSuperIncreasingInfoPopUp, keyboardVisiblity } = this.state;
     let pageNo = this.checkPageNo()
      return(
        <View style={styles.page1.learnTabPad}>
@@ -549,20 +579,29 @@ class KeyPage extends Component {
            : null
          }
          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-           <View>
-              <View style={styles.page1.textStyleTitleWrapper}>
-                <Text style={styles.page1.textStyleTitleCenter}>Key Generation</Text>
+              <View>
+           {
+             keyboardVisiblity
+             ? null
+             : (
+               <>
+                <View style={styles.page1.textStyleTitleWrapper}>
+                  <Text style={styles.page1.textStyleTitleCenter}>Key Generation</Text>
 
-              </View>
-            <View style={{alignItems: 'center'}}>
+                </View>
+                <View style={{alignItems: 'center'}}>
 
-              {
-                pageNo <= 5 ? 
-                <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image>:
-                null
-              }
-            </View>
-          </View>
+                  {
+                    pageNo <= 5 ? 
+                    <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image>:
+                    null
+                  }
+                </View>
+                </>
+             )
+           }
+           </View>
+         
         </TouchableWithoutFeedback>
         {
           this.getPageElements()

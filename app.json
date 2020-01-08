@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-    "version": "1.0.4",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -24,7 +24,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.traplearn.info"
+      "bundleIdentifier": "CY-ACCB8C90-8AC7-11E9-B8A5-5F678AA1AEC5.supplies.wall.Home-Depot"
     },
     "android": {
       "package": "com.traplearn.info"

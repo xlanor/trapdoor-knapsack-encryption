@@ -85,7 +85,28 @@ const multipleButtonRight = {
   flex: 1,
   marginLeft: Dimensions.get('window').width * 0.01,
 }
- 
+
+const encryptText = {
+  fontFamily: 'comfortaa',
+  fontSize: 16,
+}
+
+const encryptTextGray = {
+  fontFamily: 'comfortaa',
+  color: COLORS.GREY_1,
+  fontSize: 14,
+  marginTop: Dimensions.get('window').height * 0.005,
+
+}
+
+const secondParaView = {
+  marginTop: Dimensions.get('window').height * 0.02,
+}
+
+const tableView = {
+
+  marginTop: Dimensions.get('window').height * 0.02,
+}
 
 export default {
   textStyle,
@@ -100,5 +121,9 @@ export default {
   learnTabPad,
   buttonRow,
   multipleButtonLeft,
-  multipleButtonRight
+  multipleButtonRight,
+  encryptText,
+  encryptTextGray,
+  secondParaView,
+  tableView
 };
