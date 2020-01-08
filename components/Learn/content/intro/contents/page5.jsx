@@ -134,7 +134,7 @@ export default class page5 extends Component {
                     These three are kept as the <Text style={style.secretKey} onPress={() => { this.setState({ showSecretKeyInfoPopUp: true, }) }}>
                         <Text style={style.underline}>secret key</Text>
                     </Text> by the owner and not distributed.
-                    
+                    {"\n"}
                 </Text>
             </View>
         )

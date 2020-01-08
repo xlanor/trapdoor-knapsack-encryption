@@ -94,8 +94,7 @@ export default class page4 extends Component {
         return (
             <View>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The cryptosystem was implemented in multiple layers the
-                    more difficult knapsack problem would still be secure.
+                    The cryptosystem was implemented in multiple layers thus would still be secure.
                 </Text>
             </View>
         )
@@ -192,23 +191,3 @@ export default class page4 extends Component {
         )
     }
 }
-/**OLD STUFF
- * A quick reference to how he broke the system can be found in this link
-                    {"\n"}
-                    <Text style={{color: '#2980B9'}}
-                        onPress={() => Linking.openURL('https://link.springer.com/chapter/10.1007%2F978-1-4757-0602-4_29')}>
-                    https://link.springer.com/chapter/10.1007%2F978-1-4757-0602-4_29
-                    </Text>
-                    {"\n\n"}
-                    In the same year Adi Shamir the inventor of RSA cryptosystem that is still used today posted an article on an algorithm to break the cryptosystem
-                    {"\n"}
-                    <Text style={{color: '#2980B9'}}
-                        onPress={() => Linking.openURL('https://ieeexplore.ieee.org/document/4568386')}>
-                    https://ieeexplore.ieee.org/document/4568386
-                    </Text>
-                    {"\n\n"}
-                    Merkle awarded the price to Brickell. This marked the end of the trapdoor knapsack cryptosystem.
-                    {"\n\n"}
-                    However, we can still learn from the concepts of cryptography from trapdoor knapsack as it is easy to understand compared to many other cryptographic systems.
-
- */
