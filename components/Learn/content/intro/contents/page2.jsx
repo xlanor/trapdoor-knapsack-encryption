@@ -88,16 +88,20 @@ export default class page2 extends Component {
                 <Text style={style.contentStyle}>
                     A good example of the <Text style={style.links} onPress={() => { this.setState({ showOneWayInfoPopUp: true, }) }}>
                         one-way trapdoor function
-                    </Text>:
-                    {"\n\n"}
-                    <Text style={style.links} onPress={() => { this.setState({ showDiscreteLogInfoPopUp: true, }) }}>
-                        Discrete Logarithm problem
-                    </Text>.
-                    {"\n"}
+                    </Text>:{"\n"}
+                </Text>
+                <Text style={{alignSelf:"center"}}>
+                    <Text style={style.contentStyle}>
+                        <Text style={style.links} onPress={() => { this.setState({ showDiscreteLogInfoPopUp: true, }) }}>
+                            Discrete Logarithm problem.
+                        </Text>
+                    </Text>
+                </Text>
+                <Text style={style.contentStyle}>
                     Assuming we have a function:
                 </Text>
 
-                <View style={{height: u * 0.038}}>
+                <View style={{height: u * 0.058, paddingTop: u * 0.01, paddingBottom: u * 0.01}}>
                     <Image
                         source={require('./pic/DiscreteLogProblem.png')}
                         style={style.imgStyle}
@@ -105,7 +109,8 @@ export default class page2 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    Given <Text style={{color:'#9B59B6'}}>b</Text>, we would be unable to find <Text style={{color:'#1ABC9C'}}>a</Text> and <Text style={{color:'#E74C3C'}}>k</Text> in a reasonable time.
+                    Given <Text style={{color:'#9B59B6'}}>b</Text>,
+                    we would be unable to find <Text style={{color:'#1ABC9C'}}>a</Text> and <Text style={{color:'#E74C3C'}}>k</Text> in a reasonable time.
                     {"\n"}
                 </Text>
             </View>
