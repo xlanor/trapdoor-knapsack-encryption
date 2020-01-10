@@ -11,7 +11,7 @@ import {
 import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
-import Alert from '../../../../../assets/images/alert.png';
+import Info from '../../../../../assets/images/InfoIcon.png';
 // import stylesheet.
 import styles from '../styles';
 
@@ -131,7 +131,7 @@ export default class page4 extends Component {
                 {
                     showAdlemanArticleInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.adlemanArticleInfoPopUp()}
                             callback={() => { this.setState({ showAdlemanArticleInfoPopUp: false, }) }}
                             visibility={showAdlemanArticleInfoPopUp} />
@@ -140,7 +140,7 @@ export default class page4 extends Component {
                 {
                     showShamirArticleInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.shamirArticleInfoPopUp()}
                             callback={() => { this.setState({ showShamirArticleInfoPopUp: false, }) }}
                             visibility={showShamirArticleInfoPopUp} />
@@ -149,7 +149,7 @@ export default class page4 extends Component {
                 {
                     showPriceInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.priceInfoPopUp()}
                             callback={() => { this.setState({ showPriceInfoPopUp: false, }) }}
                             visibility={showPriceInfoPopUp} />
@@ -158,7 +158,7 @@ export default class page4 extends Component {
                 {
                     showBrickellInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.brickellInfoPopUp()}
                             callback={() => { this.setState({ showBrickellInfoPopUp: false, }) }}
                             visibility={showBrickellInfoPopUp} />

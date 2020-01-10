@@ -11,7 +11,7 @@ import {
 import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
-import Alert from '../../../../../assets/images/alert.png';
+import Info from '../../../../../assets/images/InfoIcon.png';
 // import stylesheet.
 import styles from '../styles';
 
@@ -107,7 +107,7 @@ export default class page3 extends Component {
                 {
                     showTrapdoorKnapsackAlgoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.trapdoorKnapsackAlgoPopUp()}
                             callback={() => { this.setState({ showTrapdoorKnapsackAlgoPopUp: false, }) }}
                             visibility={showTrapdoorKnapsackAlgoPopUp} />
@@ -116,7 +116,7 @@ export default class page3 extends Component {
                 {
                     showRalphMerkleInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.ralphMerkleInfoPopUp()}
                             callback={() => { this.setState({ showRalphMerkleInfoPopUp: false, }) }}
                             visibility={showRalphMerkleInfoPopUp} />
@@ -125,7 +125,7 @@ export default class page3 extends Component {
                 {
                     showMartinHellmanInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.martinHellmanInfoPopUp()}
                             callback={() => { this.setState({ showMartinHellmanInfoPopUp: false, }) }}
                             visibility={showMartinHellmanInfoPopUp} />
@@ -134,7 +134,7 @@ export default class page3 extends Component {
                 {
                     showProblemsInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.problemsInfoPopUp()}
                             callback={() => { this.setState({ showProblemsInfoPopUp: false, }) }}
                             visibility={showProblemsInfoPopUp} />

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
-import Alert from '../../../../../assets/images/alert.png';
+import Info from '../../../../../assets/images/InfoIcon.png';
 // import stylesheet.
 import styles from '../styles';
 
@@ -48,7 +48,7 @@ export default class page1 extends Component {
                 {
                     showEuclideanInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.euclideanInfoPopUp()}
                             callback={() => { this.setState({ showEuclideanInfoPopUp: false, }) }}
                             visibility={showEuclideanInfoPopUp} />
