@@ -1,7 +1,6 @@
 /* For Redux - List of actions that can affect our states */
 export const COUNTER_CHANGE = 'COUNTER_CHANGE';
 // hint actions
-export const HINT_SELECT = 'HINT_SELECT';
 export const HINT_DONE = 'HINT_DONE';
 export const HINT_NOTDONE = 'HINT_NOTDONE';
 // intro actions
@@ -105,6 +104,3 @@ export const UPDATE_SIMULATOR_MULTIPLIER_VALID = "UPDATE_SIMULATOR_MULTIPLIER_VA
 export const UPDATE_SIMULATOR_PADDING = "UPDATE_SIMULATOR_PADDING";
 export const UPDATE_SIMULATOR_RESET_DEC = "UPDATE_SIMULATOR_RESET_DEC";
 export const UPDATE_SIMULATOR_RESET_ENC = "UPDATE_SIMULATOR_RESET_ENC";
-
-//for handling state of hints
-export const RESET_HINT = "RESET_HINT";

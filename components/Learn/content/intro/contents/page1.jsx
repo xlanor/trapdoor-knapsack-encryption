@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // importing redux defined actions
 import {
-    HINT_SELECT_ACTION,
     HINT_DONE_ACTION,
-    HINT_NOTDONE_ACTION
+    HINT_NOTDONE_ACTION,
+    HINT_RESET_ACTION,
+    HINT_UNLOCK_ACTION
 } from '../../../../../actions/hint';
 
 import {
@@ -36,14 +37,16 @@ class page1 extends Component {
         }
     }
     checkHintState = () => {
-        const { lockState } = this.props
-        let state = lockState.hintReducer.hintLocked;
-        if (state){
+        const { lockState, actions } = this.props;
+        actions.HINT_RESET_ACTION();
+        
+        if (lockState.hintReducer.hintLocked) {
+            actions.HINT_DONE_ACTION();
             <AlertPopUp
-            icon={Info}
-            renderedBlocks={this.hintInfoPopUp()}
-            callback={() => { this.setState({ showHintInfoPopUp: false, }) }}
-            visibility={showHintInfoPopUp} />
+                icon={Info}
+                renderedBlocks={this.hintInfoPopUp()}
+                callback={() => { this.setState({ showHintInfoPopUp: false, }) }}
+                visibility={showHintInfoPopUp} />
         }
     }
     hintInfoPopUp = () => {
@@ -112,9 +115,10 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({
-        HINT_SELECT_ACTION,
         HINT_DONE_ACTION,
-        HINT_NOTDONE_ACTION
+        HINT_NOTDONE_ACTION,
+        HINT_RESET_ACTION,
+        HINT_UNLOCK_ACTION
     }, dispatch)
 });
 
