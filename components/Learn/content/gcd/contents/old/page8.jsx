@@ -11,27 +11,25 @@ import {
 // import stylesheet.
 import styles from '../styles';
 
-export default class page11 extends Component {
+export default class page8 extends Component {
     render() {
         let style = styles.GCDPages
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
                 
+                
                 <View style={style.imgContainer}>
                     <Image
-                        source={require('./pic/ET6.png')}
+                        source={require('./pic/ET1.png')}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
-                    Repeat for the remaining rows.
+                    With the Extended Euclidean algorithm, the easiest way to visualise it is via a table.
                     {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
-                    {"\n"}
+                    Construct a table like the original Euclidean algorithm but with 4 more columns
                 </Text>
             </View>
         )

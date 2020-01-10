@@ -17,23 +17,34 @@ export default class page10 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                
+          
                 <View style={style.imgContainer}>
                     <Image
-                        source={require('./pic/ET4.png')}
+                        source={require('./pic/ET5.png')}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
-                    Remember the following fomulas:{"\n"}
-                    a1 = a2, a2 = a1 - q * a2{"\n"}
-                    b1 = b2, b2 = b1 - q * b2
+                    Use the following <Text style={style.bold}>
+                        formulas
+                    </Text> for the rest of the columns:{"\n"}
+                    a1 = a2{"\n"}
+                    <Text style={style.highlight}>a2 = a1 - q * a2</Text>{"\n"}
+                    b1 = b2{"\n"}
+                    <Text style={style.highlight}>b2 = b1 - q * b2</Text>{"\n"}
                     {"\n\n"}
-                    Fill in the next row like in the standard Euclidean algorithm.
+                    
+                    Calculate <Text style={style.bold}>
+                        a2
+                    </Text> and <Text style={style.bold}>
+                        b2
+                    </Text> using the formula above.
                     {"\n\n"}
-                    Now to get a1 and b1,
-                    look at the previous row's a2 and b2 respectively.
+                    <Text style={style.bold}>
+                        Notice all the values shifting left?
+                    </Text>
+                    {"\n"}
                 </Text>
             </View>
         )

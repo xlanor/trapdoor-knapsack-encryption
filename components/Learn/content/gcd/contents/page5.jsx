@@ -26,10 +26,19 @@ export default class page5 extends Component {
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    To get the next row:
+                    Fill in the next row:
                     {"\n\n"}
-                    Set a as previous b{"\n"}
-                    Set b as previous r
+                    Let <Text style={style.valA}>
+                    a
+                    </Text> be the <Text style={style.bold}>
+                    previous b
+                    </Text>.{"\n"}
+                    Let <Text style={style.valB}>
+                    b
+                    </Text> be the <Text style={style.bold}>
+                    previous r
+                    </Text>.
+                    {"\n"}
                 </Text>
             </View>
         )

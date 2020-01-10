@@ -17,21 +17,21 @@ export default class page11 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                
+          
                 <View style={style.imgContainer}>
                     <Image
-                        source={require('./pic/ET6.png')}
+                        source={require('./pic/ET5.png')}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
-                    Repeat for the remaining rows.
+                    Remember the following fomulas:{"\n"}
+                    a1 = a2, a2 = a1 - q * a2{"\n"}
+                    b1 = b2, b2 = b1 - q * b2
                     {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
-                    {"\n"}
+                    Calculate a2 and b2 with the formula above.{"\n"}
+                    Notice all the values shifting left?
                 </Text>
             </View>
         )

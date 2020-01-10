@@ -26,24 +26,11 @@ export default class page6 extends Component {
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    Repeat for the rest of the rows.
+                    Fill in the rest.{"\n"}
+                    Once r = 0, Stop.
                     {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
-                    {"\n\n"}
-                    Now, look at the <Text style={style.bold}>
-                        last value
-                    </Text> of <Text style={style.valB}>
-                        b
-                    </Text> which is <Text style={style.bold}>
-                        GCD of
-                    </Text> 23 and 282.
-                    {"\n\n"}
-                    Hence, <Text style={style.bold}>
-                        GCD(282, 23) = 1
-                    </Text>.
-                    {"\n"}
+                    Now look at the last value of b.{"\n"}
+                    Since b = 1, GCD(282, 23) = 1.
                 </Text>
             </View>
         )

@@ -11,13 +11,13 @@ import {
 // import stylesheet.
 import styles from '../styles';
 
-export default class page11 extends Component {
+export default class page13 extends Component {
     render() {
         let style = styles.GCDPages
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                
+               
                 <View style={style.imgContainer}>
                     <Image
                         source={require('./pic/ET6.png')}
@@ -26,12 +26,12 @@ export default class page11 extends Component {
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    Repeat for the remaining rows.
+                    To find out the multiplicative inverse.{"\n"}
+                    1. The GCD must be 1 like in this case.{"\n"}
+                    2. Since 23 is under b, look at b2 final value.
                     {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
-                    {"\n"}
+                    If you find that the gcd is not 1, there is no multiplicative inverse.{"\n"}
+                    If you did the table differently and the value is under a then look at a2.
                 </Text>
             </View>
         )

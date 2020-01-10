@@ -11,7 +11,6 @@ import page10 from './page10';
 import page11 from './page11';
 import page12 from './page12';
 import page13 from './page13';
-import page14 from './page14';
 
 
 export default {
@@ -28,5 +27,4 @@ export default {
     page11,
     page12,
     page13,
-    page14,
 };
