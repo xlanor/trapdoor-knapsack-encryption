@@ -1,29 +1,23 @@
 import {
-    HINT_SELECT,
     HINT_DONE,
     HINT_NOTDONE,
-    RESET_HINT
+    RESET_ALL,
+    UNLOCK_ALL,
 } from '../constants';
 
-// we will have different tab names
-// to be determined.
 const initialState = {
-    hintSelected: true,
+    hintLocked: true,
+}
+
+const noHint = {
     hintLocked: false,
 }
 
 const hintReducer = (state = initialState, action) => {
     switch (action.type) {
-        case HINT_SELECT:
-            return {
-                ...state,
-                hintSelected: true,
-                hintLocked: false,
-            };
         case HINT_NOTDONE:
             return {
                 ...state,
-                hintSelected: false,
                 hintLocked: true,
             };
         case HINT_DONE:
@@ -31,10 +25,14 @@ const hintReducer = (state = initialState, action) => {
                 ...state,
                 hintLocked: false,
             };
-        case RESET_HINT:
-          return {
-            ...initialState
-          };
+        case RESET_ALL:
+            return {
+                ...initialState
+            };
+        case UNLOCK_ALL:
+            return {
+                ...noHint
+            }
         default: return state;
     }
 }
