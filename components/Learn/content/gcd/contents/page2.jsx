@@ -26,12 +26,31 @@ export default class page2 extends Component {
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    With the Euclidean algorithm, the easiest way to visualise it is via a table.
+                    With the  <Text style={style.bold}>
+                        Euclidean algorithm
+                    </Text>, the easiest way to visualise it is via a table.
                     {"\n\n"}
-                    Construct a table with 4 columns.{"\n"}
-                    a and b are your integers you want to compare{"\n"}
-                    q is the quotient when dividing a by b{"\n"}
-                    r is the remainder when dividing a by b
+                    Construct a table with <Text style={style.highlight}>
+                        4 columns
+                    </Text>.{"\n"}
+                    <Text style={style.valA}>
+                        a
+                    </Text> and <Text style={style.valB}>
+                        b
+                    </Text> are your integers you want to compare.{"\n"}
+                    <Text style={style.bold}>
+                        q
+                    </Text> is the <Text style={style.bold}>
+                        quotient
+                    </Text> when dividing a by b.{"\n"}
+                    <Text style={style.bold}>
+                        r
+                    </Text> is the <Text style={style.bold}>
+                        remainder
+                    </Text> when dividing <Text style={style.valA}>
+                        a
+                    </Text> by <Text style={style.valB}>b</Text>.
+                    {"\n"}
                 </Text>
             </View>
         )

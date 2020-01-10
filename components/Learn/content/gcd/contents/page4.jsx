@@ -26,10 +26,32 @@ export default class page4 extends Component {
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    Calculate the values of q and r.{"\n"}
-                    282 / 23 = 12 r6.
-                    {"\n\n"}
-                    Set r as 6 and q as 12.
+                    Calculate the values of <Text style={style.bold}>
+                        q
+                    </Text> and <Text style={style.bold}>
+                        r
+                    </Text>:
+                </Text>
+                <Text style={{alignSelf:"center"}}>
+                    <Text style={style.contentStyle}>
+                        282 / 23 => <Text style={style.highlight}>
+                            q = 12, r = 6
+                    </Text>
+                    </Text>
+                </Text>
+                    
+                <Text style={style.contentStyle}>
+                    {"\n"}
+                    Let <Text style={style.bold}>
+                        r
+                    </Text> be <Text style={style.highlight}>
+                        6
+                    </Text> and <Text style={style.bold}>
+                        q
+                    </Text> be <Text style={style.highlight}>
+                        12
+                    </Text>.
+                    {"\n"}
                 </Text>
             </View>
         )

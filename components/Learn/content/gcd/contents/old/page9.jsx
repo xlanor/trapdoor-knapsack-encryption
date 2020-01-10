@@ -11,7 +11,7 @@ import {
 // import stylesheet.
 import styles from '../styles';
 
-export default class page11 extends Component {
+export default class page9 extends Component {
     render() {
         let style = styles.GCDPages
         return (
@@ -20,18 +20,18 @@ export default class page11 extends Component {
                 
                 <View style={style.imgContainer}>
                     <Image
-                        source={require('./pic/ET6.png')}
+                        source={require('./pic/ET3.png')}
                         style={style.imgStyle}
                     />
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    Repeat for the remaining rows.
-                    {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
-                    {"\n"}
+                    For simplicity we are going to reuse the same 2 values, 282 and 23.{"\n\n"}
+                    Now for the remaining boxes remember the weights{"\n"}
+                    a1 = 1{"\n"}
+                    a2 = 0{"\n"}
+                    b1 = 0{"\n"}
+                    b2 = 1
                 </Text>
             </View>
         )

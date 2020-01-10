@@ -26,10 +26,32 @@ export default class page3 extends Component {
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    Lets say we want to find the GCD of 23 and 282.
+                    Now, we want to find the <Text style={style.bold}>
+                        GCD
+                    </Text> of <Text style={style.highlight}>
+                        23
+                    </Text> and <Text style={style.highlight}>
+                        282
+                    </Text>.
                     {"\n\n"}
-                    Always set a as the larger number and b as the smaller number.{"\n"}
-                    So set a to 282 and b to 23.
+                    <Text style={style.bold}>
+                        Always set <Text style={style.valA}>
+                        a
+                        </Text> as the larger number and <Text style={style.valB}>
+                        b
+                        </Text> as the smaller number. 
+                    </Text>
+                    {"\n\n"}
+                    Now, let <Text style={style.valA}>
+                        a
+                    </Text> be <Text style={style.highlight}>
+                        282
+                    </Text> and <Text style={style.valB}>
+                        b
+                    </Text> by <Text style={style.highlight}>
+                        23
+                    </Text>.
+                    {"\n"}
                 </Text>
             </View>
         )

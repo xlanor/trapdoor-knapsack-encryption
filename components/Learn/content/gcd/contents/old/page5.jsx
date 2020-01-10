@@ -11,27 +11,25 @@ import {
 // import stylesheet.
 import styles from '../styles';
 
-export default class page11 extends Component {
+export default class page5 extends Component {
     render() {
         let style = styles.GCDPages
         return (
             <View style={style.containerStyle}>
-                <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
+                <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 
                 <View style={style.imgContainer}>
                     <Image
-                        source={require('./pic/ET6.png')}
+                        source={require('./pic/NormalT3.png')}
                         style={style.imgStyle}
                     />
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    Repeat for the remaining rows.
+                    To get the next row:
                     {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
-                    {"\n"}
+                    Set a as previous b{"\n"}
+                    Set b as previous r
                 </Text>
             </View>
         )

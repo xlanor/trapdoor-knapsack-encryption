@@ -17,7 +17,7 @@ export default class page13 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-               
+                
                 <View style={style.imgContainer}>
                     <Image
                         source={require('./pic/ET6.png')}
@@ -26,12 +26,24 @@ export default class page13 extends Component {
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    To find out the multiplicative inverse.{"\n"}
-                    1. The GCD must be 1 like in this case.{"\n"}
-                    2. Since 23 is under b, look at b2 final value.
+                    Now, look at the <Text style={style.bold}>
+                        last value
+                    </Text> of <Text style={style.bold}>
+                        b2
+                    </Text> which is -49.
                     {"\n\n"}
-                    If you find that the gcd is not 1, there is no multiplicative inverse.{"\n"}
-                    If you did the table differently and the value is under a then look at a2.
+                    If value is <Text style={style.bold}>positive</Text>,
+                    no further steps and it is the <Text style={style.bold}>
+                        multiplicative inverse
+                    </Text>.{"\n"}
+                    In this case, the value is <Text style={style.bold}>negative</Text>,
+                    an extra step is required:{"\n"}
+                    <Text style={style.bold}>Inverse</Text> = 282 - 49
+                    = <Text style={style.highlight}>233</Text>
+                    {"\n\n"}
+                    Hence, <Text style={style.bold}>multiplicative inverse</Text> of
+                    23 mod 282 = <Text style={style.highlight}>233 mod 282</Text>.
+                    {"\n"}
                 </Text>
             </View>
         )

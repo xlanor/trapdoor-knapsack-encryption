@@ -38,34 +38,17 @@ const links = {
     fontFamily: 'comfortaa',
     color: '#2980B9'
 }
-const superIncreasingKnapsack = {
-    fontFamily: 'comfortaa-bold',
-    color: '#C0392B'
+const valA = {
+    //fontFamily: 'comfortaa-bold',
+    color: '#16a085'
 }
-const privateKey = {
-    fontFamily: 'comfortaa-bold',
-    color: '#C0392B'
-}
-const secretKey = {
-    fontFamily: 'comfortaa-bold',
-    color: '#0404fb'
-}
-
-const modulus = {
-    fontFamily: 'comfortaa-bold',
-    color: '#16A085'
-}
-const publicKey = {
-    fontFamily: 'comfortaa-bold',
-    color: '#00b0f0'
-}
-const multiplier = {
-    fontFamily: 'comfortaa-bold',
-    color: '#E67E22'
+const valB = {
+    //fontFamily: 'comfortaa-bold',
+    color: '#f25f5c'
 }
 
 const highlight = {
-    backgroundColor: '#5afc03',
+    backgroundColor: '#c7ea46',
 }
 
 const underline = {
@@ -116,15 +99,11 @@ export default {
     contentHead,
     contentStyle,
     links,
+    valA,
+    valB,
     keyword,
     underline,
     highlight,
-    superIncreasingKnapsack,
-    privateKey,
-    secretKey,
-    modulus,
-    publicKey,
-    multiplier,
     bold,
     popUpTextStyle,
     popUpTextStyleBold,

@@ -20,18 +20,36 @@ export default class page9 extends Component {
                 
                 <View style={style.imgContainer}>
                     <Image
-                        source={require('./pic/ET3.png')}
+                        source={require('./pic/ET4.png')}
                         style={style.imgStyle}
                     />
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    For simplicity we are going to reuse the same 2 values, 282 and 23.{"\n\n"}
-                    Now for the remaining boxes remember the weights{"\n"}
-                    a1 = 1{"\n"}
-                    a2 = 0{"\n"}
-                    b1 = 0{"\n"}
-                    b2 = 1
+                    Next, fill the next row like Euclidean algorithm:{"\n"}
+                    <Text style={style.bold}>
+                        Let <Text style={style.valA}>
+                            a
+                        </Text> be previous b.{"\n"}
+                        Let <Text style={style.valB}>
+                            b
+                        </Text> be previous r.
+                    </Text>
+                    {"\n\n"}
+                    Use the following <Text style={style.bold}>
+                        formulas
+                    </Text> for the rest of the columns:{"\n"}
+                    <Text style={style.highlight}>a1 = a2</Text>{"\n"}
+                    a2 = a1 - q * a2{"\n"}
+                    <Text style={style.highlight}>b1 = b2</Text>{"\n"}
+                    b2 = b1 - q * b2
+                    {"\n\n"}
+                    Let a1 be <Text style={style.bold}>
+                        previous a2
+                    </Text> and b1 be <Text style={style.bold}>
+                        previous b2
+                    </Text>.
+                    {"\n"}
                 </Text>
             </View>
         )

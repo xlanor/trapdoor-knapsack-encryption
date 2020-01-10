@@ -11,7 +11,7 @@ import {
 // import stylesheet.
 import styles from '../styles';
 
-export default class page11 extends Component {
+export default class page12 extends Component {
     render() {
         let style = styles.GCDPages
         return (
@@ -26,12 +26,8 @@ export default class page11 extends Component {
                 </View>
                 
                 <Text style={style.contentStyle}>
-                    Repeat for the remaining rows.
-                    {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
-                    {"\n"}
+                    Fill in the remaining rows.{"\n"}
+                    Once r = 0, Stop.
                 </Text>
             </View>
         )

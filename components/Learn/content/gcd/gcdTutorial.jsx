@@ -67,11 +67,7 @@ class GCDPage extends Component {
     let Page = contents.page13;
     return <Page />
   }
-  getPage14 = () => {
-    let Page = contents.page14;
-    return <Page />
-  }
-
+  
   checkPageNo = () => {
     const { lockState } = this.props;
 
@@ -93,7 +89,6 @@ class GCDPage extends Component {
       case 11: return this.getPage11();
       case 12: return this.getPage12();
       case 13: return this.getPage13();
-      case 14: return this.getPage14();
       default: return this.getPage1();
     }
   }

@@ -11,27 +11,16 @@ import {
 // import stylesheet.
 import styles from '../styles';
 
-export default class page11 extends Component {
+export default class page7 extends Component {
     render() {
         let style = styles.GCDPages
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                
-                <View style={style.imgContainer}>
-                    <Image
-                        source={require('./pic/ET6.png')}
-                        style={style.imgStyle}
-                    />
-                </View>
-                
                 <Text style={style.contentStyle}>
-                    Repeat for the remaining rows.
+                    The point of this algorithm is to find out whether there is a multiplicative inverse and what value it is.
                     {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
-                    {"\n"}
+                    It is an extension of the standard euclidean algorithm.
                 </Text>
             </View>
         )
