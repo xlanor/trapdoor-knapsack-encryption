@@ -32,21 +32,11 @@ class page1 extends Component {
         super(props);
 
         // local state not affected by redux
-        this.state = {
-            showQuestionInfoPopUp: false,
-        }
-    }
-    checkHintState = () => {
         const { lockState, actions } = this.props;
-        actions.HINT_RESET_ACTION();
-        
-        if (lockState.hintReducer.hintLocked) {
-            actions.HINT_DONE_ACTION();
-            <AlertPopUp
-                icon={Info}
-                renderedBlocks={this.hintInfoPopUp()}
-                callback={() => { this.setState({ showHintInfoPopUp: false, }) }}
-                visibility={showHintInfoPopUp} />
+        //actions.HINT_RESET_ACTION();
+        this.state = {
+            showHintInfoPopUp: lockState.hint.hintLocked,
+            showQuestionInfoPopUp: false,
         }
     }
     hintInfoPopUp = () => {
@@ -68,7 +58,7 @@ class page1 extends Component {
         )
     }
     render() {
-        const { showQuestionInfoPopUp } = this.state
+        const { showHintInfoPopUp, showQuestionInfoPopUp } = this.state
         let style = styles.PageStyle
         let u = Dimensions.get('window').height
         let m = 0.4592
@@ -76,7 +66,17 @@ class page1 extends Component {
         return (
             <View style={style.containerStyle}>
                 {
-                    this.checkHintState()
+                    showHintInfoPopUp ? (
+                        console.log("HINT TRIGGERED"),
+                        <AlertPopUp
+                            icon={Info}
+                            renderedBlocks={this.hintInfoPopUp()}
+                            callback={() => {
+                                this.setState({ showHintInfoPopUp: false, });
+                                //actions.HINT_DONE_ACTION();
+                            }}
+                            visibility={showHintInfoPopUp} />
+                    ) : console.log("HINT NOT TRIGGERED")
                 }
                 {
                     showQuestionInfoPopUp
