@@ -11,7 +11,7 @@ import {
 import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
-import Alert from '../../../../../assets/images/alert.png';
+import Info from '../../../../../assets/images/InfoIcon.png';
 
 // import stylesheet.
 import styles from '../styles';
@@ -58,7 +58,7 @@ export default class page2 extends Component {
                 {
                     showOneWayInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.oneWayInfoPopUp()}
                             callback={() => { this.setState({ showOneWayInfoPopUp: false, }) }}
                             visibility={showOneWayInfoPopUp} />
@@ -67,7 +67,7 @@ export default class page2 extends Component {
                 {
                     showDiscreteLogInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.discreteLogInfoPopUp()}
                             callback={() => { this.setState({ showDiscreteLogInfoPopUp: false, }) }}
                             visibility={showDiscreteLogInfoPopUp} />

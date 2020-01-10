@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
-import Alert from '../../../../../assets/images/alert.png';
+import Info from '../../../../../assets/images/InfoIcon.png';
 // import stylesheet.
 import styles from '../styles';
 
@@ -77,7 +77,7 @@ export default class page5 extends Component {
                 {
                     showPrivateKeyInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.privateKeyInfoPopUp()}
                             callback={() => { this.setState({ showPrivateKeyInfoPopUp: false, }) }}
                             visibility={showPrivateKeyInfoPopUp} />
@@ -86,7 +86,7 @@ export default class page5 extends Component {
                 {
                     showModulusInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.modulusInfoPopUp()}
                             callback={() => { this.setState({ showModulusInfoPopUp: false, }) }}
                             visibility={showModulusInfoPopUp} />
@@ -95,7 +95,7 @@ export default class page5 extends Component {
                 {
                     showMultiplierInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.multiplierInfoPopUp()}
                             callback={() => { this.setState({ showMultiplierInfoPopUp: false, }) }}
                             visibility={showMultiplierInfoPopUp} />
@@ -104,7 +104,7 @@ export default class page5 extends Component {
                 {
                     showSecretKeyInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.secretKeyInfoPopUp()}
                             callback={() => { this.setState({ showSecretKeyInfoPopUp: false, }) }}
                             visibility={showSecretKeyInfoPopUp} />

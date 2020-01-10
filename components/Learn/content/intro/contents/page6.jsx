@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
-import Alert from '../../../../../assets/images/alert.png';
+import Info from '../../../../../assets/images/InfoIcon.png';
 // import stylesheet.
 import styles from '../styles';
 
@@ -66,7 +66,7 @@ export default class page6 extends Component {
                 {
                     showSuperIncreasingInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.superIncreasingInfoPopUp()}
                             callback={() => { this.setState({ showSuperIncreasingInfoPopUp: false, }) }}
                             visibility={showSuperIncreasingInfoPopUp} />
@@ -75,7 +75,7 @@ export default class page6 extends Component {
                 {
                     showDifficultKnapsackInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.difficultKnapsackInfoPopUp()}
                             callback={() => { this.setState({ showDifficultKnapsackInfoPopUp: false, }) }}
                             visibility={showDifficultKnapsackInfoPopUp} />
@@ -84,7 +84,7 @@ export default class page6 extends Component {
                 {
                     showPersonInfoPopUp
                         ? <AlertPopUp
-                            icon={Alert}
+                            icon={Info}
                             renderedBlocks={this.personInfoPopUp()}
                             callback={() => { this.setState({ showPersonInfoPopUp: false, }) }}
                             visibility={showPersonInfoPopUp} />
