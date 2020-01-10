@@ -8,13 +8,14 @@ import currentTabAndPageReducer from '../reducers/currentTabAndPageReducer';
 import currentParametersReducer from '../reducers/currentParametersReducer';
 import currentEncryptionReducer from '../reducers/currentEncryptionReducer';
 import simulatorReducer from '../reducers/simulatorReducer';
+import hintReducer from '../reducers/hintReducer';
 
 
 const persistConfig = {
   key:"root",
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
-  whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption']
+  whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption','hint']
 }
 
 const rootReducer = combineReducers(
@@ -25,6 +26,7 @@ const rootReducer = combineReducers(
     updateParameters: currentParametersReducer,
     encryption: currentEncryptionReducer,
     simulator: simulatorReducer,
+    hint: hintReducer,
   }
 );
 
