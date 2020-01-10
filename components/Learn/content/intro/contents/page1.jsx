@@ -1,4 +1,14 @@
 import React, { Component } from 'react';
+// begin redux imports
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+// importing redux defined actions
+import {
+    HINT_SELECT_ACTION,
+    HINT_DONE_ACTION,
+    HINT_NOTDONE_ACTION
+} from '../../../../../actions/hint';
+
 import {
     View,
     Button,
@@ -16,14 +26,34 @@ import Info from '../../../../../assets/images/InfoIcon.png';
 // import stylesheet.
 import styles from '../styles';
 
-export default class page1 extends Component {
+class page1 extends Component {
     constructor(props) {
         super(props);
 
         // local state not affected by redux
         this.state = {
-            showquestionInfoPopUp: false,
+            showQuestionInfoPopUp: false,
         }
+    }
+    checkHintState = () => {
+        const { lockState } = this.props
+        let state = lockState.hintReducer.hintLocked;
+        if (state){
+            <AlertPopUp
+            icon={Info}
+            renderedBlocks={this.hintInfoPopUp()}
+            callback={() => { this.setState({ showHintInfoPopUp: false, }) }}
+            visibility={showHintInfoPopUp} />
+        }
+    }
+    hintInfoPopUp = () => {
+        return (
+            <View>
+                <Text style={styles.PageStyle.popUpTextStyle}>
+                    TEST 1
+                </Text>
+            </View>
+        )
     }
     questionInfoPopUp = () => {
         return (
@@ -35,19 +65,23 @@ export default class page1 extends Component {
         )
     }
     render() {
-        const { showquestionInfoPopUp } = this.state
+        const { showQuestionInfoPopUp } = this.state
         let style = styles.PageStyle
         let u = Dimensions.get('window').height
         let m = 0.4592
+
         return (
             <View style={style.containerStyle}>
                 {
-                    showquestionInfoPopUp
+                    this.checkHintState()
+                }
+                {
+                    showQuestionInfoPopUp
                         ? <AlertPopUp
                             icon={Info}
                             renderedBlocks={this.questionInfoPopUp()}
-                            callback={() => { this.setState({ showquestionInfoPopUp: false, }) }}
-                            visibility={showquestionInfoPopUp} />
+                            callback={() => { this.setState({ showQuestionInfoPopUp: false, }) }}
+                            visibility={showQuestionInfoPopUp} />
                         : null
                 }
                 <Text style={style.titleStyle}>Introduction</Text>
@@ -56,19 +90,32 @@ export default class page1 extends Component {
                     A knapsack problem is derived from the notion of packing an odd assortment of packages into a container.
                 </Text>
                 <Text style={style.contentStyle}>
-                    How to pack a single container <Text style={style.links} onPress={() => { this.setState({ showquestionInfoPopUp: true, }) }} >
+                    How to pack a single container <Text style={style.links} onPress={() => { this.setState({ showQuestionInfoPopUp: true, }) }} >
                         most efficiently or with the highest value
                     </Text>?
                 </Text>
 
-                <View style={{height: u * m}}>
+                <View style={{ height: u * m }}>
                     <Image
                         source={require('./pic/Intro.gif')}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
             </View >
         )
     }
 }
+
+const mapStateToProps = state => ({
+    lockState: state
+})
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({
+        HINT_SELECT_ACTION,
+        HINT_DONE_ACTION,
+        HINT_NOTDONE_ACTION
+    }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(page1);
