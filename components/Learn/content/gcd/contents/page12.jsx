@@ -11,6 +11,9 @@ import {
 // import stylesheet.
 import styles from '../styles';
 
+//images
+import TableImg from './pic/ET6.png';
+
 export default class page12 extends Component {
     render() {
         let style = styles.GCDPages
@@ -20,7 +23,7 @@ export default class page12 extends Component {
                
                 <View style={style.imgContainer}>
                     <Image
-                        source={require('./pic/ET6.png')}
+                        source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>
