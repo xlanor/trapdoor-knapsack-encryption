@@ -10,12 +10,12 @@ import {
 } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
-import Info from '../../../../../assets/images/InfoIcon.png';
 // import stylesheet.
 import styles from '../styles';
 
 //images
-import TableImg from './pic/ET1.png';
+import Info from '../../../../../assets/images/InfoIcon.png';
+import TableImg from '../../../../../assets/images/GCDTables/ET1.png';
 
 export default class page7 extends Component {
     constructor(props) {

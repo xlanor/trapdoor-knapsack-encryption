@@ -14,8 +14,8 @@ import AlertPopUp from '../../../../Common/AlertPopUp';
 
 //images
 import Info from '../../../../../assets/images/InfoIcon.png';
-import leonard_adleman from './pic/leonard-adleman.jpg';
-import adi_shamir from './pic/adi-shamir.jpg';
+import leonard_adleman from '../../../../../assets/images/IntroImages/leonard-adleman.jpg';
+import adi_shamir from '../../../../../assets/images/IntroImages/adi-shamir.jpg';
 
 // import stylesheet.
 import styles from '../styles';

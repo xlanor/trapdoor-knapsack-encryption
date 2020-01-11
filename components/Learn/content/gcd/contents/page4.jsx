@@ -12,7 +12,7 @@ import {
 import styles from '../styles';
 
 //images
-import TableImg from './pic/NormalT2.png';
+import TableImg from '../../../../../assets/images/GCDTables/NormalT2.png';
 
 export default class page4 extends Component {
     render() {
