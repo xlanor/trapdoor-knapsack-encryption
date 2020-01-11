@@ -44,19 +44,19 @@ class page1 extends Component {
 
         return (
             <View>
-                <View style={{ height: u * 0.1, backgroundColor:'#fff' }}>
+                <View style={{ height: u * 0.1 }}>
                     <Image
                         source={require('../../../../../assets/images/Title.png')}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
-                <View style={{ height: u * 0.2, backgroundColor:'#fff' }}>
+                <View style={{ height: u * 0.2 }}>
                     <Image
                         source={require('../../../../../assets/images/Box1.png')}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
-                <View style={{ height: u * 0.2, backgroundColor:'#fff' }}>
+                <View style={{ height: u * 0.2 }}>
                     <Image
                         source={require('../../../../../assets/images/Box2.png')}
                         style={styles.PageStyle.imgStyle}
@@ -90,7 +90,6 @@ class page1 extends Component {
                     showHintInfoPopUp ? (
                         console.log("HINT TRIGGERED"),
                         <AlertPopUp
-                            icon={null}
                             renderedBlocks={this.hintInfoPopUp()}
                             callback={() => {
                                 this.setState({ showHintInfoPopUp: false, });

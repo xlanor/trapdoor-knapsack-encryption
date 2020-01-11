@@ -36,7 +36,7 @@ const bold = {
 const links = {
     textDecorationLine: 'underline',
     fontFamily: 'comfortaa',
-    color: '#2980B9'
+    color: COLORS.LINKS_BLUE
 }
 const valA = {
     //fontFamily: 'comfortaa-bold',
@@ -67,8 +67,7 @@ const popUpTextStyle = {
     fontFamily: 'comfortaa',
     fontSize: 14,
     //textAlign: 'center',
-    //color: COLORS.ORANGE_1,
-    color: '#4d4d4d'
+    color: COLORS.POPUP_TEXT_COLOR
 }
 
 const popUpTextStyleBold = {
@@ -77,8 +76,7 @@ const popUpTextStyleBold = {
     fontSize: 18,
     fontWeight: 'bold',
     //textAlign: 'center',
-    //color: COLORS.ORANGE_1,
-    color: '#4d4d4d'
+    color: COLORS.POPUP_TEXT_COLOR
 }
 
 const imgStyle = {
