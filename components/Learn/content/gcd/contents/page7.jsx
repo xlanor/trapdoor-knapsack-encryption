@@ -27,7 +27,7 @@ export default class page7 extends Component {
         return (
             <View>
                 <Text style={styles.GCDPages.popUpTextStyle}>
-                    Extended Euclidean algorithm is an extension to the Euclidean algorithm.
+                    The Extended Euclidean algorithm is an extension to the Euclidean algorithm.
                 </Text>
             </View>
         )

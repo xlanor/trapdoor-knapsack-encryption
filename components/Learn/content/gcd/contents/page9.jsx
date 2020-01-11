@@ -30,10 +30,10 @@ export default class page9 extends Component {
                     <Text style={style.bold}>
                         Let <Text style={style.valA}>
                             a
-                        </Text> be previous b.{"\n"}
+                        </Text> be the previous b.{"\n"}
                         Let <Text style={style.valB}>
                             b
-                        </Text> be previous r.
+                        </Text> be the previous r.
                     </Text>
                     {"\n\n"}
                     Use the following <Text style={style.bold}>
@@ -44,9 +44,9 @@ export default class page9 extends Component {
                     <Text style={style.highlight}>b1 = b2</Text>{"\n"}
                     b2 = b1 - q * b2
                     {"\n\n"}
-                    Let a1 be <Text style={style.bold}>
+                    Let a1 be the <Text style={style.bold}>
                         previous a2
-                    </Text> and b1 be <Text style={style.bold}>
+                    </Text> and b1 be the <Text style={style.bold}>
                         previous b2
                     </Text>.
                     {"\n"}

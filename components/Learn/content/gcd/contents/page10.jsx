@@ -32,7 +32,7 @@ export default class page10 extends Component {
                     a1 = a2{"\n"}
                     <Text style={style.highlight}>a2 = a1 - q * a2</Text>{"\n"}
                     b1 = b2{"\n"}
-                    <Text style={style.highlight}>b2 = b1 - q * b2</Text>{"\n"}
+                    <Text style={style.highlight}>b2 = b1 - q * b2</Text>
                     {"\n\n"}
                     
                     Calculate <Text style={style.bold}>

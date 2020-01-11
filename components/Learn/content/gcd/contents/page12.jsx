@@ -34,11 +34,11 @@ export default class page12 extends Component {
                         last value
                     </Text> of <Text style={style.bold}>b2</Text>
                     {"\n\n"}
-                    If gcd is not 1, there is no <Text style={style.bold}>
+                    If the gcd is not 1, there is no <Text style={style.bold}>
                         multiplicative inverse
                     </Text>.
                     {"\n\n"}
-                    If you did the table differently; inverse for <Text style={style.valA}>a</Text> is
+                    If you did the table differently, the inverse for <Text style={style.valA}>a</Text> is
                     the <Text style={style.bold}>last value</Text> of <Text style={style.bold}>a2</Text>.
                 </Text>
             </View>
