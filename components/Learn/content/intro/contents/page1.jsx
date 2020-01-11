@@ -35,7 +35,7 @@ class page1 extends Component {
         const { lockState, actions } = this.props;
         //actions.HINT_RESET_ACTION();
         this.state = {
-            showHintInfoPopUp: lockState.hint.hintLocked,
+            showHintInfoPopUp: lockState.hint.linksHintLocked,
             showQuestionInfoPopUp: false,
         }
     }
