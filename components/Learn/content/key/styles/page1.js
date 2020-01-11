@@ -3,11 +3,11 @@ import { COLORS } from '../../../../../constants/Colors';
 import { Dimensions } from 'react-native';
 
 const width = Dimensions.get('screen').width - 60;
-const height = width * (337/1940);
+const height = width * (337 / 1940);
 
 const progressBarSize = {
-    width: width,
-    height: height,
+  width: width,
+  height: height,
 }
 
 const textStyleTitle = {
@@ -47,11 +47,11 @@ const boldFont = {
 const textBoxStyle = {
   fontFamily: 'comfortaa-bold',
   backgroundColor: COLORS.YELLOW_1,
-  borderColor:'black',
+  borderColor: 'black',
   borderWidth: 2,
   borderStyle: 'solid',
   borderRadius: 5,
-  height:  Dimensions.get('screen').height * 0.08,
+  height: Dimensions.get('screen').height * 0.08,
   fontSize: 20,
   paddingLeft: Dimensions.get('screen').height * 0.01,
   paddingTop: Dimensions.get('screen').height * 0.01,
@@ -79,24 +79,38 @@ const textStyleTitleWrapper = {
   alignItems: 'center'
 }
 
-const buttonRow = { 
-  alignItems: 'center', 
+const buttonRow = {
+  alignItems: 'center',
   marginTop: Dimensions.get('window').height * 0.02,
-  marginBottom:  Dimensions.get('window').height * 0.02,
+  marginBottom: Dimensions.get('window').height * 0.02,
 }
 
 const linkStyle = {
-  color: COLORS.BLUE_2,
+  color: '#2980B9',//COLORS.BLUE_2,
   textDecorationLine: 'underline',
 }
-
+const privateKeyStyle = {
+  color: '#C0392B'
+}
+const modulusStyle = {
+  color: '#16A085'
+}
+const multiplierStyle = {
+  color: '#E67E22'
+}
+const publicKeyStyle = {
+  color: '#00b0f0'
+}
+const inverseStyle = {
+  color: '#8E44AD'
+}
 
 const popUpTextStyle = {
 
   fontFamily: 'comfortaa',
   fontSize: 14,
-  textAlign: 'center',
-  color: COLORS.ORANGE_1,
+  //textAlign: 'center',
+  color: '#4d4d4d'//COLORS.ORANGE_1,
 }
 
 const popUpTextStyleBold = {
@@ -104,8 +118,8 @@ const popUpTextStyleBold = {
   fontFamily: 'comfortaa',
   fontSize: 18,
   fontWeight: 'bold',
-  textAlign: 'center',
-  color: COLORS.ORANGE_1,
+  //textAlign: 'center',
+  color: '#4d4d4d'//COLORS.ORANGE_1,
 }
 
 
@@ -123,6 +137,11 @@ export default {
   learnTabPad,
   buttonRow,
   linkStyle,
+  privateKeyStyle,
+  modulusStyle,
+  multiplierStyle,
+  publicKeyStyle,
+  inverseStyle,
   popUpTextStyle,
   popUpTextStyleBold,
 };
