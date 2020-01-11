@@ -86,23 +86,23 @@ const buttonRow = {
 }
 
 const linkStyle = {
-  color: '#2980B9',//COLORS.BLUE_2,
+  color: COLORS.LINKS_BLUE,
   textDecorationLine: 'underline',
 }
 const privateKeyStyle = {
-  color: '#C0392B'
+  color: COLORS.PRIVATEKEY_COLOR,
 }
 const modulusStyle = {
-  color: '#16A085'
+  color: COLORS.MODULUS_COLOR,
 }
 const multiplierStyle = {
-  color: '#E67E22'
+  color: COLORS.MULTIPLIER_COLOR,
 }
 const publicKeyStyle = {
-  color: '#00b0f0'
+  color: COLORS.PUBLICKEY_COLOR,
 }
 const inverseStyle = {
-  color: '#8E44AD'
+  color: COLORS.MULTIPLIER_INVERSE_COLOR,
 }
 
 const popUpTextStyle = {
@@ -110,7 +110,7 @@ const popUpTextStyle = {
   fontFamily: 'comfortaa',
   fontSize: 14,
   //textAlign: 'center',
-  color: '#4d4d4d'//COLORS.ORANGE_1,
+  color: COLORS.POPUP_TEXT_COLOR
 }
 
 const popUpTextStyleBold = {
@@ -119,7 +119,7 @@ const popUpTextStyleBold = {
   fontSize: 18,
   fontWeight: 'bold',
   //textAlign: 'center',
-  color: '#4d4d4d'//COLORS.ORANGE_1,
+  color: COLORS.POPUP_TEXT_COLOR
 }
 
 

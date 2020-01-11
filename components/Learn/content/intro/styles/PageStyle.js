@@ -36,32 +36,32 @@ const bold = {
 const links = {
     textDecorationLine: 'underline',
     fontFamily: 'comfortaa',
-    color: '#2980B9'
+    color: COLORS.LINKS_BLUE
 }
 const superIncreasingKnapsack = {
     fontFamily: 'comfortaa-bold',
-    color: '#C0392B'
+    color: COLORS.PRIVATEKEY_COLOR
 }
 const privateKey = {
     fontFamily: 'comfortaa-bold',
-    color: '#C0392B'
+    color: COLORS.PRIVATEKEY_COLOR
 }
 const secretKey = {
     fontFamily: 'comfortaa-bold',
-    color: '#0404fb'
+    color: COLORS.SECRETKEY_COLOR
 }
 
 const modulus = {
     fontFamily: 'comfortaa-bold',
-    color: '#16A085'
+    color: COLORS.MODULUS_COLOR
 }
 const publicKey = {
     fontFamily: 'comfortaa-bold',
-    color: '#00b0f0'
+    color: COLORS.PUBLICKEY_COLOR
 }
 const multiplier = {
     fontFamily: 'comfortaa-bold',
-    color: '#E67E22'
+    color: COLORS.MULTIPLIER_COLOR
 }
 
 const highlight = {
@@ -84,8 +84,7 @@ const popUpTextStyle = {
     fontFamily: 'comfortaa',
     fontSize: 14,
     //textAlign: 'center',
-    //color: COLORS.ORANGE_1,
-    color: '#4d4d4d'
+    color: COLORS.POPUP_TEXT_COLOR
 }
 
 const popUpTextStyleBold = {
@@ -94,8 +93,7 @@ const popUpTextStyleBold = {
     fontSize: 18,
     fontWeight: 'bold',
     //textAlign: 'center',
-    //color: COLORS.ORANGE_1,
-    color: '#4d4d4d'
+    color: COLORS.POPUP_TEXT_COLOR
 }
 
 const imgStyle = {
