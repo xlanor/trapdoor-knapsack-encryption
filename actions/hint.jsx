@@ -5,12 +5,12 @@ import {
     UNLOCK_ALL,
 } from '../constants'
 
-export const HINT_DONE_ACTION = () => {
+export const LINKS_HINT_DONE_ACTION = () => {
     return {
         type: LINKS_HINT_DONE
     }
 }
-export const HINT_NOTDONE_ACTION = () => {
+export const LINKS_HINT_NOTDONE_ACTION = () => {
     return {
         type: LINKS_HINT_NOTDONE
     }

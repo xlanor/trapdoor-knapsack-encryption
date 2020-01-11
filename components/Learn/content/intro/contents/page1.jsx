@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // importing redux defined actions
 import {
-    HINT_DONE_ACTION,
-    HINT_NOTDONE_ACTION,
+    LINKS_HINT_DONE_ACTION,
+    LINKS_HINT_NOTDONE_ACTION,
     HINT_RESET_ACTION,
     HINT_UNLOCK_ACTION
 } from '../../../../../actions/hint';
@@ -73,7 +73,7 @@ class page1 extends Component {
                             renderedBlocks={this.hintInfoPopUp()}
                             callback={() => {
                                 this.setState({ showHintInfoPopUp: false, });
-                                //actions.HINT_DONE_ACTION();
+                                //actions.LINKS_HINT_DONE_ACTION();
                             }}
                             visibility={showHintInfoPopUp} />
                     ) : console.log("HINT NOT TRIGGERED")
@@ -115,8 +115,8 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({
-        HINT_DONE_ACTION,
-        HINT_NOTDONE_ACTION,
+        LINKS_HINT_DONE_ACTION,
+        LINKS_HINT_NOTDONE_ACTION,
         HINT_RESET_ACTION,
         HINT_UNLOCK_ACTION
     }, dispatch)
