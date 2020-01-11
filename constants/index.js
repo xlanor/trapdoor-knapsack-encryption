@@ -1,8 +1,8 @@
 /* For Redux - List of actions that can affect our states */
 export const COUNTER_CHANGE = 'COUNTER_CHANGE';
 // hint actions
-export const HINT_DONE = 'HINT_DONE';
-export const HINT_NOTDONE = 'HINT_NOTDONE';
+export const LINKS_HINT_DONE = 'LINKS_HINT_DONE';
+export const LINKS_HINT_NOTDONE = 'LINKS_HINT_NOTDONE';
 // intro actions
 export const INTRO_SELECT = 'INTRO_SELECT';
 export const INTRO_LOCK = 'INTRO_LOCK';

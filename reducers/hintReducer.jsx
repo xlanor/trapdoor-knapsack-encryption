@@ -1,29 +1,29 @@
 import {
-    HINT_DONE,
-    HINT_NOTDONE,
+    LINKS_HINT_DONE,
+    LINKS_HINT_NOTDONE,
     RESET_ALL,
     UNLOCK_ALL,
 } from '../constants';
 
 const initialState = {
-    hintLocked: true,
+    linksHintLocked: true,
 }
 
 const noHint = {
-    hintLocked: false,
+    linksHintLocked: false,
 }
 
 const hintReducer = (state = initialState, action) => {
     switch (action.type) {
-        case HINT_NOTDONE:
+        case LINKS_HINT_DONE:
             return {
                 ...state,
-                hintLocked: true,
+                linksHintLocked: false,
             };
-        case HINT_DONE:
+        case LINKS_HINT_NOTDONE:
             return {
                 ...state,
-                hintLocked: false,
+                linksHintLocked: true,
             };
         case RESET_ALL:
             return {
