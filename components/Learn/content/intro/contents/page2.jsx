@@ -14,8 +14,8 @@ import AlertPopUp from '../../../../Common/AlertPopUp';
 
 //Images
 import Info from '../../../../../assets/images/InfoIcon.png';
-import DiscreteLogProblem from './pic/DiscreteLogProblem.png';
-import Trapdoor_permutation from './pic/1052px-Trapdoor_permutation.svg.png';
+import DiscreteLogProblem from '../../../../../assets/images/IntroImages/DiscreteLogProblem.png';
+import Trapdoor_permutation from '../../../../../assets/images/IntroImages/1052px-Trapdoor_permutation.svg.png';
 
 // import stylesheet.
 import styles from '../styles';

@@ -11,8 +11,8 @@ import {
 import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
-import ralph_merkle from './pic/ralph_merkle.jpeg';
-import Martin_Hellman from './pic/Martin-Hellman.jpg';
+import ralph_merkle from '../../../../../assets/images/IntroImages/ralph_merkle.jpeg';
+import Martin_Hellman from '../../../../../assets/images/IntroImages/Martin-Hellman.jpg';
 
 //Images
 import Info from '../../../../../assets/images/InfoIcon.png';

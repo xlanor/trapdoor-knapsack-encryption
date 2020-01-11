@@ -25,7 +25,7 @@ import AlertPopUp from '../../../../Common/AlertPopUp';
 
 //Images
 import Info from '../../../../../assets/images/InfoIcon.png';
-import Intro from './pic/Intro.gif';
+import Intro from '../../../../../assets/images/IntroImages/Intro.gif';
 import Title from '../../../../../assets/images/Title.png';
 import Box1 from '../../../../../assets/images/Box1.png';
 import Box2 from '../../../../../assets/images/Box2.png';
