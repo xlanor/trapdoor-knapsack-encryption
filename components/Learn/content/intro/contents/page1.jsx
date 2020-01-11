@@ -78,6 +78,7 @@ class page1 extends Component {
         )
     }
     render() {
+        const { actions } = this.props;
         const { showHintInfoPopUp, showQuestionInfoPopUp } = this.state
         let style = styles.PageStyle
         let u = Dimensions.get('window').height
@@ -111,8 +112,7 @@ class page1 extends Component {
                 <Text style={style.contentHead}>Knapsack Problem</Text>
                 <Text style={style.contentStyle}>
                     A knapsack problem is derived from the notion of packing an odd assortment of packages into a container.
-                </Text>
-                <Text style={style.contentStyle}>
+                    {"\n\n"}
                     How to pack a single container <Text style={style.links} onPress={() => { this.setState({ showQuestionInfoPopUp: true, }) }} >
                         most efficiently or with the highest value
                     </Text>?
