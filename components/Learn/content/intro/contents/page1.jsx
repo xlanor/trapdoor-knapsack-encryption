@@ -40,10 +40,30 @@ class page1 extends Component {
         }
     }
     hintInfoPopUp = () => {
+        let u = Dimensions.get('window').height
+
         return (
             <View>
-                <Text style={styles.PageStyle.popUpTextStyle}>
-                    TEST 1
+                <View style={{ height: u * 0.1, backgroundColor:'#fff' }}>
+                    <Image
+                        source={require('../../../../../assets/images/Title.png')}
+                        style={styles.PageStyle.imgStyle}
+                    />
+                </View>
+                <View style={{ height: u * 0.2, backgroundColor:'#fff' }}>
+                    <Image
+                        source={require('../../../../../assets/images/Box1.png')}
+                        style={styles.PageStyle.imgStyle}
+                    />
+                </View>
+                <View style={{ height: u * 0.2, backgroundColor:'#fff' }}>
+                    <Image
+                        source={require('../../../../../assets/images/Box2.png')}
+                        style={styles.PageStyle.imgStyle}
+                    />
+                </View>
+                <Text style={styles.PageStyle.popUpTextStyleBold}>
+                    Clicking underlined text displays additional information.
                 </Text>
             </View>
         )
@@ -69,7 +89,7 @@ class page1 extends Component {
                     showHintInfoPopUp ? (
                         console.log("HINT TRIGGERED"),
                         <AlertPopUp
-                            icon={Info}
+                            icon={null}
                             renderedBlocks={this.hintInfoPopUp()}
                             callback={() => {
                                 this.setState({ showHintInfoPopUp: false, });
