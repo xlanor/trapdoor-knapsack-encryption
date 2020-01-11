@@ -33,11 +33,12 @@ export default class page13 extends Component {
                     </Text> which is -49.
                     {"\n\n"}
                     If value is <Text style={style.bold}>positive</Text>,
-                    no further steps and it is the <Text style={style.bold}>
+                    there are no further steps and it is the <Text style={style.bold}>
                         multiplicative inverse
-                    </Text>.{"\n"}
-                    In this case, the value is <Text style={style.bold}>negative</Text>,
-                    an extra step is required:{"\n"}
+                    </Text>.
+                    {"\n\n"}
+                    If the value is <Text style={style.bold}>negative</Text>,
+                    such as in this case, an extra step is required:{"\n"}
                     <Text style={style.bold}>Inverse</Text> = 282 - 49
                     = <Text style={style.highlight}>233</Text>
                     {"\n\n"}
