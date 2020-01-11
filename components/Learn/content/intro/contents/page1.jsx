@@ -22,7 +22,13 @@ import {
 import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
+
+//Images
 import Info from '../../../../../assets/images/InfoIcon.png';
+import Intro from './pic/Intro.gif';
+import Title from '../../../../../assets/images/Title.png';
+import Box1 from '../../../../../assets/images/Box1.png';
+import Box2 from '../../../../../assets/images/Box2.png';
 
 // import stylesheet.
 import styles from '../styles';
@@ -46,19 +52,19 @@ class page1 extends Component {
             <View>
                 <View style={{ height: u * 0.1 }}>
                     <Image
-                        source={require('../../../../../assets/images/Title.png')}
+                        source={Title}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
                 <View style={{ height: u * 0.2 }}>
                     <Image
-                        source={require('../../../../../assets/images/Box1.png')}
+                        source={Box1}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
                 <View style={{ height: u * 0.2 }}>
                     <Image
-                        source={require('../../../../../assets/images/Box2.png')}
+                        source={Box2}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
@@ -119,7 +125,7 @@ class page1 extends Component {
 
                 <View style={{ height: u * m }}>
                     <Image
-                        source={require('./pic/Intro.gif')}
+                        source={Intro}
                         style={style.imgStyle}
                     />
                 </View>

@@ -14,6 +14,9 @@ import Info from '../../../../../assets/images/InfoIcon.png';
 // import stylesheet.
 import styles from '../styles';
 
+//images
+import TableImg from './pic/ET1.png';
+
 export default class page7 extends Component {
     constructor(props) {
         super(props);
@@ -83,7 +86,7 @@ export default class page7 extends Component {
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
                 <View style={style.imgContainer}>
                     <Image
-                        source={require('./pic/ET1.png')}
+                        source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>

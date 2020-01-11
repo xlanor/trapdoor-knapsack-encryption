@@ -11,7 +11,12 @@ import {
 import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
+
+//images
 import Info from '../../../../../assets/images/InfoIcon.png';
+import leonard_adleman from './pic/leonard-adleman.jpg';
+import adi_shamir from './pic/adi-shamir.jpg';
+
 // import stylesheet.
 import styles from '../styles';
 
@@ -34,7 +39,7 @@ export default class page4 extends Component {
             <View>
                 <View style={{height: u * m}}>
                     <Image
-                        source={require('./pic/leonard-adleman.jpg')}
+                        source={leonard_adleman}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
@@ -65,7 +70,7 @@ export default class page4 extends Component {
             <View>
                 <View style={{height: u * m}}>
                     <Image
-                        source={require('./pic/adi-shamir.jpg')}
+                        source={adi_shamir}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>

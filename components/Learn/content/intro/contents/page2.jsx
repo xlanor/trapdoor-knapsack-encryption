@@ -11,7 +11,11 @@ import {
 import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
+
+//Images
 import Info from '../../../../../assets/images/InfoIcon.png';
+import DiscreteLogProblem from './pic/DiscreteLogProblem.png';
+import Trapdoor_permutation from './pic/1052px-Trapdoor_permutation.svg.png';
 
 // import stylesheet.
 import styles from '../styles';
@@ -80,7 +84,7 @@ export default class page2 extends Component {
                 
                 <View style={{height: u * 0.2976}}>
                     <Image
-                        source={require('./pic/1052px-Trapdoor_permutation.svg.png')}
+                        source={Trapdoor_permutation}
                         style={style.imgStyle}
                     />
                 </View>
@@ -103,7 +107,7 @@ export default class page2 extends Component {
 
                 <View style={{height: u * 0.058, paddingTop: u * 0.01, paddingBottom: u * 0.01}}>
                     <Image
-                        source={require('./pic/DiscreteLogProblem.png')}
+                        source={DiscreteLogProblem}
                         style={style.imgStyle}
                     />
                 </View>
