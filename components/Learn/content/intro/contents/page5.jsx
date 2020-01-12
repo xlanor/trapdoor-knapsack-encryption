@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    Dimensions,
     Button,
     Text,
     Image,
@@ -27,40 +28,40 @@ export default class page5 extends Component {
     }
     privateKeyInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     The private key is a superincreasing knapsack to ensure there will only be one answer to a ciphertext.
                 </Text>
-            </View>
+            </>
         )
     }
     modulusInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     The modulus chosen is a random integer larger than the sum of elements in the knapsack.
                     This ensures the uniqueness of the ciphertext and plaintext pairs.
                 </Text>
-            </View>
+            </>
         )
     }
     multiplierInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     The multiplier chosen is a co-prime to the modulus,
                     so that a multiplicative inverse can be found.
                 </Text>
-            </View>
+            </>
         )
     }
     secretKeyInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                   The secret key is a piece of information or parameter that is used to decrypt ciphertext during trapdoor knapsack.
+                    The secret key is a piece of information or parameter that is used to decrypt ciphertext during trapdoor knapsack.
                 </Text>
-            </View>
+            </>
         )
     }
     render() {
@@ -71,6 +72,7 @@ export default class page5 extends Component {
             showSecretKeyInfoPopUp
         } = this.state
         let style = styles.PageStyle
+        let u = Dimensions.get('window').height
 
         return (
             <View style={style.containerStyle}>
@@ -115,20 +117,39 @@ export default class page5 extends Component {
 
                 <Text style={style.contentStyle}>
                     Trapdoor knapsack is basically formed around 3 different key information:
-                    {"\n\n"}
-                    1. <Text style={style.privateKey} onPress={() => { this.setState({ showPrivateKeyInfoPopUp: true, }) }}>
-                        <Text style={style.underline}>Private Key</Text>
+                </Text>
+                <Text style={{ ...style.contentStyle, marginTop: u * 0.01, marginLeft: u * 0.04 }}>
+                    1. <Text
+                        style={{ ...style.privateKey, ...style.underline }}
+                        onPress={() => {
+                            this.setState({ showPrivateKeyInfoPopUp: true, })
+                        }}>
+                        Private Key
                     </Text>
-                    {"\n\n"}
-                    2. <Text style={style.modulus} onPress={() => { this.setState({ showModulusInfoPopUp: true, }) }}>
-                        <Text style={style.underline}>Modulus</Text>
+                </Text>
+                <Text style={{ ...style.contentStyle, marginTop: u * 0.01, marginLeft: u * 0.04 }}>
+                    2. <Text
+                        style={{ ...style.modulus, ...style.underline }}
+                        onPress={() => {
+                            this.setState({
+                                showModulusInfoPopUp: true,
+                            })
+                        }}>
+                        Modulus
                     </Text>
-                    {"\n\n"}
-                    3. <Text style={style.multiplier} onPress={() => { this.setState({ showMultiplierInfoPopUp: true, }) }}>
-                        <Text style={style.underline}>Multiplier</Text>
+                </Text>
+                <Text style={{ ...style.contentStyle, marginTop: u * 0.01, marginLeft: u * 0.04 }}>
+                    3. <Text
+                        style={{ ...style.multiplier, ...style.underline }}
+                        onPress={() => {
+                            this.setState({
+                                showMultiplierInfoPopUp: true,
+                            })
+                        }}>
+                        Multiplier
                     </Text>
-                    {"\n\n"}
-
+                </Text>
+                <Text style={{ ...style.contentStyle, marginTop: u * 0.04 }}>
                     Everything else is derived from these 3 pieces of information.
                     {"\n\n"}
                     These three are kept as the <Text style={style.secretKey} onPress={() => { this.setState({ showSecretKeyInfoPopUp: true, }) }}>
@@ -136,7 +157,7 @@ export default class page5 extends Component {
                     </Text> by the owner and not distributed.
                     {"\n"}
                 </Text>
-            </View>
+            </View >
         )
     }
 }
