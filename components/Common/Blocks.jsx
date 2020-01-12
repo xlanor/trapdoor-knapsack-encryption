@@ -63,7 +63,7 @@ class Block extends Component{
         </View>
         <Table borderStyle={{borderWidth: 1}}>
           <TableWrapper style={styles.wrapperStyle}>
-            <Col data={tableTitle} style={styles.titleStyle} heightArr={[28,28]} textStyle={styles.textStyle}/>
+            <Col data={tableTitle} style={styles.titleStyle} heightArr={[28,28]} textStyle={styles.headerTextStyle}/>
             <Rows data={this.constructRowData()} flexArr={flexArr} style={styles.rowStyle} textStyle={styles.textStyle}/>
           </TableWrapper>
          
