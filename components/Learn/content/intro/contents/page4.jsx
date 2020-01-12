@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    Dimensions,
     Button,
     Text,
     Image,
@@ -8,7 +9,6 @@ import {
     FlatList,
     Linking
 } from 'react-native';
-import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
 
@@ -36,90 +36,85 @@ export default class page4 extends Component {
         let u = Dimensions.get('window').height
         let m = 0.24
         return (
-            <View>
-                <View style={{height: u * m}}>
+            <>
+                <View style={{ height: u * m }}>
                     <Image
                         source={leonard_adleman}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
-                
-                <Text style={styles.PageStyle.popUpTextStyle}>
-                    {"\n"}
+
+                <Text style={{ ...styles.PageStyle.popUpTextStyle, marginTop: u * 0.02 }}>
                     Leonard Adleman is one of the creators of the RSA encryption algorithm. <Text
                         style={styles.PageStyle.links}
                         onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Leonard_Adleman')}>
                         wikipedia
                     </Text>
+                    {"\n\n"}
+                    A quick reference on how he broke the system can be found in this link:{"\n"}
+                    <Text
+                        style={styles.PageStyle.links}
+                        onPress={() => Linking.openURL('https://link.springer.com/chapter/10.1007%2F978-1-4757-0602-4_29')}>
+                        https://link.springer.com/chapter/10.1007%2F978-1-4757-0602-4_29
+                    </Text>
                 </Text>
-                <Text style={styles.PageStyle.popUpTextStyle}>{"\n"}
-                    A quick reference on how he broke the system can be found in this link:
-                </Text>
-                <Text
-                    style={styles.PageStyle.links}
-                    onPress={() => Linking.openURL('https://link.springer.com/chapter/10.1007%2F978-1-4757-0602-4_29')}>
-                    https://link.springer.com/chapter/10.1007%2F978-1-4757-0602-4_29
-                </Text>
-            </View>
+            </>
         )
     }
     shamirArticleInfoPopUp = () => {
         let u = Dimensions.get('window').height
         let m = 0.24
         return (
-            <View>
-                <View style={{height: u * m}}>
+            <>
+                <View style={{ height: u * m }}>
                     <Image
                         source={adi_shamir}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
 
-                <Text style={styles.PageStyle.popUpTextStyle}>
-                    {"\n"}
+                <Text style={{ ...styles.PageStyle.popUpTextStyle, marginTop: u * 0.02 }}>
                     Adi Shamir is a co-inventor of the Rivest–Shamir–Adleman (RSA) algorithm
                     (along with Ron Rivest and Len Adleman). <Text
                         style={styles.PageStyle.links}
                         onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Adi_Shamir')}>
                         wikipedia
                     </Text>
+                    {"\n\n"}
+                    A quick reference on how he broke the system can be found in this link:{"\n"}
+                    <Text
+                        style={styles.PageStyle.links}
+                        onPress={() => Linking.openURL('https://ieeexplore.ieee.org/document/4568386')}>
+                        https://ieeexplore.ieee.org/document/4568386
+                    </Text>
                 </Text>
-                <Text style={styles.PageStyle.popUpTextStyle}>{"\n"}
-                    A quick reference on how he broke the system can be found in this link:
-                </Text>
-                <Text
-                    style={styles.PageStyle.links}
-                    onPress={() => Linking.openURL('https://ieeexplore.ieee.org/document/4568386')}>
-                    https://ieeexplore.ieee.org/document/4568386
-                </Text>
-            </View>
+            </>
         )
     }
     priceInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     The cryptosystem was implemented in multiple layers thus would still be secure.
                 </Text>
-            </View>
+            </>
         )
     }
     brickellInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     Merkle awarded a price of $1000 to Brickell who broke it in 1 hour.{"\n"}
-                    This marked the end of the trapdoor knapsack cryptosystem.{"\n"}
+                    This marked the end of the trapdoor knapsack cryptosystem.
+                    {"\n\n"}
+                    A documentation of it can be found in this link:{"\n"}
+                    <Text
+                        style={styles.PageStyle.links}
+                        onPress={() => Linking.openURL('https://link.springer.com/chapter/10.1007/BFb0053429')}>
+                        https://link.springer.com/chapter/10.1007/BFb0053429
+                    </Text>
                 </Text>
-                <Text style={styles.PageStyle.popUpTextStyle}>
-                    A documentation of it can be found in this link:
-                </Text>
-                <Text
-                    style={styles.PageStyle.links}
-                    onPress={() => Linking.openURL('https://link.springer.com/chapter/10.1007/BFb0053429')}>
-                    https://link.springer.com/chapter/10.1007/BFb0053429
-                </Text>
-            </View>
+            </>
         )
     }
     render() {
@@ -171,6 +166,7 @@ export default class page4 extends Component {
                 }
                 <Text style={style.titleStyle}>Introduction</Text>
                 <Text style={style.contentHead}>A brief History of how Trapdoor Knapsack was broken</Text>
+                
                 <Text style={style.contentStyle}>
                     In 1982 <Text style={style.links} onPress={() => { this.setState({ showAdlemanArticleInfoPopUp: true, }) }}>
                         Leonard Adleman

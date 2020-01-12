@@ -26,18 +26,19 @@ export default class page1 extends Component {
     }
     euclideanInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.GCDPages.popUpTextStyle}>
                     An algorithm named after the ancient Greek mathematician Euclid.
                     It can be used to reduce fractions to their simplest form,
-                    and is a part of many number-theoretic and cryptographic calculations.{"\n"}
+                    and is a part of many number-theoretic and cryptographic calculations.
+                    {"\n\n"}
+                    <Text
+                        style={styles.GCDPages.links}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Euclidean_algorithm')}>
+                        https://en.wikipedia.org/wiki/Euclidean_algorithm
+                    </Text>
                 </Text>
-                <Text
-                    style={styles.GCDPages.links}
-                    onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Euclidean_algorithm')}>
-                    https://en.wikipedia.org/wiki/Euclidean_algorithm
-                </Text>
-            </View>
+            </>
         )
     }
     render() {

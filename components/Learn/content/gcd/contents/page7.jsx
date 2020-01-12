@@ -28,17 +28,17 @@ export default class page7 extends Component {
     }
     euclideanInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.GCDPages.popUpTextStyle}>
                     The Extended Euclidean algorithm is an extension to the Euclidean algorithm.
                 </Text>
-            </View>
+            </>
         )
     }
     inverseInfoPopUp = () => {
         let style = styles.GCDPages
         return (
-            <View>
+            <>
                 <Text style={styles.GCDPages.popUpTextStyle}>
                     Multiplicative inverse also known as reciprocal for a number <Text style={style.bold}>
                         x
@@ -57,7 +57,7 @@ export default class page7 extends Component {
                     <Text style={style.bold}>GCD(a, b) = x * a + y * b = 1</Text>{"\n"}
                     (Where x and y are some integers)
                 </Text>
-            </View>
+            </>
         )
     }
     render() {

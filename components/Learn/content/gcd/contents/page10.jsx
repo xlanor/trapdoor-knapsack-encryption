@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    Dimensions,
     Button,
     Text,
     Image,
@@ -17,6 +18,8 @@ import TableImg from '../../../../../assets/images/GCDTables/ET5.png';
 export default class page10 extends Component {
     render() {
         let style = styles.GCDPages
+        let u = Dimensions.get('window').height
+        
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
@@ -28,16 +31,22 @@ export default class page10 extends Component {
                     />
                 </View>
 
-                <Text style={style.contentStyle}>
+                <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
                     Use the following <Text style={style.bold}>
                         formulas
-                    </Text> for the rest of the columns:{"\n"}
+                    </Text> for the rest of the columns:
+                </Text>
+                <Text style={{
+                    ...style.contentStyle,
+                    marginLeft: u * 0.03,
+                    fontSize: 16
+                }}>
                     a1 = a2{"\n"}
                     <Text style={style.highlight}>a2 = a1 - q * a2</Text>{"\n"}
                     b1 = b2{"\n"}
                     <Text style={style.highlight}>b2 = b1 - q * b2</Text>
-                    {"\n\n"}
-                    
+                </Text>
+                <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
                     Calculate <Text style={style.bold}>
                         a2
                     </Text> and <Text style={style.bold}>

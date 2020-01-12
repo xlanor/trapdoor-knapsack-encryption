@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    Dimensions,
     Button,
     Text,
     Image,
@@ -17,36 +18,51 @@ import TableImg from '../../../../../assets/images/GCDTables/ET4.png';
 export default class page9 extends Component {
     render() {
         let style = styles.GCDPages
+        let u = Dimensions.get('window').height
+
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                
+
                 <View style={style.imgContainer}>
                     <Image
                         source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
-                    Next, fill the next row like Euclidean algorithm:{"\n"}
-                    <Text style={style.bold}>
-                        Let <Text style={style.valA}>
-                            a
-                        </Text> be the previous b.{"\n"}
-                        Let <Text style={style.valB}>
-                            b
-                        </Text> be the previous r.
-                    </Text>
-                    {"\n\n"}
+                    Next, fill the next row like Euclidean algorithm:
+                </Text>
+                <Text style={{
+                    ...style.contentStyle,
+                    ...style.bold,
+                    marginLeft: u * 0.03,
+                    fontSize: 16
+                }}>
+                    Let <Text style={style.valA}>
+                        a
+                    </Text> be the previous b.{"\n"}
+                    Let <Text style={style.valB}>
+                        b
+                    </Text> be the previous r.
+                </Text>
+                <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
                     Use the following <Text style={style.bold}>
                         formulas
-                    </Text> for the rest of the columns:{"\n"}
+                    </Text> for the rest of the columns:
+                </Text>
+                <Text style={{
+                    ...style.contentStyle,
+                    marginLeft: u * 0.03,
+                    fontSize: 16
+                }}>
                     <Text style={style.highlight}>a1 = a2</Text>{"\n"}
                     a2 = a1 - q * a2{"\n"}
                     <Text style={style.highlight}>b1 = b2</Text>{"\n"}
                     b2 = b1 - q * b2
-                    {"\n\n"}
+                </Text>
+                <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
                     Let a1 be the <Text style={style.bold}>
                         previous a2
                     </Text> and b1 be the <Text style={style.bold}>

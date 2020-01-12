@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    Dimensions,
     Button,
     Text,
     Image,
@@ -8,7 +9,6 @@ import {
     FlatList,
     Linking
 } from 'react-native';
-import { Dimensions } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
 import ralph_merkle from '../../../../../assets/images/IntroImages/ralph_merkle.jpeg';
@@ -34,27 +34,26 @@ export default class page3 extends Component {
     }
     trapdoorKnapsackAlgoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     The trapdoor knapsack is also known as the Merkle-Hellman knapsack cryptosystem.
                 </Text>
-            </View>
+            </>
         )
     }
     ralphMerkleInfoPopUp = () => {
         let u = Dimensions.get('window').height
         let m = 0.24
         return (
-            <View>
-                <View style={{height: u * m}}>
+            <>
+                <View style={{ height: u * m }}>
                     <Image
                         source={ralph_merkle}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
 
-                <Text style={styles.PageStyle.popUpTextStyle}>
-                    {"\n"}
+                <Text style={{ ...styles.PageStyle.popUpTextStyle, marginTop: u * 0.02 }}>
                     Ralph C.Merkle is one of the inventors of public key cryptography and
                     the inventor of cryptographic hashing. <Text
                         style={styles.PageStyle.links}
@@ -62,41 +61,41 @@ export default class page3 extends Component {
                         wikipedia
                     </Text>
                 </Text>
-            </View>
+            </>
         )
     }
     martinHellmanInfoPopUp = () => {
         let u = Dimensions.get('window').height
         let m = 0.24
         return (
-            <View>
-                <View style={{height: u * m}}>
+            <>
+                <View style={{ height: u * m }}>
                     <Image
                         source={Martin_Hellman}
                         style={styles.PageStyle.imgStyle}
                     />
                 </View>
-                
-                <Text style={styles.PageStyle.popUpTextStyle}>
-                    {"\n"}
+
+                <Text style={{ ...styles.PageStyle.popUpTextStyle, marginTop: u * 0.02 }}>
                     Martin Edward Hellman is best known for his invention of public key cryptography. <Text
                         style={styles.PageStyle.links}
                         onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Martin_Hellman')}>
                         wikipedia
                     </Text>
                 </Text>
-            </View>
+            </>
         )
     }
     problemsInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     1. Easy to solve, given the private key
-                    {"\n\n"}
+                </Text>
+                <Text style={styles.PageStyle.popUpTextStyle}>
                     2. Difficult to solve, given a public key.
                 </Text>
-            </View>
+            </>
         )
     }
     render() {
@@ -146,7 +145,6 @@ export default class page3 extends Component {
                         : null
                 }
                 <Text style={style.titleStyle}>Introduction</Text>
-
                 <Text style={style.contentHead}>Trapdoor Knapsack Algorithm</Text>
 
                 <Text style={style.contentStyle}>

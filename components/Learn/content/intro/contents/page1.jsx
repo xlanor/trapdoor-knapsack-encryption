@@ -49,7 +49,7 @@ class page1 extends Component {
         let u = Dimensions.get('window').height
 
         return (
-            <View>
+            <>
                 <View style={{ height: u * 0.1 }}>
                     <Image
                         source={Title}
@@ -71,16 +71,16 @@ class page1 extends Component {
                 <Text style={styles.PageStyle.popUpTextStyleBold}>
                     Clicking underlined text displays additional information.
                 </Text>
-            </View>
+            </>
         )
     }
     questionInfoPopUp = () => {
         return (
-            <View>
+            <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
                     Which boxes should be chosen to maximize the amount of money while still keeping the overall weight under or equal to 15kg?
                 </Text>
-            </View>
+            </>
         )
     }
     render() {
@@ -115,6 +115,7 @@ class page1 extends Component {
                 }
                 <Text style={style.titleStyle}>Introduction</Text>
                 <Text style={style.contentHead}>Knapsack Problem</Text>
+
                 <Text style={style.contentStyle}>
                     A knapsack problem is derived from the notion of packing an odd assortment of packages into a container.
                     {"\n\n"}
