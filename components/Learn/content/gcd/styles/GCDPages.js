@@ -10,20 +10,27 @@ const containerStyle = {
 const titleStyle = {
     fontFamily: 'comfortaa-bold',
     fontSize: 25,
-    paddingTop: Dimensions.get('screen').height * 0.02,
-    paddingBottom: Dimensions.get('screen').height * 0.01,
+    marginTop: Dimensions.get('screen').height * 0.02,
+    marginBottom: Dimensions.get('screen').height * 0.02,
     textAlign: 'center',
     textDecorationLine: 'underline'
 }
 const contentHead = {
     fontFamily: 'comfortaa-bold',
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'center',
 }
-
 const contentStyle = {
     fontFamily: 'comfortaa',
     fontSize: 18,
+}
+const contentStyleSmall = {
+    fontFamily: 'comfortaa',
+    fontSize: 14,
+}
+const contentStyleBig = {
+    fontFamily: 'comfortaa',
+    fontSize: 23
 }
 
 const keyword = {
@@ -96,6 +103,8 @@ export default {
     titleStyle,
     contentHead,
     contentStyle,
+    contentStyleSmall,
+    contentStyleBig,
     links,
     valA,
     valB,
