@@ -10,39 +10,35 @@ const progressBarSize = {
   height: height,
 }
 
-const textStyleTitle = {
-  fontFamily: 'comfortaa',
+const titleStyle = {
+  fontFamily: 'comfortaa-bold',
+  fontSize: 25,
+  marginTop: Dimensions.get('screen').height * 0.02,
+  marginBottom: Dimensions.get('screen').height * 0.02,
+  textAlign: 'center',
+  textDecorationLine: 'underline'
+}
+const contentHead = {
+  fontFamily: 'comfortaa-bold',
   fontSize: 20,
-  paddingTop: Dimensions.get('screen').height * 0.02,
-  paddingBottom: Dimensions.get('screen').height * 0.01,
+  textAlign: 'center',
 }
-
-const textStyleHeader1 = {
+const contentStyle = {
   fontFamily: 'comfortaa',
-  fontSize: 16,
-  paddingBottom: Dimensions.get('screen').height * 0.02,
+  fontSize: 18,
 }
-
-const textStyleHeader2 = {
+const contentStyleSmall = {
   fontFamily: 'comfortaa',
-  fontSize: 16,
-  paddingBottom: Dimensions.get('screen').height * 0.02,
+  fontSize: 14,
 }
-
-const textStyleHeader3 = {
+const contentStyleBig = {
   fontFamily: 'comfortaa',
-  fontSize: 16,
-  paddingBottom: Dimensions.get('screen').height * 0.02,
-}
-
-
-const textStyle = {
-  fontFamily: 'comfortaa',
+  fontSize: 23
 }
 
 const boldFont = {
   fontFamily: 'comfortaa-bold',
-  fontWeight: 'bold',
+  //fontWeight: 'bold',
 }
 const textBoxStyle = {
   fontFamily: 'comfortaa-bold',
@@ -56,15 +52,8 @@ const textBoxStyle = {
   paddingLeft: Dimensions.get('screen').height * 0.01,
   paddingTop: Dimensions.get('screen').height * 0.01,
   paddingBottom: Dimensions.get('screen').height * 0.01,
-}
-
-
-const textStyleTitleCenter = {
-  fontFamily: 'comfortaa-bold',
-  fontSize: 25,
-  textDecorationLine: 'underline',
-  paddingTop: Dimensions.get('screen').height * 0.02,
-  paddingBottom: Dimensions.get('screen').height * 0.02,
+  marginTop: Dimensions.get('screen').height * 0.01,
+  marginBottom: Dimensions.get('screen').height * 0.01,
 }
 
 const learnTabPad = {
@@ -72,11 +61,6 @@ const learnTabPad = {
   marginLeft: Dimensions.get('window').height * 0.05,
   marginRight: Dimensions.get('window').height * 0.05,
   //backgroundColor: '#888'
-}
-
-const textStyleTitleWrapper = {
-  // to wrap the text in a view so that we can apply a center align to the view only,
-  alignItems: 'center'
 }
 
 const buttonRow = {
@@ -106,7 +90,6 @@ const inverseStyle = {
 }
 
 const popUpTextStyle = {
-
   fontFamily: 'comfortaa',
   fontSize: 14,
   //textAlign: 'center',
@@ -122,18 +105,22 @@ const popUpTextStyleBold = {
   color: COLORS.POPUP_TEXT_COLOR
 }
 
+const imgStyle = {
+  flex: 1,
+  width: null,
+  height: null,
+  resizeMode: 'contain'
+}
 
 export default {
-  textStyleTitle,
-  textStyleHeader1,
-  textStyleHeader2,
-  textStyleHeader3,
   progressBarSize,
-  textStyle,
+  titleStyle,
+  contentHead,
+  contentStyle,
+  contentStyleSmall,
+  contentStyleBig,
   textBoxStyle,
   boldFont,
-  textStyleTitleCenter,
-  textStyleTitleWrapper,
   learnTabPad,
   buttonRow,
   linkStyle,
@@ -144,4 +131,5 @@ export default {
   inverseStyle,
   popUpTextStyle,
   popUpTextStyleBold,
+  imgStyle,
 };
