@@ -1,27 +1,30 @@
 import React, { Component } from 'React';
 
-import { 
-  View, 
-  Button,  
-  Text, 
-  Image, 
+import {
+  View,
+  Dimensions,
+  Button,
+  Text,
+  Image,
   TouchableOpacity,
   TextInput,
-  FlatList 
+  FlatList
 } from 'react-native';
 
-import { 
-  Table, 
-  TableWrapper, 
-  Rows, 
-  Row, 
-  Col } 
-from 'react-native-table-component';
+import {
+  Table,
+  TableWrapper,
+  Rows,
+  Row,
+  Col
+}
+  from 'react-native-table-component';
 
 import {
   ALLOW_NEXT_PAGE_ACTION
- } from '../../../../actions/tabPage';
+} from '../../../../actions/tabPage';
 
+import { COLORS } from '../../../../constants/Colors';
 // import stylesheet.
 import styles from './styles';
 // begin redux imports
@@ -33,6 +36,7 @@ import DF1 from '../../../../assets/images/DecryptionFormula_1.png'
 import DF2 from '../../../../assets/images/DecryptionFormula_2.png'
 import Alert from '../../../../assets/images/alert.png'
 import Exclaim from '../../../../assets/images/ExclaimIcon.png'
+import InfoIcon from '../../../../assets/images/InfoIcon.png'
 
 import BlocksDecrypt from '../../../Common/BlocksDecrypt';
 import CustomButton from '../../../Common/Button';
@@ -41,21 +45,22 @@ import Loader from '../../../Common/Spinner';
 import AlertPopUp from '../../../Common/AlertPopUp';
 import Block from '../../../Common/Blocks';
 
-class DecryptTutorial extends Component{
-  constructor(props){
+class DecryptTutorial extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       decryptedText: "",
       currentDecryptedBlocks: null,
       showBlocks: false,
       showSpinner: false,
-      showWInversePopUp: false,
+      showInversePopUp: false,
       showrPopUp: false,
       showCmpPopUp: false,
+      showPaddingInfoPopUp: false,
     }
   }
 
-  checkPageNo = () =>{
+  checkPageNo = () => {
     const { lockState } = this.props;
     return lockState.lessonPageTabAndPages.tabPage;
   }
@@ -63,34 +68,34 @@ class DecryptTutorial extends Component{
   getBinaryString = (knapsack, yVal) => {
     const { lockState } = this.props;
     let returnObj = {
-        ['binlist']: [],
-        ['blocks']:[],
+      ['binlist']: [],
+      ['blocks']: [],
     }
-    yVal.forEach(( y, idx )=>{
-        let binaryStr = "";
-        let blocksInner = {
-          ['inital_enc']: lockState.encryption.encryptedText[idx],
-          ['initial_r']: Number(y), // get new object so its not mutated
-          ['current_r']:[],
-          ['knapsack']:[],
-          ['decrypted']: [],
-          ['new_r']: [],
+    yVal.forEach((y, idx) => {
+      let binaryStr = "";
+      let blocksInner = {
+        ['inital_enc']: lockState.encryption.encryptedText[idx],
+        ['initial_r']: Number(y), // get new object so its not mutated
+        ['current_r']: [],
+        ['knapsack']: [],
+        ['decrypted']: [],
+        ['new_r']: [],
+      }
+      for (let i = knapsack.length - 1; i >= 0; i--) {
+        blocksInner.knapsack.push(knapsack[i])
+        blocksInner.current_r.push(Number(y))
+        if (y >= knapsack[i]) {
+          binaryStr = `1${binaryStr}`
+          y -= knapsack[i]
+          blocksInner.decrypted.push('1')
+        } else {
+          binaryStr = `0${binaryStr}`
+          blocksInner.decrypted.push('0')
         }
-        for(let i = knapsack.length-1; i >=0; i--){
-          blocksInner.knapsack.push(knapsack[i])
-          blocksInner.current_r.push(Number(y))
-          if(y >= knapsack[i]){
-            binaryStr = `1${binaryStr}`
-            y -= knapsack[i]
-            blocksInner.decrypted.push('1')
-          }else{
-            binaryStr = `0${binaryStr}`
-            blocksInner.decrypted.push('0')
-          }
-          blocksInner.new_r.push(Number(y))
-        }
-        returnObj.blocks.push(blocksInner)
-        returnObj.binlist.push(binaryStr)
+        blocksInner.new_r.push(Number(y))
+      }
+      returnObj.blocks.push(blocksInner)
+      returnObj.binlist.push(binaryStr)
     })
     return returnObj
   }
@@ -98,101 +103,107 @@ class DecryptTutorial extends Component{
 
   removePadding = (binStringList, padNumber) => {
     let binString = binStringList.join('')
-    if(padNumber != 0){
-        return binString.substring(0,(binString.length-padNumber))
+    if (padNumber != 0) {
+      return binString.substring(0, (binString.length - padNumber))
     }
-    else{
-        return binString
+    else {
+      return binString
     }
   }
   convertBinToText = (binaryString) => {
     let dec = []
     // characters are done in blocks of 8.
-    for (let i = 0; i <= binaryString.length-8; i+= 8){
-        let ascii = parseInt(binaryString.substring(i, i+8), 2)
-        dec.push(String.fromCharCode(ascii))
+    for (let i = 0; i <= binaryString.length - 8; i += 8) {
+      let ascii = parseInt(binaryString.substring(i, i + 8), 2)
+      dec.push(String.fromCharCode(ascii))
     }
     return dec.join('')
   }
+  paddingInfoPopUp = () => {
+    return (
+      <>
+        <Text style={styles.tutorial.popUpTextStyle}>
+          Eg: if padding = 1, remove 1 ‘0’ from the binary x
+          {"\n\n"}
+          01100001 <Text style={{ color: COLORS.CORRECT_GREEN }}>-0</Text>
+        </Text>
+      </>
+    )
+  }
   comparingPopUp = () => {
     return (
-      <View>
-        
+      <>
         <Text style={styles.tutorial.popUpTextStyle}>
-          E.G: R = 15 and use a to find binary x
+          Eg: R = 15 and use a to find binary x
         </Text>
+
         <View style={styles.tutorial.tableMargin}>
-          <Table borderStyle={{borderWidth: 1}}>
+          <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col data={['a','R', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28,28]} textStyle={{textAlign: 'center' }}/>
+              <Col data={['a', 'R', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28, 28]} textStyle={{ textAlign: 'center' }} />
               <Rows data={[
-                    ['2','5','10'],
-                    ['0','5','15'],
-                    ['0','1','1'],
-                 ]} 
+                ['2', '5', '10'],
+                [
+                  <Text style={{ color: COLORS.CORRECT_GREEN, textAlign: 'center' }}>0</Text>,
+                  <Text style={{ color: COLORS.CORRECT_GREEN, textAlign: 'center' }}>5</Text>,
+                  <Text style={{ color: COLORS.CORRECT_GREEN, textAlign: 'center' }}>15</Text>
+                ],
+                ['0', '1', '1'],
+              ]}
                 flexArr={[1, 1, 1]}
-                style={{height: 28}} 
-                textStyle={{textAlign: 'center' }}
+                style={{ height: 28 }}
+                textStyle={{ textAlign: 'center' }}
               />
             </TableWrapper>
           </Table>
         </View>
-       
-        
+
         <Text style={styles.tutorial.popUpTextStyle}>
           15 > 10 ? -> true, x = 1
         </Text>
-        
         <Text style={styles.tutorial.popUpTextStyle}>
-             15 - 10 = 5
+          15 - 10 = 5
         </Text>
-        
         <Text style={styles.tutorial.popUpTextStyle}>
-            5 > 5 ? -> true, x = 1
+          5 > 5 ? -> true, x = 1
         </Text>
-        
         <Text style={styles.tutorial.popUpTextStyle}>
-             5 - 5 = 0
+          5 - 5 = 0
         </Text>
-        
         <Text style={styles.tutorial.popUpTextStyle}>
-           0 > 2 ? -> false, x = 0
+          0 > 2 ? -> false, x = 0
         </Text>
-      </View>
+      </>
     )
   }
   rPopUp = () => {
     return (
-      <View>
+      <>
         <Text style={styles.tutorial.popUpTextStyle}>
-          E.G: T = 48, w^-1 = 32, and m = 39
+          Eg: T = 48, w^-1 = 32, and m = 39{"\n"}
+          Using the formula for R
         </Text>
-        
         <Text style={styles.tutorial.popUpTextStyle}>
-          Using the formula for R 
+          R = 48 * 32 mod 39 = 15
         </Text>
-        
-        <Text style={styles.tutorial.popUpTextStyle}>
-           R = 48 * 32 mod 39 = 15
-        </Text>
-      </View>
+      </>
     )
   }
-  
+
   wInversePopUp = () => {
     return (
-      <View>
+      <>
         <Text style={styles.tutorial.popUpTextStyle}>
-          Using Extended Euclidean to find m^-1 such that 
+          Using Extended Euclidean to find m^-1 such that:
         </Text>
         <Text style={{
-          
-            ...styles.tutorial.popUpTextStyle,
-            fontSize: 16
-          }}>
-            w^-1 * w = 1 mod m
+          ...styles.tutorial.popUpTextStyle,
+          textAlign: 'center',
+          fontSize: 16
+        }}>
+          w^-1 * w = 1 mod m
         </Text>
-      </View>
+      </>
     )
   }
 
@@ -205,15 +216,15 @@ class DecryptTutorial extends Component{
     let padding = lockState.encryption.padding;
     let privateKey = lockState.updateParameters.privateKeyArr;
     let decrypted = [];
-    encryptedText.forEach((enc)=>{
-        let multiplied = enc * inverse;
-        let modVal = multiplied % modulo;
-        decrypted.push(modVal)
+    encryptedText.forEach((enc) => {
+      let multiplied = enc * inverse;
+      let modVal = multiplied % modulo;
+      decrypted.push(modVal)
     })
     let binStringList = this.getBinaryString(privateKey, decrypted)
-    let unpadded = this.removePadding(binStringList.binlist,padding)
+    let unpadded = this.removePadding(binStringList.binlist, padding)
     let dec = this.convertBinToText(unpadded)
-  
+
     /*
     this.setState({
       decryptedText: dec,
@@ -228,62 +239,58 @@ class DecryptTutorial extends Component{
   }
 
   async decryption() {
-      this.setState({
-          showSpinner: true,
-      }, ()=>{
-        let decryptRs = this.decrypt()
-        setTimeout(() => {
-          this.setState({
-            showSpinner: false,
-            ...decryptRs
-          });
-        }, 500);
-      })
-      
+    this.setState({
+      showSpinner: true,
+    }, () => {
+      let decryptRs = this.decrypt()
+      setTimeout(() => {
+        this.setState({
+          showSpinner: false,
+          ...decryptRs
+        });
+      }, 500);
+    })
+
   }
 
   getThirdPage = () => {
-    const { decryptedText,currentDecryptedBlocks } = this.state;
-    const { actions,lockState } = this.props;
-    if (! lockState.lessonPageTabAndPages.allowNextPage){
-      actions.ALLOW_NEXT_PAGE_ACTION()
+    const { decryptedText, currentDecryptedBlocks } = this.state;
+    const { actions, lockState } = this.props;
+    let u = Dimensions.get('window').height;
 
+    if (!lockState.lessonPageTabAndPages.allowNextPage) {
+      actions.ALLOW_NEXT_PAGE_ACTION()
     }
     return (
       <>
-    
-        <View style={styles.tutorial.textStyleTitleWrapper}>
-          <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
-        </View>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}>Convert the binary values to decimal, this decimal is the ascii value of the message.</Text>
-        </View>
-        <View style={styles.tutorial.imageView}>
-         <Text style={styles.tutorial.textStyleSmallerText}>Now, convert the ascii value back to characters to get back the plaintext message.</Text>
-        </View>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}>Don't forget to subtract the padding applied!</Text>
-        </View>
-        <View style={styles.tutorial.imageView}>
-      <Text style={styles.tutorial.textStyleSmallerText}>Current Padding: {lockState.encryption.padding}</Text>
-      </View>
-      {
-          currentDecryptedBlocks !== null?
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View style={styles.tutorial.multipleButtonLeft}>
-              <CustomButton text="Decrypt" callback={()=>{
-                  this.decryption()
-                }}/>
-            </View>
+        <Text style={styles.tutorial.contentStyle}>
+          Remove <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showPaddingInfoPopUp: true, }) }}>
+            padding from x
+          </Text> if there is any.
+          {"\n\n"}
+          Next, convert the binary values to the ascii value.{"\n"}
+          Lastly, convert the ascii value back to characters to get back the decrypted message.
+          {"\n\n"}
+          Current Padding: {lockState.encryption.padding}
+        </Text>
+        <View style={{ marginTop: u * 0.04, marginBottom: u * 0.04 }}>
+          {
+            currentDecryptedBlocks !== null ?
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={styles.tutorial.multipleButtonLeft}>
+                  <CustomButton text="Decrypt" callback={() => {
+                    this.decryption()
+                  }} />
+                </View>
 
-            <View style={styles.tutorial.multipleButtonRight}>
-                <CustomButton text="Blocks" 
-                  callback={
-                    ()=>{
+                <View style={styles.tutorial.multipleButtonRight}>
+                  <CustomButton text="Blocks"
+                    callback={
+                      () => {
                         this.setState({
                           showSpinner: true,
 
-                        }, ()=>{
+                        }, () => {
                           setTimeout(() => {
                             this.setState({
                               showBlocks: true,
@@ -291,177 +298,161 @@ class DecryptTutorial extends Component{
                             });
                           }, 500)
                         })
+                      }
                     }
-                  }
-                  buttonColor="blue"
+                    buttonColor="blue"
                   />
+                </View>
               </View>
-          </View>
-       
-          :
-          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <CustomButton text="Decrypt" callback={()=>{
+
+              :
+              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                <CustomButton text="Decrypt" callback={() => {
                   this.decryption()
-                }}/>
-          </View>
-      }
-      { 
-        decryptedText != ""
-        ? <>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}> Decrypted Text:</Text> 
-          <Text style={styles.tutorial.textStyleSmallerText}> {decryptedText}</Text>
+                }} />
+              </View>
+          }
         </View>
-          </>
-        : null
-      }
+        {
+          decryptedText != ""
+            ? <>
+              <Text style={styles.tutorial.contentStyle}>
+                <Text style={styles.tutorial.boldFont}>Binary value</Text>: {lockState.encryption.binaryString}{"\n"}
+                <Text style={styles.tutorial.boldFont}>Ascii value</Text>: {lockState.encryption.asciiString}{"\n"}
+                <Text style={styles.tutorial.boldFont}>Decrypted Text</Text>: {decryptedText}
+              </Text>
+            </>
+            : null
+        }
       </>
     )
   }
   getSecondPage = () => {
+    const { actions, lockState } = this.props;
+    let u = Dimensions.get('window').height
 
-    const { actions,lockState } = this.props;
-    if (! lockState.lessonPageTabAndPages.allowNextPage){
+    if (!lockState.lessonPageTabAndPages.allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION()
 
     }
     return (
       <>
-        <View style={styles.tutorial.textStyleTitleWrapper}>
-          <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
-        </View>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}>
-            {"Select the largest a which is <= R:"}
-          </Text>
-          <Text style={styles.tutorial.textStyleSmallerText}>
-            If it is true, then the corresponding x = 1
-          </Text>
-          <Text style={styles.tutorial.textStyleSmallerText}>
-            If false, then x = 0
-          </Text>
-          <Text style={styles.tutorial.textStyleSmallerText}>
-            {"Since the next largest a <= the difference, repeat until the difference is 0"}
-          </Text>
-          <Text style={styles.tutorial.textStyleSmallerText}>
-            As the knapsack is super increasing, it is comparatively easier to get the values
-          </Text>
-        </View>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
+          {"Select the largest a which is <= R:"}
+        </Text>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
+          If it is true, then the corresponding x = 1
+        </Text>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
+          If false, then x = 0
+        </Text>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
+          {"Since the next largest a <= the difference, repeat until the difference is 0"}
+        </Text>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
+          As the knapsack is super increasing, it is comparatively easier to get the values
+        </Text>
       </>
     )
   }
   getFirstPage = () => {
-    const { actions,lockState } = this.props;
-    if (! lockState.lessonPageTabAndPages.allowNextPage){
-      actions.ALLOW_NEXT_PAGE_ACTION()
+    const { actions, lockState } = this.props;
+    let u = Dimensions.get('window').height;
 
+    if (!lockState.lessonPageTabAndPages.allowNextPage) {
+      actions.ALLOW_NEXT_PAGE_ACTION()
     }
     return (
       <>
-        <View style={styles.tutorial.textStyleTitleWrapper}>
-          <Text style={styles.tutorial.textStyleTitleCenter}>Decryption</Text>
+        <Text style={styles.tutorial.contentStyle}>The current ciphertext is:</Text>
+        <Text style={styles.tutorial.contentStyleSmall}>({lockState.encryption.encryptedText.join(', ')})</Text>
+
+        <Text style={{ ...styles.tutorial.contentStyle, marginTop: u * 0.02 }}>
+          Padding: {lockState.encryption.padding}
+        </Text>
+
+        <View style={{ height: u * 0.05, marginTop: u * 0.03, marginBottom: u * 0.03 }}>
+          <Image source={DF1} style={styles.tutorial.imgStyle} />
         </View>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}>The current ciphertext is:</Text>
-          <Text style={styles.tutorial.textStyleSmallerText}>({lockState.encryption.encryptedText.join(', ')})</Text>
+
+        <Text style={styles.tutorial.contentStyleSmall}>
+          Use the <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showInversePopUp: true, }) }}>
+            inverse multiplier w^-1
+          </Text> to calculate <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showrPopUp: true, }) }}>
+            R
+          </Text>.
+        </Text>
+
+        <Text style={styles.tutorial.contentStyleSmall}>
+          Use the <Text style={styles.tutorial.privateKey}>private key a</Text> to find binary x since
+        </Text>
+
+        <View style={{ height: u * 0.04, marginTop: u * 0.03, marginBottom: u * 0.03 }}>
+          <Image source={DF2} style={styles.tutorial.imgStyle} />
         </View>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}>Padding: </Text>
-          <Text style={styles.tutorial.textStyleSmallerText}>{lockState.encryption.padding}</Text>
-        </View>
-        <View style={styles.tutorial.imageView}>
-          <Image style={styles.tutorial.DF1} source={DF1}/>
-        </View>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}>Use the 
-            <Text 
-              style={styles.tutorial.linkStyle}
-              onPress={()=>{
-                  this.setState({showWInversePopUp: true,})
-              }}
-            > inverse multiplier w^-1 </Text> 
-            to calculate 
-            <Text 
-              style={styles.tutorial.linkStyle}
-              onPress={()=> {
-                this.setState({showrPopUp: true,})
-              }}
-            > R</Text>
+
+        <Text style={styles.tutorial.contentStyleSmall}>
+          Then by <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showCmpPopUp: true, }) }}>
+            comparing with a to calculate to obtain the binary value x
           </Text>
-        </View>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}>Use the private key a to find binary x since</Text>
-        </View>
-        <View style={styles.tutorial.imageView}>
-          <Image style={styles.tutorial.DF2} source={DF2}/>
-        </View>
-        <View style={styles.tutorial.imageView}>
-          <Text style={styles.tutorial.textStyleSmallerText}>
-            Then by 
-            <Text 
-              style={styles.tutorial.linkStyle}
-              onPress={()=>{this.setState({showCmpPopUp: true,})}}
-            > comparing with a </Text>
-            to obtain the binary value x
-          </Text>
-        </View>
-      
-        </>
+        </Text>
+      </>
     )
   }
 
   getPageElements = () => {
     let pageNo = this.checkPageNo()
-    switch(pageNo){
-      case 1: 
+    switch (pageNo) {
+      case 1:
         return this.getFirstPage()
-      case 2: 
+      case 2:
         return this.getSecondPage()
       case 3:
         return this.getThirdPage()
-      default:  
+      default:
         return this.getFirstPage()
     }
   }
-  render(){
-      const { lockState } = this.props;
-      const { 
-        showBlocks,
-        showSpinner, 
-        showWInversePopUp,
-        showrPopUp,
-        showCmpPopUp
-      } = this.state;
-      {
-        /*
-          BlockDecrypt.propTypes = {
-            flexArr: PropTypes.array.isRequired,
-            tableTitle: PropTypes.array.isRequired,
-            currentR: PropTypes.array.isRequired,
-            pubKey: PropTypes.array.isRequired,
-            postSub: PropTypes.array.isRequired,
-            binary: PropTypes.array.isRequired,
-            binaryOrdered: PropTypes.array.isRequired,
-            encryptedInput: PropTypes.number.isRequired,
-            inverse: PropTypes.number.isRequired,
-            modulo: PropTypes.number.isRequired,
-            rVal: PropTypes.number.isRequired,
-          };
-        */
-      }
+  render() {
+    const { lockState } = this.props;
+    const {
+      showBlocks,
+      showSpinner,
+      showInversePopUp,
+      showrPopUp,
+      showCmpPopUp,
+      showPaddingInfoPopUp
+    } = this.state;
+    {
+      /*
+        BlockDecrypt.propTypes = {
+          flexArr: PropTypes.array.isRequired,
+          tableTitle: PropTypes.array.isRequired,
+          currentR: PropTypes.array.isRequired,
+          pubKey: PropTypes.array.isRequired,
+          postSub: PropTypes.array.isRequired,
+          binary: PropTypes.array.isRequired,
+          binaryOrdered: PropTypes.array.isRequired,
+          encryptedInput: PropTypes.number.isRequired,
+          inverse: PropTypes.number.isRequired,
+          modulo: PropTypes.number.isRequired,
+          rVal: PropTypes.number.isRequired,
+        };
+      */
+    }
     const { currentDecryptedBlocks } = this.state;
     let decryptedArr = []
-    if (currentDecryptedBlocks !== null){
+    if (currentDecryptedBlocks !== null) {
       let flexLength = []
-      for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++){
+      for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++) {
         flexLength.push(1);
       }
       decryptedArr.push(
-        currentDecryptedBlocks.blocks.map ((x, idx)=> {
+        currentDecryptedBlocks.blocks.map((x, idx) => {
           return (
-            <View key = {`${idx}`}>
+            <View key={`${idx}`}>
               <BlocksDecrypt
-                key = {`${idx}`}
+                key={`${idx}`}
                 flexArr={flexLength}
                 tableTitle={
                   [
@@ -470,32 +461,32 @@ class DecryptTutorial extends Component{
                     'New R',
                     'Binary',
                     'Ordered'
-                ]}
+                  ]}
                 currentR={
                   x.current_r
                 }
                 pubKey={
                   x.knapsack
                 }
-                postSub = {
+                postSub={
                   x.new_r
                 }
-                binary = {
+                binary={
                   x.decrypted
                 }
-                binaryOrdered = {
+                binaryOrdered={
                   x.decrypted.slice().reverse()
                 }
-                encryptedInput = {
+                encryptedInput={
                   x.inital_enc
                 }
-                inverse = {
+                inverse={
                   lockState.updateParameters.inverse
                 }
-                modulo = {
+                modulo={
                   lockState.updateParameters.modulo
                 }
-                rVal = {
+                rVal={
                   x.initial_r
                 }
               />
@@ -505,20 +496,21 @@ class DecryptTutorial extends Component{
 
       )
     }
-    return(
-      
+    return (
+
       <View style={styles.tutorial.learnTabPad}>
-         {
-           this.getPageElements()
-         }
+        <Text style={styles.tutorial.titleStyle}>Decryption</Text>
         {
-          showSpinner 
-          ? <Loader />
-          : null
+          this.getPageElements()
+        }
+        {
+          showSpinner
+            ? <Loader />
+            : null
         }
         {
           /*
-
+ 
   messageContent: PropTypes.string,
   renderedBlocks: PropTypes.node,
   callback: PropTypes.func.isRequired,
@@ -526,49 +518,59 @@ class DecryptTutorial extends Component{
   icon: PropTypes.node,*/
         }
         {
-          showWInversePopUp
-          ? <AlertPopUp 
-              icon={Exclaim}
+          showInversePopUp
+            ? <AlertPopUp
+              icon={InfoIcon}
               renderedBlocks={this.wInversePopUp()}
-              callback={()=>{this.setState({showWInversePopUp: false,})}}
-              visibility={showWInversePopUp}
+              callback={() => { this.setState({ showInversePopUp: false, }) }}
+              visibility={showInversePopUp}
             />
-          : null
+            : null
         }
         {
           showrPopUp
-          ?<AlertPopUp 
-          icon={Exclaim}
-          renderedBlocks={this.rPopUp()}
-          callback={()=>{this.setState({showrPopUp: false,})}}
-          visibility={showrPopUp}
-        />
-         : null
+            ? <AlertPopUp
+              icon={InfoIcon}
+              renderedBlocks={this.rPopUp()}
+              callback={() => { this.setState({ showrPopUp: false, }) }}
+              visibility={showrPopUp}
+            />
+            : null
         }
         {
           showCmpPopUp
-          ?<AlertPopUp 
-          icon={Exclaim}
-          renderedBlocks={this.comparingPopUp()}
-          callback={()=>{this.setState({showCmpPopUp: false,})}}
-          visibility={showCmpPopUp}
-        />
-          :null
+            ? <AlertPopUp
+              icon={InfoIcon}
+              renderedBlocks={this.comparingPopUp()}
+              callback={() => { this.setState({ showCmpPopUp: false, }) }}
+              visibility={showCmpPopUp}
+            />
+            : null
         }
         {
-               showBlocks
-               ? <ScrollViewPopUp   
-                    visibility={showBlocks}
-                    lockStateArr={decryptedArr} 
-                    callback={
-                      ()=>{
-                        this.setState({
-                          showBlocks: false,
-                        })
-                      }
-                    }/>
-               : null
-            }
+          showPaddingInfoPopUp
+            ? <AlertPopUp
+              icon={InfoIcon}
+              renderedBlocks={this.paddingInfoPopUp()}
+              callback={() => { this.setState({ showPaddingInfoPopUp: false, }) }}
+              visibility={showPaddingInfoPopUp}
+            />
+            : null
+        }
+        {
+          showBlocks
+            ? <ScrollViewPopUp
+              visibility={showBlocks}
+              lockStateArr={decryptedArr}
+              callback={
+                () => {
+                  this.setState({
+                    showBlocks: false,
+                  })
+                }
+              } />
+            : null
+        }
       </View>
     )
   }
@@ -585,4 +587,4 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch)
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(DecryptTutorial);
+export default connect(mapStateToProps, mapDispatchToProps)(DecryptTutorial);
