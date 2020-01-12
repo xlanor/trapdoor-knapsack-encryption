@@ -204,7 +204,7 @@ class EncryptTutorial extends Component {
       let binString = this.getBinaryOfInput()
       actions.UPDATE_ENCRYPTION_STRING_ACTION(currentTextBox)
       actions.UPDATE_ENCRYPTION_BINARY_STRING_ACTION(binString)
-      actions.UPDATE_ENCRYPTION_ASCII_STRING_ACTION(currentTextBox)
+      actions.UPDATE_ENCRYPTION_ASCII_STRING_ACTION(this.stringToAscii())
       actions.ALLOW_NEXT_PAGE_ACTION()
       Keyboard.dismiss()
     }
@@ -229,18 +229,18 @@ class EncryptTutorial extends Component {
 
   paddingInfoPopUp = () => {
     return (
-      <View>
+      <>
         <Text style={styles.tutorial.popUpTextStyle}>
           Padding - insert ‘0’s at back of binary string to fill the block
           {"\n\n"}
           Eg: 01100001 <Text style={{ color: COLORS.CORRECT_GREEN }}>+0</Text>
         </Text>
-      </View>
+      </>
     )
   }
   ciphertextInfoPopUp = () => {
     return (
-      <View>
+      <>
         <Text style={styles.tutorial.popUpTextStyle}>
           Eg: using the encryption formula to calculate
         </Text>
@@ -261,8 +261,22 @@ class EncryptTutorial extends Component {
             </TableWrapper>
           </Table>
         </View>
-      </View>
+      </>
     )
+  }
+  stringToAscii = () => {
+    const {lockState} = this.props
+    let text = lockState.encryption.textToEncrypt;
+    var asciiVal = "("
+
+    for (var i = 0; i < text.length; i++) {
+      asciiVal += (Number)(text.charCodeAt(i));
+      if (i + 1 != text.length)
+        asciiVal += ", ";
+    }
+    asciiVal += ")";
+
+    return asciiVal
   }
   getFifthPage = () => {
     const { actions } = this.props;
@@ -627,7 +641,7 @@ class EncryptTutorial extends Component {
                     <>
                       <Text style={styles.tutorial.contentStyleSmall}>
                         <Text style={styles.tutorial.boldFont}>Your message:</Text> {lockState.encryption.textToEncrypt}{"\n"}
-                        <Text style={styles.tutorial.boldFont}>Ascii value:</Text> W.I.P{"\n"}
+                        <Text style={styles.tutorial.boldFont}>Ascii value:</Text> {lockState.encryption.asciiString}{"\n"}
                         <Text style={styles.tutorial.boldFont}>Binary value:</Text> {lockState.encryption.binaryString}
                       </Text>
                       <Text style={{
