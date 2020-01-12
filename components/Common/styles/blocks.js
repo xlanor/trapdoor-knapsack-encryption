@@ -24,11 +24,14 @@ const rowStyle = {
   height: 28,
 }
 
+const headerTextStyle = {
+  textAlign: 'center',
+  fontFamily: 'comfortaa-bold'
+}
 const textStyle = {
   textAlign: 'center',
   fontFamily: 'comfortaa'
 }
-
 const blockTitleView = {
     marginBottom: Dimensions.get('window').height * 0.01,
 }
@@ -43,6 +46,7 @@ export default {
   wrapperStyle,
   titleStyle,
   rowStyle,
+  headerTextStyle,
   textStyle,
   blockTitleView,
   blockTotalView,

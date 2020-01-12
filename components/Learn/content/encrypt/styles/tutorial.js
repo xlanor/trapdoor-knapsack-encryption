@@ -1,63 +1,47 @@
 import { COLORS } from '../../../../../constants/Colors';
-
 import { Dimensions } from 'react-native';
 
-
-const textStyleTitle = {
-  fontFamily: 'comfortaa',
+const titleStyle = {
+  fontFamily: 'comfortaa-bold',
+  fontSize: 25,
+  marginTop: Dimensions.get('screen').height * 0.02,
+  marginBottom: Dimensions.get('screen').height * 0.02,
+  textAlign: 'center',
+  textDecorationLine: 'underline'
+}
+const contentHead = {
+  fontFamily: 'comfortaa-bold',
   fontSize: 20,
-  paddingTop: Dimensions.get('screen').height * 0.02,
-  paddingBottom: Dimensions.get('screen').height * 0.01,
+  textAlign: 'center',
 }
-
-const textStyleHeader1 = {
-  fontFamily: 'comfortaa',
-  fontSize: 15,
-  paddingBottom: Dimensions.get('screen').height * 0.02,
-}
-
-const textStyleHeader2 = {
+const contentStyle = {
   fontFamily: 'comfortaa',
   fontSize: 18,
-  paddingBottom: Dimensions.get('screen').height * 0.02,
 }
-
-const textStyleHeader3 = {
+const contentStyleSmall = {
   fontFamily: 'comfortaa',
-  fontSize: 18,
-  paddingBottom: Dimensions.get('screen').height * 0.02,
-  paddingTop: Dimensions.get('screen').height * 0.02,
+  fontSize: 14,
 }
-
-
-const textStyle = {
+const contentStyleBig = {
   fontFamily: 'comfortaa',
+  fontSize: 23
 }
 
 const boldFont = {
   fontFamily: 'comfortaa-bold',
-  fontWeight: 'bold',
 }
 const textBoxStyle = {
   fontFamily: 'comfortaa-bold',
   backgroundColor: COLORS.YELLOW_1,
-  borderColor:'black',
+  borderColor: 'black',
   borderWidth: 2,
   borderStyle: 'solid',
   borderRadius: 5,
-  height:  Dimensions.get('screen').height * 0.08,
+  height: Dimensions.get('screen').height * 0.08,
   fontSize: 20,
   paddingLeft: Dimensions.get('screen').height * 0.01,
   paddingTop: Dimensions.get('screen').height * 0.01,
   paddingBottom: Dimensions.get('screen').height * 0.01,
-}
-
-const textStyleTitleCenter = {
-  fontFamily: 'comfortaa-bold',
-  fontSize: 25,
-  textDecorationLine: 'underline',
-  paddingTop: Dimensions.get('screen').height * 0.02,
-  paddingBottom: Dimensions.get('screen').height * 0.02,
 }
 
 const learnTabPad = {
@@ -67,14 +51,10 @@ const learnTabPad = {
   //backgroundColor: '#888'
 }
 
-const textStyleTitleWrapper = {
-  // to wrap the text in a view so that we can apply a center align to the view only,
-  alignItems: 'center'
-}
-const buttonRow = { 
-  alignItems: 'center', 
+const buttonRow = {
+  alignItems: 'center',
   marginTop: Dimensions.get('window').height * 0.02,
-  marginBottom:  Dimensions.get('window').height * 0.02,
+  marginBottom: Dimensions.get('window').height * 0.02,
 }
 
 const multipleButtonLeft = {
@@ -86,17 +66,8 @@ const multipleButtonRight = {
   marginLeft: Dimensions.get('window').width * 0.01,
 }
 
-const encryptText = {
-  fontFamily: 'comfortaa',
-  fontSize: 16,
-}
-
 const encryptTextGray = {
-  fontFamily: 'comfortaa',
   color: COLORS.GREY_1,
-  fontSize: 14,
-  marginTop: Dimensions.get('window').height * 0.005,
-
 }
 
 const secondParaView = {
@@ -108,22 +79,73 @@ const tableView = {
   marginTop: Dimensions.get('window').height * 0.02,
 }
 
+const tableHeaderValue = {
+  fontFamily: 'comfortaa-bold',
+  textAlign: 'center',
+}
+const tableValue = {
+  fontFamily: 'comfortaa',
+  textAlign: 'center',
+}
+const tableUnknownValue = {
+  fontFamily: 'comfortaa-bold',
+  textAlign: 'center',
+  color: COLORS.RED_1
+}
+const tableCorrectValue = {
+  fontFamily: 'comfortaa-bold',
+  textAlign: 'center',
+  color: COLORS.CORRECT_GREEN
+}
+
+const linkStyle = {
+  color: COLORS.LINKS_BLUE,
+  textDecorationLine: 'underline',
+}
+
+const imgStyle = {
+  flex: 1,
+  width: null,
+  height: null,
+  resizeMode: 'contain'
+}
+const popUpTextStyle = {
+
+  fontFamily: 'comfortaa',
+  fontSize: 14,
+  //textAlign: 'center',
+  color: COLORS.POPUP_TEXT_COLOR
+}
+const popUpTextStyleBold = {
+
+  fontFamily: 'comfortaa',
+  fontSize: 18,
+  fontWeight: 'bold',
+  //textAlign: 'center',
+  color: COLORS.POPUP_TEXT_COLOR
+}
+
 export default {
-  textStyle,
   textBoxStyle,
-  textStyleTitle,
+  titleStyle,
+  contentHead,
+  contentStyle,
+  contentStyleSmall,
+  contentStyleBig,
   boldFont,
-  textStyleHeader3,
-  textStyleHeader2,
-  textStyleHeader1,
-  textStyleTitleCenter,
-  textStyleTitleWrapper,
   learnTabPad,
   buttonRow,
   multipleButtonLeft,
   multipleButtonRight,
-  encryptText,
   encryptTextGray,
   secondParaView,
-  tableView
+  tableView,
+  tableHeaderValue,
+  tableValue,
+  tableUnknownValue,
+  tableCorrectValue,
+  linkStyle,
+  imgStyle,
+  popUpTextStyle,
+  popUpTextStyleBold
 };

@@ -13,6 +13,7 @@ export const COLORS = {
   GREY_1: '#7E7E7E',
   POPUP_TEXT_COLOR:'#4D4D4D',
   LINKS_BLUE: '#2980B9',
+  CORRECT_GREEN: '#27AE60',
   
   //keywords
   PRIVATEKEY_COLOR:'#C0392B',
