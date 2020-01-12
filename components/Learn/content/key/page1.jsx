@@ -2,6 +2,7 @@ import React, { Component } from 'React';
 
 import {
   View,
+  Dimensions,
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
@@ -10,7 +11,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  FlatList
+  FlatList,
 } from 'react-native';
 // import stylesheet.
 import styles from './styles';
@@ -25,7 +26,8 @@ import ProgressBar4 from '../../../../assets/images/FiveStepProgress/ProgressBar
 import ProgressBar5 from '../../../../assets/images/FiveStepProgress/ProgressBar5.png'
 
 import Error from '../../../../assets/images/Error.png'
-import Alert from '../../../../assets/images/alert.png'
+import InfoIcon from '../../../../assets/images/InfoIcon.png'
+import bFormula from '../../../../assets/images/bFormula.png'
 
 import {
   ALLOW_NEXT_PAGE_ACTION
@@ -70,6 +72,9 @@ class KeyPage extends Component {
       inverseLoaded: false,
       pkLoaded: false,
       showSuperIncreasingInfoPopUp: false,
+      showCoprimeInfoPopUp: false,
+      showKeyMultiplicationInfoPopUp: false,
+      showModulusInfoPopUp: false,
       errorMessage: "",
       keyboardVisiblity: false,
     }
@@ -103,17 +108,12 @@ class KeyPage extends Component {
   superIncreasingInfoPopUp = () => {
     return (
       <View>
-        <View>
-          <Text style={styles.page1.popUpTextStyle}>
-            Every number of the sequence is >
-            the sum of all previous numbers in the sequence
-          </Text>
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <Text style={styles.page1.popUpTextStyle}>
-            Eg.  a = 2, 5, 10 where 2 {"<"} 5 and 2 + 5 {"<"} 10,
-            </Text>
-        </View>
+        <Text style={styles.page1.popUpTextStyle}>
+          Every number of the sequence is >
+          the sum of all previous numbers in the sequence
+          {"\n\n"}
+          Eg.  a = 2, 5, 10 where 2 {"<"} 5 and 2 + 5 {"<"} 10,
+        </Text>
       </View>
     )
   }
@@ -121,9 +121,7 @@ class KeyPage extends Component {
     return (
       <View>
         <Text style={styles.page1.popUpTextStyle}>
-          Eg. a = 2, 5, 10, sum of a = 17
-        </Text>
-        <Text style={styles.page1.popUpTextStyle}>
+          Eg. a = 2, 5, 10, sum of a = 17{"\n"}
           m = 39 which is > 17 (sum of a)
         </Text>
       </View>
@@ -133,9 +131,7 @@ class KeyPage extends Component {
     return (
       <View>
         <Text style={styles.page1.popUpTextStyle}>
-          Co-prime means gcd (m, w) = 1
-        </Text>
-        <Text style={styles.page1.popUpTextStyle}>
+          Co-prime means gcd (m, w) = 1{"\n"}
           Eg: m = 39, w = 11 so gcd (39, 11) = 1
         </Text>
       </View>
@@ -145,15 +141,9 @@ class KeyPage extends Component {
     return (
       <View>
         <Text style={styles.page1.popUpTextStyle}>
-          Eg:
-        </Text>
-        <Text style={styles.page1.popUpTextStyle}>
-          b1 = 11 * 2 = 22 (mod 39)
-        </Text>
-        <Text style={styles.page1.popUpTextStyle}>
-          b2 = 11 * 5 = 16 (mod 39)
-        </Text>
-        <Text style={styles.page1.popUpTextStyle}>
+          Eg:{"\n"}
+          b1 = 11 * 2 = 22 (mod 39){"\n"}
+          b2 = 11 * 5 = 16 (mod 39){"\n"}
           b3 = 11 * 10 = 32 (mod 39)
         </Text>
       </View>
@@ -390,43 +380,57 @@ class KeyPage extends Component {
   getSixthPage = () => {
     return (
       <View style={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
-        <Text style={styles.page1.textStyle}> Quiz Time</Text>
-        <Text style={styles.page1.textStyle}> WIP</Text>
+        <Text style={styles.page1.contentStyle}>Quiz Time</Text>
+        <Text style={styles.page1.contentStyle}>WIP</Text>
       </View>
     )
   }
   getFifthPage = () => {
     const { lockState, actions } = this.props;
     const { pkLoaded } = this.state;
+    let u = Dimensions.get('window').width;
     return (
       <View>
-        <Text style={styles.page1.textStyleTitle}>Compute the <Text style={styles.page1.publicKeyStyle}>public key b</Text>:</Text>
-        <Text style={styles.page1.textStyleHeader3}>
-            <Text style={styles.page1.linkStyle} onPress={() => { this.setState({ showKeyMultiplicationInfoPopUp: true, }) }}>
-              For every element in a, multiply it by the multiplier w you chose in step 3 and get the remainder
-              when divided by the modulo m you chose in step 2
-            </Text>
+        <Text style={styles.page1.contentStyle}>
+          Compute the <Text style={styles.page1.publicKeyStyle}>public key b</Text>:
         </Text>
-        <Text style={styles.page1.textStyleHeader3}>Example to be added later</Text>
-        <Text style={styles.page1.textStyleHeader2}>
-          <Text style={styles.page1.boldFont}>Private key <Text style={styles.page1.privateKeyStyle}>a</Text>: {lockState.updateParameters.privateKeyString}</Text>
+        <View style={{ height: u * 0.06, marginTop: u * 0.03, marginBottom: u * 0.03 }}>
+          <Image
+            source={bFormula}
+            style={{
+              flex: 1,
+              width: null,
+              height: null,
+              resizeMode: 'contain'
+            }}
+          />
+        </View>
+
+        <Text style={styles.page1.contentStyleSmall}>
+          <Text style={styles.page1.linkStyle}
+            onPress={() => { this.setState({ showKeyMultiplicationInfoPopUp: true, }) }}>
+            For every element in a,
+            multiply it by the multiplier w you chose in step 3 and get the remainder
+            when divided by the modulo m you chose in step 2
+          </Text>
+          {"\n\n"}
+          Private key <Text style={styles.page1.privateKeyStyle}>a</Text>
+          :  {lockState.updateParameters.privateKeyString}{"\n"}
+          Multiplier <Text style={styles.page1.multiplierStyle}>w</Text>
+          :  {lockState.updateParameters.multiplier}{"\n"}
+          Modulus <Text style={styles.page1.modulusStyle}>m</Text>
+          :  {lockState.updateParameters.modulo}{"\n"}
+          Inverse multiplier <Text style={styles.page1.inverseStyle}>w^-1</Text>
+          :  {lockState.updateParameters.inverse}
         </Text>
-        <Text style={styles.page1.textStyleHeader2}>
-          <Text style={styles.page1.boldFont}>Multiplier <Text style={styles.page1.multiplierStyle}>w</Text>: {lockState.updateParameters.multiplier}</Text>
-        </Text>
-        <Text style={styles.page1.textStyleHeader2}>
-          <Text style={styles.page1.boldFont}>Modulus <Text style={styles.page1.modulusStyle}>m</Text>: {lockState.updateParameters.modulo}</Text>
-        </Text>
-        <Text style={styles.page1.textStyleHeader2}>
-          <Text style={styles.page1.boldFont}>Inverse multiplier <Text style={styles.page1.inverseStyle}>w^-1</Text>: {lockState.updateParameters.inverse}</Text>
-        </Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+
+        <View style={{ flexDirection: 'row', justifyContent: 'center', margin: Dimensions.get('window').height * 0.05 }}>
           <CustomButton text="Gen Public Key" callback={() => { this.generatePubKey() }} />
         </View>
 
         {
           pkLoaded
-            ? <Text style={styles.page1.textStyleHeader3}>Public key <Text style={styles.page1.publicKeyStyle}>b</Text>: {lockState.updateParameters.publicKeyString}</Text>
+            ? <Text style={styles.page1.contentStyle}>Public key <Text style={styles.page1.publicKeyStyle}>b</Text>: {lockState.updateParameters.publicKeyString}</Text>
             : null
         }
       </View>
@@ -437,19 +441,29 @@ class KeyPage extends Component {
     const { inverseLoaded } = this.state;
     return (
       <View>
-        <Text style={styles.page1.textStyleTitle}>Calculate the multiplicative inverse of your multiplier <Text style={styles.page1.boldFont}>w ({lockState.updateParameters.multiplier})</Text>:</Text>
-        <Text style={styles.page1.textStyleHeader3}>(Using Extended Euclidean's algorithm)</Text>
-        <Text style={styles.page1.textStyleHeader2}>This is needed for decryption</Text>
-        <Text style={styles.page1.textStyleHeader2}>E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)</Text>
+        <Text style={styles.page1.contentStyle}>
+          Calculate the multiplicative inverse of your
+          multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>:
+          {"\n"}
+        </Text>
+        <Text style={styles.page1.contentStyleSmall}>
+          (Using Extended Euclidean's algorithm){"\n"}
+          This is needed for decryption{"\n"}
+          E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)
+        </Text>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', margin: Dimensions.get('window').height * 0.05 }}>
           <CustomButton text="Gen Inverse" callback={() => { this.loadInverse() }} />
         </View>
 
         {
           inverseLoaded
             ?
-            <Text style={styles.page1.textStyleTitle}>Multiplicative inverse of your multiplier <Text style={styles.page1.boldFont}>w ({lockState.updateParameters.multiplier})</Text>: {lockState.updateParameters.inverse}</Text>
+            <Text style={styles.page1.contentStyle}>
+              Multiplicative inverse of your
+              multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>
+              : {lockState.updateParameters.inverse}
+            </Text>
             : null
         }
       </View>
@@ -461,38 +475,47 @@ class KeyPage extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
-          <Text style={styles.page1.textStyleTitle}>Choose your <Text style={styles.page1.multiplierStyle}>multiplier w</Text>:</Text>
-          <Text style={styles.page1.textStyleHeader2}>
+          <Text style={styles.page1.contentStyle}>
+            Choose your <Text style={styles.page1.multiplierStyle}>multiplier w</Text>:
+          </Text>
+          <Text style={styles.page1.contentStyleSmall}>
             This <Text style={styles.page1.multiplierStyle}>multiplier w</Text> must be
             a <Text style={styles.page1.linkStyle} onPress={() => { this.setState({ showCoprimeInfoPopUp: true, }) }}>
               co-prime
             </Text> to your <Text style={styles.page1.modulusStyle}>modulus m</Text>
           </Text>
-          <Text style={styles.page1.textStyleHeader3}>
-            This means <Text style={styles.page1.boldFont}>gcd({lockState.updateParameters.modulo},
-            <Text style={styles.page1.multiplierStyle}>w</Text>)</Text> = 1
-          </Text>
-          <Text style={styles.page1.textStyleHeader2}>E.G: <Text style={styles.page1.boldFont}>w</Text> = 11, where <Text style={styles.page1.boldFont}>gcd (39,11)</Text> = 1</Text>
-          <TextInput
-            defaultValue={
-              lockState.updateParameters.multiplier === 0 ?
-                null :
-                lockState.updateParameters.multiplier.toString()
-            }
-            onSubmitEditing={
-              Keyboard.dismiss
-            }
-            keyboardType={'numeric'} style={styles.page1.textBoxStyle} onChangeText={(text) => {
-              this.setState({ currentMultiplier: text })
-            }} />
-          <View style={styles.page1.buttonRow}>
-            <CustomButton text="Validate" callback={this.validateMultiplier} />
-          </View>
-          {
-            lockState.updateParameters.multiplier === 0 ?
-              null :
-              <Text style={styles.page1.textStyleHeader3}>Multiplier <Text style={styles.page1.multiplierStyle}>w: </Text>{lockState.updateParameters.multiplier.toString()}</Text>
 
+          <View style={{ marginTop: Dimensions.get('window').height * 0.02 }}>
+            <Text style={styles.page1.contentStyle}>
+              This means <Text style={styles.page1.boldFont}>
+                gcd({lockState.updateParameters.modulo}, <Text style={styles.page1.multiplierStyle}>w</Text>)
+              </Text> = 1{"\n"}
+              E.G: <Text style={styles.page1.boldFont}>w</Text> = 11, where <Text style={styles.page1.boldFont}>gcd (39,11)</Text> = 1
+            </Text>
+          </View>
+
+          <View style={{ marginTop: Dimensions.get('window').height * 0.03 }}>
+            <TextInput
+              defaultValue={
+                lockState.updateParameters.multiplier === 0
+                  ? null
+                  : lockState.updateParameters.multiplier.toString()
+              } onSubmitEditing={
+                Keyboard.dismiss
+              } keyboardType={'numeric'} style={styles.page1.textBoxStyle} onChangeText={(text) => {
+                this.setState({ currentMultiplier: text })
+              }} />
+            <View style={styles.page1.buttonRow}>
+              <CustomButton text="Validate" callback={this.validateMultiplier} />
+            </View>
+          </View>
+
+          {
+            lockState.updateParameters.multiplier === 0
+              ? null
+              : <Text style={styles.page1.contentStyle}>
+                Multiplier <Text style={styles.page1.multiplierStyle}>w: </Text>{lockState.updateParameters.multiplier.toString()}
+              </Text>
           }
         </View>
       </TouchableWithoutFeedback>
@@ -505,33 +528,39 @@ class KeyPage extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
-          <Text style={styles.page1.textStyleTitle}>Choose your <Text style={styles.page1.modulusStyle}>modulus m</Text>:</Text>
-          <Text style={styles.page1.textStyleHeader3}>Sum of <Text style={styles.page1.privateKeyStyle}>a</Text> is: {lockState.updateParameters.privateKeySum}</Text>
-          <Text style={styles.page1.textStyleHeader2}>
+          <Text style={styles.page1.contentStyle}>
+            Choose your <Text style={styles.page1.modulusStyle}>modulus m</Text>:
+            {"\n\n"}
+            Sum of <Text style={styles.page1.privateKeyStyle}>a</Text> is: {lockState.updateParameters.privateKeySum}
+            {"\n"}
+          </Text>
+          <Text style={styles.page1.contentStyleSmall}>
             <Text style={styles.page1.linkStyle} onPress={() => { this.setState({ showModulusInfoPopUp: true, }) }}>
               m should be bigger than the sum of a
             </Text>
           </Text>
-          
-          <TextInput defaultValue={
-            lockState.updateParameters.modulo === 0 ?
-              null :
-              lockState.updateParameters.modulo.toString()
-          }
-            onSubmitEditing={
+
+          <View style={{ marginTop: Dimensions.get('window').height * 0.03 }}>
+            <TextInput defaultValue={
+              lockState.updateParameters.modulo === 0
+                ? null
+                : lockState.updateParameters.modulo.toString()
+            } onSubmitEditing={
               Keyboard.dismiss
-            }
-            keyboardType={'numeric'} style={styles.page1.textBoxStyle} onChangeText={(text) => {
+            } keyboardType={'numeric'} style={styles.page1.textBoxStyle} onChangeText={(text) => {
               this.setState({ currentModulo: text })
             }} />
-          <View style={styles.page1.buttonRow}>
-            <CustomButton text="Validate" callback={this.validateModulus} />
+            <View style={styles.page1.buttonRow}>
+              <CustomButton text="Validate" callback={this.validateModulus} />
+            </View>
           </View>
-          {
-            lockState.updateParameters.modulo === 0 ?
-              null :
-              <Text style={styles.page1.textStyleHeader3}>Modulus <Text style={styles.page1.modulusStyle}>m: </Text>{lockState.updateParameters.modulo.toString()}</Text>
 
+          {
+            lockState.updateParameters.modulo === 0
+              ? null
+              : <Text style={styles.page1.contentStyle}>
+                Modulus <Text style={styles.page1.modulusStyle}>m: </Text>{lockState.updateParameters.modulo.toString()}
+              </Text>
           }
         </View>
       </TouchableWithoutFeedback>
@@ -544,38 +573,40 @@ class KeyPage extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
-          <Text style={styles.page1.textStyleTitle}>Enter your <Text style={styles.page1.privateKeyStyle}>private key a</Text>:</Text>
-          <Text style={styles.page1.textStyleHeader1}>(This <Text style={styles.page1.privateKeyStyle}>private key a</Text> should be in a
-              <Text
-              style={styles.page1.linkStyle}
-              onPress={() => {
-                this.setState({
-                  showSuperIncreasingInfoPopUp: true,
-                })
-              }}
-            > super increasing sequence</Text>
-            )
+          <Text style={styles.page1.contentStyle}>
+            Enter your <Text style={styles.page1.privateKeyStyle}>private key a</Text>:
+            {"\n\n"}
+            (This <Text style={styles.page1.privateKeyStyle}>private key a</Text> should
+            be in a <Text style={styles.page1.linkStyle} onPress={() => { this.setState({ showSuperIncreasingInfoPopUp: true, }) }} >
+              super increasing sequence
+            </Text>)
           </Text>
-          <TextInput defaultValue={
-            lockState.updateParameters.privateKeyString === ""
-              ? null :
-              lockState.updateParameters.privateKeyString
-          } style={styles.page1.textBoxStyle} onChangeText={(text) => {
-            this.setState({
-              currentPrivateKey: text,
-            })
-          }}
-            onSubmitEditing={
+
+          <View style={{ marginTop: Dimensions.get('window').height * 0.03 }}>
+            <TextInput defaultValue={
+              lockState.updateParameters.privateKeyString === ""
+                ? null
+                : lockState.updateParameters.privateKeyString
+            } style={styles.page1.textBoxStyle} onChangeText={(text) => {
+              this.setState({
+                currentPrivateKey: text,
+              })
+            }} onSubmitEditing={
               Keyboard.dismiss
             }
-          />
-          <View style={styles.page1.buttonRow}>
-            <CustomButton text="Validate" callback={this.validatePrivateKey} />
+            />
+            <View style={styles.page1.buttonRow}>
+              <CustomButton text="Validate" callback={this.validatePrivateKey} />
+            </View>
           </View>
-          <Text style={styles.page1.textStyleHeader2}>
-            Private key <Text style={styles.page1.privateKeyStyle}>a</Text>: {isEntered ? lockState.updateParameters.privateKeyString : null}
-          </Text>
-          <Text style={styles.page1.textStyleHeader2}>
+
+          <Text style={styles.page1.contentStyle}>
+            Private key <Text style={styles.page1.privateKeyStyle}>a</Text>: {
+              isEntered
+                ? lockState.updateParameters.privateKeyString
+                : null
+            }
+            {"\n"}
             Knapsack Size <Text style={styles.page1.boldFont}>n</Text>: {
               isEntered
                 ? lockState.updateParameters.privateKeyArr.length
@@ -639,7 +670,7 @@ class KeyPage extends Component {
         {
           showKeyMultiplicationInfoPopUp
             ? <AlertPopUp
-              icon={Alert}
+              icon={InfoIcon}
               renderedBlocks={this.keyMultiplicationInfoPopUp()}
               callback={() => { this.setState({ showKeyMultiplicationInfoPopUp: false, }) }}
               visibility={showKeyMultiplicationInfoPopUp} />
@@ -648,7 +679,7 @@ class KeyPage extends Component {
         {
           showCoprimeInfoPopUp
             ? <AlertPopUp
-              icon={Alert}
+              icon={InfoIcon}
               renderedBlocks={this.superCoprimeInfoPopUp()}
               callback={() => { this.setState({ showCoprimeInfoPopUp: false, }) }}
               visibility={showCoprimeInfoPopUp} />
@@ -657,7 +688,7 @@ class KeyPage extends Component {
         {
           showSuperIncreasingInfoPopUp
             ? <AlertPopUp
-              icon={Alert}
+              icon={InfoIcon}
               renderedBlocks={this.superIncreasingInfoPopUp()}
               callback={() => { this.setState({ showSuperIncreasingInfoPopUp: false, }) }}
               visibility={showSuperIncreasingInfoPopUp} />
@@ -666,7 +697,7 @@ class KeyPage extends Component {
         {
           showModulusInfoPopUp
             ? <AlertPopUp
-              icon={Alert}
+              icon={InfoIcon}
               renderedBlocks={this.modulusInfoPopUp()}
               callback={() => { this.setState({ showModulusInfoPopUp: false, }) }}
               visibility={showModulusInfoPopUp} />
@@ -684,12 +715,8 @@ class KeyPage extends Component {
                 ? null
                 : (
                   <>
-                    <View style={styles.page1.textStyleTitleWrapper}>
-                      <Text style={styles.page1.textStyleTitleCenter}>Key Generation</Text>
-
-                    </View>
+                    <Text style={styles.page1.titleStyle}>Key Generation</Text>
                     <View style={{ alignItems: 'center' }}>
-
                       {
                         pageNo <= 5 ?
                           <Image style={styles.page1.progressBarSize} source={this.getProgressImage()}></Image> :
