@@ -107,46 +107,46 @@ class KeyPage extends Component {
   }
   superIncreasingInfoPopUp = () => {
     return (
-      <View>
+      <>
         <Text style={styles.page1.popUpTextStyle}>
           Every number of the sequence is >
           the sum of all previous numbers in the sequence
           {"\n\n"}
           Eg.  a = 2, 5, 10 where 2 {"<"} 5 and 2 + 5 {"<"} 10,
         </Text>
-      </View>
+      </>
     )
   }
   modulusInfoPopUp = () => {
     return (
-      <View>
+      <>
         <Text style={styles.page1.popUpTextStyle}>
           Eg. a = 2, 5, 10, sum of a = 17{"\n"}
           m = 39 which is > 17 (sum of a)
         </Text>
-      </View>
+      </>
     )
   }
   superCoprimeInfoPopUp = () => {
     return (
-      <View>
+      <>
         <Text style={styles.page1.popUpTextStyle}>
           Co-prime means gcd (m, w) = 1{"\n"}
           Eg: m = 39, w = 11 so gcd (39, 11) = 1
         </Text>
-      </View>
+      </>
     )
   }
   keyMultiplicationInfoPopUp = () => {
     return (
-      <View>
+      <>
         <Text style={styles.page1.popUpTextStyle}>
           Eg:{"\n"}
           b1 = 11 * 2 = 22 (mod 39){"\n"}
           b2 = 11 * 5 = 16 (mod 39){"\n"}
           b3 = 11 * 10 = 32 (mod 39)
         </Text>
-      </View>
+      </>
     )
   }
   disableError = () => {
@@ -379,31 +379,24 @@ class KeyPage extends Component {
   }
   getSixthPage = () => {
     return (
-      <View style={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
-        <Text style={styles.page1.contentStyle}>Quiz Time</Text>
-        <Text style={styles.page1.contentStyle}>WIP</Text>
-      </View>
+      <>
+        <Text style={{ ...styles.page1.contentStyle, textAlign: 'center' }}>Quiz Time</Text>
+        <Text style={{ ...styles.page1.contentStyle, textAlign: 'center' }}>W.I.P</Text>
+      </>
     )
   }
   getFifthPage = () => {
     const { lockState, actions } = this.props;
     const { pkLoaded } = this.state;
-    let u = Dimensions.get('window').width;
+    let u = Dimensions.get('window').height;
+
     return (
-      <View>
+      <>
         <Text style={styles.page1.contentStyle}>
           Compute the <Text style={styles.page1.publicKeyStyle}>public key b</Text>:
         </Text>
-        <View style={{ height: u * 0.06, marginTop: u * 0.03, marginBottom: u * 0.03 }}>
-          <Image
-            source={bFormula}
-            style={{
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: 'contain'
-            }}
-          />
+        <View style={{ height: u * 0.035, marginTop: u * 0.03, marginBottom: u * 0.03 }}>
+          <Image source={bFormula} style={styles.page1.imgStyle}/>
         </View>
 
         <Text style={styles.page1.contentStyleSmall}>
@@ -413,7 +406,8 @@ class KeyPage extends Component {
             multiply it by the multiplier w you chose in step 3 and get the remainder
             when divided by the modulo m you chose in step 2
           </Text>
-          {"\n\n"}
+        </Text>
+        <Text style={{ ...styles.page1.contentStyleSmall, marginTop: u * 0.03 }}>
           Private key <Text style={styles.page1.privateKeyStyle}>a</Text>
           :  {lockState.updateParameters.privateKeyString}{"\n"}
           Multiplier <Text style={styles.page1.multiplierStyle}>w</Text>
@@ -433,23 +427,24 @@ class KeyPage extends Component {
             ? <Text style={styles.page1.contentStyle}>Public key <Text style={styles.page1.publicKeyStyle}>b</Text>: {lockState.updateParameters.publicKeyString}</Text>
             : null
         }
-      </View>
+      </>
     )
   }
   getFourthPage = () => {
     const { lockState } = this.props;
     const { inverseLoaded } = this.state;
+    let u = Dimensions.get('window').height
+
     return (
       <View>
         <Text style={styles.page1.contentStyle}>
           Calculate the multiplicative inverse of your
           multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>:
-          {"\n"}
         </Text>
-        <Text style={styles.page1.contentStyleSmall}>
+        <Text style={{ ...styles.page1.contentStyleSmall, marginTop: u * 0.02 }}>
           (Using Extended Euclidean's algorithm){"\n"}
           This is needed for decryption{"\n"}
-          E.G: Inverse of 11 mod 39 = 32 (32 --7 + 39)
+          Eg: Inverse of 11 mod 39 = 32 (32 --7 + 39)
         </Text>
 
         <View style={{ flexDirection: 'row', justifyContent: 'center', margin: Dimensions.get('window').height * 0.05 }}>
@@ -472,9 +467,10 @@ class KeyPage extends Component {
 
   getThirdPage = () => {
     const { lockState } = this.props;
+
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View>
+        <>
           <Text style={styles.page1.contentStyle}>
             Choose your <Text style={styles.page1.multiplierStyle}>multiplier w</Text>:
           </Text>
@@ -490,7 +486,8 @@ class KeyPage extends Component {
               This means <Text style={styles.page1.boldFont}>
                 gcd({lockState.updateParameters.modulo}, <Text style={styles.page1.multiplierStyle}>w</Text>)
               </Text> = 1{"\n"}
-              E.G: <Text style={styles.page1.boldFont}>w</Text> = 11, where <Text style={styles.page1.boldFont}>gcd (39,11)</Text> = 1
+              E.G: <Text style={styles.page1.boldFont}>w</Text> = 11,
+              where <Text style={styles.page1.boldFont}>gcd (39,11)</Text> = 1
             </Text>
           </View>
 
@@ -517,14 +514,16 @@ class KeyPage extends Component {
                 Multiplier <Text style={styles.page1.multiplierStyle}>w: </Text>{lockState.updateParameters.multiplier.toString()}
               </Text>
           }
-        </View>
+        </>
       </TouchableWithoutFeedback>
     )
   }
 
   getSecondPage = () => {
     const { lockState } = this.props;
+    let u = Dimensions.get('window').height
     console.log(lockState.updateParameters.modulo)
+
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
@@ -532,12 +531,13 @@ class KeyPage extends Component {
             Choose your <Text style={styles.page1.modulusStyle}>modulus m</Text>:
             {"\n\n"}
             Sum of <Text style={styles.page1.privateKeyStyle}>a</Text> is: {lockState.updateParameters.privateKeySum}
-            {"\n"}
           </Text>
-          <Text style={styles.page1.contentStyleSmall}>
-            <Text style={styles.page1.linkStyle} onPress={() => { this.setState({ showModulusInfoPopUp: true, }) }}>
-              m should be bigger than the sum of a
-            </Text>
+          <Text
+            style={{ marginTop: u * 0.02, ...styles.page1.contentStyleSmall, ...styles.page1.linkStyle }}
+            onPress={() => {
+              this.setState({ showModulusInfoPopUp: true, })
+            }}>
+            m should be bigger than the sum of a
           </Text>
 
           <View style={{ marginTop: Dimensions.get('window').height * 0.03 }}>
@@ -563,7 +563,7 @@ class KeyPage extends Component {
               </Text>
           }
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback >
     )
   }
   getFirstPage = () => {
