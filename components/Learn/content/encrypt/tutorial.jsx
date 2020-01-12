@@ -268,7 +268,7 @@ class EncryptTutorial extends Component {
     const { actions } = this.props;
     return (
       <>
-        <Text style={{textAlign: 'center'}}>
+        <Text style={{ textAlign: 'center' }}>
           <Text style={styles.tutorial.contentStyle}>Quiz Time</Text>{"\n"}
           <Text style={styles.tutorial.contentStyle}>W.I.P</Text>
         </Text>
@@ -357,12 +357,13 @@ class EncryptTutorial extends Component {
             ciphertext T
           </Text> using:
         </Text>
-        <View style={{ height: u * 0.09, marginBottom: u * 0.03 }}>
+        <View style={{ height: u * 0.09, marginTop: u * 0.02, marginBottom: u * 0.02 }}>
           <Image
             source={EncryptionFormula}
             style={styles.tutorial.imgStyle}
           />
         </View>
+
         <Text style={styles.tutorial.contentStyle}>
           Your public key b:
         </Text>
@@ -425,6 +426,7 @@ class EncryptTutorial extends Component {
   }
   getThirdPage = () => {
     const { actions, lockState } = this.props;
+    let u = Dimensions.get('window').height
 
     if (!lockState.lessonPageTabAndPages.allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION()
@@ -436,23 +438,26 @@ class EncryptTutorial extends Component {
           add <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showPaddingInfoPopUp: true, }) }} >
             padding
           </Text>
-          {"\n\n"}
+        </Text>
+        <Text style={{ ...styles.tutorial.contentStyle, marginTop: u * 0.02 }}>
           To get padding value:
         </Text>
-        <Text style={styles.tutorial.contentStyleSmall}>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.03 }}>
           - Remainder = binary length % n{"\n"}
           - If the remainder is 0, padding = 0{"\n"}
           - If the remainder is not 0, padding = n minus remainder
         </Text>
-        <Text style={styles.tutorial.contentStyleSmall}>
-          <Text style={styles.tutorial.encryptTextGray}>
-            eg:{"\n"}
-            remainder = 8 % 3 = 2{"\n"}
-            Padding = 3 - 2 = 1{"\n"}
-            Add 1 '0' to the back of the binary string x
-          </Text>
+        <Text style={{
+          ...styles.tutorial.contentStyleSmall,
+          ...styles.tutorial.encryptTextGray,
+          marginTop: u * 0.01
+        }}>
+          eg:{"\n"}
+          remainder = 8 % 3 = 2{"\n"}
+          Padding = 3 - 2 = 1{"\n"}
+          Add 1 '0' to the back of the binary string x
         </Text>
-        
+
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
@@ -510,20 +515,21 @@ class EncryptTutorial extends Component {
     }
     ALLOW_NEXT_PAGE_ACTION
     return (
-      <View>
+      <>
         <Text style={styles.tutorial.contentStyle}>
           However, there might be cases where binary cannot be divided into equal
           blocks according to knapsack size n to correspond to public key.
-          {"\n"}
         </Text>
-        <Text style={styles.tutorial.contentStyleSmall}>
-          <Text style={styles.tutorial.encryptTextGray}>
-            E.g:{"\n"}
-            Public key b: (22, 16, 32) where n = 3{"\n"}
-            Message: a, ASCII of a = 97{"\n"}
-            Binary of 97: '0110 0001'{"\n"}
-            Binary length / n: 8 / 3 = 3 (rounded up)
-          </Text>
+        <Text style={{
+          ...styles.tutorial.contentStyleSmall,
+          ...styles.tutorial.encryptTextGray,
+          marginTop: Dimensions.get('window').height * 0.02
+        }}>
+          E.g:{"\n"}
+          Public key b: (22, 16, 32) where n = 3{"\n"}
+          Message: a, ASCII of a = 97{"\n"}
+          Binary of 97: '0110 0001'{"\n"}
+          Binary length / n: 8 / 3 = 3 (rounded up)
         </Text>
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
@@ -570,7 +576,7 @@ class EncryptTutorial extends Component {
             </TableWrapper>
           </Table>
         </View>
-      </View>
+      </>
     )
   }
 
@@ -579,7 +585,7 @@ class EncryptTutorial extends Component {
     const { keyboardVisiblity } = this.state;
 
     return (
-      <View>
+      <>
         {
           keyboardVisiblity
             ? null
@@ -623,10 +629,18 @@ class EncryptTutorial extends Component {
                         <Text style={styles.tutorial.boldFont}>Your message:</Text> {lockState.encryption.textToEncrypt}{"\n"}
                         <Text style={styles.tutorial.boldFont}>Ascii value:</Text> W.I.P{"\n"}
                         <Text style={styles.tutorial.boldFont}>Binary value:</Text> {lockState.encryption.binaryString}
-                        {"\n\n"}
+                      </Text>
+                      <Text style={{
+                        ...styles.tutorial.contentStyleSmall,
+                        marginTop: Dimensions.get('window').height * 0.02
+                      }}>
                         Divide the binary string to the blocks according to knapsack size n to corresponds public key
                         (binary length ÷ n)
-                        {"\n\n"}
+                      </Text>
+                      <Text style={{
+                        ...styles.tutorial.contentStyleSmall,
+                        marginTop: Dimensions.get('window').height * 0.02
+                      }}>
                         Add the public key b that corresponds to the value 1 in binary x
                       </Text>
                     </>
@@ -634,7 +648,7 @@ class EncryptTutorial extends Component {
               }
             </>
         }
-      </View>
+      </>
 
     )
   }
