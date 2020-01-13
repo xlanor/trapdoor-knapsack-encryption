@@ -28,8 +28,9 @@ export default class page1 extends Component {
         return (
             <>
                 <Text style={styles.GCDPages.popUpTextStyle}>
-                    An algorithm named after the ancient Greek mathematician Euclid.
-                    It can be used to reduce fractions to their simplest form,
+                    An algorithm named after the <Text style={styles.GCDPages.bold}>
+                        ancient Greek mathematician Euclid
+                    </Text>. It can be used to reduce fractions to their simplest form,
                     and is a part of many number-theoretic and cryptographic calculations.
                     {"\n\n"}
                     <Text
@@ -59,26 +60,26 @@ export default class page1 extends Component {
                 <Text style={style.contentStyle}>
                     The <Text style={style.links} onPress={() => { this.setState({ showEuclideanInfoPopUp: true, }) }} >
                         Euclidean algorithm
-                    </Text> is an efficient method of finding the <Text style={style.bold}>
+                    </Text> is an efficient method of finding the <Text style={{ ...style.bold, ...style.GCDStyle }}>
                         Greatest Common Divisor(GCD)
                     </Text> of <Text style={style.bold}>
                         2 different integers
                     </Text>.
                     {"\n\n"}
-                    Usually when someone asks for a notation such as <Text style={style.bold}>
+                    Usually when someone asks for a notation such as <Text style={{ ...style.bold, ...style.GCDStyle }}>
                         GCD(<Text style={style.valA}>a</Text>, <Text style={style.valB}>b</Text>) = x
-                    </Text> where <Text style={style.valA}>
+                    </Text> where <Text style={{ ...style.bold, ...style.valA }}>
                         a
-                    </Text> and <Text style={style.valB}>
+                    </Text> and <Text style={{ ...style.bold, ...style.valB }}>
                         b
                     </Text> are <Text style={style.bold}>
                         2 different integers
                     </Text>.{"\n"}
-                    They are asking what is the <Text style={style.bold}>
+                    They are asking what is the <Text style={{ ...style.bold, ...style.GCDStyle }}>
                         GCD
-                    </Text> of <Text style={style.valA}>
+                    </Text> of <Text style={{ ...style.bold, ...style.valA }}>
                         a
-                    </Text> and <Text style={style.valB}>
+                    </Text> and <Text style={{ ...style.bold, ...style.valB }}>
                         b
                     </Text>.
                     {"\n"}

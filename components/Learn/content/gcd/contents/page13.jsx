@@ -20,14 +20,14 @@ export default class page13 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                
+
                 <View style={style.imgContainer}>
                     <Image
                         source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
                     Now, look at the <Text style={style.bold}>
                         last value

@@ -20,16 +20,16 @@ export default class page3 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
-                
+
                 <View style={style.imgContainer}>
                     <Image
                         source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
-                    Now, we want to find the <Text style={style.bold}>
+                    Now, we want to find the <Text style={{ ...style.bold, ...style.GCDStyle }}>
                         GCD
                     </Text> of <Text style={style.highlight}>
                         23
@@ -39,17 +39,17 @@ export default class page3 extends Component {
                     {"\n\n"}
                     <Text style={style.bold}>
                         Always set <Text style={style.valA}>
-                        a
+                            a
                         </Text> as the larger number and <Text style={style.valB}>
-                        b
-                        </Text> as the smaller number. 
+                            b
+                        </Text> as the smaller number.
                     </Text>
                     {"\n\n"}
-                    Now, let <Text style={style.valA}>
+                    Now, let <Text style={{ ...style.bold, ...style.valA }}>
                         a
                     </Text> be <Text style={style.highlight}>
                         282
-                    </Text> and <Text style={style.valB}>
+                    </Text> and <Text style={{ ...style.bold, ...style.valB }}>
                         b
                     </Text> by <Text style={style.highlight}>
                         23

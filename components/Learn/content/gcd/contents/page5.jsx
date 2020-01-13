@@ -20,26 +20,26 @@ export default class page5 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
-                
+
                 <View style={style.imgContainer}>
                     <Image
                         source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
                     Fill in the next row:
                     {"\n\n"}
-                    Let <Text style={style.valA}>
-                    a
+                    Let <Text style={{ ...style.bold, ...style.valA }}>
+                        a
                     </Text> be the <Text style={style.bold}>
-                    previous b
+                        previous b
                     </Text>.{"\n"}
-                    Let <Text style={style.valB}>
-                    b
+                    Let <Text style={{ ...style.bold, ...style.valB }}>
+                        b
                     </Text> be the <Text style={style.bold}>
-                    previous r
+                        previous r
                     </Text>.
                     {"\n"}
                 </Text>

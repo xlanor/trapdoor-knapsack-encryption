@@ -20,14 +20,14 @@ export default class page6 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
-                
+
                 <View style={style.imgContainer}>
                     <Image
                         source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
                     Repeat for the rest of the rows.
                     {"\n\n"}
@@ -37,13 +37,13 @@ export default class page6 extends Component {
                     {"\n\n"}
                     Now, look at the <Text style={style.bold}>
                         last value
-                    </Text> of <Text style={style.valB}>
+                    </Text> of <Text style={{ ...style.bold, ...style.valB }}>
                         b
                     </Text> which is <Text style={style.bold}>
-                        GCD of
+                        <Text style={style.GCDStyle}>GCD</Text> of
                     </Text> 23 and 282.
                     {"\n\n"}
-                    Hence, <Text style={style.bold}>
+                    Hence, <Text style={{ ...style.bold, ...style.GCDStyle }}>
                         GCD(282, 23) = 1
                     </Text>.
                     {"\n"}

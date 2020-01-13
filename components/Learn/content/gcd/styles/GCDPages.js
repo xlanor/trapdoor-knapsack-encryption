@@ -33,10 +33,6 @@ const contentStyleBig = {
     fontSize: 23
 }
 
-const keyword = {
-    fontFamily: 'comfortaa-bold',
-    color: 'blue'
-}
 const bold = {
     fontFamily: 'comfortaa-bold',
 }
@@ -45,12 +41,13 @@ const links = {
     fontFamily: 'comfortaa',
     color: COLORS.LINKS_BLUE
 }
+const GCDStyle = {
+    color: COLORS.GCD_COLOR,
+}
 const valA = {
-    //fontFamily: 'comfortaa-bold',
     color: '#16a085'
 }
 const valB = {
-    //fontFamily: 'comfortaa-bold',
     color: '#f25f5c'
 }
 
@@ -69,20 +66,15 @@ const picStyle = {
     alignItems: 'stretch',
     resizeMode: 'stretch',
 }
-const popUpTextStyle = {
 
+const popUpTextStyle = {
     fontFamily: 'comfortaa',
     fontSize: 14,
-    //textAlign: 'center',
     color: COLORS.POPUP_TEXT_COLOR
 }
-
 const popUpTextStyleBold = {
-
-    fontFamily: 'comfortaa',
+    fontFamily: 'comfortaa-bold',
     fontSize: 18,
-    fontWeight: 'bold',
-    //textAlign: 'center',
     color: COLORS.POPUP_TEXT_COLOR
 }
 
@@ -106,9 +98,9 @@ export default {
     contentStyleSmall,
     contentStyleBig,
     links,
+    GCDStyle,
     valA,
     valB,
-    keyword,
     underline,
     highlight,
     bold,

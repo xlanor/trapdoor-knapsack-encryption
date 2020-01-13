@@ -438,7 +438,7 @@ class KeyPage extends Component {
     return (
       <View>
         <Text style={styles.page1.contentStyle}>
-          Calculate the multiplicative inverse of your
+          Calculate the <Text style={styles.page1.inverseStyle}>multiplicative inverse</Text> of your
           multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>:
         </Text>
         <Text style={{ ...styles.page1.contentStyleSmall, marginTop: u * 0.02 }}>
@@ -455,7 +455,7 @@ class KeyPage extends Component {
           inverseLoaded
             ?
             <Text style={styles.page1.contentStyle}>
-              Multiplicative inverse of your
+              <Text style={styles.page1.inverseStyle}>Multiplicative inverse</Text> of your
               multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>
               : {lockState.updateParameters.inverse}
             </Text>
@@ -486,7 +486,7 @@ class KeyPage extends Component {
               This means <Text style={styles.page1.boldFont}>
                 gcd({lockState.updateParameters.modulo}, <Text style={styles.page1.multiplierStyle}>w</Text>)
               </Text> = 1{"\n"}
-              E.G: <Text style={styles.page1.boldFont}>w</Text> = 11,
+              Eg: <Text style={styles.page1.boldFont}>w</Text> = 11,
               where <Text style={styles.page1.boldFont}>gcd (39,11)</Text> = 1
             </Text>
           </View>
@@ -511,7 +511,7 @@ class KeyPage extends Component {
             lockState.updateParameters.multiplier === 0
               ? null
               : <Text style={styles.page1.contentStyle}>
-                Multiplier <Text style={styles.page1.multiplierStyle}>w: </Text>{lockState.updateParameters.multiplier.toString()}
+                <Text style={styles.page1.multiplierStyle}>Multiplier w</Text>: {lockState.updateParameters.multiplier.toString()}
               </Text>
           }
         </>
@@ -530,7 +530,7 @@ class KeyPage extends Component {
           <Text style={styles.page1.contentStyle}>
             Choose your <Text style={styles.page1.modulusStyle}>modulus m</Text>:
             {"\n\n"}
-            Sum of <Text style={styles.page1.privateKeyStyle}>a</Text> is: {lockState.updateParameters.privateKeySum}
+            Sum of <Text style={styles.page1.privateKeyStyle}>a</Text>: {lockState.updateParameters.privateKeySum}
           </Text>
           <Text
             style={{ marginTop: u * 0.02, ...styles.page1.contentStyleSmall, ...styles.page1.linkStyle }}
@@ -559,7 +559,7 @@ class KeyPage extends Component {
             lockState.updateParameters.modulo === 0
               ? null
               : <Text style={styles.page1.contentStyle}>
-                Modulus <Text style={styles.page1.modulusStyle}>m: </Text>{lockState.updateParameters.modulo.toString()}
+                <Text style={styles.page1.modulusStyle}>Modulus m</Text>: {lockState.updateParameters.modulo.toString()}
               </Text>
           }
         </View>
@@ -601,13 +601,13 @@ class KeyPage extends Component {
           </View>
 
           <Text style={styles.page1.contentStyle}>
-            Private key <Text style={styles.page1.privateKeyStyle}>a</Text>: {
+            <Text style={styles.page1.privateKeyStyle}>Private key a</Text>: {
               isEntered
                 ? lockState.updateParameters.privateKeyString
                 : null
             }
             {"\n"}
-            Knapsack Size <Text style={styles.page1.boldFont}>n</Text>: {
+            <Text style={styles.page1.knapsackSizeStyle}>Knapsack Size n</Text>: {
               isEntered
                 ? lockState.updateParameters.privateKeyArr.length
                 : null
