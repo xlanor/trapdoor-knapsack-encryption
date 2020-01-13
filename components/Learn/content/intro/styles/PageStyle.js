@@ -86,20 +86,15 @@ const picStyle = {
     alignItems: 'stretch',
     resizeMode: 'stretch',
 }
-const popUpTextStyle = {
 
+const popUpTextStyle = {
     fontFamily: 'comfortaa',
     fontSize: 14,
-    //textAlign: 'center',
     color: COLORS.POPUP_TEXT_COLOR
 }
-
 const popUpTextStyleBold = {
-
-    fontFamily: 'comfortaa',
+    fontFamily: 'comfortaa-bold',
     fontSize: 18,
-    fontWeight: 'bold',
-    //textAlign: 'center',
     color: COLORS.POPUP_TEXT_COLOR
 }
 

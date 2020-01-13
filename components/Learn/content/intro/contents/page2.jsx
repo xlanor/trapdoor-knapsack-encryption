@@ -113,8 +113,8 @@ export default class page2 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    Given <Text style={{ color: '#9B59B6' }}>b</Text>,
-                    we would be unable to find <Text style={{ color: '#1ABC9C' }}>a</Text> and <Text style={{ color: '#E74C3C' }}>k</Text> in a reasonable time.
+                    Given <Text style={{ ...style.bold, color: '#9B59B6' }}>b</Text>,
+                    we would be unable to find <Text style={{ ...style.bold, color: '#1ABC9C' }}>a</Text> and <Text style={{ ...style.bold, color: '#E74C3C' }}>k</Text> in a reasonable time.
                     {"\n"}
                 </Text>
             </View>
