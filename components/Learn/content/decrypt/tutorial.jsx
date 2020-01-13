@@ -253,7 +253,7 @@ class DecryptTutorial extends Component {
 
   }
 
-  getThirdPage = () => {
+  getSecondPage = () => {
     const { decryptedText, currentDecryptedBlocks } = this.state;
     const { actions, lockState } = this.props;
     let u = Dimensions.get('window').height;
@@ -329,6 +329,7 @@ class DecryptTutorial extends Component {
       </>
     )
   }
+  /*
   getSecondPage = () => {
     const { actions, lockState } = this.props;
     let u = Dimensions.get('window').height
@@ -357,6 +358,7 @@ class DecryptTutorial extends Component {
       </>
     )
   }
+  */
   getFirstPage = () => {
     const { actions, lockState } = this.props;
     let u = Dimensions.get('window').height;
@@ -369,11 +371,11 @@ class DecryptTutorial extends Component {
         <Text style={styles.tutorial.contentStyle}>The current ciphertext is:</Text>
         <Text style={styles.tutorial.contentStyleSmall}>({lockState.encryption.encryptedText.join(', ')})</Text>
 
-        <Text style={{ ...styles.tutorial.contentStyle, marginTop: u * 0.02 }}>
+        <Text style={{ ...styles.tutorial.contentStyle, marginTop: u * 0.01 }}>
           Padding: {lockState.encryption.padding}
         </Text>
 
-        <View style={{ height: u * 0.05, marginTop: u * 0.03, marginBottom: u * 0.03 }}>
+        <View style={{ height: u * 0.04, marginTop: u * 0.02, marginBottom: u * 0.02 }}>
           <Image source={DF1} style={styles.tutorial.imgStyle} />
         </View>
 
@@ -389,7 +391,7 @@ class DecryptTutorial extends Component {
           Use the <Text style={styles.tutorial.privateKey}>private key a</Text> to find binary x since
         </Text>
 
-        <View style={{ height: u * 0.04, marginTop: u * 0.03, marginBottom: u * 0.03 }}>
+        <View style={{ height: u * 0.03, marginTop: u * 0.02, marginBottom: u * 0.02 }}>
           <Image source={DF2} style={styles.tutorial.imgStyle} />
         </View>
 
@@ -397,6 +399,20 @@ class DecryptTutorial extends Component {
           Then by <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showCmpPopUp: true, }) }}>
             comparing with a to calculate to obtain the binary value x
           </Text>
+        </Text>
+
+        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.02, marginTop: u * 0.01 }}>
+          - Select the largest a which is {"<="} R:
+        </Text>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.04 }}>
+          - If it is true, then the corresponding x = 1{"\n"}
+          - If false, then x = 0
+        </Text>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.02 }}> 
+          - Since the next largest a {"<="} the difference, repeat until the difference is 0
+        </Text>
+        <Text style={{ ...styles.tutorial.contentStyleSmall, marginTop: u * 0.02 }}>
+          Since the knapsack is super-increasing it is comparatively easier to get the binary values
         </Text>
       </>
     )
@@ -409,8 +425,6 @@ class DecryptTutorial extends Component {
         return this.getFirstPage()
       case 2:
         return this.getSecondPage()
-      case 3:
-        return this.getThirdPage()
       default:
         return this.getFirstPage()
     }

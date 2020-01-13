@@ -19,7 +19,7 @@ const MAX_INTRO_PAGES=6;
 const MAX_GCD_PAGES=13;
 const MAX_KEY_PAGES=6;
 const MAX_ENCRYPT_PAGES=5;
-const MAX_DECRYPT_PAGES=3;
+const MAX_DECRYPT_PAGES=2;
 const MAX_SIMULATOR_PAGES=1;
 // we will have different tab names
 // to be determined.
