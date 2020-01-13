@@ -6,7 +6,8 @@ import {
     Image,
     TouchableOpacity,
     KeyboardAvoidingView,
-    FlatList
+    FlatList,
+    Dimensions
 } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
@@ -37,24 +38,25 @@ export default class page7 extends Component {
     }
     inverseInfoPopUp = () => {
         let style = styles.GCDPages
+        let u = Dimensions.get('window').height
+
         return (
             <>
-                <Text style={styles.GCDPages.popUpTextStyle}>
-                    Multiplicative inverse also known as reciprocal for a number <Text style={style.bold}>
-                        x
-                    </Text>, denoted by <Text style={style.bold}>
+                <Text style={style.popUpTextStyle}>
+                    Multiplicative inverse also known as reciprocal for a
+                    number <Text style={style.bold}>x</Text>,
+                    denoted by <Text style={style.bold}>
                         1/x
-                    </Text> or <Text style={style.bold}>
-                        x^-1
-                    </Text>, is <Text style={style.bold}>
-                        a number
-                    </Text> which when multiplied by x to get 1.
+                    </Text> or <Text style={style.bold}>x^-1</Text>,
+                    is <Text style={style.bold}>a number</Text> which when
+                    multiplied by x to get 1.
                     {"\n\n"}
                     If <Text style={style.bold}>
                         GCD(a, b) = 1
                     </Text> => can find inverses a mod b and b mod a.
-                    {"\n\n"}
-                    <Text style={style.bold}>GCD(a, b) = x * a + y * b = 1</Text>{"\n"}
+                </Text>
+                <Text style={{ textAlign: 'center', marginTop: u * 0.02, ...style.popUpTextStyle }}>
+                    <Text style={style.popUpTextStyleBold}>GCD(a, b) = x * a + y * b = 1</Text>{"\n"}
                     (Where x and y are some integers)
                 </Text>
             </>
@@ -94,13 +96,13 @@ export default class page7 extends Component {
                 <Text style={style.contentStyle}>
                     <Text style={style.links} onPress={() => { this.setState({ showEuclideanInfoPopUp: true, }) }} >
                         Extended Euclidean algorithm
-                    </Text> is used to find if there is a <Text style={style.links} onPress={() => { this.setState({ showInverseInfoPopUp: true, }) }} >
+                    </Text> is used to find if there is
+                    a <Text style={style.links} onPress={() => { this.setState({ showInverseInfoPopUp: true, }) }} >
                         multiplicative inverse
                     </Text> and the value of it.
                     {"\n\n"}
-                    With the <Text style={style.bold}>
-                        Extended Euclidean algorithm
-                    </Text>, the easiest way to visualise it is via a table.
+                    With the <Text style={style.bold}>Extended Euclidean algorithm</Text>,
+                    the easiest way to visualise it is via a table.
                     {"\n\n"}
                     Construct a table like the original Euclidean algorithm but with <Text style={style.highlight}>
                         4 more columns

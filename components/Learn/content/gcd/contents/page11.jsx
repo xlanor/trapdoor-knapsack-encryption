@@ -20,14 +20,14 @@ export default class page11 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Extended Euclidean Algorithm</Text>
-                
+
                 <View style={style.imgContainer}>
                     <Image
                         source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
                     Repeat for the remaining rows.
                     {"\n\n"}

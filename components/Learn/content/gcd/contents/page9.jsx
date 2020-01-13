@@ -54,12 +54,13 @@ export default class page9 extends Component {
                 </Text>
                 <Text style={{
                     ...style.contentStyle,
+                    ...style.bold,
                     marginLeft: u * 0.03,
                     fontSize: 16
                 }}>
-                    <Text style={style.highlight}>a1 = a2</Text>{"\n"}
+                    <Text style={{ backgroundColor: '#00FF00' }}>a1 = a2</Text>{"\n"}
                     a2 = a1 - q * a2{"\n"}
-                    <Text style={style.highlight}>b1 = b2</Text>{"\n"}
+                    <Text style={{ backgroundColor: '#00FF00' }}>b1 = b2</Text>{"\n"}
                     b2 = b1 - q * b2
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>

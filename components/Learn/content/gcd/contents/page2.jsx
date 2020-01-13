@@ -20,14 +20,14 @@ export default class page2 extends Component {
         return (
             <View style={style.containerStyle}>
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
-                
+
                 <View style={style.imgContainer}>
                     <Image
                         source={TableImg}
                         style={style.imgStyle}
                     />
                 </View>
-                
+
                 <Text style={style.contentStyle}>
                     With the  <Text style={style.bold}>
                         Euclidean algorithm
@@ -36,9 +36,9 @@ export default class page2 extends Component {
                     Construct a table with <Text style={style.highlight}>
                         4 columns
                     </Text>.{"\n"}
-                    <Text style={style.valA}>
+                    <Text style={{ ...style.bold, ...style.valA }}>
                         a
-                    </Text> and <Text style={style.valB}>
+                    </Text> and <Text style={{ ...style.bold, ...style.valB }}>
                         b
                     </Text> are your integers you want to compare.{"\n"}
                     <Text style={style.bold}>
@@ -50,9 +50,9 @@ export default class page2 extends Component {
                         r
                     </Text> is the <Text style={style.bold}>
                         remainder
-                    </Text> when dividing <Text style={style.valA}>
+                    </Text> when dividing <Text style={{ ...style.bold, ...style.valA }}>
                         a
-                    </Text> by <Text style={style.valB}>b</Text>.
+                    </Text> by <Text style={{ ...style.bold, ...style.valB }}>b</Text>.
                     {"\n"}
                 </Text>
             </View>
