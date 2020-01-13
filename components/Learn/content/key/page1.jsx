@@ -407,14 +407,14 @@ class KeyPage extends Component {
             when divided by the modulo m you chose in step 2
           </Text>
         </Text>
-        <Text style={{ ...styles.page1.contentStyleSmall, marginTop: u * 0.03 }}>
-          Private key <Text style={styles.page1.privateKeyStyle}>a</Text>
+        <Text style={{ ...styles.page1.contentStyleSmall, ...styles.page1.boldFont, marginTop: u * 0.03 }}>
+          <Text style={styles.page1.privateKeyStyle}>Private key a</Text>
           :  {lockState.updateParameters.privateKeyString}{"\n"}
-          Multiplier <Text style={styles.page1.multiplierStyle}>w</Text>
+          <Text style={styles.page1.multiplierStyle}>Multiplier w</Text>
           :  {lockState.updateParameters.multiplier}{"\n"}
-          Modulus <Text style={styles.page1.modulusStyle}>m</Text>
+          <Text style={styles.page1.modulusStyle}>Modulus m</Text>
           :  {lockState.updateParameters.modulo}{"\n"}
-          Inverse multiplier <Text style={styles.page1.inverseStyle}>w^-1</Text>
+          <Text style={styles.page1.inverseStyle}>Inverse multiplier w^-1</Text>
           :  {lockState.updateParameters.inverse}
         </Text>
 
@@ -424,7 +424,7 @@ class KeyPage extends Component {
 
         {
           pkLoaded
-            ? <Text style={styles.page1.contentStyle}>Public key <Text style={styles.page1.publicKeyStyle}>b</Text>: {lockState.updateParameters.publicKeyString}</Text>
+            ? <Text style={styles.page1.contentStyle}><Text style={styles.page1.publicKeyStyle}>Public key b</Text>: {lockState.updateParameters.publicKeyString}</Text>
             : null
         }
       </>
@@ -438,8 +438,10 @@ class KeyPage extends Component {
     return (
       <View>
         <Text style={styles.page1.contentStyle}>
-          Calculate the <Text style={styles.page1.inverseStyle}>multiplicative inverse</Text> of your
-          multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>:
+          Calculate the <Text style={styles.page1.inverseStyle}>multiplicative inverse</Text> of
+          your <Text style={styles.page1.multiplierStyle}>
+            multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>
+          </Text>:
         </Text>
         <Text style={{ ...styles.page1.contentStyleSmall, marginTop: u * 0.02 }}>
           (Using Extended Euclidean's algorithm){"\n"}
@@ -455,9 +457,10 @@ class KeyPage extends Component {
           inverseLoaded
             ?
             <Text style={styles.page1.contentStyle}>
-              <Text style={styles.page1.inverseStyle}>Multiplicative inverse</Text> of your
-              multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>
-              : {lockState.updateParameters.inverse}
+              <Text style={styles.page1.inverseStyle}>Multiplicative inverse</Text> of
+              your <Text style={styles.page1.multiplierStyle}>
+                multiplier <Text style={styles.page1.boldFont}>w({lockState.updateParameters.multiplier})</Text>
+              </Text>: {lockState.updateParameters.inverse}
             </Text>
             : null
         }
