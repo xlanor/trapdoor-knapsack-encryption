@@ -166,7 +166,7 @@ export default class page4 extends Component {
                 }
                 <Text style={style.titleStyle}>Introduction</Text>
                 <Text style={style.contentHead}>A brief History of how Trapdoor Knapsack was broken</Text>
-                
+
                 <Text style={style.contentStyle}>
                     In 1982 <Text style={style.links} onPress={() => { this.setState({ showAdlemanArticleInfoPopUp: true, }) }}>
                         Leonard Adleman
