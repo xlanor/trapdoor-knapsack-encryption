@@ -317,8 +317,10 @@ class DecryptTutorial extends Component {
           decryptedText != ""
             ? <>
               <Text style={styles.tutorial.contentStyle}>
-                <Text style={styles.tutorial.boldFont}>Binary value</Text>: {lockState.encryption.binaryString}{"\n"}
-                <Text style={styles.tutorial.boldFont}>Ascii value</Text>: {lockState.encryption.asciiString}{"\n"}
+                <Text style={styles.tutorial.boldFont}>Binary value</Text>:{"\n"}
+                {lockState.encryption.binaryString}{"\n"}
+                <Text style={styles.tutorial.boldFont}>Ascii value</Text>:{"\n"}
+                {lockState.encryption.asciiString}{"\n"}
                 <Text style={styles.tutorial.boldFont}>Decrypted Text</Text>: {decryptedText}
               </Text>
             </>

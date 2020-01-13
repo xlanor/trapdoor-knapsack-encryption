@@ -196,6 +196,7 @@ class EncryptTutorial extends Component {
   validateInput = () => {
     const { lockState, actions } = this.props;
     const { currentTextBox } = this.state;
+    let asciiVal = this.stringToAscii(currentTextBox);
     if (this.isEmptyInput()) {
       // TODO: show popup error
       this.showError("Encryption String cannot be empty!")
@@ -204,7 +205,7 @@ class EncryptTutorial extends Component {
       let binString = this.getBinaryOfInput()
       actions.UPDATE_ENCRYPTION_STRING_ACTION(currentTextBox)
       actions.UPDATE_ENCRYPTION_BINARY_STRING_ACTION(binString)
-      actions.UPDATE_ENCRYPTION_ASCII_STRING_ACTION(this.stringToAscii())
+      actions.UPDATE_ENCRYPTION_ASCII_STRING_ACTION(asciiVal)
       actions.ALLOW_NEXT_PAGE_ACTION()
       Keyboard.dismiss()
     }
@@ -264,9 +265,8 @@ class EncryptTutorial extends Component {
       </>
     )
   }
-  stringToAscii = () => {
-    const {lockState} = this.props
-    let text = lockState.encryption.textToEncrypt;
+  stringToAscii = (text) => {
+    const { lockState } = this.props
     var asciiVal = "("
 
     for (var i = 0; i < text.length; i++) {
@@ -424,16 +424,23 @@ class EncryptTutorial extends Component {
           }
         </View>
         <View style={{ marginTop: 10 }}>
-          <Text style={styles.tutorial.contentStyleSmall}>
+          <Text style={styles.tutorial.contentStyle}>
             Ciphertext:
           </Text>
           {
             lockState.encryption.encryptedText.length != 0 ?
-              <Text tyle={styles.tutorial.contentStyleSmall}>
+              <Text tyle={styles.tutorial.contentStyle}>
                 {lockState.encryption.encryptedText.join(", ")}
               </Text>
               : null
           }
+          <Text style={styles.tutorial.contentStyle}>
+            Current Padding: {
+              lockState.encryption.encryptedText.length != 0
+                ? lockState.encryption.padding
+                : null
+            }
+          </Text>
         </View>
       </View>
     )

@@ -34,8 +34,7 @@ const contentStyleBig = {
 }
 
 const boldFont = {
-  fontFamily: 'comfortaa-bold',
-  fontWeight: 'bold',
+  fontFamily: 'comfortaa-bold'
 }
 
 const learnTabPad = {
@@ -75,18 +74,13 @@ const imageView = {
 }
 
 const popUpTextStyle = {
-
   fontFamily: 'comfortaa',
   fontSize: 14,
-  //textAlign: 'center',
   color: COLORS.POPUP_TEXT_COLOR
 }
 const popUpTextStyleBold = {
-
-  fontFamily: 'comfortaa',
+  fontFamily: 'comfortaa-bold',
   fontSize: 18,
-  fontWeight: 'bold',
-  //textAlign: 'center',
   color: COLORS.POPUP_TEXT_COLOR
 }
 
