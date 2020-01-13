@@ -273,7 +273,7 @@ class DecryptTutorial extends Component {
           {"\n\n"}
           Current Padding: {lockState.encryption.padding}
         </Text>
-        <View style={{ marginTop: u * 0.04, marginBottom: u * 0.04 }}>
+        <View style={{ marginTop: u * 0.03, marginBottom: u * 0.03 }}>
           {
             currentDecryptedBlocks !== null ?
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -318,9 +318,11 @@ class DecryptTutorial extends Component {
             ? <>
               <Text style={styles.tutorial.contentStyle}>
                 <Text style={styles.tutorial.boldFont}>Binary value</Text>:{"\n"}
-                {lockState.encryption.binaryString}{"\n"}
+                {lockState.encryption.binaryString}
+                {"\n\n"}
                 <Text style={styles.tutorial.boldFont}>Ascii value</Text>:{"\n"}
-                {lockState.encryption.asciiString}{"\n"}
+                {lockState.encryption.asciiString}
+                {"\n\n"}
                 <Text style={styles.tutorial.boldFont}>Decrypted Text</Text>: {decryptedText}
               </Text>
             </>
@@ -408,7 +410,7 @@ class DecryptTutorial extends Component {
           - If it is true, then the corresponding x = 1{"\n"}
           - If false, then x = 0
         </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.02 }}> 
+        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.02 }}>
           - Since the next largest a {"<="} the difference, repeat until the difference is 0
         </Text>
         <Text style={{ ...styles.tutorial.contentStyleSmall, marginTop: u * 0.02 }}>

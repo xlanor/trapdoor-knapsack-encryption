@@ -425,16 +425,16 @@ class EncryptTutorial extends Component {
         </View>
         <View style={{ marginTop: 10 }}>
           <Text style={styles.tutorial.contentStyle}>
-            Ciphertext: {
-            lockState.encryption.encryptedText.length != 0
-              ? lockState.encryption.encryptedText.join(", ")
-              : null
-          }
-          </Text>
-          <Text style={styles.tutorial.contentStyle}>
             Current Padding: {
               lockState.encryption.encryptedText.length != 0
                 ? lockState.encryption.padding
+                : null
+            }
+          </Text>
+          <Text style={styles.tutorial.contentStyle}>
+            Ciphertext: {
+              lockState.encryption.encryptedText.length != 0
+                ? lockState.encryption.encryptedText.join(", ")
                 : null
             }
           </Text>
