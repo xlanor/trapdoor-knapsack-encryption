@@ -99,7 +99,7 @@ class page1 extends Component {
                             renderedBlocks={this.hintInfoPopUp()}
                             callback={() => {
                                 this.setState({ showHintInfoPopUp: false, });
-                                //actions.LINKS_HINT_DONE_ACTION();
+                                //actions.LINKS_HINT_DONE_ACTION();   //<<=== Uncomment this line for hint to work as intended. Left commented for testing purpose.
                             }}
                             visibility={showHintInfoPopUp} />
                     ) : console.log("HINT NOT TRIGGERED")
