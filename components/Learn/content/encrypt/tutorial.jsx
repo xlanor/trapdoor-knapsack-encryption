@@ -379,7 +379,7 @@ class EncryptTutorial extends Component {
         </View>
 
         <Text style={styles.tutorial.contentStyle}>
-          Your public key b:
+          Your <Text style={styles.tutorial.publicKey}>public key b</Text>:
         </Text>
         <Text style={styles.tutorial.contentStyleSmall}>
           Binary values x are assigned into blocks and will add padding if there is a need.
@@ -425,15 +425,12 @@ class EncryptTutorial extends Component {
         </View>
         <View style={{ marginTop: 10 }}>
           <Text style={styles.tutorial.contentStyle}>
-            Ciphertext:
-          </Text>
-          {
-            lockState.encryption.encryptedText.length != 0 ?
-              <Text tyle={styles.tutorial.contentStyle}>
-                {lockState.encryption.encryptedText.join(", ")}
-              </Text>
+            Ciphertext: {
+            lockState.encryption.encryptedText.length != 0
+              ? lockState.encryption.encryptedText.join(", ")
               : null
           }
+          </Text>
           <Text style={styles.tutorial.contentStyle}>
             Current Padding: {
               lockState.encryption.encryptedText.length != 0

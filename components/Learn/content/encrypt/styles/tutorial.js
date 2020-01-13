@@ -69,7 +69,10 @@ const multipleButtonRight = {
 const encryptTextGray = {
   color: COLORS.GREY_1,
 }
-
+const publicKey = {
+  fontFamily: 'comfortaa-bold',
+  color: COLORS.PUBLICKEY_COLOR
+}
 const secondParaView = {
   marginTop: Dimensions.get('window').height * 0.02,
 }
@@ -134,6 +137,7 @@ export default {
   multipleButtonLeft,
   multipleButtonRight,
   encryptTextGray,
+  publicKey,
   secondParaView,
   tableView,
   tableHeaderValue,
