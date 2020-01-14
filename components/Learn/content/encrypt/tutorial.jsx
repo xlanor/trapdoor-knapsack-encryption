@@ -556,7 +556,7 @@ class EncryptTutorial extends Component {
           to <Text style={styles.tutorial.knapsackSizeStyle}>
             knapsack size n
           </Text> to correspond to <Text style={styles.tutorial.publicKey}>
-            public key
+            public key b
           </Text>.
         </Text>
         <Text style={{
