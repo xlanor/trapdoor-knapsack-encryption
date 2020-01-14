@@ -134,7 +134,7 @@ class DecryptTutorial extends Component {
     return (
       <>
         <Text style={styles.tutorial.popUpTextStyle}>
-          Eg: R = 15 and use a to find binary x
+          Eg: <Text style={styles.tutorial.boldFont}>R</Text> = 15 and use a to find binary x
         </Text>
 
         <View style={styles.tutorial.tableMargin}>
@@ -180,11 +180,16 @@ class DecryptTutorial extends Component {
     return (
       <>
         <Text style={styles.tutorial.popUpTextStyle}>
-          Eg: T = 48, w^-1 = 32, and m = 39{"\n"}
-          Using the formula for R
+          Eg: <Text style={styles.tutorial.boldFont}>T</Text> = 48, <Text style={{ ...styles.tutorial.inverseStyle, ...styles.tutorial.boldFont }}>
+            w^-1
+          </Text> = 32,
+          and <Text style={{ ...styles.tutorial.modulusStyle, ...styles.tutorial.boldFont }}>
+            m
+          </Text> = 39{"\n"}
+          Using the formula for <Text style={styles.tutorial.boldFont}>R</Text>.
         </Text>
         <Text style={styles.tutorial.popUpTextStyle}>
-          R = 48 * 32 mod 39 = 15
+          <Text style={styles.tutorial.boldFont}>R</Text> = 48 * 32 mod 39 = 15
         </Text>
       </>
     )
@@ -194,14 +199,23 @@ class DecryptTutorial extends Component {
     return (
       <>
         <Text style={styles.tutorial.popUpTextStyle}>
-          Using Extended Euclidean to find m^-1 such that:
+          Using Extended Euclidean to find the inverse
+          of <Text style={{ ...styles.tutorial.multiplierStyle, ...styles.tutorial.boldFont }}>
+            w
+          </Text> such that:
         </Text>
         <Text style={{
           ...styles.tutorial.popUpTextStyle,
           textAlign: 'center',
           fontSize: 16
         }}>
-          w^-1 * w = 1 mod m
+          <Text style={{ ...styles.tutorial.inverseStyle, ...styles.tutorial.boldFont }}>
+            w^-1
+          </Text> * <Text style={{ ...styles.tutorial.multiplierStyle, ...styles.tutorial.boldFont }}>
+            w
+          </Text> = 1 mod <Text style={{ ...styles.tutorial.modulusStyle, ...styles.tutorial.boldFont }}>
+            m
+          </Text>
         </Text>
       </>
     )
@@ -268,8 +282,14 @@ class DecryptTutorial extends Component {
             padding from x
           </Text> if there is any.
           {"\n\n"}
-          Next, convert the binary values to the ascii value.{"\n"}
-          Lastly, convert the ascii value back to characters to get back the decrypted message.
+          Next, convert the <Text style={styles.tutorial.boldFont}>
+            binary values
+          </Text> to the <Text style={styles.tutorial.boldFont}>
+            ascii value
+          </Text>.{"\n"}
+          Lastly, convert the <Text style={styles.tutorial.boldFont}>
+            ascii value
+          </Text> back to characters to get back the decrypted message.
           {"\n\n"}
           Current Padding: {lockState.encryption.padding}
         </Text>
@@ -382,9 +402,11 @@ class DecryptTutorial extends Component {
         </View>
 
         <Text style={styles.tutorial.contentStyleSmall}>
-          Use the <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showInversePopUp: true, }) }}>
+          Use the <Text
+            style={{ ...styles.tutorial.linkStyle, ...styles.tutorial.boldFont, ...styles.tutorial.inverseStyle }}
+            onPress={() => { this.setState({ showInversePopUp: true, }) }}>
             inverse multiplier w^-1
-          </Text> to calculate <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showrPopUp: true, }) }}>
+          </Text> to calculate <Text style={{ ...styles.tutorial.linkStyle, ...styles.tutorial.boldFont }} onPress={() => { this.setState({ showrPopUp: true, }) }}>
             R
           </Text>.
         </Text>
@@ -404,7 +426,7 @@ class DecryptTutorial extends Component {
         </Text>
 
         <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.02, marginTop: u * 0.01 }}>
-          - Select the largest a which is {"<="} R:
+          - Select the largest a which is {"<="} <Text style={styles.tutorial.boldFont}>R</Text>:
         </Text>
         <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.04 }}>
           - If it is true, then the corresponding x = 1{"\n"}

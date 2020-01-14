@@ -67,6 +67,15 @@ const privateKey = {
   fontFamily: 'comfortaa-bold',
   color: COLORS.PRIVATEKEY_COLOR
 }
+const modulusStyle = {
+  color: COLORS.MODULUS_COLOR,
+}
+const multiplierStyle = {
+  color: COLORS.MULTIPLIER_COLOR,
+}
+const inverseStyle = {
+  color: COLORS.MULTIPLIER_INVERSE_COLOR,
+}
 
 const imageView = {
   alignItems: 'center',
@@ -109,6 +118,9 @@ export default {
   multipleButtonRight,
   linkStyle,
   privateKey,
+  modulusStyle,
+  multiplierStyle,
+  inverseStyle,
   imgStyle,
   imageView,
   popUpTextStyle,

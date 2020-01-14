@@ -50,6 +50,9 @@ const valA = {
 const valB = {
     color: '#f25f5c'
 }
+const inverseStyle = {
+  color: COLORS.MULTIPLIER_INVERSE_COLOR,
+}
 
 const highlight = {
     backgroundColor: '#c7ea46',
@@ -101,6 +104,7 @@ export default {
     GCDStyle,
     valA,
     valB,
+    inverseStyle,
     underline,
     highlight,
     bold,

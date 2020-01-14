@@ -45,7 +45,9 @@ export default class page2 extends Component {
                         q
                     </Text> is the <Text style={style.bold}>
                         quotient
-                    </Text> when dividing a by b.{"\n"}
+                    </Text> when dividing <Text style={{ ...style.bold, ...style.valA }}>
+                        a
+                    </Text> by <Text style={{ ...style.bold, ...style.valB }}>b</Text>.{"\n"}
                     <Text style={style.bold}>
                         r
                     </Text> is the <Text style={style.bold}>

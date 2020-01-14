@@ -33,16 +33,11 @@ const contentStyleBig = {
     fontSize: 23
 }
 
-const keyword = {
-    fontFamily: 'comfortaa-bold',
-    color: 'blue'
-}
 const bold = {
     fontFamily: 'comfortaa-bold',
 }
 const links = {
     textDecorationLine: 'underline',
-    fontFamily: 'comfortaa',
     color: COLORS.LINKS_BLUE
 }
 const superIncreasingKnapsack = {
@@ -69,6 +64,9 @@ const publicKey = {
 const multiplier = {
     fontFamily: 'comfortaa-bold',
     color: COLORS.MULTIPLIER_COLOR
+}
+const inverseStyle = {
+  color: COLORS.MULTIPLIER_INVERSE_COLOR,
 }
 
 const highlight = {
@@ -114,7 +112,6 @@ export default {
     contentStyleSmall,
     contentStyleBig,
     links,
-    keyword,
     underline,
     highlight,
     superIncreasingKnapsack,
@@ -123,6 +120,7 @@ export default {
     modulus,
     publicKey,
     multiplier,
+    inverseStyle,
     bold,
     popUpTextStyle,
     popUpTextStyleBold,

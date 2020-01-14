@@ -43,7 +43,9 @@ export default class page7 extends Component {
         return (
             <>
                 <Text style={style.popUpTextStyle}>
-                    Multiplicative inverse also known as reciprocal for a
+                    <Text style={{ ...style.inverseStyle, ...style.bold }}>
+                        Multiplicative inverse
+                    </Text> also known as reciprocal for a
                     number <Text style={style.bold}>x</Text>,
                     denoted by <Text style={style.bold}>
                         1/x
@@ -97,7 +99,9 @@ export default class page7 extends Component {
                     <Text style={style.links} onPress={() => { this.setState({ showEuclideanInfoPopUp: true, }) }} >
                         Extended Euclidean algorithm
                     </Text> is used to find if there is
-                    a <Text style={style.links} onPress={() => { this.setState({ showInverseInfoPopUp: true, }) }} >
+                    a <Text
+                        style={{ ...style.inverseStyle, ...style.bold, ...style.underline }}
+                        onPress={() => { this.setState({ showInverseInfoPopUp: true, }) }} >
                         multiplicative inverse
                     </Text> and the value of it.
                     {"\n\n"}

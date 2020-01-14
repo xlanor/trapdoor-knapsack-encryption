@@ -28,7 +28,9 @@ export default class page6 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    This refers to the set of private keys
+                    This refers to the set of <Text style={styles.PageStyle.privateKey}>
+                        private keys
+                    </Text>.
                 </Text>
             </>
         )
@@ -37,7 +39,11 @@ export default class page6 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    Since a public key is no longer in a superincreasing sequence,
+                    Since a <Text style={styles.PageStyle.publicKey}>
+                        public key
+                    </Text> is no longer in a <Text style={styles.PageStyle.superIncreasingKnapsack}>
+                        superincreasing sequence
+                    </Text>,
                     there are multiple solutions to a single ciphertext therefore
                     making it difficult to decipher.
                 </Text>
@@ -48,8 +54,9 @@ export default class page6 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    This person will then encrypt his message using the public key and
-                    send it back to the owner.
+                    This person will then encrypt his message using the <Text style={styles.PageStyle.publicKey}>
+                        public key
+                    </Text> and send it back to the owner.
                 </Text>
             </>
         )

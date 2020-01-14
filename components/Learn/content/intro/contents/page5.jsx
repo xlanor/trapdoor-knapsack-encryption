@@ -30,7 +30,11 @@ export default class page5 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The private key is a superincreasing knapsack to ensure there will only be one answer to a ciphertext.
+                    The <Text style={{ ...styles.PageStyle.privateKey, ...styles.PageStyle.bold }}>
+                        private key
+                    </Text> is a <Text style={styles.PageStyle.bold}>
+                        superincreasing knapsack
+                    </Text> to ensure there will only be one answer to a ciphertext.
                 </Text>
             </>
         )
@@ -39,7 +43,9 @@ export default class page5 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The modulus chosen is a random integer larger than the sum of elements in the knapsack.
+                    The <Text style={{ ...styles.PageStyle.modulus, ...styles.PageStyle.bold }}>
+                        modulus
+                    </Text> chosen is a random integer larger than the sum of elements in the knapsack.
                     This ensures the uniqueness of the ciphertext and plaintext pairs.
                 </Text>
             </>
@@ -49,8 +55,15 @@ export default class page5 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The multiplier chosen is a co-prime to the modulus,
-                    so that a multiplicative inverse can be found.
+                    The <Text style={{ ...styles.PageStyle.multiplier, ...styles.PageStyle.bold }}>
+                        multiplier
+                    </Text> chosen is a co-prime to
+                    the <Text style={{ ...styles.PageStyle.modulus, ...styles.PageStyle.bold }}>
+                        modulus
+                    </Text>,
+                    so that a <Text style={{ ...styles.PageStyle.inverseStyle, ...styles.PageStyle.bold }}>
+                        multiplicative inverse
+                    </Text> can be found.
                 </Text>
             </>
         )
@@ -59,7 +72,9 @@ export default class page5 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The secret key is a piece of information or parameter that is used to decrypt ciphertext during trapdoor knapsack.
+                    The <Text style={{ ...styles.PageStyle.secretKey, ...styles.PageStyle.bold }}>
+                        secret key
+                    </Text> is a piece of information or parameter that is used to decrypt ciphertext during trapdoor knapsack.
                 </Text>
             </>
         )

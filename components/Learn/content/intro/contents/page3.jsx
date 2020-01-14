@@ -90,10 +90,10 @@ export default class page3 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    1. Easy to solve, given the private key
+                    1. Easy to solve, given the <Text style={styles.PageStyle.privateKey}>private key</Text>.
                 </Text>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    2. Difficult to solve, given a public key.
+                    2. Difficult to solve, given a <Text style={styles.PageStyle.publicKey}>public key</Text>.
                 </Text>
             </>
         )
@@ -159,7 +159,11 @@ export default class page3 extends Component {
                     The general idea behind this algorithm is to create <Text style={style.links} onPress={() => { this.setState({ showProblemsInfoPopUp: true, }) }}>
                         2 separate problems
                     </Text>.
-                    This ensures that the private key is easy to use but the public key is difficult to compute.
+                    This ensures that the <Text style={styles.PageStyle.privateKey}>
+                        private key
+                    </Text> is easy to use but the <Text style={styles.PageStyle.publicKey}>
+                        public key
+                    </Text> is difficult to compute.
                     {"\n\n"}
                     As such, trapdoor function ensures that without prior knowledge of the "trapdoor", the encryption cannot easily be reversed.
                     {"\n\n"}
