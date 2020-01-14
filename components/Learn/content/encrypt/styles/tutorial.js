@@ -66,6 +66,10 @@ const multipleButtonRight = {
   marginLeft: Dimensions.get('window').width * 0.01,
 }
 
+const linkStyle = {
+  color: COLORS.LINKS_BLUE,
+  textDecorationLine: 'underline',
+}
 const encryptTextGray = {
   color: COLORS.GREY_1,
 }
@@ -73,12 +77,16 @@ const publicKey = {
   fontFamily: 'comfortaa-bold',
   color: COLORS.PUBLICKEY_COLOR
 }
+const knapsackSizeStyle = {
+  fontFamily: 'comfortaa-bold',
+  color: COLORS.KNAPSACK_SIZE_GREY,
+}
+
 const secondParaView = {
   marginTop: Dimensions.get('window').height * 0.02,
 }
 
 const tableView = {
-
   marginTop: Dimensions.get('window').height * 0.02,
 }
 
@@ -100,10 +108,10 @@ const tableCorrectValue = {
   textAlign: 'center',
   color: COLORS.CORRECT_GREEN
 }
-
-const linkStyle = {
-  color: COLORS.LINKS_BLUE,
-  textDecorationLine: 'underline',
+const tablePublicKeyValue = {
+  fontFamily: 'comfortaa-bold',
+  textAlign: 'center',
+  color: COLORS.PUBLICKEY_COLOR
 }
 
 const imgStyle = {
@@ -136,15 +144,17 @@ export default {
   buttonRow,
   multipleButtonLeft,
   multipleButtonRight,
+  linkStyle,
   encryptTextGray,
   publicKey,
+  knapsackSizeStyle,
   secondParaView,
   tableView,
   tableHeaderValue,
   tableValue,
   tableUnknownValue,
   tableCorrectValue,
-  linkStyle,
+  tablePublicKeyValue,
   imgStyle,
   popUpTextStyle,
   popUpTextStyleBold

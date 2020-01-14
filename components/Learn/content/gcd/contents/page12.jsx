@@ -32,7 +32,9 @@ export default class page12 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    To find out the multiplicative inverse:
+                    To find out the <Text style={{ ...style.inverseStyle, ...style.bold }}>
+                        multiplicative inverse
+                    </Text>:
                 </Text>
                 <Text style={{ ...style.contentStyle, marginLeft: u * 0.03 }}>
                     1. <Text style={{ ...style.bold, ...style.GCDStyle }}>
@@ -43,7 +45,8 @@ export default class page12 extends Component {
                     </Text> of <Text style={style.bold}>b2</Text>
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
-                    If the gcd is not 1, there is no <Text style={style.bold}>
+                    If the <Text style={{ ...style.bold, ...style.GCDStyle }}>gcd</Text> is not 1,
+                    there is no <Text style={{ ...style.inverseStyle, ...style.bold }}>
                         multiplicative inverse
                     </Text>.
                     {"\n\n"}

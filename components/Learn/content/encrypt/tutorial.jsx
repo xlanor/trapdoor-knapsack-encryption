@@ -248,7 +248,11 @@ class EncryptTutorial extends Component {
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col data={['b', 'x', 'Total']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28, 28]} textStyle={styles.tutorial.tableHeaderValue} />
+              <Col
+                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x', 'Total']}
+                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
+                heightArr={[28, 28]}
+                textStyle={styles.tutorial.tableHeaderValue} />
               <Rows data={[
                 ['22', '16', '32'],
                 ['0', '1', '1'],
@@ -384,7 +388,8 @@ class EncryptTutorial extends Component {
         <Text style={styles.tutorial.contentStyleSmall}>
           Binary values x are assigned into blocks and will add padding if there is a need.
           {"\n\n"}
-          The following blocks chart out the process of obtaining ciphertext using b.
+          The following blocks chart out the process of obtaining ciphertext
+          using <Text style={styles.tutorial.publicKey}>b</Text>.
         </Text>
         <View style={{ marginTop: u * 0.03 }}>
           {
@@ -479,7 +484,11 @@ class EncryptTutorial extends Component {
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28, 28]} textStyle={styles.tutorial.tableHeaderValue} />
+              <Col
+                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
+                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
+                heightArr={[28, 28]}
+                textStyle={styles.tutorial.tableHeaderValue} />
               <Rows data={[
                 ['22', '16', '32'],
                 ['0', '1', '1'],
@@ -494,7 +503,11 @@ class EncryptTutorial extends Component {
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28, 28]} textStyle={styles.tutorial.tableHeaderValue} />
+              <Col
+                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
+                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
+                heightArr={[28, 28]}
+                textStyle={styles.tutorial.tableHeaderValue} />
               <Rows data={[
                 ['22', '16', '32'],
                 ['0', '0', '0'],
@@ -509,7 +522,11 @@ class EncryptTutorial extends Component {
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28, 28]} textStyle={styles.tutorial.tableHeaderValue} />
+              <Col
+                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
+                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
+                heightArr={[28, 28]}
+                textStyle={styles.tutorial.tableHeaderValue} />
               <Rows data={[
                 ['22', '16', '32'],
                 ['0', '1', <Text style={styles.tutorial.tableCorrectValue}>0</Text>],
@@ -535,8 +552,12 @@ class EncryptTutorial extends Component {
     return (
       <>
         <Text style={styles.tutorial.contentStyle}>
-          However, there might be cases where binary cannot be divided into equal
-          blocks according to knapsack size n to correspond to public key.
+          However, there might be cases where binary cannot be divided into equal blocks according
+          to <Text style={styles.tutorial.knapsackSizeStyle}>
+            knapsack size n
+          </Text> to correspond to <Text style={styles.tutorial.publicKey}>
+            public key
+          </Text>.
         </Text>
         <Text style={{
           ...styles.tutorial.contentStyleSmall,
@@ -552,7 +573,11 @@ class EncryptTutorial extends Component {
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28, 28]} textStyle={styles.tutorial.tableHeaderValue} />
+              <Col
+                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
+                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
+                heightArr={[28, 28]}
+                textStyle={styles.tutorial.tableHeaderValue} />
               <Rows data={[
                 ['22', '16', '32'],
                 ['0', '1', '1'],
@@ -567,7 +592,11 @@ class EncryptTutorial extends Component {
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28, 28]} textStyle={styles.tutorial.tableHeaderValue} />
+              <Col
+                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
+                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
+                heightArr={[28, 28]}
+                textStyle={styles.tutorial.tableHeaderValue} />
               <Rows data={[
                 ['22', '16', '32'],
                 ['0', '0', '0'],
@@ -582,7 +611,11 @@ class EncryptTutorial extends Component {
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col data={['b', 'x']} style={{ flex: 1, backgroundColor: '#f6f8fa' }} heightArr={[28, 28]} textStyle={styles.tutorial.tableHeaderValue} />
+              <Col
+                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
+                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
+                heightArr={[28, 28]}
+                textStyle={styles.tutorial.tableHeaderValue} />
               <Rows data={[
                 ['22', '16', '32'],
                 ['0', '1', <Text style={styles.tutorial.tableUnknownValue}>?</Text>],
@@ -616,23 +649,24 @@ class EncryptTutorial extends Component {
               </>
             )
         }
-
-        <Text style={
-          keyboardVisiblity
-            ? { ...styles.tutorial.contentStyleSmall, marginTop: Dimensions.get('screen').height * 0.02, }
-            : { ...styles.tutorial.contentStyleSmall, marginTop: 0 }
-        }>Enter your message to encrypt:</Text>
-        <TextInput defaultValue={
-          lockState.encryption.textToEncrypt === ""
-            ? null
-            : lockState.encryption.textToEncrypt
-        } style={styles.tutorial.textBoxStyle} onChangeText={(text) => {
-          this.setState({
-            currentTextBox: text,
-          })
-        }} />
-        <View style={styles.tutorial.buttonRow}>
-          <CustomButton text="Validate" callback={this.validateInput} />
+        <View style={{ marginTop: Dimensions.get('window').height * 0.02, marginBottom: Dimensions.get('window').height * 0.01 }}>
+          <Text style={
+            keyboardVisiblity
+              ? { ...styles.tutorial.contentStyleSmall, marginTop: Dimensions.get('screen').height * 0.02, }
+              : { ...styles.tutorial.contentStyleSmall, marginTop: 0 }
+          }>Enter your message to encrypt:</Text>
+          <TextInput defaultValue={
+            lockState.encryption.textToEncrypt === ""
+              ? null
+              : lockState.encryption.textToEncrypt
+          } style={styles.tutorial.textBoxStyle} onChangeText={(text) => {
+            this.setState({
+              currentTextBox: text,
+            })
+          }} />
+          <View style={styles.tutorial.buttonRow}>
+            <CustomButton text="Validate" callback={this.validateInput} />
+          </View>
         </View>
         {
           lockState.encryption.textToEncrypt === ""
@@ -652,14 +686,20 @@ class EncryptTutorial extends Component {
                         ...styles.tutorial.contentStyleSmall,
                         marginTop: Dimensions.get('window').height * 0.02
                       }}>
-                        Divide the binary string to the blocks according to knapsack size n to corresponds public key
-                        (binary length ÷ n)
+                        Divide the binary string to the blocks according
+                        to <Text style={styles.tutorial.knapsackSizeStyle}>
+                          knapsack size n
+                        </Text> to corresponds <Text style={styles.tutorial.publicKey}>
+                          public key
+                        </Text> (binary length ÷ n)
                       </Text>
                       <Text style={{
                         ...styles.tutorial.contentStyleSmall,
                         marginTop: Dimensions.get('window').height * 0.02
                       }}>
-                        Add the public key b that corresponds to the value 1 in binary x
+                        Add the <Text style={styles.tutorial.publicKey}>
+                          public key b
+                        </Text> that corresponds to the value 1 in binary x
                       </Text>
                     </>
                   )

@@ -43,12 +43,12 @@ export default class page2 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    A quick reference on discrete logarithm problem can be found on this link:
-                </Text>
-                <Text
-                    style={styles.PageStyle.links}
-                    onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Discrete_logarithm')}>
-                    https://en.wikipedia.org/wiki/Discrete_logarithm
+                    A quick reference on discrete logarithm problem can be found on this link:{"\n"}
+                    <Text
+                        style={styles.PageStyle.links}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Discrete_logarithm')}>
+                        https://en.wikipedia.org/wiki/Discrete_logarithm
+                    </Text>
                 </Text>
             </>
         )
@@ -92,14 +92,12 @@ export default class page2 extends Component {
                         one-way trapdoor function
                     </Text>:{"\n"}
                 </Text>
-                <Text style={{ alignSelf: "center" }}>
-                    <Text
-                        style={{ ...style.contentStyle, ...style.links }}
-                        onPress={() => {
-                            this.setState({ showDiscreteLogInfoPopUp: true, })
-                        }}>
-                        Discrete Logarithm problem.
-                    </Text>
+                <Text
+                    style={{ alignSelf: "center", ...style.contentStyle, ...style.links }}
+                    onPress={() => {
+                        this.setState({ showDiscreteLogInfoPopUp: true, })
+                    }}>
+                    Discrete Logarithm problem.
                 </Text>
                 <Text style={style.contentStyle}>
                     Assuming we have a function:
@@ -117,7 +115,7 @@ export default class page2 extends Component {
                     we would be unable to find <Text style={{ ...style.bold, color: '#1ABC9C' }}>a</Text> and <Text style={{ ...style.bold, color: '#E74C3C' }}>k</Text> in a reasonable time.
                     {"\n"}
                 </Text>
-            </View>
+            </View >
         )
     }
 }

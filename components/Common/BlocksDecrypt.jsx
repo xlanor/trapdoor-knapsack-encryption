@@ -41,10 +41,12 @@ class BlockDecrypt extends Component{
     } = this.props;
     return (
       <View style={styles.containerStyle}>
-        <Text>Encrypted Value: {encryptedInput}</Text>
-        <Text>Multiplied with Inverse ({inverse}): {Number(encryptedInput) * inverse}</Text>
-        <Text>Modulo by {modulo}: </Text>
-        <Text>R: {rVal}</Text>
+        <Text style={{fontFamily:'comfortaa'}}>
+          Encrypted Value: {encryptedInput}{"\n"}
+          Multiplied with Inverse ({inverse}): {Number(encryptedInput) * inverse}{"\n"}
+          Modulo by: {modulo}{"\n"}
+          R: {rVal}
+        </Text>
         <Table borderStyle={{borderWidth: 1}}>
           <TableWrapper style={styles.wrapperStyle}>
             <Col data={tableTitle} style={styles.titleStyle} heightArr={[28,28]} textStyle={styles.textStyle}/>

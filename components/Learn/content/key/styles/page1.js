@@ -90,6 +90,9 @@ const inverseStyle = {
 const knapsackSizeStyle = {
   color: COLORS.KNAPSACK_SIZE_GREY,
 }
+const GCDStyle = {
+    color: COLORS.GCD_COLOR,
+}
 
 const popUpTextStyle = {
   fontFamily: 'comfortaa',
@@ -127,6 +130,7 @@ export default {
   publicKeyStyle,
   inverseStyle,
   knapsackSizeStyle,
+  GCDStyle,
   popUpTextStyle,
   popUpTextStyleBold,
   imgStyle,

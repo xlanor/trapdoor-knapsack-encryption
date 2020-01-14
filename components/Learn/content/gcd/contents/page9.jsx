@@ -64,9 +64,13 @@ export default class page9 extends Component {
                     b2 = b1 - q * b2
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
-                    Let a1 be the <Text style={style.bold}>
+                    Let <Text style={style.bold}>
+                        a1
+                    </Text> be the <Text style={style.bold}>
                         previous a2
-                    </Text> and b1 be the <Text style={style.bold}>
+                    </Text> and <Text style={style.bold}>
+                        b1
+                    </Text> be the <Text style={style.bold}>
                         previous b2
                     </Text>.
                     {"\n"}
