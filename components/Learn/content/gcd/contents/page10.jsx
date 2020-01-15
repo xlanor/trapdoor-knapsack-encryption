@@ -32,6 +32,7 @@ export default class page10 extends Component {
                 </View>
 
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
+                <Text style={style.bold}>Step 3:</Text>{"\n"}
                     Use the following <Text style={style.bold}>
                         formulas
                     </Text> for the rest of the columns:
