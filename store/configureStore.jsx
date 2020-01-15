@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers,createMigrate } from 'redux';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { persistStore, persistReducer } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
@@ -10,12 +10,22 @@ import currentEncryptionReducer from '../reducers/currentEncryptionReducer';
 import simulatorReducer from '../reducers/simulatorReducer';
 import hintReducer from '../reducers/hintReducer';
 
+const migrations = {
+  0: (state) => {
+    return {
+      ...state,
+      // todo: ADD DEFAULT MIGRATIONS HERE
+    }
+  }
+}
 
 const persistConfig = {
   key:"root",
+  version: 0,
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
-  whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption','hint']
+  whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption','hint'],
+  migrate: createMigrate(migrations, { debug: true })
 }
 
 const rootReducer = combineReducers(
