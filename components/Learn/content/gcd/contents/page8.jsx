@@ -44,6 +44,7 @@ export default class page8 extends Component {
                         23
                     </Text>.
                     {"\n\n"}
+                    <Text style={style.bold}>Step 1:</Text>{"\n"}
                     Now for the first row:
                 </Text>
                 <Text style={{

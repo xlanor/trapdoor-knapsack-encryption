@@ -29,12 +29,14 @@ export default class page6 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
+                    <Text style={style.bold}>Step 3:</Text>{"\n"}
                     Repeat for the rest of the rows.
                     {"\n\n"}
                     Stop when <Text style={style.highlight}>
                         r = 0
                     </Text>.
                     {"\n\n"}
+                    <Text style={style.bold}>Step 4:</Text>{"\n"}
                     Now, look at the <Text style={style.bold}>
                         last value
                     </Text> of <Text style={{ ...style.bold, ...style.valB }}>

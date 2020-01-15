@@ -29,7 +29,7 @@ export default class page2 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    With the  <Text style={style.bold}>
+                    With the <Text style={style.bold}>
                         Euclidean algorithm
                     </Text>, the easiest way to visualise it is via a table.
                     {"\n\n"}
