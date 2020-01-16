@@ -2,6 +2,13 @@ import { AppState } from 'react-native';
 
 import React, { Component } from 'react';
 
+import { getQuestions } from '../../api/Questions';
+
+// begin redux imports
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { CALL_API } from '../../redux-modules/actions/updateQuestions';
+
 class UpdateQuestions extends Component{
     constructor(props){
         super(props);
@@ -11,6 +18,8 @@ class UpdateQuestions extends Component{
     }
     componentDidMount() {
       AppState.addEventListener('change', this.handleAppStateChange);
+      const { actions } = this.props;
+      actions.CALL_API('INTRO')
       console.log(`APP LOADED`)
     }
     componentWillUnmount() {
@@ -31,4 +40,14 @@ class UpdateQuestions extends Component{
     }
 }
 
-export default UpdateQuestions;
+
+const mapStateToProps = state => ({
+    lockState: state
+  })
+  
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({
+        CALL_API
+    }, dispatch)
+});
+export default connect(mapStateToProps,mapDispatchToProps)(UpdateQuestions);
