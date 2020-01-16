@@ -1,6 +1,6 @@
-import { createStore, combineReducers,createMigrate } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore, persistReducer,createMigrate } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
 import countReducer from '../reducers/countReducer';
 import lessonPageReducer from '../reducers/lessonPageReducer';
@@ -21,7 +21,7 @@ const migrations = {
 
 const persistConfig = {
   key:"root",
-  version: 0,
+  version: -1,
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
   whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption','hint'],

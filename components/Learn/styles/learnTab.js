@@ -1,4 +1,4 @@
-import { COLORS } from '../../../constants/Colors';
+import { COLORS } from '../../../redux-modules/constants/Colors';
 import { Dimensions } from 'react-native';
 
 const arrowWidth = Dimensions.get('window').width * 0.1;

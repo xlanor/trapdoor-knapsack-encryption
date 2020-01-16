@@ -37,7 +37,7 @@ import {
   PREVIOUS_ENCRYPT_PAGE_ACTION,
   RESET_PAGE_ACTION,
   CHANGE_TAB_ACTION,
-} from '../../actions/tabPage';
+} from '../../redux-modules/actions/tabPage';
 
 // importing redux defined actions
 import { 
@@ -61,19 +61,19 @@ import {
   KNAPSACK_UNLOCK_ACTION,
   UNLOCK_ALL_ACTION,
   RESET_ALL_ACTION,
- }  from '../../actions/learnPageLock';
+ }  from '../../redux-modules/actions/learnPageLock';
 
  import {
   UPDATE_ENCRYPTION_PADDING_ACTION,
   UPDATE_ENCRYPTION_BLOCKS_ACTION,
   UPDATE_ENCRYPTED_STRING_ACTION,
- } from '../../actions/updateEncryption';
+ } from '../../redux-modules/actions/updateEncryption';
 
  import {
   UPDATE_INVERSE_ACTION,
   UPDATE_PUBLIC_KEY_STRING_ACTION,
   UPDATE_PUBLIC_KEY_ARRAY_ACTION,
- } from '../../actions/updateParameters';
+ } from '../../redux-modules/actions/updateParameters';
 
  import KeyPage from './content/key/page1';
 // begin redux imports

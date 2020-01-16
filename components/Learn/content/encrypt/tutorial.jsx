@@ -33,11 +33,11 @@ import {
   UPDATE_ENCRYPTION_PADDING_ACTION,
   UPDATE_ENCRYPTION_BLOCKS_ACTION,
   UPDATE_ENCRYPTED_STRING_ACTION,
-} from '../../../../actions/updateEncryption';
+} from '../../../../redux-modules/actions/updateEncryption';
 
 import {
   ALLOW_NEXT_PAGE_ACTION
-} from '../../../../actions/tabPage';
+} from '../../../../redux-modules/actions/tabPage';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Block from '../../../Common/Blocks'
@@ -50,7 +50,7 @@ import Error from '../../../../assets/images/Error.png';
 import InfoIcon from '../../../../assets/images/InfoIcon.png';
 import Exclaim from '../../../../assets/images/ExclaimIcon.png';
 import EncryptionFormula from '../../../../assets/images/EncryptionFormula.png'
-import { COLORS } from '../../../../constants/Colors';
+import { COLORS } from '../../../../redux-modules/constants/Colors';
 
 class EncryptTutorial extends Component {
   constructor(props) {

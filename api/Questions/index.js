@@ -23,5 +23,4 @@ export const getQuestions = async(currentTab, succ, fail) => {
             other: err.message,
         });
     }
-
 }
