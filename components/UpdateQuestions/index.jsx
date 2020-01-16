@@ -36,10 +36,13 @@ class UpdateQuestions extends Component{
         const { actions } = this.props;
         console.log(`App state changed: ${appState}, ${nextAppState}`)
 
-        if (appState !== 'background' && nextAppState === 'background') {
+       
             console.log(`Triggering API Call`)
             actions.CALL_API('INTRO')
-        }
+            actions.CALL_API('ALGO')
+            actions.CALL_API('KEYGEN')
+            actions.CALL_API('ENCRYPT')
+            actions.CALL_API('DECRYPT')
         this.setState({ appState: nextAppState });
     }
     render(){
