@@ -46,5 +46,6 @@ export const CALL_API = (quizType) => async dispatch => {
         console.log(err);
     }
     let idx = pageIndexMapper(quizType);
+    console.log(`${quizType} - ${idx}`)
     getQuestions(idx, succ, err);
 }
