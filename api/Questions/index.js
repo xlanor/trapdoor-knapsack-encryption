@@ -10,12 +10,12 @@ export const getQuestions = async(currentTab, succ, fail) => {
     .contentType('application/json')
     .build();
     
-    let urlIndex = mapIndex(currentTab);
+    console.log(`${GET_QUESTION_URL}${currentTab}/`)
     try{
         const res = await axios({
             headers: apiHeader,
             method: 'get',
-            url: `${GET_QUESTION_URL}${urlIndex}/`
+            url: `${GET_QUESTION_URL}${currentTab}/`
         });
         succ(res.data);
     }catch(err){

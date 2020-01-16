@@ -24,12 +24,67 @@ const questionReducer = ( state=initialState, action ) => {
     console.log(`Received ${JSON.stringify(action)}`)
     switch(action.type){
         case CALL_QUESTIONS_API:
-            console.log(action.payload.quizType)
             switch(action.payload.quizType){
                 case 'INTRO':
                     return {
                         ...state,
                         intro: action.payload.questions.map(x => ({
+                                ...x,
+                                options: x.options.map(y => ({
+                                        ...y,
+                                        selected: y.selected === 1 ? 0: y.selected, // reset the selected value,
+                                    })
+                                ),
+                                answer: x.options.find(y => y.selected === 1).value
+                            })
+                        )
+                    }
+                case 'ALGO':
+                        return {
+                            ...state,
+                            algo: action.payload.questions.map(x => ({
+                                    ...x,
+                                    options: x.options.map(y => ({
+                                            ...y,
+                                            selected: y.selected === 1 ? 0: y.selected, // reset the selected value,
+                                        })
+                                    ),
+                                    answer: x.options.find(y => y.selected === 1).value
+                                })
+                            )
+                        }
+                case 'KEYGEN':
+                    return {
+                        ...state,
+                        keygen: action.payload.questions.map(x => ({
+                                ...x,
+                                options: x.options.map(y => ({
+                                        ...y,
+                                        selected: y.selected === 1 ? 0: y.selected, // reset the selected value,
+                                    })
+                                ),
+                                answer: x.options.find(y => y.selected === 1).value
+                            })
+                        )
+                    }
+                case 'ENCRYPT':
+                    return {
+                        ...state,
+                        encrypt: action.payload.questions.map(x => ({
+                                ...x,
+                                options: x.options.map(y => ({
+                                        ...y,
+                                        selected: y.selected === 1 ? 0: y.selected, // reset the selected value,
+                                    })
+                                ),
+                                answer: x.options.find(y => y.selected === 1).value
+                            })
+                        )
+                    }
+                case 'DECRYPT':
+                    return {
+                        ...state,
+                        decrypt: action.payload.questions.map(x => ({
                                 ...x,
                                 options: x.options.map(y => ({
                                         ...y,
