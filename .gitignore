@@ -12,3 +12,4 @@ web-report/
 dist/
 *.keystore
 *.apk
+*.cer
