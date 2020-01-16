@@ -6,10 +6,11 @@ import { Platform, StatusBar, StyleSheet, View, ActivityIndicator } from 'react-
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+import UpdateQuestions from './components/UpdateQuestions';
 
 import { Provider } from 'react-redux';
 
-import { getStore, getPersistor } from './store/configureStore';
+import { getStore, getPersistor } from './redux-modules/store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react'
 
 
@@ -51,6 +52,7 @@ export default function App(props) {
                 >
             <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <UpdateQuestions />
             <AppNavigator />
           </View>
           </PersistGate>

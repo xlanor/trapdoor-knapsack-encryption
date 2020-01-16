@@ -36,7 +36,7 @@ import{
     UPDATE_SIMULATOR_PADDING_ACTION,
     UPDATE_SIMULATOR_RESET_ENC_ACTION,
     UPDATE_SIMULATOR_RESET_DEC_ACTION
- } from '../../../../actions/simulators'
+ } from '../../../../redux-modules/actions/simulators'
 
 import Error from '../../../../assets/images/Error.png'
 import EditButton from '../../../../assets/images/EditButton.png'

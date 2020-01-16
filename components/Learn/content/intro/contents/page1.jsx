@@ -8,7 +8,7 @@ import {
     LINKS_HINT_NOTDONE_ACTION,
     HINT_RESET_ACTION,
     HINT_UNLOCK_ACTION
-} from '../../../../../actions/hint';
+} from '../../../../../redux-modules/actions/hint';
 
 import {
     View,
