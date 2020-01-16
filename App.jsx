@@ -9,7 +9,7 @@ import AppNavigator from './navigation/AppNavigator';
 
 import { Provider } from 'react-redux';
 
-import { getStore, getPersistor } from './store/configureStore';
+import { getStore, getPersistor } from './redux-modules/store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react'
 
 

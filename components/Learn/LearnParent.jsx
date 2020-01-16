@@ -37,11 +37,11 @@ import {
   KNAPSACK_UNLOCK_ACTION,
   UNLOCK_ALL_ACTION,
   RESET_ALL_ACTION,
- }  from '../../actions/learnPageLock';
+ }  from '../../redux-modules/actions/learnPageLock';
 
  import {
   CHANGE_TAB_ACTION
-}  from '../../actions/tabPage';
+}  from '../../redux-modules/actions/tabPage';
 
 // importing image assets
 // unlocked

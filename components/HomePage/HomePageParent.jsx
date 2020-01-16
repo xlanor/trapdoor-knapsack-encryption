@@ -7,8 +7,8 @@ import Constants from 'expo-constants';
 
 // redux actions
 import { bindActionCreators } from 'redux';
-import { changeCount } from '../../actions/counts';
-import { COUNTER_CHANGE } from '../../constants';
+import { changeCount } from '../../redux-modules/actions/counts';
+import { COUNTER_CHANGE } from '../../redux-modules/constants';
 
 // importing image assets
 import arrow from '../../assets/images/arrow.png';

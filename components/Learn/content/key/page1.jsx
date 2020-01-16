@@ -31,7 +31,7 @@ import bFormula from '../../../../assets/images/bFormula.png'
 
 import {
   ALLOW_NEXT_PAGE_ACTION
-} from '../../../../actions/tabPage';
+} from '../../../../redux-modules/actions/tabPage';
 
 import {
   UPDATE_PRIVATE_KEY_STRING_ACTION,
@@ -42,12 +42,12 @@ import {
   UPDATE_INVERSE_ACTION,
   UPDATE_PUBLIC_KEY_STRING_ACTION,
   UPDATE_PUBLIC_KEY_ARRAY_ACTION,
-} from '../../../../actions/updateParameters';
+} from '../../../../redux-modules/actions/updateParameters';
 
 import {
   ENCRYPT_LOCK_ACTION,
   DECRYPT_LOCK_ACTION,
-} from '../../../../actions/learnPageLock';
+} from '../../../../redux-modules/actions/learnPageLock';
 
 import PopUp from '../../../Common/PopUp';
 import CustomButton from '../../../Common/Button';

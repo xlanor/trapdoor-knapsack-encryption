@@ -22,9 +22,9 @@ import {
 
 import {
   ALLOW_NEXT_PAGE_ACTION
-} from '../../../../actions/tabPage';
+} from '../../../../redux-modules/actions/tabPage';
 
-import { COLORS } from '../../../../constants/Colors';
+import { COLORS } from '../../../../redux-modules/constants/Colors';
 // import stylesheet.
 import styles from './styles';
 // begin redux imports
