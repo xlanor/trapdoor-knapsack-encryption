@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import { COLORS } from '../../../../../constants/Colors';
+import { COLORS } from '../../../../../redux-modules/constants/Colors';
 
 const containerStyle = {
     backgroundColor: '#fff',
