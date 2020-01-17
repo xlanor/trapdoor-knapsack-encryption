@@ -12,6 +12,9 @@ import {
   PacmanIndicator
 } from 'react-native-indicators';
 
+import AlertPopUp from '../../Common/AlertPopUp'
+
+import Alert from '../../../assets/images/alert.png';
 import styles from './styles';
 
 class Question extends Component {
@@ -21,41 +24,50 @@ class Question extends Component {
         checkedValue: -1,
         disable: false,
         checking: false,
+        isCheckedValueCorrect: true,
       }
     }
-    checkAnswer = () => {
-      
-    }
+
     changeChecked = (newValue) => {
+
       this.setState((prevState) => ({
           checkedValue: newValue,
           disable: !prevState.disable,
           checking: !prevState.checking,
         }), ()=>{setTimeout(()=>{this.checkValues()},1000)}
       )
-      
     }
+
     checkValues = () => {
-      console.log("Called")
+      const { checkedValue } = this.state;
+      let answer = this.props.answer
+      console.log(checkedValue)
+      console.log(answer)
       this.setState((prevState)=>({
         disable: !prevState.disable,
         checkedValue: -1,
         checking: !prevState.checking,
-
-      }))
+        isCheckedValueCorrect: checkedValue === answer,
+      }),()=>{console.log(this.state)})
     }
+
     changeDisabled = () => {
       this.setState({
           disable: !this.state.disable,
         })
     }
+
     render(){
       const { 
         qnName,
         label,
         options
      } = this.props;
-    const { checkedValue,disable, checking } = this.state;
+    const { 
+      checkedValue,
+      disable, 
+      checking,
+      isCheckedValueCorrect } = this.state;
       return(
           <>
             <Text>
@@ -79,7 +91,9 @@ class Question extends Component {
                         this.changeChecked(x.value)
                       }
                     }
-                    disabled={disable}
+                    disabled={
+                      disable
+                    }
                 />
                 )
               })
@@ -93,6 +107,15 @@ class Question extends Component {
               <PacmanIndicator color='green' />
               : null
             }
+            {
+              isCheckedValueCorrect? null:
+              <AlertPopUp
+                  messageContent="Incorrect option selected!"
+                  visibility={true}
+                  callback={()=>{this.setState({isCheckedValueCorrect:true})}}
+                  icon={Alert}
+              />
+            }
 
             </View>
           </>
@@ -100,6 +123,15 @@ class Question extends Component {
     }
 }
 /*
+
+AlertPopUp.propTypes = {
+  messageContent: PropTypes.string,
+  renderedBlocks: PropTypes.node,
+  callback: PropTypes.func.isRequired,
+  visibility: PropTypes.bool.isRequired,
+  icon: PropTypes.node,
+};
+
 Question.propTypes = {
   qnName: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,

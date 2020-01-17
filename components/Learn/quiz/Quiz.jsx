@@ -29,7 +29,6 @@ class Quiz extends Component{
 
   }
   componentDidMount = () => {
-    console.log(`COM<PONENT DID MOUNT`)
     this.getQuestions()
   }
   getValidNumberOfQuestions = () => {
@@ -80,9 +79,6 @@ class Quiz extends Component{
   render(){
     const { currentQuestionIdx, questions } = this.state;
       const { questionList, quizType } = this.props;
-      console.log(questionList)
-    console.log(`IN QUESTIONS COMPONENT`)
-    console.log(questions)
     return (
       <>
       {currentQuestionIdx < questions.length - 1 && questions.length != 0
