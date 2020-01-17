@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'react-proptypes';
+import PropTypes from 'prop-types';
 
 import {
   Text
@@ -9,12 +9,12 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { CALL_API } from '../../../api/Questions';
+
 import * as Animatable from 'react-native-animatable';
 
 // begin custom component imports
 import Question from './Question';
-// preparing for Animatables.
-Question = Animatable.createAnimatableComponent(Question);
 
 
 class Quiz extends Component{
@@ -26,21 +26,46 @@ class Quiz extends Component{
       isQuizEnded: false,
       currentQuestionIdx: 0,
     }
+
+  }
+  componentDidMount = () => {
+    console.log(`COM<PONENT DID MOUNT`)
+    this.getQuestions()
   }
   getValidNumberOfQuestions = () => {
       // Hardcoded - to think about allowing the user to dynamically set this in the API?
       const { maxQuestions } = this.state;
-      const { questionList } = this.props;
+      let questionList = this.getQuestionByType()
       return questionList.length > maxQuestions ? maxQuestions : questionList.length;
+  }
+  getQuestionByType = () => {
+      const { quizType,questionList } = this.props;
+      switch(quizType){
+        case 'INTRO':
+            return questionList.intro;
+        case 'ALGO':
+          return questionList.algo;
+        case 'KEYGEN':
+          return questionList.keygen;
+        case 'ENCRYPT':
+          return questionList.encrypt;
+        case 'DECRYPT':
+          return questionList.decrypt;
+        default:
+          return questionList.intro;
+      }
   }
   getQuestions = () => {
       // I'm going to handle the disabling on the API side instead.
       const { questionList, quizType } = this.props;
       let numberOfQuestions = this.getValidNumberOfQuestions()
-      let sample = questionList.map(x => ({ x, r : Math.random() }))
+      console.log(`NOQN ${numberOfQuestions}`)
+      let ql = this.getQuestionByType()
+      let sample = ql.map(x => ({ x, r : Math.random() }))
                       .sort((a, b) => a.r - b.r)
                       .map(a => a.x)
                       .slice(0, numberOfQuestions);
+      console.log(` SAMPLE ${sample}`)
       this.setState({
         questions: sample,
       })
@@ -54,22 +79,30 @@ class Quiz extends Component{
 
   render(){
     const { currentQuestionIdx, questions } = this.state;
+      const { questionList, quizType } = this.props;
+      console.log(questionList)
+    console.log(`IN QUESTIONS COMPONENT`)
+    console.log(questions)
     return (
-      currentQuestionIdx > questions.length - 1
-      ? <Question
+      <>
+      {currentQuestionIdx < questions.length - 1 && questions.length != 0
+      ?( <Question
           qnName={questions[currentQuestionIdx].questions_name}
-          label={questions[currentQuestionIdx].label}
+          label={questions[currentQuestionIdx].questions_label}
           options={questions[currentQuestionIdx].options}
           answer={questions[currentQuestionIdx].answer}
           callback={()=>{this.incrementIndex()}}
         />
-      : null
+        
+      )
+      : <Text>Hello!</Text>
+  }
+      </>
     )
   }
 }
 
 Quiz.propTypes = {
-  quizType: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
