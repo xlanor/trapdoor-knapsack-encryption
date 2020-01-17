@@ -40,6 +40,7 @@ class Question extends Component {
 
     checkValues = () => {
       const { checkedValue } = this.state;
+      const { callback } = this.props;
       let answer = this.props.answer
       console.log(checkedValue)
       console.log(answer)
@@ -48,7 +49,11 @@ class Question extends Component {
         checkedValue: -1,
         checking: !prevState.checking,
         isCheckedValueCorrect: checkedValue === answer,
-      }),()=>{console.log(this.state)})
+      }),()=>{
+        this.state.isCheckedValueCorrect === true
+        ? callback()
+        : null
+      })
     }
 
     changeDisabled = () => {
@@ -61,7 +66,8 @@ class Question extends Component {
       const { 
         qnName,
         label,
-        options
+        options,
+        callback
      } = this.props;
     const { 
       checkedValue,
@@ -71,13 +77,9 @@ class Question extends Component {
       return(
           <>
             <Text>
-              {qnName}
-            </Text>
-            <Text>
-              {label}
             </Text>
             <View style={styles.Question.viewCard}>
-            <Card>
+            <Card title={label}>
             {
               options.map(x=>{
                 return(
@@ -108,9 +110,10 @@ class Question extends Component {
               : null
             }
             {
-              isCheckedValueCorrect? null:
+              isCheckedValueCorrect
+              ? null:
               <AlertPopUp
-                  messageContent="Incorrect option selected!"
+                  messageContent="Incorrect answer selected!"
                   visibility={true}
                   callback={()=>{this.setState({isCheckedValueCorrect:true})}}
                   icon={Alert}

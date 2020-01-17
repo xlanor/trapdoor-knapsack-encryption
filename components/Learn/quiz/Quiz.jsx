@@ -79,9 +79,10 @@ class Quiz extends Component{
   render(){
     const { currentQuestionIdx, questions } = this.state;
       const { questionList, quizType } = this.props;
+      console.log(currentQuestionIdx+ "-" +questions.length)
     return (
       <>
-      {currentQuestionIdx < questions.length - 1 && questions.length != 0
+      {currentQuestionIdx <= questions.length - 1 && questions.length != 0
       ?( <Question
           qnName={questions[currentQuestionIdx].questions_name}
           label={questions[currentQuestionIdx].questions_label}
