@@ -4,14 +4,38 @@ import {
   View
 } from 'react-native';
 import PropTypes from 'react-proptypes';
+import {
+  CheckBox
+} from 'react-native-elements';
 
 class Question extends Component {
     constructor(props){
       super(props);
     }
     render(){
+      const { 
+        qnName,
+        label,
+        options
+     } = this.props;
+    
       return(
           <>
+            <Text>
+              {qnName}
+            </Text>
+            <Text>
+              {label}
+            </Text>
+            {
+              options.map(x=>{
+                <CheckBox
+                    title={x.label}
+                    checked={false}
+                    val={x.value}
+                />
+              })
+            }
           </>
       );
     }
