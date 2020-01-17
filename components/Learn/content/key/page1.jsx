@@ -52,6 +52,7 @@ import {
 import PopUp from '../../../Common/PopUp';
 import CustomButton from '../../../Common/Button';
 import AlertPopUp from '../../../Common/AlertPopUp';
+import Quiz from '../../quiz/Quiz';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 // dynamic pages not static pages.
 class KeyPage extends Component {
@@ -389,7 +390,7 @@ class KeyPage extends Component {
     return (
       <>
         <Text style={{ ...styles.page1.contentStyle, textAlign: 'center' }}>Quiz Time</Text>
-        <Text style={{ ...styles.page1.contentStyle, textAlign: 'center' }}>W.I.P</Text>
+        <Quiz quizType="KEYGEN" />
       </>
     )
   }
