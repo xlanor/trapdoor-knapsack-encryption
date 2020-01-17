@@ -12,6 +12,8 @@ import {
   PacmanIndicator
 } from 'react-native-indicators';
 
+import styles from './styles';
+
 class Question extends Component {
     constructor(props){
       super(props);
@@ -29,14 +31,23 @@ class Question extends Component {
           checkedValue: newValue,
           disable: !prevState.disable,
           checking: !prevState.checking,
-        })
+        }), ()=>{setTimeout(()=>{this.checkValues()},1000)}
       )
+      
+    }
+    checkValues = () => {
+      console.log("Called")
+      this.setState((prevState)=>({
+        disable: !prevState.disable,
+        checkedValue: -1,
+        checking: !prevState.checking,
+
+      }))
     }
     changeDisabled = () => {
-      this.setState((prevState)=>({
-          disable: !prevState.disable,
+      this.setState({
+          disable: !this.state.disable,
         })
-      )
     }
     render(){
       const { 
@@ -53,7 +64,7 @@ class Question extends Component {
             <Text>
               {label}
             </Text>
-            <View style={{backgroundColor:'black'}}>
+            <View style={styles.Question.viewCard}>
             <Card>
             {
               options.map(x=>{
@@ -76,12 +87,14 @@ class Question extends Component {
             </Card>
           
             </View>
-          
+            <View style={{backgroundColor:'blue'}}>
             {
               checking?
               <PacmanIndicator color='green' />
               : null
             }
+
+            </View>
           </>
       );
     }
