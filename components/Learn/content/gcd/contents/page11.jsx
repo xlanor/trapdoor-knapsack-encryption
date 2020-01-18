@@ -29,7 +29,8 @@ export default class page11 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                <Text style={style.bold}>Step 4:</Text>{"\n"}
+                    <Text style={style.bold}>Step 4:</Text>
+                    {"\n\n"}
                     Repeat for the remaining rows.
                     {"\n\n"}
                     Stop when <Text style={style.highlight}>

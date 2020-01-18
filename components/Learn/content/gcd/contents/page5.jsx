@@ -29,7 +29,8 @@ export default class page5 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    <Text style={style.bold}>Step 2:</Text>{"\n"}
+                    <Text style={style.bold}>Step 2:</Text>
+                    {"\n\n"}
                     Fill in the next row:
                     {"\n\n"}
                     Let <Text style={{ ...style.bold, ...style.valA }}>

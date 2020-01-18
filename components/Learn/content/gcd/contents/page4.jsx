@@ -29,7 +29,8 @@ export default class page4 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    <Text style={style.bold}>Step 1:</Text>{"\n"}
+                    <Text style={style.bold}>Step 1:</Text>
+                    {"\n\n"}
                     Calculate the values of <Text style={style.bold}>
                         q
                     </Text> and <Text style={style.bold}>

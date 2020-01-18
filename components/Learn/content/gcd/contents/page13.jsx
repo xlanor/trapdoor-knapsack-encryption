@@ -35,10 +35,10 @@ export default class page13 extends Component {
                         b2
                     </Text> which is -49.
                     {"\n\n"}
-                    If value is <Text style={style.bold}>positive</Text>,
-                    there are no further steps and it is
+                    If the value is <Text style={style.bold}>positive</Text>,
+                    there are no further steps are required and the value is
                     the <Text style={{ ...style.inverseStyle, ...style.bold }}>
-                        multiplicative inverse
+                        modular inverse
                     </Text>.
                     {"\n\n"}
                     If the value is <Text style={style.bold}>negative</Text>,
@@ -49,7 +49,7 @@ export default class page13 extends Component {
                     = <Text style={style.highlight}>233</Text>
                     {"\n\n"}
                     Hence, <Text style={{ ...style.inverseStyle, ...style.bold }}>
-                        multiplicative inverse
+                        inverse
                     </Text> of
                     23 mod 282 = <Text style={style.highlight}>233 mod 282</Text>.
                     {"\n"}

@@ -32,7 +32,7 @@ export default class page8 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    For simplicity we are going to reuse the <Text style={style.bold}>
+                    For simplicity, reuse the <Text style={style.bold}>
                         same 2 integers <Text style={style.valA}>
                             a
                         </Text> and <Text style={style.valB}>
@@ -44,8 +44,9 @@ export default class page8 extends Component {
                         23
                     </Text>.
                     {"\n\n"}
-                    <Text style={style.bold}>Step 1:</Text>{"\n"}
-                    Now for the first row:
+                    <Text style={style.bold}>Step 1:</Text>
+                    {"\n\n"}
+                    For the first row:
                 </Text>
                 <Text style={{
                     ...style.contentStyle,
