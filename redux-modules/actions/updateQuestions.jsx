@@ -39,13 +39,11 @@ export const GET_QUESTIONS_ACTION = questionType => {
 /* Redux thunk actions */
 export const CALL_API = (quizType) => async dispatch => {
     const succ = (data) => {
-        console.log(`Dispatching ${data.results}`)
         dispatch(ADD_QUESTIONS_API_ACTION(data.results, quizType));
     }
     const err = (err)=> {
         console.log(err);
     }
     let idx = pageIndexMapper(quizType);
-    console.log(`${quizType} - ${idx}`)
     getQuestions(idx, succ, err);
 }

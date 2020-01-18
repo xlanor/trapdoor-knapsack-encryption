@@ -13,14 +13,21 @@ import {
   CHANGE_TAB,
   SET_NEXT_TAB,
   ALLOW_NEXT_PAGE,
+  MAX_INTRO_PAGES,
+  MAX_GCD_PAGES,
+  MAX_KEY_PAGES,
+  MAX_ENCRYPT_PAGES,
+  MAX_DECRYPT_PAGES,
+  MAX_SIMULATOR_PAGES,
 } from '../constants';
+/*
 
 const MAX_INTRO_PAGES=6;
 const MAX_GCD_PAGES=13;
-const MAX_KEY_PAGES=6;
+const MAX_KEY_PAGES=;
 const MAX_ENCRYPT_PAGES=5;
 const MAX_DECRYPT_PAGES=2;
-const MAX_SIMULATOR_PAGES=1;
+const MAX_SIMULATOR_PAGES=1;*/
 // we will have different tab names
 // to be determined.
 const initialState = {
