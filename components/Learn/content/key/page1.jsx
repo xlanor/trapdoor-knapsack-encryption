@@ -422,7 +422,7 @@ class KeyPage extends Component {
           :  {lockState.updateParameters.multiplier}{"\n"}
           <Text style={styles.page1.modulusStyle}>Modulus m</Text>
           :  {lockState.updateParameters.modulo}{"\n"}
-          <Text style={styles.page1.inverseStyle}>Inverse multiplier w^-1</Text>
+          <Text style={styles.page1.inverseStyle}>Modular Inverse w^-1</Text>
           :  {lockState.updateParameters.inverse}
         </Text>
 
@@ -449,14 +449,16 @@ class KeyPage extends Component {
     return (
       <View>
         <Text style={styles.page1.contentStyle}>
-          Calculate the <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>multiplicative inverse</Text> of
+          Calculate the <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>modular inverse</Text> of
           your <Text style={{ ...styles.page1.multiplierStyle, ...styles.page1.boldFont }}>
             multiplier w({lockState.updateParameters.multiplier})
           </Text>:
         </Text>
         <Text style={{ ...styles.page1.contentStyleSmall, marginTop: u * 0.02 }}>
-          (Using Extended Euclidean's algorithm){"\n"}
-          This is needed for decryption{"\n"}
+          (Using Extended Euclidean's algorithm)
+          {"\n\n"}
+          This is needed for decryption
+          {"\n\n"}
           Eg: <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>Inverse</Text> of 11 mod 39 = 32 (32 --7 + 39)
         </Text>
 
@@ -472,7 +474,7 @@ class KeyPage extends Component {
           inverseLoaded
             ?
             <Text style={styles.page1.contentStyle}>
-              <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>Multiplicative inverse</Text> of
+              The <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>modular inverse</Text> of
               your <Text style={{ ...styles.page1.multiplierStyle, ...styles.page1.boldFont }}>
                 multiplier w({lockState.updateParameters.multiplier})
               </Text>: {lockState.updateParameters.inverse}
