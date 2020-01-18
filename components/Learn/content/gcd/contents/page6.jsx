@@ -29,19 +29,19 @@ export default class page6 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    <Text style={style.bold}>Step 3:</Text>{"\n"}
+                    <Text style={style.bold}>Step 3:</Text>
+                    {"\n\n"}
                     Repeat for the rest of the rows.
                     {"\n\n"}
                     Stop when <Text style={style.highlight}>
                         r = 0
                     </Text>.
                     {"\n\n"}
-                    <Text style={style.bold}>Step 4:</Text>{"\n"}
                     Now, look at the <Text style={style.bold}>
                         last value
                     </Text> of <Text style={{ ...style.bold, ...style.valB }}>
                         b
-                    </Text> which is <Text style={style.bold}>
+                    </Text> which is the <Text style={style.bold}>
                         <Text style={style.GCDStyle}>GCD</Text> of
                     </Text> 23 and 282.
                     {"\n\n"}

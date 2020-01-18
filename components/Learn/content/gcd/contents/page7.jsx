@@ -43,23 +43,19 @@ export default class page7 extends Component {
         return (
             <>
                 <Text style={style.popUpTextStyle}>
-                    <Text style={{ ...style.inverseStyle, ...style.bold }}>
-                        Multiplicative inverse
-                    </Text> also known as reciprocal for a
-                    number <Text style={style.bold}>x</Text>,
-                    denoted by <Text style={style.bold}>
-                        1/x
-                    </Text> or <Text style={style.bold}>x^-1</Text>,
-                    is <Text style={style.bold}>a number</Text> which when
-                    multiplied by x to get 1.
-                    {"\n\n"}
-                    If <Text style={style.bold}>
-                        GCD(a, b) = 1
-                    </Text> => can find inverses a mod b and b mod a.
-                </Text>
-                <Text style={{ textAlign: 'center', marginTop: u * 0.02, ...style.popUpTextStyle }}>
-                    <Text style={style.popUpTextStyleBold}>GCD(a, b) = x * a + y * b = 1</Text>{"\n"}
-                    (Where x and y are some integers)
+                    The <Text style={{ ...style.inverseStyle, ...style.bold }}>
+                        modular inverse
+                    </Text> of <Text style={{ ...style.bold, ...style.valB }}>
+                        b
+                    </Text> refers to <Text style={{ ...style.bold, ...style.valB }}>
+                        b
+                    </Text>^-1 where <Text style={{ ...style.bold, ...style.valB }}>
+                        b
+                    </Text>^-1 * <Text style={{ ...style.bold, ...style.valB }}>
+                        b
+                    </Text> ≡ 1 mod <Text style={{ ...style.bold, ...style.valA }}>
+                        a
+                    </Text>.
                 </Text>
             </>
         )
@@ -102,14 +98,19 @@ export default class page7 extends Component {
                     a <Text
                         style={{ ...style.inverseStyle, ...style.bold, ...style.underline }}
                         onPress={() => { this.setState({ showInverseInfoPopUp: true, }) }} >
-                        multiplicative inverse
+                        modular inverse
+                    </Text> of <Text style={{ ...style.bold, ...style.valB }}>
+                        b
+                    </Text> with respect to <Text style={{ ...style.bold, ...style.valA }}>
+                        a
                     </Text> and the value of it.
                     {"\n\n"}
-                    With the <Text style={style.bold}>Extended Euclidean algorithm</Text>,
-                    the easiest way to visualise it is via a table.
+                    The easiest way to visualise the <Text style={style.bold}>
+                        Extended Euclidean algorithm
+                    </Text> is via a table.
                     {"\n\n"}
                     Construct a table like the original Euclidean algorithm but with <Text style={style.highlight}>
-                        4 more columns
+                        4 more additional columns
                     </Text>.
                     {"\n"}
                 </Text>

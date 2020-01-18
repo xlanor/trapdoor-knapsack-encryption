@@ -29,15 +29,16 @@ export default class page3 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    Now, we want to find the <Text style={{ ...style.bold, ...style.GCDStyle }}>
+                    For example, to find the <Text style={{ ...style.bold, ...style.GCDStyle }}>
                         GCD
                     </Text> of <Text style={style.highlight}>
                         23
                     </Text> and <Text style={style.highlight}>
                         282
-                    </Text>.
+                    </Text>, insert the 2 integers into the table.
                     {"\n\n"}
                     <Text style={style.bold}>
+                        Note{"\n"}
                         Always set <Text style={style.valA}>
                             a
                         </Text> as the larger number and <Text style={style.valB}>
@@ -45,13 +46,13 @@ export default class page3 extends Component {
                         </Text> as the smaller number.
                     </Text>
                     {"\n\n"}
-                    Now, let <Text style={{ ...style.bold, ...style.valA }}>
+                    Let <Text style={{ ...style.bold, ...style.valA }}>
                         a
                     </Text> be <Text style={style.highlight}>
                         282
                     </Text> and <Text style={{ ...style.bold, ...style.valB }}>
                         b
-                    </Text> by <Text style={style.highlight}>
+                    </Text> be <Text style={style.highlight}>
                         23
                     </Text>.
                     {"\n"}

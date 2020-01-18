@@ -51,7 +51,7 @@ const valB = {
     color: '#f25f5c'
 }
 const inverseStyle = {
-  color: COLORS.MULTIPLIER_INVERSE_COLOR,
+    color: COLORS.MULTIPLIER_INVERSE_COLOR,
 }
 
 const highlight = {
@@ -88,7 +88,7 @@ const imgStyle = {
     resizeMode: 'contain'
 }
 const imgContainer = {
-    height: Dimensions.get('window').height * 0.2
+    height: Dimensions.get('window').height * 0.25
 }
 
 

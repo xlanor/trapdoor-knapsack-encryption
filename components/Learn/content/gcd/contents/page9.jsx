@@ -32,8 +32,9 @@ export default class page9 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    <Text style={style.bold}>Step 2:</Text>{"\n"}
-                    Next, fill the next row like Euclidean algorithm:
+                    <Text style={style.bold}>Step 2:</Text>
+                    {"\n\n"}
+                    Fill the next row like Euclidean algorithm:
                 </Text>
                 <Text style={{
                     ...style.contentStyle,
@@ -49,9 +50,11 @@ export default class page9 extends Component {
                     </Text> be the previous r.
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
-                    Use the following <Text style={style.bold}>
-                        formulas
-                    </Text> for the rest of the columns:
+                    Calculate <Text style={style.bold}>
+                        a1
+                    </Text> and <Text style={style.bold}>
+                        b1
+                    </Text> using the formulas below:
                 </Text>
                 <Text style={{
                     ...style.contentStyle,
