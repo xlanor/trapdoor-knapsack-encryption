@@ -213,7 +213,7 @@ class DecryptTutorial extends Component {
             w^-1
           </Text> * <Text style={{ ...styles.tutorial.multiplierStyle, ...styles.tutorial.boldFont }}>
             w
-          </Text> = 1 mod <Text style={{ ...styles.tutorial.modulusStyle, ...styles.tutorial.boldFont }}>
+          </Text> ≡ 1 mod <Text style={{ ...styles.tutorial.modulusStyle, ...styles.tutorial.boldFont }}>
             m
           </Text>
         </Text>
@@ -405,7 +405,7 @@ class DecryptTutorial extends Component {
           Use the <Text
             style={{ ...styles.tutorial.linkStyle, ...styles.tutorial.boldFont, ...styles.tutorial.inverseStyle }}
             onPress={() => { this.setState({ showInversePopUp: true, }) }}>
-            inverse multiplier w^-1
+            modular inverse w^-1
           </Text> to calculate <Text style={{ ...styles.tutorial.linkStyle, ...styles.tutorial.boldFont }} onPress={() => { this.setState({ showrPopUp: true, }) }}>
             R
           </Text>.

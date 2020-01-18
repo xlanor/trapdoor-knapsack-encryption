@@ -62,7 +62,7 @@ export default class page5 extends Component {
                         modulus
                     </Text>,
                     so that a <Text style={{ ...styles.PageStyle.inverseStyle, ...styles.PageStyle.bold }}>
-                        multiplicative inverse
+                        modular inverse
                     </Text> can be found.
                 </Text>
             </>
