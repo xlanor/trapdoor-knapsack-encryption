@@ -16,6 +16,7 @@ import AlertPopUp from '../../Common/AlertPopUp'
 
 import Alert from '../../../assets/images/alert.png';
 import styles from './styles';
+import * as Animatable from 'react-native-animatable';
 
 class Question extends Component {
     constructor(props){
@@ -42,8 +43,6 @@ class Question extends Component {
       const { checkedValue } = this.state;
       const { callback } = this.props;
       let answer = this.props.answer
-      console.log(checkedValue)
-      console.log(answer)
       this.setState((prevState)=>({
         disable: !prevState.disable,
         checkedValue: -1,
@@ -75,9 +74,8 @@ class Question extends Component {
       checking,
       isCheckedValueCorrect } = this.state;
       return(
-          <>
-            <Text>
-            </Text>
+        <>
+        <Animatable.View key={label} animation="slideInRight" duration={1500}> 
             <View style={styles.Question.viewCard}>
             <Card title={label}>
             {
@@ -103,6 +101,7 @@ class Question extends Component {
             </Card>
           
             </View>
+            </Animatable.View>
             <View style={{backgroundColor:'blue'}}>
             {
               checking?

@@ -10,7 +10,6 @@ export const getQuestions = async(currentTab, succ, fail) => {
     .contentType('application/json')
     .build();
     
-    console.log(`${GET_QUESTION_URL}${currentTab}/`)
     try{
         const res = await axios({
             headers: apiHeader,

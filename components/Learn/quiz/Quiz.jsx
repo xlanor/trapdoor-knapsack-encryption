@@ -71,29 +71,39 @@ class Quiz extends Component{
   }
   incrementIndex = () => {
     const { currentQuestionIdx, questions } = this.state;
+    const { callback } = this.props;
+    console.log(`CALLBACK`)
+    console.log(callback)
     currentQuestionIdx+1 > questions.length-1 
-    ? this.setState({ isQuizEnded: true })
+    ? this.setState({ isQuizEnded: true }, callback)
     : this.setState((prevState) => ({ currentQuestionIdx: prevState.currentQuestionIdx+1 }))
   }
 
   render(){
-    const { currentQuestionIdx, questions } = this.state;
+    const { currentQuestionIdx, questions, isQuizEnded } = this.state;
       const { questionList, quizType } = this.props;
-      console.log(currentQuestionIdx+ "-" +questions.length)
+
     return (
       <>
-      {currentQuestionIdx <= questions.length - 1 && questions.length != 0
-      ?( <Question
-          qnName={questions[currentQuestionIdx].questions_name}
-          label={questions[currentQuestionIdx].questions_label}
-          options={questions[currentQuestionIdx].options}
-          answer={questions[currentQuestionIdx].answer}
-          callback={()=>{this.incrementIndex()}}
-        />
-        
-      )
-      : <Text>Hello!</Text>
-  }
+      {
+        isQuizEnded
+        ? null
+        :currentQuestionIdx <= questions.length - 1 && questions.length != 0
+          ?(
+              <Question
+                qnName={questions[currentQuestionIdx].questions_name}
+                label={questions[currentQuestionIdx].questions_label}
+                options={questions[currentQuestionIdx].options}
+                answer={questions[currentQuestionIdx].answer}
+                callback={()=>{this.incrementIndex()}}
+              />
+           
+            
+          )
+          : null
+      
+      }
+    
       </>
     )
   }

@@ -30,7 +30,8 @@ import InfoIcon from '../../../../assets/images/InfoIcon.png'
 import bFormula from '../../../../assets/images/bFormula.png'
 
 import {
-  ALLOW_NEXT_PAGE_ACTION
+  ALLOW_NEXT_PAGE_ACTION,
+  NEXT_KEY_PAGE_ACTION
 } from '../../../../redux-modules/actions/tabPage';
 
 import {
@@ -54,6 +55,8 @@ import CustomButton from '../../../Common/Button';
 import AlertPopUp from '../../../Common/AlertPopUp';
 import Quiz from '../../quiz/Quiz';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import * as Animatable from "react-native-animatable";
+import { Card } from 'react-native-elements'
 // dynamic pages not static pages.
 class KeyPage extends Component {
   constructor(props) {
@@ -386,11 +389,21 @@ class KeyPage extends Component {
 
     })
   }
+  getSeventhPage = () => {
+    return(
+      <Animatable.View animation="slideInDown">
+          <Card title="Unlocked!"/>
+      </Animatable.View>
+
+    )
+    
+  }
   getSixthPage = () => {
+    const { actions } = this.props;
     return (
       <>
         <Text style={{ ...styles.page1.contentStyle, textAlign: 'center' }}>Quiz Time</Text>
-        <Quiz quizType="KEYGEN" />
+        <Quiz quizType="KEYGEN" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_KEY_PAGE_ACTION()}} />
       </>
     )
   }
@@ -669,6 +682,8 @@ class KeyPage extends Component {
         return this.getFifthPage();
       case 6:
         return this.getSixthPage();
+      case 7:
+        return this.getSeventhPage();
       default:
         return this.getFirstPage();
     }
@@ -776,6 +791,7 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_PUBLIC_KEY_STRING_ACTION,
     ENCRYPT_LOCK_ACTION,
     DECRYPT_LOCK_ACTION,
+    NEXT_KEY_PAGE_ACTION
   }, dispatch)
 });
 export default connect(mapStateToProps, mapDispatchToProps)(KeyPage);

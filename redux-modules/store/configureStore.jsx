@@ -13,21 +13,61 @@ import simulatorReducer from '../reducers/simulatorReducer';
 import questionReducer from '../reducers/questionReducer';
 import hintReducer from '../reducers/hintReducer';
 
+import {
+
+  MAX_INTRO_PAGES,
+  MAX_GCD_PAGES,
+  MAX_KEY_PAGES,
+  MAX_ENCRYPT_PAGES,
+  MAX_DECRYPT_PAGES,
+  MAX_SIMULATOR_PAGES,
+} from '../constants'
+
 const migrations = {
   0: (state) => {
     return {
       ...state,
       // todo: ADD DEFAULT MIGRATIONS HERE
+      lessonPageTabAndPages:{
+        ...state.lessonPageTabAndPages,
+        maxPage: MAX_INTRO_PAGES,
+        maxIntroPages: MAX_INTRO_PAGES,
+        maxGcdPages: MAX_GCD_PAGES,
+        maxKeyPages: MAX_KEY_PAGES,
+        maxEncryptPages: MAX_ENCRYPT_PAGES,
+        maxDecryptPages: MAX_DECRYPT_PAGES,
+      },
+      questions: {
+        intro: [
+
+        ],
+        algo: [
+    
+        ],
+        keygen: [
+    
+        ],
+        encrypt: [
+    
+        ], 
+        decrypt: [
+    
+        ],
+      },
+      hint: {
+        linksHintLocked: true,
+      }
     }
   }
 }
 
 const persistConfig = {
   key:"root",
-  version: -1,
+  version: 0,
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
   whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption','hint'], 
+  blacklist: ['questions'],
   migrate: createMigrate(migrations, { debug: true })
 }
 
