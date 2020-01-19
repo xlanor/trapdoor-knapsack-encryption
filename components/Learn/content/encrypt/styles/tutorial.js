@@ -132,6 +132,10 @@ const popUpTextStyleBold = {
   color: COLORS.POPUP_TEXT_COLOR
 }
 
+const unlockIconStyle = {
+  width: Dimensions.get('window').width * 0.1,
+  height: Dimensions.get('window').width * 0.1,
+}
 export default {
   textBoxStyle,
   titleStyle,
@@ -157,5 +161,6 @@ export default {
   tablePublicKeyValue,
   imgStyle,
   popUpTextStyle,
-  popUpTextStyleBold
+  popUpTextStyleBold,
+  unlockIconStyle,
 };

@@ -315,7 +315,7 @@ class LearnTab extends Component{
                       <View style={{marginLeft:'auto'}}>
                           {
                           this.isFinalPage()?
-                          this.getNextTab():
+                          null:
                             this.canNavigate()?
                               <TouchableOpacity onPress = {()=>{
                                   this.getTouchableNextAction()

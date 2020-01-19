@@ -42,8 +42,7 @@ class Button extends Component{
             ?
             <RneButton raised buttonStyle={this.getStyle()} onPress={callback} title={text}/>
             :
-            <RneButton raised buttonStyle={this.getStyle("green")}  onPress={callback} title={text}>
-            </RneButton>
+            <RneButton raised buttonStyle={this.getStyle("green")}  onPress={callback} title={text}/>
         );
     }
 }

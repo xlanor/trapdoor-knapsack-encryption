@@ -4,6 +4,8 @@ import page3 from './page3';
 import page4 from './page4';
 import page5 from './page5';
 import page6 from './page6';
+import QuizTab from './quiz';
+import UnlockNext from './unlock';
 
 export default {
     page1,
@@ -12,4 +14,6 @@ export default {
     page4,
     page5,
     page6,
+    QuizTab,
+    UnlockNext,
 };
