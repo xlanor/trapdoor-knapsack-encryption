@@ -16,6 +16,7 @@ import {
   RESET_ERROR_MESSAGE,
   SET_ERROR_MESSAGE,
   ALLOW_NEXT_PAGE,
+  DISABLE_NEXT_PAGE,
  } from '../constants';
 
 
@@ -97,6 +98,11 @@ export const RESET_ERROR_MESSAGE_ACTION = () => {
 export const ALLOW_NEXT_PAGE_ACTION = () => {
     return {
         type: ALLOW_NEXT_PAGE,
+    }
+}
+export const DISABLE_NEXT_PAGE_ACTION = () => {
+    return {
+      type: DISABLE_NEXT_PAGE,
     }
 }
 
