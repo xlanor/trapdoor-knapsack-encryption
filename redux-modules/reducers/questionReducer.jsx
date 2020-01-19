@@ -21,7 +21,6 @@ const initialState = {
 }
 
 const questionReducer = ( state=initialState, action ) => {
-    console.log(`Received ${JSON.stringify(action)}`)
     switch(action.type){
         case CALL_QUESTIONS_API:
             switch(action.payload.quizType){

@@ -112,6 +112,14 @@ const imgStyle = {
   resizeMode: 'contain'
 }
 
+const unlockIconStyle = {
+  width: Dimensions.get('window').width * 0.1,
+  height: Dimensions.get('window').width * 0.1,
+}
+
+const keyboardAvoidingViewMargin = {
+  marginTop: Dimensions.get('window').height * 0.05,
+}
 export default {
   progressBarSize,
   titleStyle,
@@ -134,4 +142,6 @@ export default {
   popUpTextStyle,
   popUpTextStyleBold,
   imgStyle,
+  unlockIconStyle,
+  keyboardAvoidingViewMargin,
 };
