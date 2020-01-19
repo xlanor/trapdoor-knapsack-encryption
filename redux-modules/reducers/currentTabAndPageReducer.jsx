@@ -238,17 +238,29 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
             ...initialState
           };
       case 'persist/REHYDRATE':
-        if (action.payload.lessonPageTabAndPages) {
-          return {
-            ...action.payload.lessonPageTabAndPages,
-            maxIntroPages: MAX_INTRO_PAGES,
-            maxGcdPages: MAX_GCD_PAGES,
-            maxKeyPages: MAX_KEY_PAGES,
-            maxEncryptPages: MAX_ENCRYPT_PAGES,
-            maxDecryptPages: MAX_DECRYPT_PAGES,
+        console.log(`action ${JSON.stringify(action)}`)
+        if(action.payload !== undefined){
+          if (action.payload.lessonPageTabAndPages !== undefined) {
+            return {
+              ...action.payload.lessonPageTabAndPages,
+              maxIntroPages: MAX_INTRO_PAGES,
+              maxGcdPages: MAX_GCD_PAGES,
+              maxKeyPages: MAX_KEY_PAGES,
+              maxEncryptPages: MAX_ENCRYPT_PAGES,
+              maxDecryptPages: MAX_DECRYPT_PAGES,
+            }
+  
+          }else{
+            return {
+              ...state,
+            }
           }
-
+        }else{
+          return {
+            ...state,
+          }
         }
+       
         break;
       default: return state;
   }
