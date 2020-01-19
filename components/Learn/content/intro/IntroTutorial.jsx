@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 
 import { ScrollView } from 'react-native-gesture-handler';
 
+// actions
+import { DISABLE_NEXT_PAGE_ACTION } from '../../../../redux-modules/actions/tabPage'
 //contents
 import styles from './styles';
 import contents from './contents';
@@ -21,6 +23,8 @@ class IntroPage extends Component {
         return contents.QuizTab
     }
     getPage6 = () => {
+        const { actions } = this.props;
+        actions.DISABLE_NEXT_PAGE_ACTION();
         return contents.page6
     }
     getPage5 = () => {
@@ -74,6 +78,7 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({
+        DISABLE_NEXT_PAGE_ACTION,
     }, dispatch)
 });
 

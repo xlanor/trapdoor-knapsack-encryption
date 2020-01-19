@@ -59,6 +59,7 @@ import Quiz from '../../quiz/Quiz';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import * as Animatable from "react-native-animatable";
 import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements'
+
 // dynamic pages not static pages.
 class KeyPage extends Component {
   constructor(props) {
