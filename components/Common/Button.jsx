@@ -5,6 +5,19 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
+import {
+    Button as RneButton
+} from 'react-native-elements';
+
+    /*
+
+            <TouchableOpacity onPress={callback} style={this.getStyle()} >
+            </TouchableOpacity>
+            <TouchableOpacity onPress={callback} style={ styles.buttonStyle}>
+            </TouchableOpacity>
+            style={styles.buttonStyle} 
+             style={this.getStyle()}
+    */
 import { button as styles } from './styles';
 class Button extends Component{
     constructor(props){
@@ -27,13 +40,10 @@ class Button extends Component{
         return (
             buttonColor
             ?
-            <TouchableOpacity onPress={callback} style={this.getStyle()} >
-                <Text style={styles.textStyle}>{text}</Text>
-            </TouchableOpacity>
+            <RneButton raised buttonStyle={this.getStyle()} onPress={callback} title={text}/>
             :
-            <TouchableOpacity onPress={callback} style={styles.buttonStyle} >
-                <Text style={styles.textStyle}>{text}</Text>
-            </TouchableOpacity>
+            <RneButton raised buttonStyle={this.getStyle("green")}  onPress={callback} title={text}>
+            </RneButton>
         );
     }
 }
