@@ -77,8 +77,8 @@ class Question extends Component {
         <>
         <Animatable.View key={label} animation="slideInRight" duration={1500}> 
             <View style={styles.Question.viewCard}>
-            <Card title={label}>
-            {
+            <Card title={label} titleStyle={styles.Question.viewQns}>
+            {              
               options.map(x=>{
                 return(
                 <CheckBox
@@ -94,9 +94,10 @@ class Question extends Component {
                     disabled={
                       disable
                     }
-                />
+                /> 
                 )
               })
+              
             }
             </Card>
           
