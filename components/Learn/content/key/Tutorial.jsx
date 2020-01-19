@@ -28,6 +28,7 @@ import ProgressBar5 from '../../../../assets/images/FiveStepProgress/ProgressBar
 import Error from '../../../../assets/images/Error.png'
 import InfoIcon from '../../../../assets/images/InfoIcon.png'
 import bFormula from '../../../../assets/images/bFormula.png'
+import Unlock from '../../../../assets/images/unlock.png';
 
 import {
   ALLOW_NEXT_PAGE_ACTION,
@@ -48,6 +49,7 @@ import {
 import {
   ENCRYPT_LOCK_ACTION,
   DECRYPT_LOCK_ACTION,
+  ENCRYPT_UNLOCK_ACTION,
 } from '../../../../redux-modules/actions/learnPageLock';
 
 import PopUp from '../../../Common/PopUp';
@@ -56,7 +58,7 @@ import AlertPopUp from '../../../Common/AlertPopUp';
 import Quiz from '../../quiz/Quiz';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import * as Animatable from "react-native-animatable";
-import { Card } from 'react-native-elements'
+import { Card, Button as RneButton, RneImage } from 'react-native-elements'
 // dynamic pages not static pages.
 class KeyPage extends Component {
   constructor(props) {
@@ -390,9 +392,21 @@ class KeyPage extends Component {
     })
   }
   getSeventhPage = () => {
+    const { actions } = this.props;
     return(
       <Animatable.View animation="slideInDown">
-          <Card title="Unlocked!"/>
+          <Card title="Unlocked Next Tab!">
+            <RneButton
+              type="clear"
+              icon={
+                <Image source={Unlock}
+                style={styles.page1.unlockIconStyle}/>}
+              buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+              onPress = {()=>{actions.ENCRYPT_UNLOCK_ACTION()}}
+            >
+
+            </RneButton>
+          </Card>
       </Animatable.View>
 
     )
@@ -499,10 +513,11 @@ class KeyPage extends Component {
 
   getThirdPage = () => {
     const { lockState } = this.props;
+    const { keyboardVisiblity } = this.state;
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <>
+        <View style={ keyboardVisiblity? { ...styles.page1.keyboardAvoidingViewMargin} : null}>
           <Text style={styles.page1.contentStyle}>
             Choose your <Text style={{ ...styles.page1.multiplierStyle, ...styles.page1.boldFont }}>multiplier w</Text>:
           </Text>
@@ -545,19 +560,20 @@ class KeyPage extends Component {
                 : {lockState.updateParameters.multiplier.toString()}
               </Text>
           }
-        </>
+        </View>
       </TouchableWithoutFeedback>
     )
   }
 
   getSecondPage = () => {
     const { lockState } = this.props;
+    const { keyboardVisiblity } = this.state;
     let u = Dimensions.get('window').height
     console.log(lockState.updateParameters.modulo)
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View>
+      <View style={ keyboardVisiblity? { ...styles.page1.keyboardAvoidingViewMargin} : null}>
           <Text style={styles.page1.contentStyle}>
             Choose your <Text style={{ ...styles.page1.modulusStyle, ...styles.page1.boldFont }}>modulus m</Text>:
             {"\n\n"}
@@ -600,11 +616,12 @@ class KeyPage extends Component {
   }
   getFirstPage = () => {
     const { lockState } = this.props;
+    const { keyboardVisiblity } = this.state;
     let isEntered = lockState.lessonPageTabAndPages.allowNextPage
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View>
+        <View style={ keyboardVisiblity? { ...styles.page1.keyboardAvoidingViewMargin} : null}>
           <Text style={styles.page1.contentStyle}>
             Enter your <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>private key a</Text>:
             {"\n\n"}
@@ -791,7 +808,8 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_PUBLIC_KEY_STRING_ACTION,
     ENCRYPT_LOCK_ACTION,
     DECRYPT_LOCK_ACTION,
-    NEXT_KEY_PAGE_ACTION
+    NEXT_KEY_PAGE_ACTION,
+    ENCRYPT_UNLOCK_ACTION,
   }, dispatch)
 });
 export default connect(mapStateToProps, mapDispatchToProps)(KeyPage);
