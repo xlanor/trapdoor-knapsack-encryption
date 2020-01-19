@@ -10,7 +10,6 @@ import { DISABLE_NEXT_PAGE_ACTION } from '../../../../redux-modules/actions/tabP
 //contents
 import styles from './styles';
 import contents from './contents';
-import { allow } from 'expo/build/ScreenOrientation/ScreenOrientation';
 
 // dynamic pages not static pages.
 class IntroPage extends Component {

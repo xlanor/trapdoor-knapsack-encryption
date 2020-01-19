@@ -103,6 +103,10 @@ const imgStyle = {
     resizeMode: 'contain'
 }
 
+const unlockIconStyle = {
+    width: Dimensions.get('window').width * 0.1,
+    height: Dimensions.get('window').width * 0.1,
+  }
 export default {
     picStyle,
     containerStyle,
@@ -125,4 +129,5 @@ export default {
     popUpTextStyle,
     popUpTextStyleBold,
     imgStyle,
+    unlockIconStyle,
 };

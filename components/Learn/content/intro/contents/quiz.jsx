@@ -8,9 +8,6 @@ import { bindActionCreators } from 'redux';
 // import third party libs
 import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements'
 
-// import stylesheet
-import styles from '../styles';
-
 // import components
 import Quiz from '../../../quiz/Quiz';
 
