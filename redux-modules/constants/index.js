@@ -111,7 +111,7 @@ export const UPDATE_SIMULATOR_RESET_ENC = "UPDATE_SIMULATOR_RESET_ENC";
 
 
 export const MAX_INTRO_PAGES=8;
-export const MAX_GCD_PAGES=14;
+export const MAX_GCD_PAGES=15;
 export const MAX_KEY_PAGES=7;
 export const MAX_ENCRYPT_PAGES=6;
 export const MAX_DECRYPT_PAGES=3;
