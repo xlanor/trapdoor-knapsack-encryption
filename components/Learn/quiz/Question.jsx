@@ -103,7 +103,7 @@ class Question extends Component {
           
             </View>
             </Animatable.View>
-            <View style={{backgroundColor:'blue'}}>
+            <View>
             {
               checking?
               <PacmanIndicator color='green' />
