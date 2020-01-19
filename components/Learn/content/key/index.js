@@ -1,4 +1,4 @@
-import KeyPage from './page1';
+import KeyPage from './Tutorial';
 export { 
   KeyPage as keyPageOne,
 };
