@@ -2,6 +2,11 @@ const viewCard = {
     marginBottom: '10%',
 }
 
-export default {
-    viewCard
+const viewQns = {
+    textAlign: 'left',
 }
+
+export default {
+    viewCard,
+    viewQns
+};
