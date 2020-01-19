@@ -10,56 +10,33 @@ import { DISABLE_NEXT_PAGE_ACTION } from '../../../../redux-modules/actions/tabP
 //contents
 import styles from './styles';
 import contents from './contents';
+import { allow } from 'expo/build/ScreenOrientation/ScreenOrientation';
 
 // dynamic pages not static pages.
 class IntroPage extends Component {
     constructor(props) {
         super(props);
     }
-    getUnlock = () => {
-        return contents.UnlockNext
-    }
     getQuiz = () => {
+        const { actions,allowNextPage } = this.props;
+        if(allowNextPage){
+            actions.DISABLE_NEXT_PAGE_ACTION();
+        }
         return contents.QuizTab
     }
-    getPage6 = () => {
-        const { actions } = this.props;
-        actions.DISABLE_NEXT_PAGE_ACTION();
-        return contents.page6
-    }
-    getPage5 = () => {
-        return contents.page5
-    }
-    getPage4 = () => {
-        return contents.page4
-    }
-    getPage3 = () => {
-        return contents.page3
-    }
-    getPage2 = () => {
-        return contents.page2
-    }
-    getPage1 = () => {
-        return contents.page1
-    }
-    checkPageNo = () => {
-        const { lockState } = this.props;
-
-        return lockState.lessonPageTabAndPages.tabPage;
-    }
     getPageElements = () => {
-        let pageNo = this.checkPageNo()
+        const { currentTabPage } = this.props;
 
-        switch (pageNo) {
-            case 1: return this.getPage1();
-            case 2: return this.getPage2();
-            case 3: return this.getPage3();
-            case 4: return this.getPage4();
-            case 5: return this.getPage5();
-            case 6: return this.getPage6();
+        switch (currentTabPage) {
+            case 1: return contents.page1;
+            case 2: return contents.page2;
+            case 3: return contents.page3;
+            case 4: return contents.page4;
+            case 5: return contents.page5;
+            case 6: return contents.page6;
             case 7: return this.getQuiz();
-            case 8: return this.getUnlock();
-            default: return this.getPage1();
+            case 8: return contents.UnlockNext
+            default: return contents.page1;
         }
     }
 
@@ -74,7 +51,8 @@ class IntroPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    lockState: state
+    currentTabPage: state.lessonPageTabAndPages.tabPage,
+    allowNextPage: state.lessonPageTabAndPages.allowNextPage
 })
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({
