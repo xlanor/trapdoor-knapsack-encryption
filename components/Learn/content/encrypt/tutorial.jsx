@@ -1,5 +1,7 @@
+// react imports
 import React, { Component } from 'React';
 
+// react-native imports.
 import {
   View,
   Dimensions,
@@ -12,20 +14,17 @@ import {
   Modal,
   Keyboard,
 } from 'react-native';
+
 // import stylesheet.
 import styles from './styles';
-// begin redux imports
+
+/* Third Party Libs begin here */
+
+// Redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import {
-  Table,
-  TableWrapper,
-  Rows,
-  Row,
-  Col
-} from 'react-native-table-component';
-
+// Redux Actions Imports
 import {
   UPDATE_ENCRYPTION_STRING_ACTION,
   UPDATE_ENCRYPTION_ASCII_STRING_ACTION,
@@ -34,23 +33,50 @@ import {
   UPDATE_ENCRYPTION_BLOCKS_ACTION,
   UPDATE_ENCRYPTED_STRING_ACTION,
 } from '../../../../redux-modules/actions/updateEncryption';
-
 import {
-  ALLOW_NEXT_PAGE_ACTION
+  ALLOW_NEXT_PAGE_ACTION,
+  NEXT_ENCRYPT_PAGE_ACTION,
 } from '../../../../redux-modules/actions/tabPage';
+import {
+  DECRYPT_UNLOCK_ACTION
+} from '../../../../redux-modules/actions/learnPageLock';
+
+// React-Native Table Imports
+import {
+  Table,
+  TableWrapper,
+  Rows,
+  Row,
+  Col
+} from 'react-native-table-component';
+
+// React-native-Gesture Imports
 import { ScrollView } from 'react-native-gesture-handler';
 
-import Block from '../../../Common/Blocks'
-import AlertPopUp from '../../../Common/AlertPopUp';
+// React Native Animatable Imports
+import * as Animatable from "react-native-animatable";
 
-import PopUp from '../../../Common/PopUp';
-import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
-import CustomButton from '../../../Common/Button';
+// React Native Elements Imports
+import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements'
+
+// Constant Imports
+import { COLORS } from '../../../../redux-modules/constants/Colors';
+
+// Image Asset Imports
 import Error from '../../../../assets/images/Error.png';
 import InfoIcon from '../../../../assets/images/InfoIcon.png';
 import Exclaim from '../../../../assets/images/ExclaimIcon.png';
 import EncryptionFormula from '../../../../assets/images/EncryptionFormula.png'
-import { COLORS } from '../../../../redux-modules/constants/Colors';
+import Unlock from '../../../../assets/images/unlock.png';
+
+// Other Component Imports
+import AlertPopUp from '../../../Common/AlertPopUp';
+import Block from '../../../Common/Blocks'
+import CustomButton from '../../../Common/Button';
+import PopUp from '../../../Common/PopUp';
+import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
+import Quiz from '../../quiz/Quiz';
+
 
 class EncryptTutorial extends Component {
   constructor(props) {
@@ -282,87 +308,37 @@ class EncryptTutorial extends Component {
 
     return asciiVal
   }
+  getSixthPage = () => {
+    const { actions } = this.props;
+    return(
+      <Animatable.View animation="slideInDown">
+          <Card title="Unlocked Next Tab!">
+            <RneButton
+              type="clear"
+              icon={
+                <Image source={Unlock} 
+                style={styles.tutorial.unlockIconStyle}/>}
+              buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+              onPress = {()=>{actions.DECRYPT_UNLOCK_ACTION()}}
+            >
+
+            </RneButton>
+          </Card>
+      </Animatable.View>
+    )
+
+  }
+
   getFifthPage = () => {
     const { actions } = this.props;
     return (
       <>
-        <Text style={{ textAlign: 'center' }}>
-          <Text style={styles.tutorial.contentStyle}>Quiz Time</Text>{"\n"}
-          <Text style={styles.tutorial.contentStyle}>W.I.P</Text>
-        </Text>
+        <Text style={{ ...styles.tutorial.contentStyle, textAlign: 'center' }}>Quiz Time</Text>
+        <Quiz quizType="ENCRYPT" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_ENCRYPT_PAGE_ACTION()}} />
       </>
     )
   }
-  /*getFourthPage = () => {
-    const { showBlocks } = this.state;
-    const { lockState, actions } = this.props;
-
-    return (
-      <View>
-        <Text style={styles.tutorial.textStyleHeader2}>
-          Depending on the number of elements in your public key b,
-          the binary values are assigned into blocks.
-          (size of binary / size of b)
-        </Text>
-        <Text style={styles.tutorial.textStyleHeader2}>
-          Your public key b,
-          padding may have to be applied based on the length of the public key and the message.
-        </Text>
-        <Text style={styles.tutorial.textStyleHeader2}>
-          The following blocks chart out the additional process of obtaining the first encryption using b.
-        </Text>
-
-        {
-          lockState.encryption.binaryBlocks.length != 0
-            ?
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <View style={styles.tutorial.multipleButtonLeft}>
-                <CustomButton text="Encrypt" callback={() => {
-                  this.generateBinaryBlocks()
-                }} />
-              </View>
-
-              <View style={styles.tutorial.multipleButtonRight}>
-                <CustomButton text="Blocks"
-                  callback={
-                    () => {
-                      this.setState({
-                        showBlocks: true,
-                      })
-                    }
-                  }
-                  buttonColor="blue"
-                />
-              </View>
-            </View>
-            :
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-              <CustomButton
-                text="Encrypt"
-                callback={
-                  () => {
-                    this.generateBinaryBlocks()
-                  }
-                }
-              />
-            </View>
-        }
-        <View style={{ marginTop: 10 }}>
-          <Text style={styles.tutorial.textStyle}>
-            Ciphertext:
-          </Text>
-          {
-            lockState.encryption.encryptedText.length != 0 ?
-              <Text tyle={styles.tutorial.textStyle}>
-                {lockState.encryption.encryptedText.join(", ")}
-              </Text>
-              : null
-          }
-        </View>
-
-      </View>
-    )
-  }*/
+  
   getFourthPage = () => {
     const { showBlocks } = this.state;
     const { lockState, actions } = this.props;
@@ -724,6 +700,8 @@ class EncryptTutorial extends Component {
         return this.getFourthPage()
       case 5:
         return this.getFifthPage()
+      case 6:
+        return this.getSixthPage()
       default:
         return this.getFirstPage()
     }
@@ -846,6 +824,8 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_ENCRYPTION_BLOCKS_ACTION,
     UPDATE_ENCRYPTED_STRING_ACTION,
     ALLOW_NEXT_PAGE_ACTION,
+    DECRYPT_UNLOCK_ACTION,
+    NEXT_ENCRYPT_PAGE_ACTION,
   }, dispatch)
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EncryptTutorial);
