@@ -75,7 +75,6 @@ import {
   UPDATE_PUBLIC_KEY_ARRAY_ACTION,
  } from '../../redux-modules/actions/updateParameters';
 
- import KeyPage from './content/key/page1';
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

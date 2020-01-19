@@ -24,7 +24,6 @@ class UpdateQuestions extends Component{
       actions.CALL_API('KEYGEN')
       actions.CALL_API('ENCRYPT')
       actions.CALL_API('DECRYPT')
-      console.log(`APP LOADED`)
     }
 
     componentWillUnmount() {
@@ -34,10 +33,8 @@ class UpdateQuestions extends Component{
     handleAppStateChange = nextAppState => {
         const { appState } = this.state;
         const { actions } = this.props;
-        console.log(`App state changed: ${appState}, ${nextAppState}`)
 
        
-            console.log(`Triggering API Call`)
             actions.CALL_API('INTRO')
             actions.CALL_API('ALGO')
             actions.CALL_API('KEYGEN')
