@@ -10,6 +10,9 @@ import styles from './styles';
 //contents
 import contents from './contents';
 
+// actions
+import { DISABLE_NEXT_PAGE_ACTION } from '../../../../redux-modules/actions/tabPage'
+
 // dynamic pages not static pages.
 class GCDPage extends Component {
   constructor(props) {
@@ -20,10 +23,12 @@ class GCDPage extends Component {
       <Text>15</Text>
     )
   }
-  placeholder14 = () => {
-    return (
-      <Text>14</Text>
-    )
+  getQuiz = () => {
+    const { actions,allowNextPage } = this.props;
+    if(allowNextPage){
+        actions.DISABLE_NEXT_PAGE_ACTION();
+    }
+    return contents.QuizTab
   }
   getPageElements = () => {
     
@@ -42,8 +47,8 @@ class GCDPage extends Component {
       case 11: return contents.page11;
       case 12: return contents.page12;
       case 13: return contents.page13;
-      case 14: return this.placeholder14;
-      case 15: return this.placeholder15;
+      case 14: return this.getQuiz();
+      case 15: return contents.UnlockNext;
       default: return contents.page1;
     }
   }
@@ -59,9 +64,11 @@ class GCDPage extends Component {
 
 const mapStateToProps = state => ({
   currentPage: state.lessonPageTabAndPages.tabPage,
+  allowNextPage: state.lessonPageTabAndPages.allowNextPage
 })
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
+    DISABLE_NEXT_PAGE_ACTION,
   }, dispatch)
 });
 
