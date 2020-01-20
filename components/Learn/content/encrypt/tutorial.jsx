@@ -406,7 +406,7 @@ class EncryptTutorial extends Component {
      return (
        <Page1
           keyboardVisiblity={keyboardVisiblity}
-          updateCurrentTextBox={()=>{this.updateCurrentTextbox()}}
+          updateCurrentTextBox={(text)=>{this.updateCurrentTextbox(text)}}
           validateInput={()=>{this.validateInput()}}  
        />
      )
