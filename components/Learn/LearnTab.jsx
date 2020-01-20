@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
+import {Card} from 'react-native-elements'
 import { Algo } from '../../assets/images'
 
 import { 
@@ -284,7 +285,12 @@ class LearnTab extends Component{
       console.log(CurPage);
       // for dynamic pages, we render component, while for static
       // we render a page.
-      return <CurPage />
+      return (
+        <Card>
+
+<CurPage />
+        </Card>
+      )
     }
 
     render(){

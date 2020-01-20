@@ -1,3 +1,4 @@
+*.ipa
 node_modules/**/*
 .expo/*
 npm-debug.*

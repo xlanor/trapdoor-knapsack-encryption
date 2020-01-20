@@ -4,11 +4,11 @@ import { Dimensions } from 'react-native'
 
 const buttonStyle = {
     backgroundColor: COLORS.GREEN_1,
-    minWidth: Dimensions.get('window').width * 0.4,
+    minWidth: Dimensions.get('window').width * 0.2,
 }
 const buttonStyleBlue = {
     backgroundColor: COLORS.BLUE_1,
-    minWidth: Dimensions.get('window').width * 0.4,
+    minWidth: Dimensions.get('window').width * 0.2,
 }
 
 const textStyle = {
