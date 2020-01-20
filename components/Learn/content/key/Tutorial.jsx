@@ -455,7 +455,6 @@ class KeyPage extends Component {
     const { actions } = this.props;
     return (
       <>
-        <Text style={{ ...styles.page1.contentStyle, textAlign: 'center' }}>Quiz Time</Text>
         <Quiz quizType="KEYGEN" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_KEY_PAGE_ACTION()}} />
       </>
     )
@@ -570,7 +569,7 @@ class KeyPage extends Component {
     } = this.state;
     let pageNo = this.checkPageNo()
     return (
-      <View style={styles.page1.learnTabPad}>
+      <View >
         {
           showKeyMultiplicationInfoPopUp
             ? <AlertPopUp
