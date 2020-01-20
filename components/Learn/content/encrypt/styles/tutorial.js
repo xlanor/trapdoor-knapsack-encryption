@@ -45,10 +45,6 @@ const textBoxStyle = {
 }
 
 const learnTabPad = {
-  //height: Dimensions.get('window').height * 0.79,
-  marginLeft: Dimensions.get('window').height * 0.05,
-  marginRight: Dimensions.get('window').height * 0.05,
-  //backgroundColor: '#888'
 }
 
 const buttonRow = {
