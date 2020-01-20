@@ -286,9 +286,9 @@ class LearnTab extends Component{
       // for dynamic pages, we render component, while for static
       // we render a page.
       return (
-        <Card>
+        <Card containerStyle={{maxHeight: '95%', height: '95%'}}>
 
-<CurPage />
+            <CurPage />
         </Card>
       )
     }
