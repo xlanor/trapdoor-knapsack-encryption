@@ -40,7 +40,7 @@ class PageFour extends Component {
         const { 
             showCiphertextInfoPopUp,
             generateBinaryBlocks,
-            showBlocks,
+            setSpinner,
             binaryBlocks,
             encryptedText,
             padding,
@@ -83,7 +83,7 @@ class PageFour extends Component {
                                 <View style={styles.tutorial.multipleButtonRight}>
                                     <CustomButton 
                                         text="Blocks"
-                                        callback={ showBlocks}
+                                        callback={setSpinner}
                                         buttonColor="blue"
                                     />
                                 </View>
@@ -126,6 +126,7 @@ PageFour.propTypes = {
     showCiphertextInfoPopUp: PropTypes.func.isRequired,
     generateBinaryBlocks: PropTypes.func.isRequired,
     showBlocks: PropTypes.func.isRequired,
+    setSpinner: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

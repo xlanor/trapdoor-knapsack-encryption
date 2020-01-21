@@ -3,8 +3,7 @@ import React, { Component } from 'React';
 
 // react-native imports.
 import {
-  View,
-  Dimensions,
+  View,ScrollView,
   Button,
   Text,
   Image,
@@ -50,8 +49,6 @@ import {
   Col
 } from 'react-native-table-component';
 
-// React-native-Gesture Imports
-import { ScrollView } from 'react-native-gesture-handler';
 
 // React Native Animatable Imports
 import * as Animatable from "react-native-animatable";
@@ -72,7 +69,7 @@ import Unlock from '../../../../assets/images/unlock.png';
 // Other Component Imports
 import AlertPopUp from '../../../Common/AlertPopUp';
 import Block from '../../../Common/Blocks'
-import CustomButton from '../../../Common/Button';
+import Loader from '../../../Common/Spinner';
 import PopUp from '../../../Common/PopUp';
 import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
 import Quiz from '../../quiz/Quiz';
@@ -89,7 +86,7 @@ class EncryptTutorial extends Component {
       currentTextBox: currentEncryptText === "" ? "" : currentEncryptText, // temporary, to be stored in redux - this is only for use in onTextChange
       showError: false,
       showBlocks: false,
-      showSpinner: true,
+      showSpinner: false,
       errorMessage: "",
       keyboardVisiblity: false,
       showPaddingInfoPopUp: false,
@@ -123,7 +120,35 @@ class EncryptTutorial extends Component {
     })
   }
 
+  setSpinner = () =>{
+    this.setState({
+        showSpinner: true,
 
+    }, () => {
+      setTimeout(() => {
+          this.setState({
+          showBlocks: true,
+          showSpinner: false,
+          });
+      }, 500)
+    })
+  }
+
+  setSpinnerCallback = (callback) =>{
+    this.setState({
+        showSpinner: true,
+
+    }, () => {
+      setTimeout(() => {
+          this.setState({
+          showBlocks: true,
+          showSpinner: false,
+          }, ()=>{
+            callback()
+          });
+      }, 500)
+    })
+  }
   showError = (message) => {
     this.setState({
       showError: true,
@@ -244,16 +269,16 @@ class EncryptTutorial extends Component {
     let binUserInput = lockState.encryption.binaryString;
     let binPubKeyString = lockState.updateParameters.publicKeyString;
     let binPubKeyArr = lockState.updateParameters.publicKeyArr;
-    console.log(lockState)
-    console.log(` User Input: ${binUserInput}`)
-    console.log(` Public Key: ${binPubKeyArr}`)
-    let binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length)
-    console.log(binaryBlocks)
-    actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
-    actions.ALLOW_NEXT_PAGE_ACTION()
-    this.setState({
-      showBlocks: true,
+    this.setSpinnerCallback(()=>{
+      let binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length)
+      console.log(binaryBlocks)
+      actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
+      actions.ALLOW_NEXT_PAGE_ACTION()
+      this.setState({
+        showBlocks: true,
+      })
     })
+    
   }
 
   paddingInfoPopUp = () => {
@@ -371,6 +396,7 @@ class EncryptTutorial extends Component {
           showCiphertextInfoPopUp={()=>{this.showCiphertextInfoPopUp()}}
           generateBinaryBlocks={()=>{this.generateBinaryBlocks()}}
           showBlocks={()=>{this.showBlocks()}}
+          setSpinner={()=>{this.setSpinner()}}
       />
     )
    
@@ -435,6 +461,7 @@ class EncryptTutorial extends Component {
   render() {
     const {
       showError,
+      showSpinner,
       errorMessage,
       showBlocks,
       showPaddingInfoPopUp,
@@ -481,6 +508,11 @@ class EncryptTutorial extends Component {
     return (
       <>
         {
+          showSpinner
+            ? <Loader />
+            : null
+        }
+        {
           showBlocks
             ? <ScrollViewPopUp
               visibility={showBlocks}
@@ -518,7 +550,8 @@ class EncryptTutorial extends Component {
             : null
         }
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
-          <View style={{ ...styles.tutorial.learnTabPad, height: '100%' }}>
+            <ScrollView>
+          <View onStartShouldSetResponder={() => true} style={{ ...styles.tutorial.learnTabPad, height: '100%' }}>
             <View style={styles.tutorial.textStyleTitleWrapper}>
               {
                 keyboardVisiblity
@@ -528,8 +561,10 @@ class EncryptTutorial extends Component {
             </View>
             {
               this.getPageElements()
+
             }
           </View>
+            </ScrollView>
         </TouchableWithoutFeedback>
       </>
     );
