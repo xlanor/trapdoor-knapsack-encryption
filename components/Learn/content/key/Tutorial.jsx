@@ -2,7 +2,7 @@ import React, { Component } from 'React';
 
 import {
   View,
-  Dimensions,
+  ScrollView,
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
@@ -569,7 +569,14 @@ class KeyPage extends Component {
     } = this.state;
     let pageNo = this.checkPageNo()
     return (
-      <View >
+      <ScrollView 
+          ref={scrollView => this.scrollView = scrollView} 
+          onContentSizeChange={(contentWidth, contentHeight)=>{     
+              pageNo < 6   
+              ?this.scrollView.scrollToEnd({animated: true})
+              :null
+          }}
+        >
         {
           showKeyMultiplicationInfoPopUp
             ? <AlertPopUp
@@ -636,7 +643,7 @@ class KeyPage extends Component {
           this.getPageElements()
         }
 
-      </View>
+      </ScrollView>
     );
   }
 
