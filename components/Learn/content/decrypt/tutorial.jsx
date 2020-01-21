@@ -3,7 +3,7 @@ import React, { Component } from 'React';
 import {
   View,
   Dimensions,
-  Button,
+  ScrollView,
   Text,
   Image,
   TouchableOpacity,
@@ -38,7 +38,6 @@ import styles from './styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { ScrollView } from 'react-native-gesture-handler';
 import Alert from '../../../../assets/images/alert.png'
 import Exclaim from '../../../../assets/images/ExclaimIcon.png'
 import InfoIcon from '../../../../assets/images/InfoIcon.png'
@@ -433,8 +432,8 @@ class DecryptTutorial extends Component {
       )
     }
     return (
-
-      <View style={styles.tutorial.learnTabPad}>
+      <ScrollView>
+      <View >
         <Text style={styles.tutorial.titleStyle}>Decryption</Text>
         {
           this.getPageElements()
@@ -500,6 +499,8 @@ class DecryptTutorial extends Component {
             : null
         }
       </View>
+        
+        </ScrollView>
     )
   }
 }

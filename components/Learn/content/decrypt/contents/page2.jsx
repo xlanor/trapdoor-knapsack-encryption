@@ -38,7 +38,7 @@ class PageTwo extends Component{
         return(
             <>
                 <Text style={styles.tutorial.contentStyle}>
-                    Remove {" "}
+                    Remove{" "}
                     <Text style={styles.tutorial.linkStyle} onPress={showPaddingInfoPopUp}>
                         padding from x
                     </Text>
@@ -48,11 +48,11 @@ class PageTwo extends Component{
                     <Text style={styles.tutorial.boldFont}>
                         binary values
                     </Text>
-                    {" "}to the {" "}
+                    {" "}to the{" "}
                     <Text style={styles.tutorial.boldFont}>
                         ascii value
                     </Text>.{"\n"}
-                    Lastly, convert the {" "}
+                    Lastly, convert the{" "}
                     <Text style={styles.tutorial.boldFont}>
                         ascii value
                     </Text>
