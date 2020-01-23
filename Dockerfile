@@ -18,6 +18,7 @@ RUN chown node:node ./app
 USER node
 WORKDIR /home/node/app/deploy
 RUN ls -la
+RUN npm install -g expo-cli
 RUN chmod +x jenkins_android.sh
 WORKDIR /home/node/app
 
