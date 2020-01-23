@@ -8,10 +8,7 @@ ENV PATH="/home/node/.npm-global/bin:/home/node/.local/bin:${PATH}"
 
 RUN mkdir /home/node/app
 # Copy from the intermidate container into the new container
-COPY . /home/node/app
-WORKDIR /home/node/app
-RUN find . -type d -exec chown node:node {} \;
-RUN find . -type f -exec chown node:node {} \;
+COPY --chown=node:node . /home/node/app
 WORKDIR /home/node
 RUN chown node:node ./app
 
