@@ -12,12 +12,12 @@ base64 --decode $APP_TITLE.keystore.base64 > $APP_TITLE.keystore
 # Sets up turtle
 turtle setup:android --sdk-version 35.0.0
 
-mkdir /home/node/$APP_TITLE/exports
-rm -rf /home/node/$APP_TITLE/exports/*
+mkdir /home/node/app/exports
+rm -rf /home/node/app/exports/*
 
 expo export --public-url $PUBLIC_URL
 
-mv /home/node/$APP_TITLE/dist/* /home/node/$APP_TITLE/exports/
+mv /home/node/app/dist/* /home/node/app/exports/
 
 echo "Building Production Build"
 export EXPO_ANDROID_KEY_PASSWORD=$EXPO_ANDROID_KEY_PASSWORD_PROD
