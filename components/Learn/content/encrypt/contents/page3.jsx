@@ -29,9 +29,9 @@ class PageThree extends Component {
         return(
             <>
                 <Text style={styles.tutorial.contentStyle}>
-                    The solution to it is to
-                    add <Text style={styles.tutorial.linkStyle} onPress={showPaddingInfoPopUp} >
-                    padding
+                    The solution to it is to add{" "}
+                    <Text style={styles.tutorial.linkStyle} onPress={showPaddingInfoPopUp} >
+                        padding
                     </Text>
                 </Text>
                 <Text style={{ ...styles.tutorial.contentStyle, marginTop: u * 0.02 }}>

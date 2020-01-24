@@ -233,23 +233,20 @@ class DecryptTutorial extends Component {
     return (
       <>
         <Text style={styles.tutorial.popUpTextStyle}>
-          Using Extended Euclidean to find the inverse
-          of <Text style={{ ...styles.tutorial.multiplierStyle, ...styles.tutorial.boldFont }}>
-            w
-          </Text> such that:
+          Using Extended Euclidean to find the inverse of{" "}
+          <Text style={{ ...styles.tutorial.multiplierStyle, ...styles.tutorial.boldFont }}>w</Text>
+          {" "}such that:
         </Text>
         <Text style={{
           ...styles.tutorial.popUpTextStyle,
           textAlign: 'center',
           fontSize: 16
         }}>
-          <Text style={{ ...styles.tutorial.inverseStyle, ...styles.tutorial.boldFont }}>
-            w^-1
-          </Text> * <Text style={{ ...styles.tutorial.multiplierStyle, ...styles.tutorial.boldFont }}>
-            w
-          </Text> ≡ 1 mod <Text style={{ ...styles.tutorial.modulusStyle, ...styles.tutorial.boldFont }}>
-            m
-          </Text>
+          <Text style={{ ...styles.tutorial.inverseStyle, ...styles.tutorial.boldFont }}>w^-1</Text>
+          {" "}*{" "}
+          <Text style={{ ...styles.tutorial.multiplierStyle, ...styles.tutorial.boldFont }}>w</Text>
+          {" "}≡ 1 mod{" "}
+          <Text style={{ ...styles.tutorial.modulusStyle, ...styles.tutorial.boldFont }}>m</Text>
         </Text>
       </>
     )

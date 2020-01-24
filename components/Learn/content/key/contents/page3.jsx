@@ -49,13 +49,13 @@ class PageThree extends Component {
                          Choose your <Text style={{ ...styles.page1.multiplierStyle, ...styles.page1.boldFont }}>multiplier w</Text>:
                     </Text>
                     <Text style={styles.page1.contentStyleSmall}>
-                        This {" "}
+                        This{" "}
                         <Text style={{ ...styles.page1.multiplierStyle, ...styles.page1.boldFont }}>multiplier w</Text>
-                        {" "}must be a {" "}
-                        <Text style={styles.page1.linkStyle} onPress={() => {showCoprimeInfoPopUp}}>
+                        {" "}must be a{" "}
+                        <Text style={styles.page1.linkStyle} onPress={showCoprimeInfoPopUp}>
                             co-prime
-                        </Text> 
-                        {" "}to your {" "}
+                        </Text>
+                        {" "}to your{" "}
                         <Text style={styles.page1.modulusStyle}>modulus m</Text>
                     </Text>
                     <View style={{ marginTop: Dimensions.get('window').height * 0.02 }}>

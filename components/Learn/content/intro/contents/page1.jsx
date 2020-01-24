@@ -88,7 +88,7 @@ class page1 extends Component {
         const { showHintInfoPopUp, showQuestionInfoPopUp } = this.state
         let style = styles.PageStyle
         let u = Dimensions.get('window').height
-        let m = 0.4592
+        let m = 0.4
 
         return (
             <View style={style.containerStyle}>
@@ -119,18 +119,15 @@ class page1 extends Component {
                 <Text style={style.contentStyle}>
                     A knapsack problem is derived from the notion of packing an odd assortment of packages into a container.
                     {"\n\n"}
-                    How to pack a single container <Text style={style.links} onPress={() => { this.setState({ showQuestionInfoPopUp: true, }) }} >
+                    How to pack a single container{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showQuestionInfoPopUp: true, }) }}>
                         most efficiently or with the highest value
                     </Text>?
                 </Text>
 
                 <View style={{ height: u * m }}>
-                    <Image
-                        source={Intro}
-                        style={style.imgStyle}
-                    />
+                    <Image source={Intro} style={style.imgStyle} />
                 </View>
-
             </View >
         )
     }

@@ -34,20 +34,22 @@ class PageFour extends Component {
         return(
             <View>
                 <Text style={styles.page1.contentStyle}>
-                    Calculate the {" "}
-                    <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>multiplicative inverse</Text> 
-                    {" "}of your 
+                    Calculate the{" "}
+                    <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>modular inverse</Text> 
+                    {" "}of your{" "}
                     <Text style={{ ...styles.page1.multiplierStyle, ...styles.page1.boldFont }}>
-                        {" "}multiplier w ({curMultiplier})
+                        multiplier w({curMultiplier})
                     </Text>
                     :
                 </Text>
                 <Text style={{ ...styles.page1.contentStyleSmall, marginTop: u * 0.02 }}>
-                    (Using Extended Euclidean's algorithm){"\n"}
-                    This is needed for decryption{"\n"}
-                    Eg: {" "}
+                    (Using Extended Euclidean's algorithm)
+                    {"\n\n"}
+                    This is needed for decryption
+                    {"\n\n"}
+                    Eg:{" "}
                     <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>Inverse</Text> 
-                    {" "}of 11 mod 39 = 32 (32 --7 + 39)
+                    {" "}of 11 mod 39 = 32 (32 - -7 + 39)
                 </Text>
                 <View 
                 style={{
@@ -63,12 +65,13 @@ class PageFour extends Component {
                     inverseLoaded
                     ?(
                         <Text style={styles.page1.contentStyle}>
+                            The{" "}
                             <Text style={{ ...styles.page1.inverseStyle, ...styles.page1.boldFont }}>
-                                Multiplicative inverse {" "}
+                                modular inverse
                             </Text> 
-                            of your 
+                            {" "}of your{" "}
                             <Text style={{ ...styles.page1.multiplierStyle, ...styles.page1.boldFont }}>
-                                {" "}multiplier w({curMultiplier})
+                                multiplier w({curMultiplier})
                             </Text>: {curInverse}
                         </Text>
                     )

@@ -121,7 +121,7 @@ class KeyPage extends Component {
           Every number of the sequence is >
           the sum of all previous numbers in the sequence
           {"\n\n"}
-          Eg.  a = 2, 5, 10 where 2 {"<"} 5 and 2 + 5 {"<"} 10,
+          Eg. a = 2, 5, 10 where 2 {"<"} 5 and 2 + 5 {"<"} 10,
         </Text>
       </>
     )

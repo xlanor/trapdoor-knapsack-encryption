@@ -33,9 +33,8 @@ export default class page11 extends Component {
                     {"\n\n"}
                     Repeat for the remaining rows.
                     {"\n\n"}
-                    Stop when <Text style={style.highlight}>
-                        r = 0
-                    </Text>.
+                    Stop when{" "}
+                    <Text style={style.highlight}>r = 0</Text>.
                     {"\n"}
                 </Text>
             </View>

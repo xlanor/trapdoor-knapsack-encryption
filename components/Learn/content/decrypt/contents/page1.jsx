@@ -49,11 +49,11 @@ class PageOne extends Component {
                     <Image source={DF1} style={styles.tutorial.imgStyle} />
                 </View>
                 <Text style={styles.tutorial.contentStyleSmall}>
-                    Use the {" "}
+                    Use the{" "}
                     <Text
                         style={{ ...styles.tutorial.linkStyle, ...styles.tutorial.boldFont, ...styles.tutorial.inverseStyle }}
                         onPress={showInversePopUp}>
-                        inverse multiplier w^-1
+                        modular inverse w^-1
                     </Text> 
                     {" "}to calculate{" "}
                     <Text style={{ ...styles.tutorial.linkStyle, ...styles.tutorial.boldFont }} onPress={showrPopUp}>
@@ -70,7 +70,7 @@ class PageOne extends Component {
                 </View>
 
                 <Text style={styles.tutorial.contentStyleSmall}>
-                    Then by {" "}
+                    Then by{" "}
                     <Text style={styles.tutorial.linkStyle} onPress={showCmpPopUp}>
                         comparing with a to calculate to obtain the binary value x
                     </Text>

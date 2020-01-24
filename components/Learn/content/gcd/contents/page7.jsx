@@ -43,19 +43,18 @@ export default class page7 extends Component {
         return (
             <>
                 <Text style={style.popUpTextStyle}>
-                    The <Text style={{ ...style.inverseStyle, ...style.bold }}>
-                        modular inverse
-                    </Text> of <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text> refers to <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text>^-1 where <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text>^-1 * <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text> ≡ 1 mod <Text style={{ ...style.bold, ...style.valA }}>
-                        a
-                    </Text>.
+                    The{" "}
+                    <Text style={{ ...style.inverseStyle, ...style.bold }}>modular inverse</Text>
+                    {" "}of{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>
+                    {" "}refers to{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>
+                    ^-1 where{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>
+                    ^-1 *{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>
+                    {" "}≡ 1 mod{" "}
+                    <Text style={{ ...style.bold, ...style.valA }}>a</Text>.
                 </Text>
             </>
         )
@@ -94,24 +93,25 @@ export default class page7 extends Component {
                 <Text style={style.contentStyle}>
                     <Text style={style.links} onPress={() => { this.setState({ showEuclideanInfoPopUp: true, }) }} >
                         Extended Euclidean algorithm
-                    </Text> is used to find if there is
-                    a <Text
+                    </Text>
+                    {" "}is used to find if there is a{" "}
+                    <Text
                         style={{ ...style.inverseStyle, ...style.bold, ...style.underline }}
                         onPress={() => { this.setState({ showInverseInfoPopUp: true, }) }} >
                         modular inverse
-                    </Text> of <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text> with respect to <Text style={{ ...style.bold, ...style.valA }}>
-                        a
-                    </Text> and the value of it.
+                    </Text>
+                    {" "}of{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>
+                    {" "}with respect to{" "}
+                    <Text style={{ ...style.bold, ...style.valA }}>a</Text>
+                    {" "}and the value of it.
                     {"\n\n"}
-                    The easiest way to visualise the <Text style={style.bold}>
-                        Extended Euclidean algorithm
-                    </Text> is via a table.
+                    The easiest way to visualise the{" "}
+                    <Text style={style.bold}>Extended Euclidean algorithm</Text>
+                    {" "}is via a table.
                     {"\n\n"}
-                    Construct a table like the original Euclidean algorithm but with <Text style={style.highlight}>
-                        4 more additional columns
-                    </Text>.
+                    Construct a table like the original Euclidean algorithm but with{" "}
+                    <Text style={style.highlight}>4 more additional columns</Text>.
                     {"\n"}
                 </Text>
             </View>

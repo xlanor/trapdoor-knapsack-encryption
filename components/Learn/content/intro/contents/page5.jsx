@@ -30,11 +30,11 @@ export default class page5 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The <Text style={{ ...styles.PageStyle.privateKey, ...styles.PageStyle.bold }}>
-                        private key
-                    </Text> is a <Text style={styles.PageStyle.bold}>
-                        superincreasing knapsack
-                    </Text> to ensure there will only be one answer to a ciphertext.
+                    The{" "}
+                    <Text style={{ ...styles.PageStyle.privateKey, ...styles.PageStyle.bold }}>private key</Text>
+                    {" "}is a{" "}
+                    <Text style={styles.PageStyle.bold}>superincreasing knapsack</Text>
+                    {" "}to ensure there will only be one answer to a ciphertext.
                 </Text>
             </>
         )
@@ -43,9 +43,9 @@ export default class page5 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The <Text style={{ ...styles.PageStyle.modulus, ...styles.PageStyle.bold }}>
-                        modulus
-                    </Text> chosen is a random integer larger than the sum of elements in the knapsack.
+                    The{" "}
+                    <Text style={{ ...styles.PageStyle.modulus, ...styles.PageStyle.bold }}>modulus</Text>
+                    {" "}chosen is a random integer larger than the sum of elements in the knapsack.
                     This ensures the uniqueness of the ciphertext and plaintext pairs.
                 </Text>
             </>
@@ -55,15 +55,13 @@ export default class page5 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The <Text style={{ ...styles.PageStyle.multiplier, ...styles.PageStyle.bold }}>
-                        multiplier
-                    </Text> chosen is a co-prime to
-                    the <Text style={{ ...styles.PageStyle.modulus, ...styles.PageStyle.bold }}>
-                        modulus
-                    </Text>,
-                    so that a <Text style={{ ...styles.PageStyle.inverseStyle, ...styles.PageStyle.bold }}>
-                        modular inverse
-                    </Text> can be found.
+                    The{" "}
+                    <Text style={{ ...styles.PageStyle.multiplier, ...styles.PageStyle.bold }}>multiplier</Text>
+                    {" "}chosen is a co-prime to the{" "}
+                    <Text style={{ ...styles.PageStyle.modulus, ...styles.PageStyle.bold }}>modulus</Text>,
+                    so that a{" "}
+                    <Text style={{ ...styles.PageStyle.inverseStyle, ...styles.PageStyle.bold }}>modular inverse</Text>
+                    {" "}can be found.
                 </Text>
             </>
         )
@@ -72,9 +70,9 @@ export default class page5 extends Component {
         return (
             <>
                 <Text style={styles.PageStyle.popUpTextStyle}>
-                    The <Text style={{ ...styles.PageStyle.secretKey, ...styles.PageStyle.bold }}>
-                        secret key
-                    </Text> is a piece of information or parameter that is used to decrypt ciphertext during trapdoor knapsack.
+                    The{" "}
+                    <Text style={{ ...styles.PageStyle.secretKey, ...styles.PageStyle.bold }}>secret key</Text>
+                    {" "}is a piece of information or parameter that is used to decrypt ciphertext during trapdoor knapsack.
                 </Text>
             </>
         )
@@ -134,42 +132,39 @@ export default class page5 extends Component {
                     Trapdoor knapsack is basically formed around 3 different key information:
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.01, marginLeft: u * 0.04 }}>
-                    1. <Text
+                    1.{" "}
+                    <Text
                         style={{ ...style.privateKey, ...style.underline }}
-                        onPress={() => {
-                            this.setState({ showPrivateKeyInfoPopUp: true, })
-                        }}>
+                        onPress={() => { this.setState({ showPrivateKeyInfoPopUp: true, }) }}>
                         Private Key
                     </Text>
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.01, marginLeft: u * 0.04 }}>
-                    2. <Text
+                    2.{" "}
+                    <Text
                         style={{ ...style.modulus, ...style.underline }}
-                        onPress={() => {
-                            this.setState({
-                                showModulusInfoPopUp: true,
-                            })
-                        }}>
+                        onPress={() => { this.setState({ showModulusInfoPopUp: true, }) }}>
                         Modulus
                     </Text>
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.01, marginLeft: u * 0.04 }}>
-                    3. <Text
+                    3.{" "}
+                    <Text
                         style={{ ...style.multiplier, ...style.underline }}
-                        onPress={() => {
-                            this.setState({
-                                showMultiplierInfoPopUp: true,
-                            })
-                        }}>
+                        onPress={() => { this.setState({ showMultiplierInfoPopUp: true, }) }}>
                         Multiplier
                     </Text>
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.04 }}>
                     Everything else is derived from these 3 pieces of information.
                     {"\n\n"}
-                    These three are kept as the <Text style={style.secretKey} onPress={() => { this.setState({ showSecretKeyInfoPopUp: true, }) }}>
-                        <Text style={style.underline}>secret key</Text>
-                    </Text> by the owner and not distributed.
+                    These three are kept as the{" "}
+                    <Text
+                        style={{ ...style.secretKey, ...style.underline }}
+                        onPress={() => { this.setState({ showSecretKeyInfoPopUp: true, }) }}>
+                        secret key
+                    </Text>
+                    {" "}by the owner and not distributed.
                     {"\n"}
                 </Text>
             </View >

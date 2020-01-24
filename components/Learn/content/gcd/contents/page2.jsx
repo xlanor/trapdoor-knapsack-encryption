@@ -29,35 +29,35 @@ export default class page2 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    The easiest way to visualise the <Text style={style.bold}>
-                        Euclidean algorithm
-                    </Text> is via a table.
+                    The easiest way to visualise the{" "}
+                    <Text style={style.bold}>Euclidean algorithm</Text>
+                    {" "}is via a table.
                     {"\n\n"}
-                    Construct a table with <Text style={style.highlight}>
-                        4 columns
-                    </Text>.
+                    Construct a table with{" "}
+                    <Text style={style.highlight}>4 columns</Text>.
                     {"\n\n"}
-                    Let the <Text style={style.bold}>
-                        2 integers
-                    </Text> be <Text style={{ ...style.bold, ...style.valA }}>
-                        a
-                    </Text> and <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text>.{"\n"}
-                    Let the <Text style={style.bold}>
-                        quotient
-                    </Text> be <Text style={style.bold}>
-                        q
-                    </Text> when dividing <Text style={{ ...style.bold, ...style.valA }}>
-                        a
-                    </Text> by <Text style={{ ...style.bold, ...style.valB }}>b</Text>.{"\n"}
-                    Let the <Text style={style.bold}>
-                        remainder
-                    </Text> be <Text style={style.bold}>
-                        r
-                    </Text> when dividing <Text style={{ ...style.bold, ...style.valA }}>
-                        a
-                    </Text> by <Text style={{ ...style.bold, ...style.valB }}>b</Text>.
+                    Let the{" "}
+                    <Text style={style.bold}>2 integers</Text>
+                    {" "}be{" "}
+                    <Text style={{ ...style.bold, ...style.valA }}>a</Text>
+                    {" "}and{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>.{"\n"}
+                    Let the{" "}
+                    <Text style={style.bold}>quotient</Text>
+                    {" "}be{" "}
+                    <Text style={style.bold}>q</Text>
+                    {" "}when dividing{" "}
+                    <Text style={{ ...style.bold, ...style.valA }}>a</Text>
+                    {" "}by{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>.{"\n"}
+                    Let the{" "}
+                    <Text style={style.bold}>remainder</Text>
+                    {" "}be{" "}
+                    <Text style={style.bold}>r</Text>
+                    {" "}when dividing{" "}
+                    <Text style={{ ...style.bold, ...style.valA }}>a</Text>
+                    {" "}by{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>.
                     {"\n"}
                 </Text>
             </View>

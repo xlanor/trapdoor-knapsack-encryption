@@ -34,9 +34,9 @@ export default class page10 extends Component {
                 <Text style={{ ...style.contentStyle }}>
                     <Text style={style.bold}>Step 3:</Text>
                     {"\n\n"}
-                    Calculate a2 and b2 using the <Text style={style.bold}>
-                        formulas
-                    </Text> below:
+                    Calculate <Text style={style.bold}>a2</Text> and{" "}
+                    <Text style={style.bold}>b2</Text> using the{" "}
+                    <Text style={style.bold}>formulas</Text> below:
                 </Text>
                 <Text style={{
                     ...style.contentStyle,
