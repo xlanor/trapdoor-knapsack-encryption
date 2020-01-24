@@ -270,7 +270,7 @@ class EncryptTutorial extends Component {
     let binPubKeyString = lockState.updateParameters.publicKeyString;
     let binPubKeyArr = lockState.updateParameters.publicKeyArr;
     this.setSpinnerCallback(()=>{
-      let binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length)
+      let binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length) 
       console.log(binaryBlocks)
       actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
       actions.ALLOW_NEXT_PAGE_ACTION()
@@ -352,7 +352,7 @@ class EncryptTutorial extends Component {
     this.setState({ showCiphertextInfoPopUp: true, })
   }
 
-  showPaddingInfoPopup = () => {
+  showPaddingInfoPopUp = () => {
     this.setState({ showPaddingInfoPopUp: true, })
   }
 
