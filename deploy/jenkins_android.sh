@@ -31,6 +31,6 @@ export EXPO_ANDROID_KEYSTORE_ALIAS=$KEYSTORE_ALIAS_PROD
 # Builds the apk
 turtle build:android --keystore-path ./$APP_TITLE.keystore --keystore-alias $KEYSTORE_ALIAS_PROD \
     -t apk -o /home/node/$APP_TITLE/$APP_TITLE-$tag.apk --public-url $PUBLIC_URL_ANDROID 
-
+ 
 # Send my build to telegram
-curl -v -F "chat_id=$CHAT_ID" -F document=@/home/node/$APP_TITLE/$APP_TITLE.apk https://api.telegram.org/bot$BOT_TOKEN/sendDocument caption="$message"
+curl -v -F "chat_id=$CHAT_ID" -F caption="$message" -F document=@/home/node/$APP_TITLE/$APP_TITLE.apk https://api.telegram.org/bot$BOT_TOKEN/sendDocument 
