@@ -58,16 +58,31 @@ const migrations = {
         linksHintLocked: true,
       }
     }
+  },
+  1: (state) => {
+    
+    return {
+      ...state,
+      // todo: ADD DEFAULT MIGRATIONS HERE
+      lessonPageTabAndPages:{
+        ...state.lessonPageTabAndPages,
+        maxPage: MAX_INTRO_PAGES,
+        maxIntroPages: MAX_INTRO_PAGES,
+        maxGcdPages: MAX_GCD_PAGES,
+        maxKeyPages: MAX_KEY_PAGES,
+        maxEncryptPages: MAX_ENCRYPT_PAGES,
+        maxDecryptPages: MAX_DECRYPT_PAGES,
+      },
+    }
   }
 }
 
 const persistConfig = {
   key:"root",
-  version: 0,
+  version: 1,
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
   whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption','hint'], 
-  blacklist: ['questions'],
   migrate: createMigrate(migrations, { debug: true })
 }
 

@@ -11,6 +11,8 @@ import page10 from './page10';
 import page11 from './page11';
 import page12 from './page12';
 import page13 from './page13';
+import QuizTab from './quiz';
+import UnlockNext from './unlock';
 
 
 export default {
@@ -27,4 +29,6 @@ export default {
     page11,
     page12,
     page13,
+    QuizTab,
+    UnlockNext
 };

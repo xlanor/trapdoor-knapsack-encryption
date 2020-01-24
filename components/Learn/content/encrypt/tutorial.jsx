@@ -1,8 +1,9 @@
+// react imports
 import React, { Component } from 'React';
 
+// react-native imports.
 import {
-  View,
-  Dimensions,
+  View,ScrollView,
   Button,
   Text,
   Image,
@@ -12,20 +13,17 @@ import {
   Modal,
   Keyboard,
 } from 'react-native';
+
 // import stylesheet.
 import styles from './styles';
-// begin redux imports
+
+/* Third Party Libs begin here */
+
+// Redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import {
-  Table,
-  TableWrapper,
-  Rows,
-  Row,
-  Col
-} from 'react-native-table-component';
-
+// Redux Actions Imports
 import {
   UPDATE_ENCRYPTION_STRING_ACTION,
   UPDATE_ENCRYPTION_ASCII_STRING_ACTION,
@@ -34,23 +32,50 @@ import {
   UPDATE_ENCRYPTION_BLOCKS_ACTION,
   UPDATE_ENCRYPTED_STRING_ACTION,
 } from '../../../../redux-modules/actions/updateEncryption';
-
 import {
-  ALLOW_NEXT_PAGE_ACTION
+  ALLOW_NEXT_PAGE_ACTION,
+  NEXT_ENCRYPT_PAGE_ACTION,
 } from '../../../../redux-modules/actions/tabPage';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+  DECRYPT_UNLOCK_ACTION
+} from '../../../../redux-modules/actions/learnPageLock';
 
-import Block from '../../../Common/Blocks'
-import AlertPopUp from '../../../Common/AlertPopUp';
+// React-Native Table Imports
+import {
+  Table,
+  TableWrapper,
+  Rows,
+  Row,
+  Col
+} from 'react-native-table-component';
 
-import PopUp from '../../../Common/PopUp';
-import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
-import CustomButton from '../../../Common/Button';
+
+// React Native Animatable Imports
+import * as Animatable from "react-native-animatable";
+
+// React Native Elements Imports
+import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements'
+
+// Constant Imports
+import { COLORS } from '../../../../redux-modules/constants/Colors';
+
+// Image Asset Imports
 import Error from '../../../../assets/images/Error.png';
 import InfoIcon from '../../../../assets/images/InfoIcon.png';
 import Exclaim from '../../../../assets/images/ExclaimIcon.png';
 import EncryptionFormula from '../../../../assets/images/EncryptionFormula.png'
-import { COLORS } from '../../../../redux-modules/constants/Colors';
+import Unlock from '../../../../assets/images/unlock.png';
+
+// Other Component Imports
+import AlertPopUp from '../../../Common/AlertPopUp';
+import Block from '../../../Common/Blocks'
+import Loader from '../../../Common/Spinner';
+import PopUp from '../../../Common/PopUp';
+import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
+import Quiz from '../../quiz/Quiz';
+
+import contents from './contents';
+
 
 class EncryptTutorial extends Component {
   constructor(props) {
@@ -61,7 +86,7 @@ class EncryptTutorial extends Component {
       currentTextBox: currentEncryptText === "" ? "" : currentEncryptText, // temporary, to be stored in redux - this is only for use in onTextChange
       showError: false,
       showBlocks: false,
-      showSpinner: true,
+      showSpinner: false,
       errorMessage: "",
       keyboardVisiblity: false,
       showPaddingInfoPopUp: false,
@@ -95,7 +120,35 @@ class EncryptTutorial extends Component {
     })
   }
 
+  setSpinner = () =>{
+    this.setState({
+        showSpinner: true,
 
+    }, () => {
+      setTimeout(() => {
+          this.setState({
+          showBlocks: true,
+          showSpinner: false,
+          });
+      }, 500)
+    })
+  }
+
+  setSpinnerCallback = (callback) =>{
+    this.setState({
+        showSpinner: true,
+
+    }, () => {
+      setTimeout(() => {
+          this.setState({
+          showBlocks: true,
+          showSpinner: false,
+          }, ()=>{
+            callback()
+          });
+      }, 500)
+    })
+  }
   showError = (message) => {
     this.setState({
       showError: true,
@@ -216,16 +269,16 @@ class EncryptTutorial extends Component {
     let binUserInput = lockState.encryption.binaryString;
     let binPubKeyString = lockState.updateParameters.publicKeyString;
     let binPubKeyArr = lockState.updateParameters.publicKeyArr;
-    console.log(lockState)
-    console.log(` User Input: ${binUserInput}`)
-    console.log(` Public Key: ${binPubKeyArr}`)
-    let binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length)
-    console.log(binaryBlocks)
-    actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
-    actions.ALLOW_NEXT_PAGE_ACTION()
-    this.setState({
-      showBlocks: true,
+    this.setSpinnerCallback(()=>{
+      let binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length)
+      console.log(binaryBlocks)
+      actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
+      actions.ALLOW_NEXT_PAGE_ACTION()
+      this.setState({
+        showBlocks: true,
+      })
     })
+    
   }
 
   paddingInfoPopUp = () => {
@@ -282,433 +335,107 @@ class EncryptTutorial extends Component {
 
     return asciiVal
   }
+
+  updateCurrentTextbox = (text) => {
+    this.setState({
+      currentTextBox: text,
+    })
+  }
+
+  showBlocks = () => {
+    this.setState({
+        showBlocks: true,
+    })
+  }
+
+  showCiphertextInfoPopUp = () => {
+    this.setState({ showCiphertextInfoPopUp: true, })
+  }
+
+  showPaddingInfoPopup = () => {
+    this.setState({ showPaddingInfoPopUp: true, })
+  }
+
+  getSixthPage = () => {
+    const { actions } = this.props;
+    return(
+      <Animatable.View animation="slideInDown">
+          <Card title="Unlocked Next Tab!">
+            <RneButton
+              type="clear"
+              icon={
+                <Image source={Unlock} 
+                style={styles.tutorial.unlockIconStyle}/>}
+              buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+              onPress = {()=>{actions.DECRYPT_UNLOCK_ACTION()}}
+            >
+
+            </RneButton>
+          </Card>
+      </Animatable.View>
+    )
+
+  }
+
   getFifthPage = () => {
     const { actions } = this.props;
     return (
       <>
-        <Text style={{ textAlign: 'center' }}>
-          <Text style={styles.tutorial.contentStyle}>Quiz Time</Text>{"\n"}
-          <Text style={styles.tutorial.contentStyle}>W.I.P</Text>
-        </Text>
+        <Text style={{ ...styles.tutorial.contentStyle, textAlign: 'center' }}>Quiz Time</Text>
+        <Quiz quizType="ENCRYPT" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_ENCRYPT_PAGE_ACTION()}} />
       </>
     )
   }
-  /*getFourthPage = () => {
-    const { showBlocks } = this.state;
-    const { lockState, actions } = this.props;
-
-    return (
-      <View>
-        <Text style={styles.tutorial.textStyleHeader2}>
-          Depending on the number of elements in your public key b,
-          the binary values are assigned into blocks.
-          (size of binary / size of b)
-        </Text>
-        <Text style={styles.tutorial.textStyleHeader2}>
-          Your public key b,
-          padding may have to be applied based on the length of the public key and the message.
-        </Text>
-        <Text style={styles.tutorial.textStyleHeader2}>
-          The following blocks chart out the additional process of obtaining the first encryption using b.
-        </Text>
-
-        {
-          lockState.encryption.binaryBlocks.length != 0
-            ?
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <View style={styles.tutorial.multipleButtonLeft}>
-                <CustomButton text="Encrypt" callback={() => {
-                  this.generateBinaryBlocks()
-                }} />
-              </View>
-
-              <View style={styles.tutorial.multipleButtonRight}>
-                <CustomButton text="Blocks"
-                  callback={
-                    () => {
-                      this.setState({
-                        showBlocks: true,
-                      })
-                    }
-                  }
-                  buttonColor="blue"
-                />
-              </View>
-            </View>
-            :
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-              <CustomButton
-                text="Encrypt"
-                callback={
-                  () => {
-                    this.generateBinaryBlocks()
-                  }
-                }
-              />
-            </View>
-        }
-        <View style={{ marginTop: 10 }}>
-          <Text style={styles.tutorial.textStyle}>
-            Ciphertext:
-          </Text>
-          {
-            lockState.encryption.encryptedText.length != 0 ?
-              <Text tyle={styles.tutorial.textStyle}>
-                {lockState.encryption.encryptedText.join(", ")}
-              </Text>
-              : null
-          }
-        </View>
-
-      </View>
-    )
-  }*/
+  
   getFourthPage = () => {
     const { showBlocks } = this.state;
     const { lockState, actions } = this.props;
-    let u = Dimensions.get('window').height;
-
+    let Page4 = contents.page4;
     return (
-      <View>
-        <Text style={styles.tutorial.contentStyle}>
-          Now, compute <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showCiphertextInfoPopUp: true, }) }} >
-            ciphertext T
-          </Text> using:
-        </Text>
-        <View style={{ height: u * 0.09, marginTop: u * 0.02, marginBottom: u * 0.02 }}>
-          <Image
-            source={EncryptionFormula}
-            style={styles.tutorial.imgStyle}
-          />
-        </View>
-
-        <Text style={styles.tutorial.contentStyle}>
-          Your <Text style={styles.tutorial.publicKey}>public key b</Text>:
-        </Text>
-        <Text style={styles.tutorial.contentStyleSmall}>
-          Binary values x are assigned into blocks and will add padding if there is a need.
-          {"\n\n"}
-          The following blocks chart out the process of obtaining ciphertext
-          using <Text style={styles.tutorial.publicKey}>b</Text>.
-        </Text>
-        <View style={{ marginTop: u * 0.03 }}>
-          {
-            lockState.encryption.binaryBlocks.length != 0
-              ?
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={styles.tutorial.multipleButtonLeft}>
-                  <CustomButton text="Encrypt" callback={() => {
-                    this.generateBinaryBlocks()
-                  }} />
-                </View>
-
-                <View style={styles.tutorial.multipleButtonRight}>
-                  <CustomButton text="Blocks"
-                    callback={
-                      () => {
-                        this.setState({
-                          showBlocks: true,
-                        })
-                      }
-                    }
-                    buttonColor="blue"
-                  />
-                </View>
-              </View>
-              :
-              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                <CustomButton
-                  text="Encrypt"
-                  callback={
-                    () => {
-                      this.generateBinaryBlocks()
-                    }
-                  }
-                />
-              </View>
-          }
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <Text style={styles.tutorial.contentStyle}>
-            Current Padding: {
-              lockState.encryption.encryptedText.length != 0
-                ? lockState.encryption.padding
-                : null
-            }
-          </Text>
-          <Text style={styles.tutorial.contentStyle}>
-            Ciphertext: {
-              lockState.encryption.encryptedText.length != 0
-                ? lockState.encryption.encryptedText.join(", ")
-                : null
-            }
-          </Text>
-        </View>
-      </View>
+      <Page4
+          showCiphertextInfoPopUp={()=>{this.showCiphertextInfoPopUp()}}
+          generateBinaryBlocks={()=>{this.generateBinaryBlocks()}}
+          showBlocks={()=>{this.showBlocks()}}
+          setSpinner={()=>{this.setSpinner()}}
+      />
     )
+   
   }
   getThirdPage = () => {
     const { actions, lockState } = this.props;
-    let u = Dimensions.get('window').height
+    let Page3 = contents.page3;
 
     if (!lockState.lessonPageTabAndPages.allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION()
     }
     return (
-      <View>
-        <Text style={styles.tutorial.contentStyle}>
-          The solution to it is to
-          add <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showPaddingInfoPopUp: true, }) }} >
-            padding
-          </Text>
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyle, marginTop: u * 0.02 }}>
-          To get padding value:
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.03 }}>
-          - Remainder = binary length % n{"\n"}
-          - If the remainder is 0, padding = 0{"\n"}
-          - If the remainder is not 0, padding = n minus remainder
-        </Text>
-        <Text style={{
-          ...styles.tutorial.contentStyleSmall,
-          ...styles.tutorial.encryptTextGray,
-          marginTop: u * 0.01
-        }}>
-          eg:{"\n"}
-          remainder = 8 % 3 = 2{"\n"}
-          Padding = 3 - 2 = 1{"\n"}
-          Add 1 '0' to the back of the binary string x
-        </Text>
-
-        <View style={styles.tutorial.tableView}>
-          <Table borderStyle={{ borderWidth: 1 }}>
-            <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col
-                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
-                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
-                heightArr={[28, 28]}
-                textStyle={styles.tutorial.tableHeaderValue} />
-              <Rows data={[
-                ['22', '16', '32'],
-                ['0', '1', '1'],
-              ]}
-                flexArr={[1, 1, 1]}
-                style={{ height: 28 }}
-                textStyle={styles.tutorial.tableValue}
-              />
-            </TableWrapper>
-          </Table>
-        </View>
-        <View style={styles.tutorial.tableView}>
-          <Table borderStyle={{ borderWidth: 1 }}>
-            <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col
-                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
-                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
-                heightArr={[28, 28]}
-                textStyle={styles.tutorial.tableHeaderValue} />
-              <Rows data={[
-                ['22', '16', '32'],
-                ['0', '0', '0'],
-              ]}
-                flexArr={[1, 1, 1]}
-                style={{ height: 28 }}
-                textStyle={styles.tutorial.tableValue}
-              />
-            </TableWrapper>
-          </Table>
-        </View>
-        <View style={styles.tutorial.tableView}>
-          <Table borderStyle={{ borderWidth: 1 }}>
-            <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col
-                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
-                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
-                heightArr={[28, 28]}
-                textStyle={styles.tutorial.tableHeaderValue} />
-              <Rows data={[
-                ['22', '16', '32'],
-                ['0', '1', <Text style={styles.tutorial.tableCorrectValue}>0</Text>],
-              ]}
-                flexArr={[1, 1, 1]}
-                style={{ height: 28 }}
-                textStyle={styles.tutorial.tableValue}
-              />
-            </TableWrapper>
-          </Table>
-        </View>
-      </View>
+        <Page3 showPaddingInfoPopUp={()=>{this.showPaddingInfoPopUp()}}/>
     )
+   
   }
 
   getSecondPage = () => {
     const { actions, lockState } = this.props;
-
+    let Page2 = contents.page2;
     if (!lockState.lessonPageTabAndPages.allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION()
     }
-    ALLOW_NEXT_PAGE_ACTION
-    return (
-      <>
-        <Text style={styles.tutorial.contentStyle}>
-          However, there might be cases where binary cannot be divided into equal blocks according
-          to <Text style={styles.tutorial.knapsackSizeStyle}>
-            knapsack size n
-          </Text> to correspond to <Text style={styles.tutorial.publicKey}>
-            public key b
-          </Text>.
-        </Text>
-        <Text style={{
-          ...styles.tutorial.contentStyleSmall,
-          ...styles.tutorial.encryptTextGray,
-          marginTop: Dimensions.get('window').height * 0.02
-        }}>
-          E.g:{"\n"}
-          Public key b: (22, 16, 32) where n = 3{"\n"}
-          Message: a, ASCII of a = 97{"\n"}
-          Binary of 97: '0110 0001'{"\n"}
-          Binary length / n: 8 / 3 = 3 (rounded up)
-        </Text>
-        <View style={styles.tutorial.tableView}>
-          <Table borderStyle={{ borderWidth: 1 }}>
-            <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col
-                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
-                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
-                heightArr={[28, 28]}
-                textStyle={styles.tutorial.tableHeaderValue} />
-              <Rows data={[
-                ['22', '16', '32'],
-                ['0', '1', '1'],
-              ]}
-                flexArr={[1, 1, 1]}
-                style={{ height: 28 }}
-                textStyle={styles.tutorial.tableValue}
-              />
-            </TableWrapper>
-          </Table>
-        </View>
-        <View style={styles.tutorial.tableView}>
-          <Table borderStyle={{ borderWidth: 1 }}>
-            <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col
-                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
-                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
-                heightArr={[28, 28]}
-                textStyle={styles.tutorial.tableHeaderValue} />
-              <Rows data={[
-                ['22', '16', '32'],
-                ['0', '0', '0'],
-              ]}
-                flexArr={[1, 1, 1]}
-                style={{ height: 28 }}
-                textStyle={styles.tutorial.tableValue}
-              />
-            </TableWrapper>
-          </Table>
-        </View>
-        <View style={styles.tutorial.tableView}>
-          <Table borderStyle={{ borderWidth: 1 }}>
-            <TableWrapper style={{ flexDirection: 'row' }}>
-              <Col
-                data={[<Text style={styles.tutorial.tablePublicKeyValue}>b</Text>, 'x']}
-                style={{ flex: 1, backgroundColor: '#f6f8fa' }}
-                heightArr={[28, 28]}
-                textStyle={styles.tutorial.tableHeaderValue} />
-              <Rows data={[
-                ['22', '16', '32'],
-                ['0', '1', <Text style={styles.tutorial.tableUnknownValue}>?</Text>],
-              ]}
-                flexArr={[1, 1, 1]}
-                style={{ height: 28 }}
-                textStyle={styles.tutorial.tableValue}
-              />
-            </TableWrapper>
-          </Table>
-        </View>
-      </>
+    return(
+        <Page2 />
     )
+    
   }
 
   getFirstPage = () => {
-    const { lockState } = this.props;
     const { keyboardVisiblity } = this.state;
-
-    return (
-      <>
-        {
-          keyboardVisiblity
-            ? null
-            : (
-              <>
-                <Text style={styles.tutorial.contentStyle}>
-                  Now, to encrypt a message,
-                  you first need to convert the message into ascii values and then to binary.
-                </Text>
-              </>
-            )
-        }
-        <View style={{ marginTop: Dimensions.get('window').height * 0.02, marginBottom: Dimensions.get('window').height * 0.01 }}>
-          <Text style={
-            keyboardVisiblity
-              ? { ...styles.tutorial.contentStyleSmall, marginTop: Dimensions.get('screen').height * 0.02, }
-              : { ...styles.tutorial.contentStyleSmall, marginTop: 0 }
-          }>Enter your message to encrypt:</Text>
-          <TextInput defaultValue={
-            lockState.encryption.textToEncrypt === ""
-              ? null
-              : lockState.encryption.textToEncrypt
-          } style={styles.tutorial.textBoxStyle} onChangeText={(text) => {
-            this.setState({
-              currentTextBox: text,
-            })
-          }} />
-          <View style={styles.tutorial.buttonRow}>
-            <CustomButton text="Validate" callback={this.validateInput} />
-          </View>
-        </View>
-        {
-          lockState.encryption.textToEncrypt === ""
-            ? null
-            : <>
-              {
-                keyboardVisiblity
-                  ? null
-                  : (
-                    <>
-                      <Text style={styles.tutorial.contentStyleSmall}>
-                        <Text style={styles.tutorial.boldFont}>Your message:</Text> {lockState.encryption.textToEncrypt}{"\n"}
-                        <Text style={styles.tutorial.boldFont}>Ascii value:</Text> {lockState.encryption.asciiString}{"\n"}
-                        <Text style={styles.tutorial.boldFont}>Binary value:</Text> {lockState.encryption.binaryString}
-                      </Text>
-                      <Text style={{
-                        ...styles.tutorial.contentStyleSmall,
-                        marginTop: Dimensions.get('window').height * 0.02
-                      }}>
-                        Divide the binary string to the blocks according
-                        to <Text style={styles.tutorial.knapsackSizeStyle}>
-                          knapsack size n
-                        </Text> to corresponds <Text style={styles.tutorial.publicKey}>
-                          public key
-                        </Text> (binary length ÷ n)
-                      </Text>
-                      <Text style={{
-                        ...styles.tutorial.contentStyleSmall,
-                        marginTop: Dimensions.get('window').height * 0.02
-                      }}>
-                        Add the <Text style={styles.tutorial.publicKey}>
-                          public key b
-                        </Text> that corresponds to the value 1 in binary x
-                      </Text>
-                    </>
-                  )
-              }
-            </>
-        }
-      </>
-
-    )
+     let Page1 = contents.page1;
+     return (
+       <Page1
+          keyboardVisiblity={keyboardVisiblity}
+          updateCurrentTextBox={(text)=>{this.updateCurrentTextbox(text)}}
+          validateInput={()=>{this.validateInput()}}  
+       />
+     )
   }
 
   getPageElements = () => {
@@ -724,6 +451,8 @@ class EncryptTutorial extends Component {
         return this.getFourthPage()
       case 5:
         return this.getFifthPage()
+      case 6:
+        return this.getSixthPage()
       default:
         return this.getFirstPage()
     }
@@ -732,6 +461,7 @@ class EncryptTutorial extends Component {
   render() {
     const {
       showError,
+      showSpinner,
       errorMessage,
       showBlocks,
       showPaddingInfoPopUp,
@@ -778,6 +508,11 @@ class EncryptTutorial extends Component {
     return (
       <>
         {
+          showSpinner
+            ? <Loader />
+            : null
+        }
+        {
           showBlocks
             ? <ScrollViewPopUp
               visibility={showBlocks}
@@ -815,7 +550,8 @@ class EncryptTutorial extends Component {
             : null
         }
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
-          <View style={{ ...styles.tutorial.learnTabPad, height: '100%' }}>
+            <ScrollView>
+          <View onStartShouldSetResponder={() => true} style={{ ...styles.tutorial.learnTabPad, height: '100%' }}>
             <View style={styles.tutorial.textStyleTitleWrapper}>
               {
                 keyboardVisiblity
@@ -825,8 +561,10 @@ class EncryptTutorial extends Component {
             </View>
             {
               this.getPageElements()
+
             }
           </View>
+            </ScrollView>
         </TouchableWithoutFeedback>
       </>
     );
@@ -846,6 +584,8 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_ENCRYPTION_BLOCKS_ACTION,
     UPDATE_ENCRYPTED_STRING_ACTION,
     ALLOW_NEXT_PAGE_ACTION,
+    DECRYPT_UNLOCK_ACTION,
+    NEXT_ENCRYPT_PAGE_ACTION,
   }, dispatch)
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EncryptTutorial);

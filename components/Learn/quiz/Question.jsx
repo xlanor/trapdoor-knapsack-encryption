@@ -3,6 +3,9 @@ import {
   Text,
   View
 } from 'react-native';
+import {
+  ScrollView
+} from 'react-native'
 import PropTypes from 'react-proptypes';
 import {
   CheckBox,
@@ -78,6 +81,8 @@ class Question extends Component {
         <Animatable.View key={label} animation="slideInRight" duration={1500}> 
             <View style={styles.Question.viewCard}>
             <Card title={label} titleStyle={styles.Question.viewQns}>
+              <ScrollView>
+                
             {              
               options.map(x=>{
                 return(
@@ -99,11 +104,12 @@ class Question extends Component {
               })
               
             }
+            </ScrollView>
             </Card>
           
             </View>
             </Animatable.View>
-            <View style={{backgroundColor:'blue'}}>
+            <View>
             {
               checking?
               <PacmanIndicator color='green' />

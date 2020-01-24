@@ -13,6 +13,7 @@ import {
   CHANGE_TAB,
   SET_NEXT_TAB,
   ALLOW_NEXT_PAGE,
+  DISABLE_NEXT_PAGE,
   MAX_INTRO_PAGES,
   MAX_GCD_PAGES,
   MAX_KEY_PAGES,
@@ -161,7 +162,11 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
             ...state,
             allowNextPage: true,
           }
-1
+      case DISABLE_NEXT_PAGE:
+          return {
+            ...state,
+            allowNextPage: false,
+          }
       case CHANGE_TAB:
           let newTabName = null;
           let newMaxPages = null;
@@ -232,6 +237,31 @@ const currentTabAndPageReducer = (state=initialState, action) =>{
           return {
             ...initialState
           };
+      case 'persist/REHYDRATE':
+        console.log(`action ${JSON.stringify(action)}`)
+        if(action.payload !== undefined){
+          if (action.payload.lessonPageTabAndPages !== undefined) {
+            return {
+              ...action.payload.lessonPageTabAndPages,
+              maxIntroPages: MAX_INTRO_PAGES,
+              maxGcdPages: MAX_GCD_PAGES,
+              maxKeyPages: MAX_KEY_PAGES,
+              maxEncryptPages: MAX_ENCRYPT_PAGES,
+              maxDecryptPages: MAX_DECRYPT_PAGES,
+            }
+  
+          }else{
+            return {
+              ...state,
+            }
+          }
+        }else{
+          return {
+            ...state,
+          }
+        }
+       
+        break;
       default: return state;
   }
 }

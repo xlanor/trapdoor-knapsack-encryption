@@ -6,6 +6,10 @@ import {
   ActivityIndicator
 } from 'react-native';
 
+import {
+  DotIndicator
+} from 'react-native-indicators'
+
 const Loader = props => {
   const {
     loading,
@@ -19,10 +23,7 @@ const Loader = props => {
       visible={loading}
       onRequestClose={() => {console.log('close modal')}}>
       <View style={styles.modalBackground}>
-        <View style={styles.activityIndicatorWrapper}>
-          <ActivityIndicator
-            animating={loading} />
-        </View>
+        <DotIndicator color='white' />
       </View>
     </Modal>
   )

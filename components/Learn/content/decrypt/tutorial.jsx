@@ -3,7 +3,7 @@ import React, { Component } from 'React';
 import {
   View,
   Dimensions,
-  Button,
+  ScrollView,
   Text,
   Image,
   TouchableOpacity,
@@ -21,8 +21,15 @@ import {
   from 'react-native-table-component';
 
 import {
-  ALLOW_NEXT_PAGE_ACTION
+  ALLOW_NEXT_PAGE_ACTION, 
+  NEXT_DECRYPT_PAGE_ACTION
 } from '../../../../redux-modules/actions/tabPage';
+
+// React Native Animatable Imports
+import * as Animatable from "react-native-animatable";
+
+// React Native Elements Imports
+import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements'
 
 import { COLORS } from '../../../../redux-modules/constants/Colors';
 // import stylesheet.
@@ -31,9 +38,6 @@ import styles from './styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { ScrollView } from 'react-native-gesture-handler';
-import DF1 from '../../../../assets/images/DecryptionFormula_1.png'
-import DF2 from '../../../../assets/images/DecryptionFormula_2.png'
 import Alert from '../../../../assets/images/alert.png'
 import Exclaim from '../../../../assets/images/ExclaimIcon.png'
 import InfoIcon from '../../../../assets/images/InfoIcon.png'
@@ -44,6 +48,9 @@ import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
 import Loader from '../../../Common/Spinner';
 import AlertPopUp from '../../../Common/AlertPopUp';
 import Block from '../../../Common/Blocks';
+import Quiz from '../../quiz/Quiz';
+
+import content from './contents'
 
 class DecryptTutorial extends Component {
   constructor(props) {
@@ -58,6 +65,33 @@ class DecryptTutorial extends Component {
       showCmpPopUp: false,
       showPaddingInfoPopUp: false,
     }
+  }
+
+  setSpinner = () =>{
+    this.setState({
+        showSpinner: true,
+
+    }, () => {
+      setTimeout(() => {
+          this.setState({
+          showBlocks: true,
+          showSpinner: false,
+          });
+      }, 500)
+    })
+  }
+
+  showCmpPopUp = () =>{
+    this.setState({ showCmpPopUp: true, })
+  }
+  showrPopUp = () => {
+    this.setState({ showrPopUp: true, })
+  }
+  showPaddingInfoPopUp = () => {
+    this.setState({ showPaddingInfoPopUp: true, })
+  }
+  showInversePopUp = () => {
+    this.setState({ showInversePopUp: true, })
   }
 
   checkPageNo = () => {
@@ -239,12 +273,6 @@ class DecryptTutorial extends Component {
     let unpadded = this.removePadding(binStringList.binlist, padding)
     let dec = this.convertBinToText(unpadded)
 
-    /*
-    this.setState({
-      decryptedText: dec,
-      currentDecryptedBlocks: binStringList,
-      showBlocks: true,
-    })*/
     return {
       decryptedText: dec,
       currentDecryptedBlocks: binStringList,
@@ -267,178 +295,58 @@ class DecryptTutorial extends Component {
 
   }
 
+  getFourthPage = () => {
+    console.log(`ON PAGE 4`)
+    return(
+      <Animatable.View animation="slideInDown">
+          <Card title="Congratulations!">
+            <Text>You have reached the end of the tutorial!</Text>
+          </Card>
+      </Animatable.View>
+    )
+
+  }
+
+  getThirdPage = () => {
+    const { actions } = this.props;
+    return (
+      <>
+        <Quiz quizType="DECRYPT" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_DECRYPT_PAGE_ACTION()}} />
+      </>
+    )
+  }
+
   getSecondPage = () => {
     const { decryptedText, currentDecryptedBlocks } = this.state;
     const { actions, lockState } = this.props;
     let u = Dimensions.get('window').height;
 
+    let Page2 = content.page2;
     if (!lockState.lessonPageTabAndPages.allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION()
     }
     return (
-      <>
-        <Text style={styles.tutorial.contentStyle}>
-          Remove <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showPaddingInfoPopUp: true, }) }}>
-            padding from x
-          </Text> if there is any.
-          {"\n\n"}
-          Next, convert the <Text style={styles.tutorial.boldFont}>
-            binary values
-          </Text> to the <Text style={styles.tutorial.boldFont}>
-            ascii value
-          </Text>.{"\n"}
-          Lastly, convert the <Text style={styles.tutorial.boldFont}>
-            ascii value
-          </Text> back to characters to get back the decrypted message.
-          {"\n\n"}
-          Current Padding: {lockState.encryption.padding}
-        </Text>
-        <View style={{ marginTop: u * 0.03, marginBottom: u * 0.03 }}>
-          {
-            currentDecryptedBlocks !== null ?
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={styles.tutorial.multipleButtonLeft}>
-                  <CustomButton text="Decrypt" callback={() => {
-                    this.decryption()
-                  }} />
-                </View>
-
-                <View style={styles.tutorial.multipleButtonRight}>
-                  <CustomButton text="Blocks"
-                    callback={
-                      () => {
-                        this.setState({
-                          showSpinner: true,
-
-                        }, () => {
-                          setTimeout(() => {
-                            this.setState({
-                              showBlocks: true,
-                              showSpinner: false,
-                            });
-                          }, 500)
-                        })
-                      }
-                    }
-                    buttonColor="blue"
-                  />
-                </View>
-              </View>
-
-              :
-              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                <CustomButton text="Decrypt" callback={() => {
-                  this.decryption()
-                }} />
-              </View>
-          }
-        </View>
-        {
-          decryptedText != ""
-            ? <>
-              <Text style={styles.tutorial.contentStyle}>
-                <Text style={styles.tutorial.boldFont}>Binary value</Text>:{"\n"}
-                {lockState.encryption.binaryString}
-                {"\n\n"}
-                <Text style={styles.tutorial.boldFont}>Ascii value</Text>:{"\n"}
-                {lockState.encryption.asciiString}
-                {"\n\n"}
-                <Text style={styles.tutorial.boldFont}>Decrypted Text</Text>: {decryptedText}
-              </Text>
-            </>
-            : null
-        }
-      </>
+        <Page2
+          showPaddingInfoPopUp={()=>{this.showPaddingInfoPopUp()}}
+          currentDecryptedBlocks={currentDecryptedBlocks}
+          decryption={()=>{this.decryption()}}
+          setSpinner={()=>{this.setSpinner()}}
+          decryptedText={decryptedText}
+        />
     )
   }
-  /*
-  getSecondPage = () => {
-    const { actions, lockState } = this.props;
-    let u = Dimensions.get('window').height
-
-    if (!lockState.lessonPageTabAndPages.allowNextPage) {
-      actions.ALLOW_NEXT_PAGE_ACTION()
-
-    }
-    return (
-      <>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
-          {"Select the largest a which is <= R:"}
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
-          If it is true, then the corresponding x = 1
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
-          If false, then x = 0
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
-          {"Since the next largest a <= the difference, repeat until the difference is 0"}
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, textAlign: 'center', marginBottom: u * 0.02 }}>
-          As the knapsack is super increasing, it is comparatively easier to get the values
-        </Text>
-      </>
-    )
-  }
-  */
   getFirstPage = () => {
     const { actions, lockState } = this.props;
-    let u = Dimensions.get('window').height;
-
+    let Page1 = content.page1;
     if (!lockState.lessonPageTabAndPages.allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION()
     }
     return (
-      <>
-        <Text style={styles.tutorial.contentStyle}>The current ciphertext is:</Text>
-        <Text style={styles.tutorial.contentStyleSmall}>({lockState.encryption.encryptedText.join(', ')})</Text>
-
-        <Text style={{ ...styles.tutorial.contentStyle, marginTop: u * 0.01 }}>
-          Padding: {lockState.encryption.padding}
-        </Text>
-
-        <View style={{ height: u * 0.04, marginTop: u * 0.02, marginBottom: u * 0.02 }}>
-          <Image source={DF1} style={styles.tutorial.imgStyle} />
-        </View>
-
-        <Text style={styles.tutorial.contentStyleSmall}>
-          Use the <Text
-            style={{ ...styles.tutorial.linkStyle, ...styles.tutorial.boldFont, ...styles.tutorial.inverseStyle }}
-            onPress={() => { this.setState({ showInversePopUp: true, }) }}>
-            modular inverse w^-1
-          </Text> to calculate <Text style={{ ...styles.tutorial.linkStyle, ...styles.tutorial.boldFont }} onPress={() => { this.setState({ showrPopUp: true, }) }}>
-            R
-          </Text>.
-        </Text>
-
-        <Text style={styles.tutorial.contentStyleSmall}>
-          Use the <Text style={styles.tutorial.privateKey}>private key a</Text> to find binary x since
-        </Text>
-
-        <View style={{ height: u * 0.03, marginTop: u * 0.02, marginBottom: u * 0.02 }}>
-          <Image source={DF2} style={styles.tutorial.imgStyle} />
-        </View>
-
-        <Text style={styles.tutorial.contentStyleSmall}>
-          Then by <Text style={styles.tutorial.linkStyle} onPress={() => { this.setState({ showCmpPopUp: true, }) }}>
-            comparing with a to calculate to obtain the binary value x
-          </Text>
-        </Text>
-
-        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.02, marginTop: u * 0.01 }}>
-          - Select the largest a which is {"<="} <Text style={styles.tutorial.boldFont}>R</Text>:
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.04 }}>
-          - If it is true, then the corresponding x = 1{"\n"}
-          - If false, then x = 0
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, marginLeft: u * 0.02 }}>
-          - Since the next largest a {"<="} the difference, repeat until the difference is 0
-        </Text>
-        <Text style={{ ...styles.tutorial.contentStyleSmall, marginTop: u * 0.02 }}>
-          Since the knapsack is super-increasing it is comparatively easier to get the binary values
-        </Text>
-      </>
+      < Page1
+        showInversePopUp={()=>{this.showInversePopUp()}}
+        showrPopUp={()=>{this.showrPopUp()}}
+        showCmpPopUp={()=>{this.showCmpPopUp()}}
+      />
     )
   }
 
@@ -449,6 +357,10 @@ class DecryptTutorial extends Component {
         return this.getFirstPage()
       case 2:
         return this.getSecondPage()
+      case 3:
+        return this.getThirdPage()
+      case 4:
+        return this.getFourthPage()
       default:
         return this.getFirstPage()
     }
@@ -463,23 +375,6 @@ class DecryptTutorial extends Component {
       showCmpPopUp,
       showPaddingInfoPopUp
     } = this.state;
-    {
-      /*
-        BlockDecrypt.propTypes = {
-          flexArr: PropTypes.array.isRequired,
-          tableTitle: PropTypes.array.isRequired,
-          currentR: PropTypes.array.isRequired,
-          pubKey: PropTypes.array.isRequired,
-          postSub: PropTypes.array.isRequired,
-          binary: PropTypes.array.isRequired,
-          binaryOrdered: PropTypes.array.isRequired,
-          encryptedInput: PropTypes.number.isRequired,
-          inverse: PropTypes.number.isRequired,
-          modulo: PropTypes.number.isRequired,
-          rVal: PropTypes.number.isRequired,
-        };
-      */
-    }
     const { currentDecryptedBlocks } = this.state;
     let decryptedArr = []
     if (currentDecryptedBlocks !== null) {
@@ -537,8 +432,8 @@ class DecryptTutorial extends Component {
       )
     }
     return (
-
-      <View style={styles.tutorial.learnTabPad}>
+      <ScrollView>
+      <View >
         <Text style={styles.tutorial.titleStyle}>Decryption</Text>
         {
           this.getPageElements()
@@ -548,15 +443,7 @@ class DecryptTutorial extends Component {
             ? <Loader />
             : null
         }
-        {
-          /*
- 
-  messageContent: PropTypes.string,
-  renderedBlocks: PropTypes.node,
-  callback: PropTypes.func.isRequired,
-  visibility: PropTypes.bool.isRequired,
-  icon: PropTypes.node,*/
-        }
+        
         {
           showInversePopUp
             ? <AlertPopUp
@@ -612,6 +499,8 @@ class DecryptTutorial extends Component {
             : null
         }
       </View>
+        
+        </ScrollView>
     )
   }
 }
@@ -624,6 +513,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
     ALLOW_NEXT_PAGE_ACTION,
+    NEXT_DECRYPT_PAGE_ACTION
   }, dispatch)
 })
 

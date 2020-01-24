@@ -45,10 +45,6 @@ const textBoxStyle = {
 }
 
 const learnTabPad = {
-  //height: Dimensions.get('window').height * 0.79,
-  marginLeft: Dimensions.get('window').height * 0.05,
-  marginRight: Dimensions.get('window').height * 0.05,
-  //backgroundColor: '#888'
 }
 
 const buttonRow = {
@@ -132,6 +128,10 @@ const popUpTextStyleBold = {
   color: COLORS.POPUP_TEXT_COLOR
 }
 
+const unlockIconStyle = {
+  width: Dimensions.get('window').width * 0.1,
+  height: Dimensions.get('window').width * 0.1,
+}
 export default {
   textBoxStyle,
   titleStyle,
@@ -157,5 +157,6 @@ export default {
   tablePublicKeyValue,
   imgStyle,
   popUpTextStyle,
-  popUpTextStyleBold
+  popUpTextStyleBold,
+  unlockIconStyle,
 };
