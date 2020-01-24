@@ -92,7 +92,7 @@ class SimulatorPage extends Component{
             let ascii = parseInt(binaryString.substring(i, i+8), 2)
             dec.push(String.fromCharCode(ascii))
         }
-        return dec.join('')
+        return decodeURIComponent(escape(dec.join('')))
     }
 
     removePadding = (binStringList, padNumber) => {
@@ -211,8 +211,9 @@ class SimulatorPage extends Component{
      }
     
     getBinaryOfInput = (textToGet) => {
+        let utf8 =unescape(encodeURIComponent(textToGet));
         return (
-            Array.from(textToGet)
+            Array.from(utf8)
               .reduce((acc, char) => acc.concat(char.charCodeAt().toString(2)), [])
               .map(bin => '0'.repeat(8 - bin.length) + bin )
               .join('')
@@ -1069,23 +1070,17 @@ class SimulatorPage extends Component{
             // Don't anyhow remove empty views, they are there to provide flex.
             <>
                 <View style={styles.SimulatorPage.rowView}>
-                    <View style={styles.SimulatorPage.buttonWrapper}>
                         <CustomButton callback={()=>{this.setState({currentSimulatorPage: "genkey"})}} text="KeyGen" />
-                    </View>
                 
                 </View>
                 {
                     lockState.simulator.genKeyCompleted
                     ? <>
                         <View style={styles.SimulatorPage.rowView}>
-                            <View style={styles.SimulatorPage.buttonWrapper}>
                                 <CustomButton callback={() => {this.setCurrentSimulatorPage("encrypt")}} text="Encrypt" />
-                            </View>
                         </View>
                         <View style={styles.SimulatorPage.rowView}>
-                            <View style={styles.SimulatorPage.buttonWrapper}>
                                 <CustomButton callback={() => {this.setCurrentSimulatorPage("decrypt")}} text="Decrypt" />
-                            </View>
                         </View>
                         
                     </>

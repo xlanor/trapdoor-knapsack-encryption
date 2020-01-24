@@ -99,7 +99,9 @@ const copyStyle={
 }
 
 const rowView = {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: Dimensions.get('screen').height * 0.01,
+    marginBottom: Dimensions.get('screen').height * 0.01,
 }
 
 const rowKeyGen = {
