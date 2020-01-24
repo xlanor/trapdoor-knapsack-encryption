@@ -4,108 +4,71 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import { Text } from 'react-native';
 // import stylesheet.
 import styles from './styles';
 //contents
 import contents from './contents';
+
+// actions
+import { DISABLE_NEXT_PAGE_ACTION } from '../../../../redux-modules/actions/tabPage'
 
 // dynamic pages not static pages.
 class GCDPage extends Component {
   constructor(props) {
     super(props);
   }
-  getPage1 = () => {
-    let Page = contents.page1;
-    return <Page />
+  placeholder15 = () => {
+    return (
+      <Text>15</Text>
+    )
   }
-  getPage2 = () => {
-    let Page = contents.page2;
-    return <Page />
-  }
-  getPage3 = () => {
-    let Page = contents.page3;
-    return <Page />
-  }
-  getPage4 = () => {
-    let Page = contents.page4;
-    return <Page />
-  }
-  getPage5 = () => {
-    let Page = contents.page5;
-    return <Page />
-  }
-  getPage6 = () => {
-    let Page = contents.page6;
-    return <Page />
-  }
-  getPage7 = () => {
-    let Page = contents.page7;
-    return <Page />
-  }
-  getPage8 = () => {
-    let Page = contents.page8;
-    return <Page />
-  }
-  getPage9 = () => {
-    let Page = contents.page9;
-    return <Page />
-  }
-  getPage10 = () => {
-    let Page = contents.page10;
-    return <Page />
-  }
-  getPage11 = () => {
-    let Page = contents.page11;
-    return <Page />
-  }
-  getPage12 = () => {
-    let Page = contents.page12;
-    return <Page />
-  }
-  getPage13 = () => {
-    let Page = contents.page13;
-    return <Page />
-  }
-  
-  checkPageNo = () => {
-    const { lockState } = this.props;
-
-    return lockState.lessonPageTabAndPages.tabPage;
+  getQuiz = () => {
+    const { actions,allowNextPage } = this.props;
+    if(allowNextPage){
+        actions.DISABLE_NEXT_PAGE_ACTION();
+    }
+    return contents.QuizTab
   }
   getPageElements = () => {
-    let pageNo = this.checkPageNo()
-    switch (pageNo) {
-      case 1: return this.getPage1();
-      case 2: return this.getPage2();
-      case 3: return this.getPage3();
-      case 4: return this.getPage4();
-      case 5: return this.getPage5();
-      case 6: return this.getPage6();
-      case 7: return this.getPage7();
-      case 8: return this.getPage8();
-      case 9: return this.getPage9();
-      case 10: return this.getPage10();
-      case 11: return this.getPage11();
-      case 12: return this.getPage12();
-      case 13: return this.getPage13();
-      default: return this.getPage1();
+    
+    const { currentPage } = this.props;
+    switch (currentPage) {
+      case 1: return contents.page1;
+      case 2: return contents.page2;
+      case 3: return contents.page3;
+      case 4: return contents.page4;
+      case 5: return contents.page5;
+      case 6: return contents.page6;
+      case 7: return contents.page7;
+      case 8: return contents.page8;
+      case 9: return contents.page9;
+      case 10: return contents.page10;
+      case 11: return contents.page11;
+      case 12: return contents.page12;
+      case 13: return contents.page13;
+      case 14: return this.getQuiz();
+      case 15: return contents.UnlockNext;
+      default: return contents.page1;
     }
   }
   render() {
+    let Page = this.getPageElements();
     return (
       <ScrollView style={styles.ScrollStyle.scrollStyle}>
-        {this.getPageElements()}
+        <Page />
       </ScrollView>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  lockState: state
+  currentPage: state.lessonPageTabAndPages.tabPage,
+  allowNextPage: state.lessonPageTabAndPages.allowNextPage
 })
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
+    DISABLE_NEXT_PAGE_ACTION,
   }, dispatch)
 });
 

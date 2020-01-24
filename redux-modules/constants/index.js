@@ -50,6 +50,7 @@ export const SET_NEXT_TAB = 'SET_NEXT_TAB';
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const ALLOW_NEXT_PAGE = 'ALLOW_NEXT_PAGE';
+export const DISABLE_NEXT_PAGE = 'DISABLE_NEXT_PAGE';
 
 
 // handling state of the parameters
@@ -109,9 +110,9 @@ export const UPDATE_SIMULATOR_RESET_DEC = "UPDATE_SIMULATOR_RESET_DEC";
 export const UPDATE_SIMULATOR_RESET_ENC = "UPDATE_SIMULATOR_RESET_ENC";
 
 
-export const MAX_INTRO_PAGES=6;
-export const MAX_GCD_PAGES=13;
+export const MAX_INTRO_PAGES=8;
+export const MAX_GCD_PAGES=15;
 export const MAX_KEY_PAGES=7;
-export const MAX_ENCRYPT_PAGES=5;
-export const MAX_DECRYPT_PAGES=2;
+export const MAX_ENCRYPT_PAGES=6;
+export const MAX_DECRYPT_PAGES=4;
 export const MAX_SIMULATOR_PAGES=1;

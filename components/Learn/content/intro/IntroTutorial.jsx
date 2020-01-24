@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 
 import { ScrollView } from 'react-native-gesture-handler';
 
+// actions
+import { DISABLE_NEXT_PAGE_ACTION } from '../../../../redux-modules/actions/tabPage'
 //contents
 import styles from './styles';
 import contents from './contents';
@@ -14,40 +16,26 @@ class IntroPage extends Component {
     constructor(props) {
         super(props);
     }
-    getPage6 = () => {
-        return contents.page6
-    }
-    getPage5 = () => {
-        return contents.page5
-    }
-    getPage4 = () => {
-        return contents.page4
-    }
-    getPage3 = () => {
-        return contents.page3
-    }
-    getPage2 = () => {
-        return contents.page2
-    }
-    getPage1 = () => {
-        return contents.page1
-    }
-    checkPageNo = () => {
-        const { lockState } = this.props;
-
-        return lockState.lessonPageTabAndPages.tabPage;
+    getQuiz = () => {
+        const { actions,allowNextPage } = this.props;
+        if(allowNextPage){
+            actions.DISABLE_NEXT_PAGE_ACTION();
+        }
+        return contents.QuizTab
     }
     getPageElements = () => {
-        let pageNo = this.checkPageNo()
+        const { currentTabPage } = this.props;
 
-        switch (pageNo) {
-            case 1: return this.getPage1();
-            case 2: return this.getPage2();
-            case 3: return this.getPage3();
-            case 4: return this.getPage4();
-            case 5: return this.getPage5();
-            case 6: return this.getPage6();
-            default: return this.getPage1();
+        switch (currentTabPage) {
+            case 1: return contents.page1;
+            case 2: return contents.page2;
+            case 3: return contents.page3;
+            case 4: return contents.page4;
+            case 5: return contents.page5;
+            case 6: return contents.page6;
+            case 7: return this.getQuiz();
+            case 8: return contents.UnlockNext
+            default: return contents.page1;
         }
     }
 
@@ -62,10 +50,12 @@ class IntroPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    lockState: state
+    currentTabPage: state.lessonPageTabAndPages.tabPage,
+    allowNextPage: state.lessonPageTabAndPages.allowNextPage
 })
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({
+        DISABLE_NEXT_PAGE_ACTION,
     }, dispatch)
 });
 
