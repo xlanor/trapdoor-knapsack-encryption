@@ -28,12 +28,10 @@ class PageTwo extends Component{
         return(
             <>
                 <Text style={styles.tutorial.contentStyle}>
-                    However, there might be cases where binary cannot be divided into equal blocks according
-                    to <Text style={styles.tutorial.knapsackSizeStyle}>
-                        knapsack size n
-                    </Text> to correspond to <Text style={styles.tutorial.publicKey}>
-                        public key b
-                    </Text>.
+                    However, there might be cases where binary cannot be divided into equal blocks according to{" "}
+                    <Text style={styles.tutorial.knapsackSizeStyle}>knapsack size n</Text>
+                    {" "}to correspond to{" "}
+                    <Text style={styles.tutorial.publicKey}>public key b</Text>.
                 </Text>
                 <Text 
                     style={{

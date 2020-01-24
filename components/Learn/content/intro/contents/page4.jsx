@@ -45,7 +45,8 @@ export default class page4 extends Component {
                 </View>
 
                 <Text style={{ ...styles.PageStyle.popUpTextStyle, marginTop: u * 0.02 }}>
-                    Leonard Adleman is one of the creators of the RSA encryption algorithm. <Text
+                    Leonard Adleman is one of the creators of the RSA encryption algorithm.{" "}
+                    <Text
                         style={styles.PageStyle.links}
                         onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Leonard_Adleman')}>
                         wikipedia
@@ -75,7 +76,8 @@ export default class page4 extends Component {
 
                 <Text style={{ ...styles.PageStyle.popUpTextStyle, marginTop: u * 0.02 }}>
                     Adi Shamir is a co-inventor of the Rivest–Shamir–Adleman (RSA) algorithm
-                    (along with Ron Rivest and Len Adleman). <Text
+                    (along with Ron Rivest and Len Adleman).{" "}
+                    <Text
                         style={styles.PageStyle.links}
                         onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Adi_Shamir')}>
                         wikipedia
@@ -168,22 +170,20 @@ export default class page4 extends Component {
                 <Text style={style.contentHead}>A brief History of how Trapdoor Knapsack was broken</Text>
 
                 <Text style={style.contentStyle}>
-                    In 1982 <Text style={style.links} onPress={() => { this.setState({ showAdlemanArticleInfoPopUp: true, }) }}>
-                        Leonard Adleman
-                    </Text> broke the cryptosystem.
+                    In 1982{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showAdlemanArticleInfoPopUp: true, }) }}>Leonard Adleman</Text>
+                    {" "}broke the cryptosystem.
                     {"\n\n"}
-                    In the same year, <Text style={style.links} onPress={() => { this.setState({ showShamirArticleInfoPopUp: true, }) }}>
-                        Adi Shamir
-                    </Text>, the inventor of RSA cryptosystem that is still used today
-                    posted an article on breaking the cryptosystem.
+                    In the same year,{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showShamirArticleInfoPopUp: true, }) }}>Adi Shamir</Text>
+                    , the inventor of RSA cryptosystem that is still used today posted an article on breaking the cryptosystem.
                     {"\n\n"}
-                    Ralph Merkle offered a reward to anyone who could break his <Text style={style.links} onPress={() => { this.setState({ showPriceInfoPopUp: true, }) }}>
-                        new implementation
-                    </Text>.
+                    Ralph Merkle offered a reward to anyone who could break his{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showPriceInfoPopUp: true, }) }}>new implementation</Text>.
                     {"\n\n"}
-                    In 1984, Brickell <Text style={style.links} onPress={() => { this.setState({ showBrickellInfoPopUp: true, }) }}>
-                        broke
-                    </Text> the cryptosystem.
+                    In 1984, Brickell{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showBrickellInfoPopUp: true, }) }}>broke</Text>
+                    {" "}the cryptosystem.
                     {"\n\n"}
                     Today, we can still learn its concepts of cryptography.
                     {"\n"}

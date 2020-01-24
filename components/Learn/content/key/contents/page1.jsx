@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // RN imports
-import { 
+import {
     TouchableWithoutFeedback,
     View,
     Text,
@@ -22,10 +22,10 @@ import CustomButton from '../../../../Common/Button';
 // typecheck
 import PropTypes from 'prop-types';
 class FirstPage extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
-    render(){
+    render() {
         const {
             allowNextPage,
             privateKeyString,
@@ -36,36 +36,36 @@ class FirstPage extends Component {
             updatePrivateKey,
         } = this.props;
         console.log(privateKeyString)
-        return(
+        return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View 
-                    style={ 
+                <View
+                    style={
                         keyboardVisiblity
-                        ? { ...styles.page1.keyboardAvoidingViewMargin} 
-                        : null
+                            ? { ...styles.page1.keyboardAvoidingViewMargin }
+                            : null
                     }
-                > 
+                >
                     <Text style={styles.page1.contentStyle}>
                         Enter your <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>private key a</Text>:
                         {"\n\n"}
-                        (This <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>private key a</Text> should
-                        be in a 
-                        <Text style={styles.page1.linkStyle} onPress={ showSuperIncreasingInfoPopUp } >
-                        {" "}super increasing sequence
+                        (This <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>private key a</Text>
+                        {" "}should be in a{" "}
+                        <Text style={styles.page1.linkStyle} onPress={showSuperIncreasingInfoPopUp} >
+                            super increasing sequence
                         </Text>
                         )
                     </Text>
                     <View style={{ marginTop: Dimensions.get('window').height * 0.03 }}>
-                        <TextInput 
+                        <TextInput
                             defaultValue={
                                 privateKeyString === ""
-                                ? null
-                                : privateKeyString
-                            } 
-                            style={styles.page1.textBoxStyle} 
+                                    ? null
+                                    : privateKeyString
+                            }
+                            style={styles.page1.textBoxStyle}
                             onChangeText={(text) => {
                                 updatePrivateKey(text)
-                            }} 
+                            }}
                             onSubmitEditing={
                                 Keyboard.dismiss
                             }
@@ -75,23 +75,22 @@ class FirstPage extends Component {
                         </View>
                     </View>
                     <Text style={styles.page1.contentStyle}>
-                        <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>
-                            Private key a
-                        </Text>
-                            :   {
+                        <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>Private key a</Text>
+                        : {
                             allowNextPage
                                 ? privateKeyString
                                 : null
-                            }
-                            {"\n"}
-                        <Text style={{ ...styles.page1.knapsackSizeStyle, ...styles.page1.boldFont }}>Knapsack Size n</Text>: {
+                        }
+                        {"\n"}
+                        <Text style={{ ...styles.page1.knapsackSizeStyle, ...styles.page1.boldFont }}>Knapsack Size n</Text>
+                        : {
                             allowNextPage
                                 ? privateKeyArr.length
                                 : null
-                            }
-                        </Text>
+                        }
+                    </Text>
                 </View>
-            
+
             </TouchableWithoutFeedback>
         );
     }

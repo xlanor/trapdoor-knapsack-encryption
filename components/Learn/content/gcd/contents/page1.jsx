@@ -29,9 +29,11 @@ export default class page1 extends Component {
         return (
             <>
                 <Text style={styles.GCDPages.popUpTextStyle}>
-                    An algorithm named after the <Text style={styles.GCDPages.bold}>
+                    An algorithm named after the{" "}
+                    <Text style={styles.GCDPages.bold}>
                         ancient Greek mathematician Euclid
-                    </Text>. It can be used to reduce fractions to their simplest form,
+                    </Text>.
+                    It can be used to reduce fractions to their simplest form,
                     and is a part of many number-theoretic and cryptographic calculations.
                     {"\n\n"}
                     <Text
@@ -61,13 +63,14 @@ export default class page1 extends Component {
                 }
                 <Text style={style.titleStyle}>Euclidean Algorithm</Text>
                 <Text style={style.contentStyle}>
-                    The <Text style={style.links} onPress={() => { this.setState({ showEuclideanInfoPopUp: true, }) }} >
+                    The{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showEuclideanInfoPopUp: true, }) }} >
                         Euclidean algorithm
-                    </Text> is an efficient method of finding the <Text style={{ ...style.bold, ...style.GCDStyle }}>
-                        Greatest Common Divisor(GCD)
-                    </Text> of <Text style={style.bold}>
-                        2 different integers
-                    </Text>.
+                    </Text>
+                    {" "}is an efficient method of finding the{" "}
+                    <Text style={{ ...style.bold, ...style.GCDStyle }}>Greatest Common Divisor(GCD)</Text>
+                    {" "}of{" "}
+                    <Text style={style.bold}>2 different integers</Text>.
                     {"\n\n"}
                     Usually when asked for a notation such as:
                 </Text>
@@ -84,23 +87,23 @@ export default class page1 extends Component {
                 </Text>
 
                 <Text style={style.contentStyle}>
-                    where <Text style={{ ...style.bold, ...style.valA }}>
-                        a
-                    </Text> and <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text> are <Text style={style.bold}>
-                        2 different integers
-                    </Text> and <Text style={style.bold}>
-                        x
-                    </Text> is the result.
+                    where{" "}
+                    <Text style={{ ...style.bold, ...style.valA }}>a</Text>
+                    {" "}and{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>
+                    {" "}are{" "}
+                    <Text style={style.bold}>2 different integers</Text>
+                    {" "}and{" "}
+                    <Text style={style.bold}>x</Text>
+                    {" "}is the result.
                     {"\n\n"}
-                    This refers to what the <Text style={{ ...style.bold, ...style.GCDStyle }}>
-                        GCD
-                    </Text> of <Text style={{ ...style.bold, ...style.valA }}>
-                        a
-                    </Text> and <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text> is.
+                    This refers to what the{" "}
+                    <Text style={{ ...style.bold, ...style.GCDStyle }}>GCD</Text>
+                    {" "}of{" "}
+                    <Text style={{ ...style.bold, ...style.valA }}>a</Text>
+                    {" "}and{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>
+                    {" "}is.
                     {"\n"}
                 </Text>
             </View>

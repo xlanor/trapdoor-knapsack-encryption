@@ -88,9 +88,9 @@ export default class page2 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    A good example of the <Text style={style.links} onPress={() => { this.setState({ showOneWayInfoPopUp: true, }) }}>
-                        one-way trapdoor function
-                    </Text>:{"\n"}
+                    A good example of the{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showOneWayInfoPopUp: true, }) }}>one-way trapdoor function</Text>
+                    :{"\n"}
                 </Text>
                 <Text
                     style={{ alignSelf: "center", ...style.contentStyle, ...style.links }}
@@ -112,7 +112,9 @@ export default class page2 extends Component {
 
                 <Text style={style.contentStyle}>
                     Given <Text style={{ ...style.bold, color: '#9B59B6' }}>b</Text>,
-                    we would be unable to find <Text style={{ ...style.bold, color: '#1ABC9C' }}>a</Text> and <Text style={{ ...style.bold, color: '#E74C3C' }}>k</Text> in a reasonable time.
+                    we would be unable to find{" "}
+                    <Text style={{ ...style.bold, color: '#1ABC9C' }}>a</Text> and <Text style={{ ...style.bold, color: '#E74C3C' }}>k</Text>
+                    {" "}in a reasonable time.
                     {"\n"}
                 </Text>
             </View >

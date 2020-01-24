@@ -148,24 +148,27 @@ export default class page3 extends Component {
                 <Text style={style.contentHead}>Trapdoor Knapsack Algorithm</Text>
 
                 <Text style={style.contentStyle}>
-                    <Text style={style.links} onPress={() => { this.setState({ showRalphMerkleInfoPopUp: true, }) }}>
-                        Ralph Merkle
-                    </Text> and <Text style={style.links} onPress={() => { this.setState({ showMartinHellmanInfoPopUp: true, }) }}>
-                        Martin Hellman
-                    </Text> invented the <Text style={style.links} onPress={() => { this.setState({ showTrapdoorKnapsackAlgoPopUp: true, }) }}>
+                    <Text style={style.links} onPress={() => { this.setState({ showRalphMerkleInfoPopUp: true, }) }}>Ralph Merkle</Text>
+                    {" "}and{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showMartinHellmanInfoPopUp: true, }) }}>Martin Hellman</Text>
+                    {" "}invented the{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showTrapdoorKnapsackAlgoPopUp: true, }) }}>
                         Trapdoor Knapsack Algorithm
-                    </Text> in 1978.
+                    </Text>
+                    {" "}in 1978.
                     {"\n\n"}
-                    The general idea behind this algorithm is to create <Text style={style.links} onPress={() => { this.setState({ showProblemsInfoPopUp: true, }) }}>
+                    The general idea behind this algorithm is to create{" "}
+                    <Text style={style.links} onPress={() => { this.setState({ showProblemsInfoPopUp: true, }) }}>
                         2 separate problems
                     </Text>.
-                    This ensures that the <Text style={styles.PageStyle.privateKey}>
-                        private key
-                    </Text> is easy to use but the <Text style={styles.PageStyle.publicKey}>
-                        public key
-                    </Text> is difficult to compute.
+                    This ensures that the{" "}
+                    <Text style={styles.PageStyle.privateKey}>private key</Text>
+                    {" "}is easy to use but the{" "}
+                    <Text style={styles.PageStyle.publicKey}>public key</Text>
+                    {" "}is difficult to compute.
                     {"\n\n"}
-                    As such, trapdoor function ensures that without prior knowledge of the "trapdoor", the encryption cannot easily be reversed.
+                    As such, trapdoor function ensures that without prior knowledge of the "trapdoor",
+                    the encryption cannot easily be reversed.
                     {"\n\n"}
                     However, Trapdoor knapsack has been broken.
                     {"\n"}
