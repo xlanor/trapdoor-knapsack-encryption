@@ -151,7 +151,7 @@ class DecryptTutorial extends Component {
       let ascii = parseInt(binaryString.substring(i, i + 8), 2)
       dec.push(String.fromCharCode(ascii))
     }
-    return dec.join('')
+    return decodeURIComponent(escape(dec.join('')))
   }
   paddingInfoPopUp = () => {
     return (

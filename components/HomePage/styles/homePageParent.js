@@ -3,8 +3,8 @@ import { Dimensions } from 'react-native';
 
 const imageStyleArrow = {
   alignSelf: 'center',
-  width: 150,
-  height: 150,
+  width: Dimensions.get('screen').height* 0.2,
+  height: Dimensions.get('screen').height* 0.2,
 };
 
 const imageStyle = {
@@ -15,6 +15,10 @@ const imageStyle = {
 
 const iconsView = {
   marginBottom: Dimensions.get('screen').height * 0.05,
+}
+
+const iconsViewSelected = {
+  marginBottom: Dimensions.get('screen').height * 0.02,
 }
 
 const textBoxVersion = {
@@ -33,7 +37,7 @@ const textBox = {
   minWidth: 350,
   textAlign: 'center',
   overflow: 'hidden',
-  padding:10,
+  padding: 10,
 }
 
 const textWrapperStyle = { 
@@ -52,4 +56,5 @@ export default {
   iconsView,
   wrapHomePage,
   textBoxVersion,
+  iconsViewSelected,
 }

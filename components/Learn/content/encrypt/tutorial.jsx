@@ -178,8 +178,9 @@ class EncryptTutorial extends Component {
 
   getBinaryOfInput = () => {
     const { currentTextBox } = this.state;
+    let utf8 =unescape(encodeURIComponent(currentTextBox));
     return (
-      Array.from(currentTextBox)
+      Array.from(utf8)
         .reduce((acc, char) => acc.concat(char.charCodeAt().toString(2)), [])
         .map(bin => '0'.repeat(8 - bin.length) + bin)
         .join('')

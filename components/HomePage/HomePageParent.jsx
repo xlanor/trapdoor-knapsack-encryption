@@ -73,7 +73,7 @@ class HomePageParent extends Component{
     const { version } = Constants.manifest;
     return(
         <View style={styles.homePageParent.wrapHomePage}>
-            <View style={styles.homePageParent.iconsView}>
+            <View style={ optionChosen ? {...styles.homePageParent.iconsViewSelected }: {...styles.homePageParent.iconsView}}>
               <TouchableOpacity onPress={() => {this.updateIconPressed("creditsIcon")}}>        
                 <Image
                   key="creditsIcon"
