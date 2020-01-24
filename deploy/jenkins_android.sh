@@ -33,4 +33,4 @@ turtle build:android --keystore-path ./$APP_TITLE.keystore --keystore-alias $KEY
     -t apk -o /home/node/$APP_TITLE/$APP_TITLE-$tag.apk --public-url $PUBLIC_URL_ANDROID 
  
 # Send my build to telegram
-curl -v -F "chat_id=$CHAT_ID" -F caption="$message" -F document=@/home/node/$APP_TITLE/$APP_TITLE.apk https://api.telegram.org/bot$BOT_TOKEN/sendDocument 
+curl -v -F "chat_id=$CHAT_ID" -F caption="$message" -F document=@/home/node/$APP_TITLE/$APP_TITLE-$tag.apk https://api.telegram.org/bot$BOT_TOKEN/sendDocument 
