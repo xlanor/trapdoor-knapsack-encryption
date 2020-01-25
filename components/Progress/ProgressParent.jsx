@@ -5,8 +5,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import {
-    ScrollView
+    ScrollView,
+    View
 } from 'react-native'
+
+import styles from './styles'
 
 import Trophy from './Trophies';
 
@@ -17,10 +20,10 @@ class ProgressParent extends Component {
     render(){
 
         return(
-            <ScrollView>
-                <Trophy title="test1" subtitle="test2" isEnabled={true} />
+                <ScrollView style={styles.progressParent.containerStyle}>
+                    <Trophy title="test1" subtitle="test2" isEnabled={true} />
                     <Trophy title="test1" subtitle="test2" isEnabled={false} />
-            </ScrollView>
+                </ScrollView>
         );
     }
 }
