@@ -52,6 +52,7 @@ class HomePageParent extends Component{
               navigation.navigate('LearnScreen');
               break;
           case 3:
+              navigation.navigate('ProgressScreen')
           default: break;
       }
   }

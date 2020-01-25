@@ -36,6 +36,7 @@
     "react-native-share": "^2.0.0",
     "react-native-status-bar-height": "^2.4.0",
     "react-native-table-component": "^1.2.1",
+    "react-native-touchable-scale": "^2.1.0",
     "react-native-web": "^0.11.7",
     "react-navigation": "^3.12.0",
     "react-proptypes": "^1.0.0",
