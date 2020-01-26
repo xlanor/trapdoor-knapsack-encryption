@@ -13,7 +13,8 @@ import {
     ALGO_UNLOCK_ACTION  
 } from '../../../../../redux-modules/actions/learnPageLock'
 import {
-    TROPHY_HISTORIAN
+    UNLOCK_TROPHY_HISTORIAN,
+    SHOW_TROPHY_ACTION,
 }  from '../../../../../redux-modules/actions/manageTrophies'
 
 // import image icons
@@ -28,6 +29,7 @@ class UnlockNext extends Component{
     }
     render(){
         const { actions } = this.props;
+        console.log(actions)
         return (
             <>
                 <Animatable.View animation="slideInDown">
@@ -39,7 +41,11 @@ class UnlockNext extends Component{
                             style={styles.PageStyle.unlockIconStyle}
                         />}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                        onPress = {()=>{actions.ALGO_UNLOCK_ACTION()}}
+                        onPress = {()=>{
+                            actions.ALGO_UNLOCK_ACTION()
+                            actions.UNLOCK_TROPHY_HISTORIAN()
+                            actions.SHOW_TROPHY_ACTION()
+                        }}
                     >
         
                     </RneButton>
@@ -57,7 +63,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators({
         ALGO_UNLOCK_ACTION,
-        TROPHY_HISTORIAN
+        UNLOCK_TROPHY_HISTORIAN,
+        SHOW_TROPHY_ACTION
     }, dispatch)
   });
 

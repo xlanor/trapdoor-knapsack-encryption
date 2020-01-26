@@ -8,6 +8,8 @@ import {
     TROPHY_SAFETY_FIRST,
     TROPHY_BREAK_WALL,
     TROPHY_RESET,
+    SHOW_TROPHY,
+    HIDE_TROPHY,
 } from '../constants';
 
 
@@ -45,4 +47,12 @@ export const UNLOCK_TROPHY_BREAK_WALL = () => ({
 
 export const UNLOCK_TROPHY_RESET = () => ({
     type: TROPHY_RESET,
+})
+
+export const SHOW_TROPHY_ACTION = () => ({
+    type: SHOW_TROPHY,
+})
+
+export const HIDE_TROPHY_ACTION = () => ({
+    type: HIDE_TROPHY,
 })

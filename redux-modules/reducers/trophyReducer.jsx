@@ -8,6 +8,8 @@ import {
     TROPHY_SAFETY_FIRST,
     TROPHY_BREAK_WALL,
     TROPHY_RESET,
+    SHOW_TROPHY,
+    HIDE_TROPHY
 } from '../constants';
 
 const initialState = {
@@ -19,6 +21,7 @@ const initialState = {
     trophyKeymaster: false,
     trophySafetyFirst: false,
     trophyBreakWall: false,
+    showTrophy:false,
 }
 
 const trophyReducer = (state = initialState, action) => {
@@ -62,6 +65,16 @@ const trophyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 trophyBreakWall: true,
+            }
+        case SHOW_TROPHY:
+            return {
+                ...state,
+                showTrophy: true,
+            }
+        case HIDE_TROPHY:
+            return {
+                ...state,
+                showTrophy: false,
             }
         case TROPHY_RESET:
             return {
