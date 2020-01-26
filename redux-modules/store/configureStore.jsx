@@ -12,6 +12,7 @@ import currentEncryptionReducer from '../reducers/currentEncryptionReducer';
 import simulatorReducer from '../reducers/simulatorReducer';
 import questionReducer from '../reducers/questionReducer';
 import hintReducer from '../reducers/hintReducer';
+import trophyReducer from '../reducers/trophyReducer';
 
 import {
 
@@ -96,6 +97,7 @@ const rootReducer = combineReducers(
     simulator: simulatorReducer,
     questions: questionReducer,
     hint: hintReducer,
+    trophy: trophyReducer,
   }
 );
 
