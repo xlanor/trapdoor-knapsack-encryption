@@ -25,6 +25,8 @@ import {
   SimulatorPage,
 } from './content'
 
+import BottomPopUp from '../Common/BottomPopUp'
+
 import {
   NEXT_INTRO_PAGE_ACTION,
   PREVIOUS_INTRO_PAGE_ACTION,
@@ -96,6 +98,9 @@ import FrontArrow from  '../../assets/images/FrontArrow.png';
 class LearnTab extends Component{
     constructor(props){
       super(props);
+      this.state = {
+        showTrophyAnimation: false,
+      }
      
     }
     getNextTab = () => {
@@ -292,7 +297,11 @@ class LearnTab extends Component{
         </Card>
       )
     }
-
+    hideTrophyAnimation = (endState) => {
+        this.setState({
+          showTrophyAnimation: false,
+        })
+    }
     render(){
       return(
         <>
@@ -304,6 +313,7 @@ class LearnTab extends Component{
             }
             </View>
             <View style={{flex:0.5}}>
+              <BottomPopUp/>
                <View style={{...styles.learnTab.bottom}}>
                   <View style={{flex: 1}}>
                     {

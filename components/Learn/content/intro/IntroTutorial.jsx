@@ -42,15 +42,11 @@ class IntroPage extends Component {
 
     render() {
         let Page = this.getPageElements()
-        console.log("==========>")
-        console.log(BottomPopUp)
-        console.log("==========>")
         return (
             <>
             <ScrollView style={styles.ScrollStyle.scrollStyle}>
                 <Page/>
             </ScrollView>
-            <BottomPopUp/>
             </>
         )
     }
