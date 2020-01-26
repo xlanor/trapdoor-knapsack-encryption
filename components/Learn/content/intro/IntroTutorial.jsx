@@ -10,6 +10,7 @@ import { DISABLE_NEXT_PAGE_ACTION } from '../../../../redux-modules/actions/tabP
 //contents
 import styles from './styles';
 import contents from './contents';
+import BottomPopUp from '../../../Common/BottomPopUp'
 
 // dynamic pages not static pages.
 class IntroPage extends Component {
@@ -41,10 +42,16 @@ class IntroPage extends Component {
 
     render() {
         let Page = this.getPageElements()
+        console.log("==========>")
+        console.log(BottomPopUp)
+        console.log("==========>")
         return (
+            <>
             <ScrollView style={styles.ScrollStyle.scrollStyle}>
                 <Page/>
             </ScrollView>
+            <BottomPopUp/>
+            </>
         )
     }
 }

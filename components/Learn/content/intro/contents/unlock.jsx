@@ -12,6 +12,9 @@ import { Card , Button as RneButton } from 'react-native-elements';
 import {
     ALGO_UNLOCK_ACTION  
 } from '../../../../../redux-modules/actions/learnPageLock'
+import {
+    TROPHY_HISTORIAN
+}  from '../../../../../redux-modules/actions/manageTrophies'
 
 // import image icons
 import Unlock from '../../../../../assets/images/unlock.png';
@@ -53,8 +56,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators({
-
-        ALGO_UNLOCK_ACTION
+        ALGO_UNLOCK_ACTION,
+        TROPHY_HISTORIAN
     }, dispatch)
   });
 

@@ -71,3 +71,5 @@ const trophyReducer = (state = initialState, action) => {
             return state;
     }
 }
+
+export default trophyReducer;
