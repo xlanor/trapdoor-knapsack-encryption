@@ -78,6 +78,11 @@ import {
   UPDATE_PUBLIC_KEY_ARRAY_ACTION,
  } from '../../redux-modules/actions/updateParameters';
 
+
+import {
+  HIDE_TROPHY_ACTION
+} from '../../redux-modules/actions/manageTrophies'
+
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -298,11 +303,17 @@ class LearnTab extends Component{
       )
     }
     hideTrophyAnimation = (endState) => {
+      const { actions } = this.props;
         this.setState({
           showTrophyAnimation: false,
+        }, ()=>{
+          setTimeout(() => {
+              actions.HIDE_TROPHY_ACTION()
+          }, 3000)
         })
     }
     render(){
+      const { showTrophy } = this.props;
       return(
         <>
           <View style={{flex: 5.5}}>
@@ -313,7 +324,10 @@ class LearnTab extends Component{
             }
             </View>
             <View style={{flex:0.5}}>
-              <BottomPopUp/>
+              {
+              showTrophy?
+                <BottomPopUp hideTrophyAnimation={(endState)=>{this.hideTrophyAnimation(endState)}} />
+              :
                <View style={{...styles.learnTab.bottom}}>
                   <View style={{flex: 1}}>
                     {
@@ -344,7 +358,7 @@ class LearnTab extends Component{
                       </View>
                     </View>
                   </View>
-              
+              }
             </View>
         
         </>
@@ -355,7 +369,10 @@ class LearnTab extends Component{
 
 
 const mapStateToProps = state => ({
-  lockState: state
+  lockState: state,
+  showTrophy: state.trophy.showTrophy,
+
+  
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -398,6 +415,7 @@ const mapDispatchToProps = (dispatch) => ({
     UPDATE_ENCRYPTION_PADDING_ACTION,
     UPDATE_ENCRYPTION_BLOCKS_ACTION,
     UPDATE_ENCRYPTED_STRING_ACTION,
+    HIDE_TROPHY_ACTION,
   }, dispatch)
 });
 

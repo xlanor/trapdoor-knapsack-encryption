@@ -4,9 +4,12 @@ import { Modal, Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 
+
+
 import * as Animatable from 'react-native-animatable';
 
 class BottomPopUp extends Component {
+    intervalID = 0;
     constructor(props){
         super(props);
         this.state = {
@@ -15,15 +18,25 @@ class BottomPopUp extends Component {
     }
 
     componentDidMount(){
-        setInterval(() => {
+        this.intervalID = setTimeout(() => {
             this.setState({ slideOut: true})
         }, 3000)
     }
+    
+    componentWillUnmount(){
+        clearInterval(this.intervalID)
+    }
+    
 
     render(){
         const { slideOut } = this.state;
+        const { hideTrophyAnimation } = this.props;
+       
         return(
-        <Animatable.View animation={slideOut ? "slideOutDown": "slideInUp"} duration={1500}>
+        <Animatable.View 
+            animation={slideOut ? "slideOutDown": "slideInUp"}
+            onAnimationEnd={hideTrophyAnimation} 
+            duration={1500}>
              <ListItem
                 containerStyle={{
                     borderWidth: 1,
@@ -50,7 +63,9 @@ class BottomPopUp extends Component {
 }
 
 BottomPopUp.propTypes = {
-    onAnimationEnd: PropTypes.func.isRequired,
+    hideTrophyAnimation: PropTypes.func.isRequired,
 }
+
+
 
 export default BottomPopUp;
