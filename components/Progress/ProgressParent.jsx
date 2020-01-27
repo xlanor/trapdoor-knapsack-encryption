@@ -23,7 +23,18 @@ import Trophy from './Trophies';
 class ProgressParent extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            confirmationResetPopup: false,
+        }
     }
+    
+    toggleConfirmationReset = () => {
+        this.setState((prevState)=> ({
+                confirmationResetPopup: !prevState.confirmationResetPopup
+            })
+        )
+    }
+
     getTrophyStates = () => {
         const {
             trophyHistorian,
@@ -89,17 +100,19 @@ class ProgressParent extends Component {
                         }}}
                         rightComponent={
                             <Button
-                            icon={
-                                <Icon
-                                name='refresh'
-                                type='evilicon'
-                                color='black'
-                                size={50}
-                                />
-                            }
-                            type="clear"
-                            title=""
-                            
+                                icon={
+                                    <Icon
+                                    name='refresh'
+                                    type='evilicon'
+                                    color='black'
+                                    size={50}
+                                    />
+                                }
+                                type="clear"
+                                title=""
+                                onPress={
+                                    ()=>{}
+                                }
                             />
                         }
                     />
