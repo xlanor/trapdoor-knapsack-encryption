@@ -27,7 +27,7 @@ export const UNLOCK_ALL_ACTION = () =>{
     type: UNLOCK_ALL
   }
 } 
-export const RESET_ALL_ACTION = () =>{
+export const RESET_ALL_TAB_ACTION = () =>{
   return{
     type: RESET_ALL
   }

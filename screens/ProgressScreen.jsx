@@ -8,7 +8,7 @@ import ProgressParent from '../components/Progress/ProgressParent'
 export default function ProgressScreen() {
   return (
     <>
-        <SafeAreaView style={styles2.learnScreen.backGroundContainer}>
+        <SafeAreaView style={styles2.progressScreen.backGroundContainer}>
             <ProgressParent/>                        
         </SafeAreaView>
     </>
