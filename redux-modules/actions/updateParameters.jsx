@@ -7,6 +7,7 @@ import {
   UPDATE_INVERSE,
   UPDATE_PUBLIC_KEY_STRING,
   UPDATE_PUBLIC_KEY_ARRAY,
+  RESET_ALL,
 } from '../constants';
 
 export const UPDATE_PRIVATE_KEY_STRING_ACTION = (payload) =>{
@@ -61,5 +62,11 @@ export const UPDATE_PUBLIC_KEY_ARRAY_ACTION = (payload) => {
   return {
     type: UPDATE_PUBLIC_KEY_ARRAY,
     payload: payload,
+  }
+}
+
+export const RESET_PARAMETERS_ACTION = () => {
+  return {
+    type: RESET_ALL
   }
 }

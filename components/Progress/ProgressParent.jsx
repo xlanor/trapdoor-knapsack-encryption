@@ -6,8 +6,15 @@ import { bindActionCreators } from 'redux';
 
 import {
     ScrollView,
-    View
+    View,
+    Dimensions
 } from 'react-native'
+
+import {
+    Header,
+    Button,
+    Icon
+} from 'react-native-elements';
 
 import styles from './styles'
 
@@ -75,9 +82,31 @@ class ProgressParent extends Component {
         let trophyState = this.getTrophyStates()
         return(
                 <ScrollView style={styles.progressParent.containerStyle}>
-                    {
-                        trophyState.map( x => <Trophy key={`${x.enabled}-${x.title}-${x.subtitle}`} title={x.title} subtitle = {x.subtitle} isEnabled = {x.enabled}/>)   
-                    }
+                    <Header 
+                        containerStyle={styles.progressParent.headerStyle}
+                        centerComponent={{ text: 'TROPHY', style:{
+                            ...styles.progressParent.headerFont
+                        }}}
+                        rightComponent={
+                            <Button
+                            icon={
+                                <Icon
+                                name='refresh'
+                                type='evilicon'
+                                color='black'
+                                size={50}
+                                />
+                            }
+                            type="clear"
+                            title=""
+                            
+                            />
+                        }
+                    />
+                        {
+                            trophyState.map( x => <Trophy key={`${x.enabled}-${x.title}-${x.subtitle}`} title={x.title} subtitle = {x.subtitle} isEnabled = {x.enabled}/>)   
+
+                        }
                 </ScrollView>
         );
     }
