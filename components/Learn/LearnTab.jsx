@@ -336,8 +336,8 @@ class LearnTab extends Component{
                       <RneButton
                           icon={
                             <Icon
-                              name="arrow-left-bold-circle-outline"
-                              type='material-community'
+                            name="arrow-bold-left"
+                            type='entypo'
                               size={50}
                              
                             />
@@ -365,8 +365,8 @@ class LearnTab extends Component{
                             <RneButton
                                   icon={
                                     <Icon
-                                      name="arrow-right-bold-circle-outline"
-                                      type='material-community'
+                                      name="arrow-bold-right"
+                                      type='entypo'
                                       size={50}
                                     
                                     />
