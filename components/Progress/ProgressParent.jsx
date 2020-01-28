@@ -5,6 +5,30 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import {
+    LINKS_HINT_NOTDONE_ACTION,
+    HINT_RESET_ACTION
+}from '../../redux-modules/actions/hint'
+
+import {
+    RESET_ALL_TAB_ACTION
+}from '../../redux-modules/actions/learnPageLock'
+
+import {
+    RESET_PAGE_ACTION
+} from '../../redux-modules/actions/tabPage'
+import {
+    TROPHY_RESET_ALL_ACTION
+} from '../../redux-modules/actions/manageTrophies' 
+
+import {
+    RESET_ENCRYPTED_ACTION
+} from '../../redux-modules/actions/updateEncryption'
+
+import {
+    RESET_PARAMETERS_ACTION
+} from '../../redux-modules/actions/updateParameters'
+
+import {
     ScrollView,
     View,
     Dimensions
@@ -12,13 +36,15 @@ import {
 
 import {
     Header,
-    Button,
+    Button as RneButton,
     Icon
 } from 'react-native-elements';
 
 import styles from './styles'
 
 import Trophy from './Trophies';
+import PopUpWithButtons from '../Common/PopUpWithButtons';
+import Button from '../Common/Button';
 
 class ProgressParent extends Component {
     constructor(props){
@@ -33,6 +59,17 @@ class ProgressParent extends Component {
                 confirmationResetPopup: !prevState.confirmationResetPopup
             })
         )
+    }
+
+    resetAll = () => {
+        const { actions } = this.props;
+        actions.LINKS_HINT_NOTDONE_ACTION()
+        actions.HINT_RESET_ACTION()
+        actions.RESET_ALL_TAB_ACTION()
+        actions.TROPHY_RESET_ALL_ACTION()
+        actions.RESET_ENCRYPTED_ACTION()
+        actions.RESET_PARAMETERS_ACTION()
+        actions.RESET_PAGE_ACTION()
     }
 
     getTrophyStates = () => {
@@ -90,16 +127,39 @@ class ProgressParent extends Component {
         ]
     }
     render(){
+        const { confirmationResetPopup } = this.state;
         let trophyState = this.getTrophyStates()
         return(
+            <>
+                {
+                    confirmationResetPopup
+                    ?  <PopUpWithButtons
+                            messageContent={"This will clear all progress you have made so far!"}
+                            ButtonOne={
+                                <Button
+                                    text="Reset"
+                                    callback={()=>{this.toggleConfirmationReset(); this.resetAll()}}
+                                    buttonColor="blue"
+                                />
+                            }
+                            ButtonTwo={
+                                <Button
+                                    text="Exit"
+                                    callback={()=>{this.toggleConfirmationReset()}}
+                                />
+                            }
+                            visibility={confirmationResetPopup}
+                        />
+                    : null
+                }
                 <ScrollView style={styles.progressParent.containerStyle}>
                     <Header 
                         containerStyle={styles.progressParent.headerStyle}
-                        centerComponent={{ text: 'TROPHY', style:{
+                        centerComponent={{ text: 'PROGRESS', style:{
                             ...styles.progressParent.headerFont
                         }}}
                         rightComponent={
-                            <Button
+                            <RneButton
                                 icon={
                                     <Icon
                                     name='refresh'
@@ -111,7 +171,7 @@ class ProgressParent extends Component {
                                 type="clear"
                                 title=""
                                 onPress={
-                                    ()=>{}
+                                    ()=>{this.toggleConfirmationReset()}
                                 }
                             />
                         }
@@ -121,6 +181,7 @@ class ProgressParent extends Component {
 
                         }
                 </ScrollView>
+        </>
         );
     }
 }
@@ -138,7 +199,15 @@ mapStateToProps = state => ({
 })
 
 mapDispatchToProps = dispatch => ({
-
+  actions: bindActionCreators({
+        LINKS_HINT_NOTDONE_ACTION,
+        HINT_RESET_ACTION,
+        RESET_ALL_TAB_ACTION,
+        TROPHY_RESET_ALL_ACTION,
+        RESET_ENCRYPTED_ACTION,
+        RESET_PARAMETERS_ACTION,
+        RESET_PAGE_ACTION,
+    }, dispatch)
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ProgressParent);

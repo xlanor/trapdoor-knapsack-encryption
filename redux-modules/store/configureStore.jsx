@@ -75,6 +75,22 @@ const migrations = {
         maxDecryptPages: MAX_DECRYPT_PAGES,
       },
     }
+  },
+  2: (state) => {
+    return {
+      ...state,
+      trophy: {
+        trophyHistorian: false,
+        trophyEzMath: false,
+        trophyKeyRing: false,
+        trophyConcealment: false,
+        trophyReveal: false,
+        trophyKeymaster: false,
+        trophySafetyFirst: false,
+        trophyBreakWall: false,
+        showTrophy:false,
+      }
+    }
   }
 }
 
@@ -83,7 +99,7 @@ const persistConfig = {
   version: 1,
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
-  whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption','hint'], 
+  whitelist: ['encryption','lessonPage','lessonPageTabAndPages','updateParameters','encryption','hint', 'trophy'], 
   migrate: createMigrate(migrations, { debug: true })
 }
 
