@@ -27,7 +27,6 @@ const navbarBackGround = {
     backgroundColor: COLORS.ORANGE_1,
     flexDirection: 'row',
     alignItems: 'center',
-    maxHeight: 45,
     width: '90%',
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
