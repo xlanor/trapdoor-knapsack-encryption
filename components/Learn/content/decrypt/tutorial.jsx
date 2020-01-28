@@ -21,9 +21,14 @@ import {
   from 'react-native-table-component';
 
 import {
-  ALLOW_NEXT_PAGE_ACTION, 
+  ALLOW_NEXT_PAGE_ACTION,
   NEXT_DECRYPT_PAGE_ACTION
 } from '../../../../redux-modules/actions/tabPage';
+
+import {
+    UNLOCK_TROPHY_REVEAL,
+    SHOW_TROPHY_ACTION,
+}  from '../../../../redux-modules/actions/manageTrophies'
 
 // React Native Animatable Imports
 import * as Animatable from "react-native-animatable";
@@ -295,8 +300,18 @@ class DecryptTutorial extends Component {
 
   }
 
+  unlockTrophy = () => {
+    const { actions, trophyReveal } = this.props;
+    actions.UNLOCK_TROPHY_REVEAL()
+    if(!trophyReveal){
+      actions.SHOW_TROPHY_ACTION()
+    }
+  }
+
   getFourthPage = () => {
-    console.log(`ON PAGE 4`)
+    /*    UNLOCK_TROPHY_REVEAL,
+        SHOW_TROPHY_ACTION,*/
+
     return(
       <Animatable.View animation="slideInDown">
           <Card title="Congratulations!">
@@ -311,7 +326,7 @@ class DecryptTutorial extends Component {
     const { actions } = this.props;
     return (
       <>
-        <Quiz quizType="DECRYPT" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_DECRYPT_PAGE_ACTION()}} />
+        <Quiz quizType="DECRYPT" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_DECRYPT_PAGE_ACTION(); this.unlockTrophy()}} />
       </>
     )
   }
@@ -443,7 +458,7 @@ class DecryptTutorial extends Component {
             ? <Loader />
             : null
         }
-        
+
         {
           showInversePopUp
             ? <AlertPopUp
@@ -499,7 +514,7 @@ class DecryptTutorial extends Component {
             : null
         }
       </View>
-        
+
         </ScrollView>
     )
   }
@@ -507,13 +522,16 @@ class DecryptTutorial extends Component {
 
 
 const mapStateToProps = state => ({
-  lockState: state
+  lockState: state,
+  trophyReveal: state.trophy.trophyReveal,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
     ALLOW_NEXT_PAGE_ACTION,
-    NEXT_DECRYPT_PAGE_ACTION
+    NEXT_DECRYPT_PAGE_ACTION,
+    UNLOCK_TROPHY_REVEAL,
+    SHOW_TROPHY_ACTION,
   }, dispatch)
 })
 

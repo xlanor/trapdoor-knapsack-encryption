@@ -32,13 +32,20 @@ import {
   UPDATE_ENCRYPTION_BLOCKS_ACTION,
   UPDATE_ENCRYPTED_STRING_ACTION,
 } from '../../../../redux-modules/actions/updateEncryption';
+
 import {
   ALLOW_NEXT_PAGE_ACTION,
   NEXT_ENCRYPT_PAGE_ACTION,
 } from '../../../../redux-modules/actions/tabPage';
+
 import {
   DECRYPT_UNLOCK_ACTION
 } from '../../../../redux-modules/actions/learnPageLock';
+
+import {
+    UNLOCK_TROPHY_CONCEALMENT,
+    SHOW_TROPHY_ACTION,
+}  from '../../../../redux-modules/actions/manageTrophies'
 
 // React-Native Table Imports
 import {
@@ -271,7 +278,7 @@ class EncryptTutorial extends Component {
     let binPubKeyString = lockState.updateParameters.publicKeyString;
     let binPubKeyArr = lockState.updateParameters.publicKeyArr;
     this.setSpinnerCallback(()=>{
-      let binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length) 
+      let binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length)
       console.log(binaryBlocks)
       actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks)
       actions.ALLOW_NEXT_PAGE_ACTION()
@@ -279,7 +286,7 @@ class EncryptTutorial extends Component {
         showBlocks: true,
       })
     })
-    
+
   }
 
   paddingInfoPopUp = () => {
@@ -357,6 +364,15 @@ class EncryptTutorial extends Component {
     this.setState({ showPaddingInfoPopUp: true, })
   }
 
+  unlockDecryptionPage = () => {
+    const { trophyConcealment, actions } = this.props;
+    actions.DECRYPT_UNLOCK_ACTION()
+    actions.UNLOCK_TROPHY_CONCEALMENT()
+    if(!trophyConcealment){
+      actions.SHOW_TROPHY_ACTION()
+    }
+  }
+
   getSixthPage = () => {
     const { actions } = this.props;
     return(
@@ -365,10 +381,10 @@ class EncryptTutorial extends Component {
             <RneButton
               type="clear"
               icon={
-                <Image source={Unlock} 
+                <Image source={Unlock}
                 style={styles.tutorial.unlockIconStyle}/>}
               buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-              onPress = {()=>{actions.DECRYPT_UNLOCK_ACTION()}}
+              onPress = {()=>{ this.unlockDecryptionPage()}}
             >
 
             </RneButton>
@@ -387,7 +403,7 @@ class EncryptTutorial extends Component {
       </>
     )
   }
-  
+
   getFourthPage = () => {
     const { showBlocks } = this.state;
     const { lockState, actions } = this.props;
@@ -400,7 +416,7 @@ class EncryptTutorial extends Component {
           setSpinner={()=>{this.setSpinner()}}
       />
     )
-   
+
   }
   getThirdPage = () => {
     const { actions, lockState } = this.props;
@@ -412,7 +428,7 @@ class EncryptTutorial extends Component {
     return (
         <Page3 showPaddingInfoPopUp={()=>{this.showPaddingInfoPopUp()}}/>
     )
-   
+
   }
 
   getSecondPage = () => {
@@ -424,7 +440,7 @@ class EncryptTutorial extends Component {
     return(
         <Page2 />
     )
-    
+
   }
 
   getFirstPage = () => {
@@ -434,7 +450,7 @@ class EncryptTutorial extends Component {
        <Page1
           keyboardVisiblity={keyboardVisiblity}
           updateCurrentTextBox={(text)=>{this.updateCurrentTextbox(text)}}
-          validateInput={()=>{this.validateInput()}}  
+          validateInput={()=>{this.validateInput()}}
        />
      )
   }
@@ -573,7 +589,8 @@ class EncryptTutorial extends Component {
 }
 
 const mapStateToProps = state => ({
-  lockState: state
+  lockState: state,
+  trophyConcealment: state.trophy.trophyConcealment,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -587,6 +604,8 @@ const mapDispatchToProps = (dispatch) => ({
     ALLOW_NEXT_PAGE_ACTION,
     DECRYPT_UNLOCK_ACTION,
     NEXT_ENCRYPT_PAGE_ACTION,
+    UNLOCK_TROPHY_CONCEALMENT,
+    SHOW_TROPHY_ACTION,
   }, dispatch)
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EncryptTutorial);

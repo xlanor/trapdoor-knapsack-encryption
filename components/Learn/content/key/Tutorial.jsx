@@ -46,6 +46,11 @@ import {
 } from '../../../../redux-modules/actions/updateParameters';
 
 import {
+    UNLOCK_TROPHY_KEYRING,
+    SHOW_TROPHY_ACTION,
+}  from '../../../../redux-modules/actions/manageTrophies'
+
+import {
   ENCRYPT_LOCK_ACTION,
   DECRYPT_LOCK_ACTION,
   ENCRYPT_UNLOCK_ACTION,
@@ -302,23 +307,23 @@ class KeyPage extends Component {
     }
 
   }
-  
+
   showKeyMultiplicationInfoPopUp = () => {
     this.setState({ showKeyMultiplicationInfoPopUp: true, })
   }
 
   showCoprimeInfoPopUp = () => {
-    this.setState({ showCoprimeInfoPopUp: true, }) 
+    this.setState({ showCoprimeInfoPopUp: true, })
   }
 
   showModulusInfoPopUp = () => {
-    this.setState({ 
-      showModulusInfoPopUp: true, 
+    this.setState({
+      showModulusInfoPopUp: true,
     })
   }
   showSuperIncreasingInfoPopUp = () => {
-    this.setState({ 
-      showSuperIncreasingInfoPopUp: true, 
+    this.setState({
+      showSuperIncreasingInfoPopUp: true,
     })
   }
 
@@ -430,6 +435,17 @@ class KeyPage extends Component {
 
     })
   }
+
+  unlockEncryption = () => {
+    const { actions, trophyKeyRing } = this.props;
+    // always unlock encrypt by default.
+    actions.ENCRYPT_UNLOCK_ACTION()
+    actions.UNLOCK_TROPHY_KEYRING()
+    if (!trophyKeyRing){
+      actions.SHOW_TROPHY_ACTION()
+    }
+  }
+
   getSeventhPage = () => {
     const { actions } = this.props;
     return(
@@ -441,7 +457,7 @@ class KeyPage extends Component {
                 <Image source={Unlock}
                 style={styles.page1.unlockIconStyle}/>}
               buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-              onPress = {()=>{actions.ENCRYPT_UNLOCK_ACTION()}}
+              onPress = {()=>{ this.unlockEncryption() }}
             >
 
             </RneButton>
@@ -449,7 +465,7 @@ class KeyPage extends Component {
       </Animatable.View>
 
     )
-    
+
   }
   getSixthPage = () => {
     const { actions } = this.props;
@@ -485,7 +501,7 @@ class KeyPage extends Component {
     const { keyboardVisiblity } = this.state;
     let Page3 = contents.page3;
     return (
-      <Page3 
+      <Page3
         keyboardVisiblity={keyboardVisiblity}
         showCoprimeInfoPopUp={()=>{this.showCoprimeInfoPopUp()}}
         setMultiplier={(text)=>{this.setMultiplier(text)}}
@@ -510,7 +526,7 @@ class KeyPage extends Component {
       const { keyboardVisiblity } = this.state;
       let Page1 = contents.page1;
       return (
-        <Page1 
+        <Page1
           keyboardVisiblity={keyboardVisiblity}
           updatePrivateKey={(text)=>{this.setPrivateKey(text)}}
           validatePrivateKey={()=>{this.validatePrivateKey()}}
@@ -569,10 +585,10 @@ class KeyPage extends Component {
     } = this.state;
     let pageNo = this.checkPageNo()
     return (
-      <ScrollView 
-          ref={scrollView => this.scrollView = scrollView} 
-          onContentSizeChange={(contentWidth, contentHeight)=>{     
-              pageNo < 6   
+      <ScrollView
+          ref={scrollView => this.scrollView = scrollView}
+          onContentSizeChange={(contentWidth, contentHeight)=>{
+              pageNo < 6
               ?this.scrollView.scrollToEnd({animated: true})
               :null
           }}
@@ -650,7 +666,8 @@ class KeyPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  lockState: state
+  lockState: state,
+  trophyKeyRing: state.trophy.trophyKeyRing,
 })
 
 
@@ -669,6 +686,8 @@ const mapDispatchToProps = (dispatch) => ({
     DECRYPT_LOCK_ACTION,
     NEXT_KEY_PAGE_ACTION,
     ENCRYPT_UNLOCK_ACTION,
+    UNLOCK_TROPHY_KEYRING,
+    SHOW_TROPHY_ACTION,
   }, dispatch)
 });
 export default connect(mapStateToProps, mapDispatchToProps)(KeyPage);
