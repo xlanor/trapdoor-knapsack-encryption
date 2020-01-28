@@ -336,21 +336,22 @@ class LearnTab extends Component{
                       <RneButton
                           icon={
                             <Icon
-                              name="md-arrow-dropleft"
-                              type='ionicon'
-                              size={45}
+                              name="arrow-left-bold-circle-outline"
+                              type='material-community'
+                              size={50}
+                             
                             />
                           }
                           title=""
                           type="clear"
                           onPress={()=>{
                               this.getTouchablePreviousAction()}}
-                        buttonStyle={{
-                          backgroundColor: 'blue',
-                          paddingTop: 0,
-                          paddingBottom: 0,
-                          marginTop: 0
-                        }}
+                          buttonStyle={{
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                            marginTop: 0
+                          }}
+                       
                       />
                     }
                     </View>
@@ -361,12 +362,26 @@ class LearnTab extends Component{
                           this.isFinalPage()?
                           null:
                             this.canNavigate()?
-                              <TouchableOpacity onPress = {()=>{
-                                  this.getTouchableNextAction()
-                              }}>
-
-                                <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
-                              </TouchableOpacity>
+                            <RneButton
+                                  icon={
+                                    <Icon
+                                      name="arrow-right-bold-circle-outline"
+                                      type='material-community'
+                                      size={50}
+                                    
+                                    />
+                                  }
+                                  title=""
+                                  type="clear"
+                                  onPress={()=>{
+                                      this.getTouchableNextAction()}}
+                                  buttonStyle={{
+                                    paddingTop: 0,
+                                    paddingBottom: 0,
+                                    marginTop: 0
+                                  }}
+                              
+                              />
                               : null
                         }
                       </View>
