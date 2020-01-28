@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation';
 import { View, Button, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Constants from 'expo-constants';
+import { Button as RneButton, Icon } from 'react-native-elements';
 
 // redux actions
 import { bindActionCreators } from 'redux';
@@ -104,9 +105,30 @@ class HomePageParent extends Component{
 
             {
                 optionChosen?
-                  <TouchableOpacity onPress={ ()=> { this.navigateScreen(selectedOption) } }>
-                    <Image style={styles.homePageParent.imageStyleArrow} source = {arrow}/>
-                  </TouchableOpacity>:
+
+                  <RneButton
+                    //
+                    icon={
+                      <Icon
+                        name="ios-arrow-dropright-circle"
+                        type='ionicon'
+                        size={100}
+                        color="red"
+                      
+                      />
+                    }
+                    title=""
+                    type="clear"
+                    onPress={()=>{
+                        this.navigateScreen(selectedOption)}}
+                    buttonStyle={{
+                      paddingTop: 0,
+                      paddingBottom: 0,
+                      marginTop: 0
+                    }}
+                  />
+
+                :
                   null
             }
             </View>
