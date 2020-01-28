@@ -10,7 +10,6 @@ import {
     TROPHY_RESET,
     SHOW_TROPHY,
     HIDE_TROPHY,
-    RESET_ALL
 } from '../constants';
 
 
@@ -59,5 +58,5 @@ export const HIDE_TROPHY_ACTION = () => ({
 })
 
 export const TROPHY_RESET_ALL_ACTION = () => ({
-    type: RESET_ALL,
+    type: TROPHY_RESET,
 })
