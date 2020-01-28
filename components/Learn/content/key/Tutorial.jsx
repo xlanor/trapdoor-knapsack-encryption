@@ -47,6 +47,7 @@ import {
 
 import {
     UNLOCK_TROPHY_KEYRING,
+    UNLOCK_TROPHY_KEYMASTER,
     SHOW_TROPHY_ACTION,
 }  from '../../../../redux-modules/actions/manageTrophies'
 
@@ -422,7 +423,7 @@ class KeyPage extends Component {
 
   }
   generatePubKey = () => {
-    const { lockState, actions } = this.props;
+    const { actions, trophyKeymaster } = this.props;
     let pub = this.computePublicKey()
     actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub)
     actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join())
@@ -432,7 +433,11 @@ class KeyPage extends Component {
     actions.ENCRYPT_LOCK_ACTION()
     this.setState({
       pkLoaded: true,
-
+    },()=>{
+      actions.UNLOCK_TROPHY_KEYMASTER();
+      if(!trophyKeymaster){
+        actions.SHOW_TROPHY_ACTION();
+      }
     })
   }
 
@@ -668,6 +673,7 @@ class KeyPage extends Component {
 const mapStateToProps = state => ({
   lockState: state,
   trophyKeyRing: state.trophy.trophyKeyRing,
+  trophyKeymaster: state.trophy.trophyKeymaster,
 })
 
 
@@ -687,6 +693,7 @@ const mapDispatchToProps = (dispatch) => ({
     NEXT_KEY_PAGE_ACTION,
     ENCRYPT_UNLOCK_ACTION,
     UNLOCK_TROPHY_KEYRING,
+    UNLOCK_TROPHY_KEYMASTER,
     SHOW_TROPHY_ACTION,
   }, dispatch)
 });
