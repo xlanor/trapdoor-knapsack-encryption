@@ -27,6 +27,7 @@ import {
 
 import {
     UNLOCK_TROPHY_REVEAL,
+    UNLOCK_TROPHY_BREAK_WALL,
     SHOW_TROPHY_ACTION,
 }  from '../../../../redux-modules/actions/manageTrophies'
 
@@ -286,6 +287,7 @@ class DecryptTutorial extends Component {
   }
 
   async decryption() {
+    const { actions, trophyBreakWall } = this.props;
     this.setState({
       showSpinner: true,
     }, () => {
@@ -294,6 +296,11 @@ class DecryptTutorial extends Component {
         this.setState({
           showSpinner: false,
           ...decryptRs
+        },()=>{
+           actions.UNLOCK_TROPHY_BREAK_WALL();
+           if (!trophyBreakWall){
+             actions.SHOW_TROPHY_ACTION()
+           }
         });
       }, 500);
     })
@@ -524,12 +531,14 @@ class DecryptTutorial extends Component {
 const mapStateToProps = state => ({
   lockState: state,
   trophyReveal: state.trophy.trophyReveal,
+  trophyBreakWall: state.trophy.trophyBreakWall,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
     ALLOW_NEXT_PAGE_ACTION,
     NEXT_DECRYPT_PAGE_ACTION,
+    UNLOCK_TROPHY_BREAK_WALL,
     UNLOCK_TROPHY_REVEAL,
     SHOW_TROPHY_ACTION,
   }, dispatch)
