@@ -10,7 +10,7 @@ import { Card , Button as RneButton } from 'react-native-elements';
 
 // begin redux actions
 import {
-    ALGO_UNLOCK_ACTION  
+    ALGO_UNLOCK_ACTION
 } from '../../../../../redux-modules/actions/learnPageLock'
 import {
     UNLOCK_TROPHY_HISTORIAN,
@@ -23,12 +23,23 @@ import Unlock from '../../../../../assets/images/unlock.png';
 // importing stylesheet
 import styles from '../styles';
 
-class UnlockNext extends Component{ 
+class UnlockNext extends Component{
     constructor(props){
         super(props)
     }
+    unlockHistorian = () => {
+      const { actions, trophyHistorian } = this.props;
+        // always unlock next page
+        actions.ALGO_UNLOCK_ACTION()
+        actions.UNLOCK_TROPHY_HISTORIAN()
+      if(!trophyHistorian){
+        // only show the popup animation if the trophy has not been unlocked before
+          actions.SHOW_TROPHY_ACTION()
+      }
+
+    }
     render(){
-        const { actions } = this.props;
+        const { actions, trophyHistorian } = this.props;
         console.log(actions)
         return (
             <>
@@ -42,12 +53,10 @@ class UnlockNext extends Component{
                         />}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                         onPress = {()=>{
-                            actions.ALGO_UNLOCK_ACTION()
-                            actions.UNLOCK_TROPHY_HISTORIAN()
-                            actions.SHOW_TROPHY_ACTION()
+                            this.unlockHistorian()
                         }}
                     >
-        
+
                     </RneButton>
                     </Card>
                 </Animatable.View>
@@ -57,7 +66,7 @@ class UnlockNext extends Component{
 }
 
 const mapStateToProps = state => ({
-    lockState: state
+  trophyHistorian: state.trophy.trophyHistorian
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -77,6 +77,7 @@ const trophyReducer = (state = initialState, action) => {
                 showTrophy: false,
             }
         case TROPHY_RESET:
+            console.log(`TROPHY_RESET_CALLED`)
             return {
                 ...initialState
             }
