@@ -1,11 +1,15 @@
 import React from 'react'
 import {
-   Modal, 
+   Modal,
    TouchableOpacity, TouchableHighlight,
-   View, 
-   Text, 
+   View,
+   Text,
    Image
 } from 'react-native'
+import {
+  Button as RneButton,
+  Icon,
+} from 'react-native-elements';
 import PropTypes from 'prop-types'
 import { ScrollView } from 'react-native-gesture-handler'
 import { scrollViewPopUp as styles } from './styles';
@@ -36,34 +40,38 @@ const ScrollViewPopUp = (props) => {
                                 : null
                             }
                         </View>
-                        <View 
-                            style={
-                                { 
-                                    flex: 1,
-                                    ...styles.closeIconView
-                                }
-                            }>
-                            <TouchableOpacity rejectResponderTermination onPress={callback}>
-                                <Image style={styles.closeIconSize} source={closeIcon}/>
-                            </TouchableOpacity>
+                        <View
+                        style={{
+                                flex: 1,}}>
+                            <RneButton
+                              icon = {
+                                <Icon
+                                  name="times-circle"
+                                  type="font-awesome"
+                                />
+                              }
+                              type="clear"
+                              title=""
+                              onPress={callback}
+                            />
 
                         </View>
-                       
+
                     </View>
-                <ScrollView style={styles.scrollViewStyle}> 
+                <ScrollView style={styles.scrollViewStyle}>
                     {
                         lockStateArr?
                         lockStateArr
                         : null
                     }
                 </ScrollView>
-               
+
             </SafeAreaView>
 
 
         </Modal>
-          
-           
+
+
     );
 }
 
@@ -73,5 +81,5 @@ ScrollViewPopUp.propTypes = {
     lockStateArr: PropTypes.array,
     title: PropTypes.string,
   };
-  
+
 export default ScrollViewPopUp;

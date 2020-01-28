@@ -1,16 +1,16 @@
 import React, { Component } from 'React';
-import { 
+import {
   View,
   Text,
   StyleSheet
 } from 'react-native'
 
-import { 
-  Table, 
-  TableWrapper, 
-  Rows, 
-  Row, 
-  Col } 
+import {
+  Table,
+  TableWrapper,
+  Rows,
+  Row,
+  Col }
 from 'react-native-table-component';
 
 
@@ -33,40 +33,39 @@ class Block extends Component{
       returnArr[i] = array1[i] * array2[i]
     }
     return returnArr
-  } 
+  }
   constructRowData = () => {
     const { tableData, currentPublicKey, tableType } = this.props;
     let rArr =  tableType === "binary" ?
           [ currentPublicKey, tableData, this.multiplyTwoArrays(currentPublicKey,tableData) ]
           : [currentPublicKey, tableData ]
-     
+
     return rArr
   }
   render(){
     const { total } = this.state;
-    const { flexArr, 
-          tableTitle, 
-          tableData, 
-          currentPublicKey, 
+    const { flexArr,
+          tableTitle,
+          tableData,
+          currentPublicKey,
           tableType,
           blockNo
     } = this.props;
     return (
       <View style={styles.containerStyle}>
         <View style={styles.blockTitleView}>
-        {
-          blockNo
-          ? <Text style={styles.textStyle}>Block #{blockNo}</Text>
-          : null
-        }
-          
+            {
+              blockNo
+              ? <Text style={styles.textStyle}>Block #{blockNo}</Text>
+              : null
+            }
         </View>
         <Table borderStyle={{borderWidth: 1}}>
           <TableWrapper style={styles.wrapperStyle}>
             <Col data={tableTitle} style={styles.titleStyle} heightArr={[28,28]} textStyle={styles.headerTextStyle}/>
             <Rows data={this.constructRowData()} flexArr={flexArr} style={styles.rowStyle} textStyle={styles.textStyle}/>
           </TableWrapper>
-         
+
         </Table>
         <View style={styles.blockTotalView}>
         {
