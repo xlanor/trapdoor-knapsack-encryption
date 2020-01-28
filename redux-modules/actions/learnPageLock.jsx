@@ -27,11 +27,6 @@ export const UNLOCK_ALL_ACTION = () =>{
     type: UNLOCK_ALL
   }
 } 
-export const RESET_ALL_TAB_ACTION = () =>{
-  return{
-    type: RESET_ALL
-  }
-} 
 export const KNAPSACK_SELECT_ACTION = () =>{
   return{
     type: KNAPSACK_SELECT,
@@ -131,3 +126,8 @@ export const INTRO_UNLOCK_ACTION = () =>{
   }
 }
 
+export const RESET_ALL_TAB_ACTION = () =>{
+  return{
+    type: RESET_ALL
+  }
+} 
