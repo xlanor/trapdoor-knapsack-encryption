@@ -10,8 +10,13 @@ import { Card , Button as RneButton } from 'react-native-elements';
 
 // begin redux actions
 import {
-    KEY_UNLOCK_ACTION  
+    KEY_UNLOCK_ACTION
 } from '../../../../../redux-modules/actions/learnPageLock'
+
+import {
+    UNLOCK_TROPHY_EZ_MATH,
+    SHOW_TROPHY_ACTION,
+}  from '../../../../../redux-modules/actions/manageTrophies'
 
 // import image icons
 import Unlock from '../../../../../assets/images/unlock.png';
@@ -19,9 +24,18 @@ import Unlock from '../../../../../assets/images/unlock.png';
 // importing stylesheet
 import styles from '../styles';
 
-class UnlockNext extends Component{ 
+class UnlockNext extends Component{
     constructor(props){
         super(props)
+    }
+    unlockEzMath = () => {
+      const { actions, trophyEzMath } = this.props;
+      // always unlock the tabs and trophies,
+      actions.KEY_UNLOCK_ACTION();
+      actions.UNLOCK_TROPHY_EZ_MATH();
+      if(!trophyEzMath){
+        actions.SHOW_TROPHY_ACTION()
+      }
     }
     render(){
         const { actions } = this.props;
@@ -36,9 +50,9 @@ class UnlockNext extends Component{
                             style={styles.GCDPages.unlockIconStyle}
                         />}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                        onPress = {()=>{actions.KEY_UNLOCK_ACTION()}}
+                        onPress = {()=>{this.unlockEzMath()}}
                     >
-        
+
                     </RneButton>
                     </Card>
                 </Animatable.View>
@@ -48,12 +62,13 @@ class UnlockNext extends Component{
 }
 
 const mapStateToProps = state => ({
-    lockState: state
+    trophyEzMath: state.trophy.trophyEzMath
 })
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators({
-
+        UNLOCK_TROPHY_EZ_MATH,
+        SHOW_TROPHY_ACTION,
         KEY_UNLOCK_ACTION
     }, dispatch)
   });
