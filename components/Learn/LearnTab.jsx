@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { withNavigation, SafeAreaView } from 'react-navigation';
-import { 
-  View, 
+import {
+  View,
   KeyboardAvoidingView,
   Button,
-  FlatList,  
-  Text, 
-  Image, 
+  FlatList,
+  Text,
+  Image,
   TouchableOpacity,
   Dimensions,
   Modal
 } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
-import {Card} from 'react-native-elements'
+import { Card, Button as RneButton, Icon } from 'react-native-elements'
 import { Algo } from '../../assets/images'
 
-import { 
+import {
   introPageOne,
   gcdPageOne,
   keyPageOne,
@@ -43,7 +43,7 @@ import {
 } from '../../redux-modules/actions/tabPage';
 
 // importing redux defined actions
-import { 
+import {
   INTRO_SELECT_ACTION,
   INTRO_LOCK_ACTION,
   INTRO_UNLOCK_ACTION,
@@ -106,7 +106,7 @@ class LearnTab extends Component{
       this.state = {
         showTrophyAnimation: false,
       }
-     
+
     }
     getNextTab = () => {
       // to be defined  - hardcoded.
@@ -128,7 +128,7 @@ class LearnTab extends Component{
         default: break;
       }
 
-      if (!isFound) 
+      if (!isFound)
         return null;
       else{
         // return a button. to be designed.
@@ -150,8 +150,8 @@ class LearnTab extends Component{
         </TouchableOpacity>
         );
       }
-      
-      
+
+
     }
     canNavigate = () => {
       const { lockState } = this.props;
@@ -168,11 +168,11 @@ class LearnTab extends Component{
       switch(currentTab){
         case "intro": return actions.PREVIOUS_INTRO_PAGE_ACTION();
         case "gcd": return actions.PREVIOUS_GCD_PAGE_ACTION();
-        case "key": 
+        case "key":
           if(currentPage == 4){
             actions.UPDATE_INVERSE_ACTION(0);
             return actions.PREVIOUS_KEY_PAGE_ACTION()
-          
+
           }else if (currentPage == 5){
             actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION([])
             actions.UPDATE_PUBLIC_KEY_STRING_ACTION("")
@@ -206,7 +206,7 @@ class LearnTab extends Component{
         case "intro": return actions.NEXT_INTRO_PAGE_ACTION();
         case "gcd": return actions.NEXT_GCD_PAGE_ACTION();
         case "key": return actions.NEXT_KEY_PAGE_ACTION();
-        case "encrypt": 
+        case "encrypt":
             if(currentPage == 1){
               // reset
               actions.UPDATE_ENCRYPTION_PADDING_ACTION(0);
@@ -224,7 +224,7 @@ class LearnTab extends Component{
       const { lockState } = this.props;
       let currentTab = lockState.lessonPageTabAndPages.tabName
       console.log(`CUrrent tab ${currentTab} Max page ${lockState.lessonPageTabAndPages.maxPage} CurrentPage: ${lockState.lessonPageTabAndPages.tabPage}`)
-       return lockState.lessonPageTabAndPages.tabPage >= lockState.lessonPageTabAndPages.maxPage 
+       return lockState.lessonPageTabAndPages.tabPage >= lockState.lessonPageTabAndPages.maxPage
                   ? true : false;
     }
 
@@ -258,7 +258,7 @@ class LearnTab extends Component{
             switch(currentPage){
               case 1:
                 return keyPageOne;
-              default: 
+              default:
                 return keyPageOne;
             }
         case "encrypt":
@@ -272,7 +272,7 @@ class LearnTab extends Component{
             switch(currentPage){
               case 1:
                 return DecryptTutorial;
-              default: 
+              default:
                 return DecryptTutorial;
             }
         case "simulator":
@@ -317,9 +317,9 @@ class LearnTab extends Component{
       return(
         <>
           <View style={{flex: 5.5}}>
-            
+
             {
-              
+
               this.loadPage()
             }
             </View>
@@ -333,11 +333,25 @@ class LearnTab extends Component{
                     {
                       this.isFirstPage()?
                       null:
-                      <TouchableOpacity onPress = {()=>{
-                          this.getTouchablePreviousAction()
-                      }}>
-                      <Image style={styles.learnTab.nextArrowSize} source={ BackArrow } resizeMode="contain" />
-                      </TouchableOpacity>
+                      <RneButton
+                          icon={
+                            <Icon
+                              name="md-arrow-dropleft"
+                              type='ionicon'
+                              size={45}
+                            />
+                          }
+                          title=""
+                          type="clear"
+                          onPress={()=>{
+                              this.getTouchablePreviousAction()}}
+                        buttonStyle={{
+                          backgroundColor: 'blue',
+                          paddingTop: 0,
+                          paddingBottom: 0,
+                          marginTop: 0
+                        }}
+                      />
                     }
                     </View>
                     <View style={{flex: 4}}/>
@@ -350,7 +364,7 @@ class LearnTab extends Component{
                               <TouchableOpacity onPress = {()=>{
                                   this.getTouchableNextAction()
                               }}>
-                                
+
                                 <Image style={styles.learnTab.nextArrowSize} source={ FrontArrow}  resizeMode="contain" />
                               </TouchableOpacity>
                               : null
@@ -360,9 +374,9 @@ class LearnTab extends Component{
                   </View>
               }
             </View>
-        
+
         </>
-        
+
       );
     }
 };
@@ -372,7 +386,7 @@ const mapStateToProps = state => ({
   lockState: state,
   showTrophy: state.trophy.showTrophy,
 
-  
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
