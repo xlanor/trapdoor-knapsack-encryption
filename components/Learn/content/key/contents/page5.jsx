@@ -45,7 +45,7 @@ class PageFive extends Component {
 
             <>
                 <Text style={styles.page1.contentStyle}>
-                Compute the <Text style={{ ...styles.page1.publicKeyStyle, ...styles.page1.boldFont }}>public key b</Text>:
+                    Compute the <Text style={{ ...styles.page1.publicKeyStyle, ...styles.page1.boldFont }}>public key b</Text>:
                 </Text>
                 <View style={{ height: u * 0.035, marginTop: u * 0.03, marginBottom: u * 0.03 }}>
                 <Image source={bFormula} style={styles.page1.imgStyle} />
@@ -66,7 +66,7 @@ class PageFive extends Component {
                 :  {curMultiplier}{"\n"}
                 <Text style={styles.page1.modulusStyle}>Modulus m</Text>
                 :  {curModulo}{"\n"}
-                <Text style={styles.page1.inverseStyle}>Inverse multiplier w^-1</Text>
+                <Text style={styles.page1.inverseStyle}>Modular Inverse w^-1</Text>
                 :  {curInverse}
                 </Text>
         

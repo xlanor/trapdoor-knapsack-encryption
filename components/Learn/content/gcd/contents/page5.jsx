@@ -29,18 +29,18 @@ export default class page5 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
+                    <Text style={style.bold}>Step 2:</Text>
+                    {"\n\n"}
                     Fill in the next row:
                     {"\n\n"}
-                    Let <Text style={{ ...style.bold, ...style.valA }}>
-                        a
-                    </Text> be the <Text style={style.bold}>
-                        previous b
-                    </Text>.{"\n"}
-                    Let <Text style={{ ...style.bold, ...style.valB }}>
-                        b
-                    </Text> be the <Text style={style.bold}>
-                        previous r
-                    </Text>.
+                    Let{" "}
+                    <Text style={{ ...style.bold, ...style.valA }}>a</Text>
+                    {" "}be the{" "}
+                    <Text style={style.bold}>previous b</Text>.{"\n"}
+                    Let{" "}
+                    <Text style={{ ...style.bold, ...style.valB }}>b</Text>
+                    {" "}be the{" "}
+                    <Text style={style.bold}>previous r</Text>.
                     {"\n"}
                 </Text>
             </View>
