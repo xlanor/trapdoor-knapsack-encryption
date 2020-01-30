@@ -46,6 +46,15 @@ import Trophy from './Trophies';
 import PopUpWithButtons from '../Common/PopUpWithButtons';
 import Button from '../Common/Button';
 
+import ConcealmentIcon from '../../assets/images/TrophyImages/ConcealmentIcon.png';
+import HistorianIcon from '../../assets/images/TrophyImages/HistorianIcon.png';
+import KeyMasterIcon from '../../assets/images/TrophyImages/KeyMasterIcon.png';
+import KeyRingIcon from '../../assets/images/TrophyImages/KeyRingIcon.png';
+import MathIcon from '../../assets/images/TrophyImages/MathIcon.png';
+import RevealIcon from '../../assets/images/TrophyImages/RevealIcon.png';
+import SafetyIcon from '../../assets/images/TrophyImages/SafetyIcon.png';
+import BreakIcon from '../../assets/images/TrophyImages/BreakIcon.png';
+
 class ProgressParent extends Component {
     constructor(props){
         super(props);
@@ -73,6 +82,7 @@ class ProgressParent extends Component {
     }
 
     getTrophyStates = () => {
+        console.log(HistorianIcon)
         const {
             trophyHistorian,
             trophyEzMath,
@@ -88,41 +98,49 @@ class ProgressParent extends Component {
                 "title": "Historian",
                 "subtitle": "Successfully completed the introduction",
                 "enabled": trophyHistorian,
+                "image": HistorianIcon,
             },
             {
                 "title":"Math is Easy",
                 "subtitle": "Successfully completed extended euclidean algorithm",
                 "enabled": trophyEzMath,
+                "image": MathIcon,
             },
             {
                 "title":"Keyring",
                 "subtitle": "Successfully completed extended key generation",
                 "enabled": trophyKeyRing,
+                "image": KeyRingIcon,
             },
             {
                 "title":"Concealment",
                 "subtitle": "Successfully completed encryption",
                 "enabled": trophyConcealment,
+                "image": ConcealmentIcon,
             },
             {
                 "title":"The Reveal",
                 "subtitle": "Successfully completed decryption",
                 "enabled": trophyReveal,
+                "image": RevealIcon,
             },
             {
                 "title":"The Key Master",
                 "subtitle": "Successfully generated keys in the simulator",
                 "enabled": trophyKeymaster,
+                "image": KeyMasterIcon,
             },
             {
                 "title":"Safety First",
                 "subtitle": "Successfully encrypt message in the simulator",
                 "enabled": trophySafetyFirst,
+                "image": SafetyIcon,
             },
             {
                 "title":"Break the Wall",
                 "subtitle": "Successfully decrypt message in the simulator",
                 "enabled": trophyBreakWall,
+                "image": BreakIcon,
             }
         ]
     }
@@ -177,7 +195,7 @@ class ProgressParent extends Component {
                         }
                     />
                         {
-                            trophyState.map( x => <Trophy key={`${x.enabled}-${x.title}-${x.subtitle}`} title={x.title} subtitle = {x.subtitle} isEnabled = {x.enabled}/>)   
+                            trophyState.map( x => <Trophy key={`${x.enabled}-${x.title}-${x.subtitle}`} title={x.title} subtitle = {x.subtitle} isEnabled = {x.enabled} image={x.image}/>)   
 
                         }
                 </ScrollView>
