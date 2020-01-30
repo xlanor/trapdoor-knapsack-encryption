@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 import HomeScreen from '../screens/HomeScreen';
 import LearnScreen from '../screens/LearnScreen';
 import ProgressScreen from '../screens/ProgressScreen';
+import CreditsScreen from '../screens/CreditsScreen';
 
 
 const config = Platform.select({
@@ -18,6 +19,7 @@ const HomeStack = createStackNavigator(
     HomeScreen: { screen: HomeScreen },
     LearnScreen: { screen: LearnScreen },
     ProgressScreen: { screen: ProgressScreen },
+    CreditsScreen: { screen: CreditsScreen },
   },
   config
 );

@@ -48,12 +48,14 @@ class HomePageParent extends Component{
       const { navigation } = this.props;
       switch(newScreen){
           case 1:
+            navigation.navigate('CreditsScreen')
               break;
           case 2:
               navigation.navigate('LearnScreen');
               break;
           case 3:
               navigation.navigate('ProgressScreen')
+              break;
           default: break;
       }
   }
