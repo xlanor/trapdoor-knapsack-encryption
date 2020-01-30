@@ -12,13 +12,14 @@ import { TouchableWithoutFeedback, View, Text, Dimensions } from 'react-native';
 class Trophy extends Component {
     constructor(props){
         super(props);
-
     }
     render(){
+        console.log(image)
         const {
             title,
             subtitle,
-            isEnabled
+            isEnabled,
+            image
         } = this.props
         return(
             isEnabled
@@ -43,7 +44,7 @@ class Trophy extends Component {
                     title={title}
                     subtitle={subtitle}
                     leftAvatar={{
-                        source: {uri: 'https://i.redd.it/h2cc2y0ztqc41.jpg'},
+                        source: image,
                         size: 'large',
                         rounded: false,
                     }}
@@ -62,7 +63,7 @@ class Trophy extends Component {
                         title={title}
                         subtitle={subtitle}
                         leftAvatar={{
-                            source: {uri: 'https://i.redd.it/h2cc2y0ztqc41.jpg'},
+                            source: image,
                             size: 'large',
                             rounded: false,
                             disabled: true,
@@ -97,6 +98,7 @@ Trophy.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
     isEnabled: PropTypes.bool.isRequired,
+    image: PropTypes.node.isRequired,
 }
 
 

@@ -16,6 +16,7 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { Card, Button as RneButton, Icon } from 'react-native-elements'
 import { Algo } from '../../assets/images'
 
+
 import {
   introPageOne,
   gcdPageOne,
@@ -338,7 +339,7 @@ class LearnTab extends Component{
                             <Icon
                             name="arrow-bold-left"
                             type='entypo'
-                              size={50}
+                            size={Dimensions.get('window').width * 0.1}
                              
                             />
                           }
@@ -367,7 +368,7 @@ class LearnTab extends Component{
                                     <Icon
                                       name="arrow-bold-right"
                                       type='entypo'
-                                      size={50}
+                                      size={Dimensions.get('window').width * 0.1}
                                     
                                     />
                                   }
