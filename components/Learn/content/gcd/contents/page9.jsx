@@ -32,7 +32,9 @@ export default class page9 extends Component {
                 </View>
 
                 <Text style={style.contentStyle}>
-                    Next, fill the next row like Euclidean algorithm:
+                    <Text style={style.bold}>Step 2:</Text>
+                    {"\n\n"}
+                    Fill the next row like Euclidean algorithm:
                 </Text>
                 <Text style={{
                     ...style.contentStyle,
@@ -40,17 +42,16 @@ export default class page9 extends Component {
                     marginLeft: u * 0.03,
                     fontSize: 16
                 }}>
-                    Let <Text style={style.valA}>
-                        a
-                    </Text> be the previous b.{"\n"}
-                    Let <Text style={style.valB}>
-                        b
-                    </Text> be the previous r.
+                    Let{" "}
+                    <Text style={style.valA}>a</Text>
+                    {" "}be the previous b.{"\n"}
+                    Let{" "}
+                    <Text style={style.valB}>b</Text>
+                    {" "}be the previous r.
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
-                    Use the following <Text style={style.bold}>
-                        formulas
-                    </Text> for the rest of the columns:
+                    Calculate <Text style={style.bold}>a1</Text> and{" "}
+                    <Text style={style.bold}>b1</Text> using the formulas below:
                 </Text>
                 <Text style={{
                     ...style.contentStyle,
@@ -64,15 +65,10 @@ export default class page9 extends Component {
                     b2 = b1 - q * b2
                 </Text>
                 <Text style={{ ...style.contentStyle, marginTop: u * 0.02 }}>
-                    Let <Text style={style.bold}>
-                        a1
-                    </Text> be the <Text style={style.bold}>
-                        previous a2
-                    </Text> and <Text style={style.bold}>
-                        b1
-                    </Text> be the <Text style={style.bold}>
-                        previous b2
-                    </Text>.
+                    Let <Text style={style.bold}>a1</Text> be the{" "}
+                    <Text style={style.bold}>previous a2</Text> and{" "}
+                    <Text style={style.bold}>b1</Text> be the{" "}
+                    <Text style={style.bold}>previous b2</Text>.
                     {"\n"}
                 </Text>
             </View>
