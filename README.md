@@ -43,7 +43,7 @@ Kindly note that expo has issues with node@13, use node@12.xx instead.
 - Prepare your simulator (for android, use the AVD in android studio, for macOS, use the simulator from xcode)
 - run `expo start` in the directory
 - Please dont ever run npm as sudo to avoid screwing up your `$PATH`.
-- It is strongly reccomended that you have some experience in running nodeJS apps before you try this out.
+- It is strongly recommended that you have some experiences in running nodeJS apps before you try this out.
 - Compilation is much, much more complicated using expo, because this is a `private` repository. As such, we have to use expo's self-hosted method of compiling via turtle-cli, which is a PITA because of the conflicting documentation and/or the lack of documentation about most parts.
 
 ## 1. Directory Layout
@@ -62,7 +62,7 @@ Kindly note that expo has issues with node@13, use node@12.xx instead.
 ```
 
 ### Redux directories
-Redux is utilised in order to handle state management across multiple classes/components, storing the state in a central store. Although react now has hooks which basically does the same thing without the need for a third party library, the benefit of utilising redux is that we can use `redux-persist` to persist the state utilising `AsyncStorage` on the device, without the need for a seperate database.
+Redux is utilized in order to handle state management across multiple classes/components, storing the state in a central store. Although react now has hooks which basically does the same thing without the need for a third party library, the benefit of utilizing redux is that we can use `redux-persist` to persist the state utilizing `AsyncStorage` on the device, without the need for a separate database.
 
 When the state is persisted, we can then rehydrate the store from the persisted store, allowing us to keep track of the progress of the user throughout the app.
 
@@ -78,15 +78,15 @@ The redux directories are as follows
 
 Redux is a little daunting to work with if you're not familiar with it, but looking at a couple of medium articles and practicing should make it fairly simple.
 
-I don't recommend youtube videos for redux because they take 3 hours to explain what you could read in 10 minutes. Read and practice. It's much faster.
+I don't recommend YouTube videos for redux because they take 3 hours to explain what you could read in 10 minutes. Read and practice. It's much faster.
 
 ### React directories
 - assets
   - We store things like images and fonts here. As the name suggests, our assets goes here.
 - components
-  - probably one of the most important parts of the application. All component logic (components can be compartmentalised according to views, but for simplicity sake we normally define each component as a tab for learnscreen, due to the intricate state management required.)
+  - probably one of the most important parts of the application. All component logic (components can be compartmentalized according to views, but for simplicity sake we normally define each component as a tab for learnscreen, due to the intricate state management required.)
 - screens
-  - the base of the window, which is utilised in navigation stacks.
+  - the base of the window, which is utilized in navigation stacks.
   - In our app we don't really have screens, because of the nature of the design, the learnscreen is one giant screen that is then managed directly by redux 
 - navigation
   - navigation stacks are defined here, and the flow of transition from one screen to another occurs here
