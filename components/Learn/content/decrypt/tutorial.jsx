@@ -293,11 +293,6 @@ class DecryptTutorial extends Component {
         this.setState({
           showSpinner: false,
           ...decryptRs
-        },()=>{
-           actions.UNLOCK_TROPHY_BREAK_WALL();
-           if (!trophyBreakWall){
-             actions.SHOW_TROPHY_ACTION()
-           }
         });
       }, 500);
     })

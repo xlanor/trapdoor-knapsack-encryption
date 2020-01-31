@@ -44,7 +44,6 @@ import {
 
 import {
     UNLOCK_TROPHY_CONCEALMENT,
-    UNLOCK_TROPHY_SAFETY_FIRST,
     SHOW_TROPHY_ACTION,
 }  from '../../../../redux-modules/actions/manageTrophies'
 
@@ -285,13 +284,7 @@ class EncryptTutorial extends Component {
       actions.ALLOW_NEXT_PAGE_ACTION()
       this.setState({
         showBlocks: true,
-      }, ()=> {
-        actions.UNLOCK_TROPHY_SAFETY_FIRST();
-        if(!trophySafetyFirst){
-          actions.SHOW_TROPHY_ACTION()
-        }
       })
-      //UNLOCK_TROPHY_SAFETY_FIRST
     })
 
   }
@@ -307,6 +300,7 @@ class EncryptTutorial extends Component {
       </>
     )
   }
+
   ciphertextInfoPopUp = () => {
     return (
       <>
@@ -598,7 +592,6 @@ class EncryptTutorial extends Component {
 const mapStateToProps = state => ({
   lockState: state,
   trophyConcealment: state.trophy.trophyConcealment,
-  trophySafetyFirst: state.trophy.trophySafetyFirst,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -613,7 +606,6 @@ const mapDispatchToProps = (dispatch) => ({
     DECRYPT_UNLOCK_ACTION,
     NEXT_ENCRYPT_PAGE_ACTION,
     UNLOCK_TROPHY_CONCEALMENT,
-    UNLOCK_TROPHY_SAFETY_FIRST,
     SHOW_TROPHY_ACTION,
   }, dispatch)
 });

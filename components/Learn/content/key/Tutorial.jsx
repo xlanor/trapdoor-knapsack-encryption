@@ -433,11 +433,6 @@ class KeyPage extends Component {
     actions.ENCRYPT_LOCK_ACTION()
     this.setState({
       pkLoaded: true,
-    },()=>{
-      actions.UNLOCK_TROPHY_KEYMASTER();
-      if(!trophyKeymaster){
-        actions.SHOW_TROPHY_ACTION();
-      }
     })
   }
 
@@ -693,7 +688,6 @@ const mapDispatchToProps = (dispatch) => ({
     NEXT_KEY_PAGE_ACTION,
     ENCRYPT_UNLOCK_ACTION,
     UNLOCK_TROPHY_KEYRING,
-    UNLOCK_TROPHY_KEYMASTER,
     SHOW_TROPHY_ACTION,
   }, dispatch)
 });
