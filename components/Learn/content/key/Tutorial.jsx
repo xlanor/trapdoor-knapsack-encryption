@@ -585,6 +585,9 @@ class KeyPage extends Component {
     } = this.state;
     let pageNo = this.checkPageNo()
     return (
+      /*
+        Note how the animation here is done differently - this is much more pleasent for User Experience than forcing them to jump to the top every time
+      */
       <ScrollView
           ref={scrollView => this.scrollView = scrollView}
           onContentSizeChange={(contentWidth, contentHeight)=>{

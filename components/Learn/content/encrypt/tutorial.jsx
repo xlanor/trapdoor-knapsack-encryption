@@ -568,20 +568,26 @@ class EncryptTutorial extends Component {
             : null
         }
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
-            <ScrollView>
-          <View onStartShouldSetResponder={() => true} style={{ ...styles.tutorial.learnTabPad, height: '100%' }}>
-            <View style={styles.tutorial.textStyleTitleWrapper}>
-              {
-                keyboardVisiblity
-                  ? null
-                  : <Text style={styles.tutorial.titleStyle}>Encryption</Text>
-              }
-            </View>
-            {
-              this.getPageElements()
 
-            }
-          </View>
+            <ScrollView
+              ref={ref => this.scrollView = ref}
+                  onContentSizeChange={() => {
+                    this.scrollView.scrollTo({x: 0, y: 0, animated: true})
+                  }}
+            >
+              <View onStartShouldSetResponder={() => true} style={{ ...styles.tutorial.learnTabPad, height: '100%' }}>
+                <View style={styles.tutorial.textStyleTitleWrapper}>
+                  {
+                    keyboardVisiblity
+                      ? null
+                      : <Text style={styles.tutorial.titleStyle}>Encryption</Text>
+                  }
+                </View>
+                {
+                  this.getPageElements()
+
+                }
+              </View>
             </ScrollView>
         </TouchableWithoutFeedback>
       </>
