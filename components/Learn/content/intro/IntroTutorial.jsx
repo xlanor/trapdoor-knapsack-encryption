@@ -44,9 +44,15 @@ class IntroPage extends Component {
         let Page = this.getPageElements()
         return (
             <>
-            <ScrollView style={styles.ScrollStyle.scrollStyle}>
-                <Page/>
-            </ScrollView>
+              <ScrollView
+                style={styles.ScrollStyle.scrollStyle}
+                ref={ref => this.scrollView = ref}
+                    onContentSizeChange={() => {
+                      this.scrollView.scrollTo({x: 0, y: 0, animated: true})
+                    }}
+              >
+                  <Page/>
+              </ScrollView>
             </>
         )
     }
