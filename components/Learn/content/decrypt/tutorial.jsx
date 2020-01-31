@@ -446,75 +446,80 @@ class DecryptTutorial extends Component {
       )
     }
     return (
-      <ScrollView>
-      <View >
-        <Text style={styles.tutorial.titleStyle}>Decryption</Text>
-        {
-          this.getPageElements()
-        }
-        {
-          showSpinner
-            ? <Loader />
-            : null
-        }
+      <ScrollView
+        ref={ref => this.scrollView = ref}
+            onContentSizeChange={() => {
+              this.scrollView.scrollTo({x: 0, y: 0, animated: true})
+            }}
+      >
+          <View >
+            <Text style={styles.tutorial.titleStyle}>Decryption</Text>
+            {
+              this.getPageElements()
+            }
+            {
+              showSpinner
+                ? <Loader />
+                : null
+            }
 
-        {
-          showInversePopUp
-            ? <AlertPopUp
-              icon={InfoIcon}
-              renderedBlocks={this.wInversePopUp()}
-              callback={() => { this.setState({ showInversePopUp: false, }) }}
-              visibility={showInversePopUp}
-            />
-            : null
-        }
-        {
-          showrPopUp
-            ? <AlertPopUp
-              icon={InfoIcon}
-              renderedBlocks={this.rPopUp()}
-              callback={() => { this.setState({ showrPopUp: false, }) }}
-              visibility={showrPopUp}
-            />
-            : null
-        }
-        {
-          showCmpPopUp
-            ? <AlertPopUp
-              icon={InfoIcon}
-              renderedBlocks={this.comparingPopUp()}
-              callback={() => { this.setState({ showCmpPopUp: false, }) }}
-              visibility={showCmpPopUp}
-            />
-            : null
-        }
-        {
-          showPaddingInfoPopUp
-            ? <AlertPopUp
-              icon={InfoIcon}
-              renderedBlocks={this.paddingInfoPopUp()}
-              callback={() => { this.setState({ showPaddingInfoPopUp: false, }) }}
-              visibility={showPaddingInfoPopUp}
-            />
-            : null
-        }
-        {
-          showBlocks
-            ? <ScrollViewPopUp
-              visibility={showBlocks}
-              lockStateArr={decryptedArr}
-              callback={
-                () => {
-                  this.setState({
-                    showBlocks: false,
-                  })
-                }
-              } />
-            : null
-        }
-      </View>
+            {
+              showInversePopUp
+                ? <AlertPopUp
+                  icon={InfoIcon}
+                  renderedBlocks={this.wInversePopUp()}
+                  callback={() => { this.setState({ showInversePopUp: false, }) }}
+                  visibility={showInversePopUp}
+                />
+                : null
+            }
+            {
+              showrPopUp
+                ? <AlertPopUp
+                  icon={InfoIcon}
+                  renderedBlocks={this.rPopUp()}
+                  callback={() => { this.setState({ showrPopUp: false, }) }}
+                  visibility={showrPopUp}
+                />
+                : null
+            }
+            {
+              showCmpPopUp
+                ? <AlertPopUp
+                  icon={InfoIcon}
+                  renderedBlocks={this.comparingPopUp()}
+                  callback={() => { this.setState({ showCmpPopUp: false, }) }}
+                  visibility={showCmpPopUp}
+                />
+                : null
+            }
+            {
+              showPaddingInfoPopUp
+                ? <AlertPopUp
+                  icon={InfoIcon}
+                  renderedBlocks={this.paddingInfoPopUp()}
+                  callback={() => { this.setState({ showPaddingInfoPopUp: false, }) }}
+                  visibility={showPaddingInfoPopUp}
+                />
+                : null
+            }
+            {
+              showBlocks
+                ? <ScrollViewPopUp
+                  visibility={showBlocks}
+                  lockStateArr={decryptedArr}
+                  callback={
+                    () => {
+                      this.setState({
+                        showBlocks: false,
+                      })
+                    }
+                  } />
+                : null
+            }
+          </View>
 
-        </ScrollView>
+      </ScrollView>
     )
   }
 }
