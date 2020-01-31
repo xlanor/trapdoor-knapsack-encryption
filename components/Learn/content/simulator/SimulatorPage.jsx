@@ -92,6 +92,8 @@ class SimulatorPage extends Component{
             alertPopUpMessage: "",
         }
     }
+
+
     convertBinToText = (binaryString) => {
         let dec = []
         // characters are done in blocks of 8.
@@ -657,7 +659,15 @@ class SimulatorPage extends Component{
                                             buttonColor="blue"/>
                                         </View>
                                         <View style={styles.SimulatorPage.multipleButtonRight}>
-                                            <CustomButton text="Decrypt" callback={()=>{this.validateDecryptionText()}} />
+                                            <CustomButton text="Decrypt" callback={()=>{
+                                                    try{
+                                                        this.validateDecryptionText()
+                                                    }catch(e){
+                                                        console.log(e)
+                                                    }
+                                                    
+                                                }}
+                                            />
                                         </View>
 
                                     </View>
@@ -1157,6 +1167,7 @@ class SimulatorPage extends Component{
                     this.getCurrentPage()
 
                 }
+                
             </View>
         );
     }
