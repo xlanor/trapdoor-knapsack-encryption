@@ -1,16 +1,16 @@
 import React, { Component } from 'React';
-import { 
+import {
   View,
   Text,
   StyleSheet
 } from 'react-native'
 
-import { 
-  Table, 
-  TableWrapper, 
-  Rows, 
-  Row, 
-  Col } 
+import {
+  Table,
+  TableWrapper,
+  Rows,
+  Row,
+  Col }
 from 'react-native-table-component';
 
 
@@ -25,9 +25,9 @@ class BlockDecrypt extends Component{
   }
 
   render(){
-    const { 
-        flexArr, 
-        tableTitle, 
+    const {
+        flexArr,
+        tableTitle,
         tableData,
         encryptedInput,
         inverse,
@@ -40,12 +40,12 @@ class BlockDecrypt extends Component{
         rVal,
     } = this.props;
     return (
-      <View style={styles.containerStyle}>
-        <Text style={{fontFamily:'comfortaa'}}>
+      <View style={{ ...styles.containerStyle }}>
+        <Text style={{fontFamily:'comfortaa', 'textAlign': 'center'}}>
+          R: {rVal}{"\n"}
+          Modulo by: {modulo}{"\n"}
           Encrypted Value: {encryptedInput}{"\n"}
           Multiplied with Inverse ({inverse}): {Number(encryptedInput) * inverse}{"\n"}
-          Modulo by: {modulo}{"\n"}
-          R: {rVal}
         </Text>
         <Table borderStyle={{borderWidth: 1}}>
           <TableWrapper style={styles.wrapperStyle}>

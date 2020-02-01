@@ -433,11 +433,6 @@ class KeyPage extends Component {
     actions.ENCRYPT_LOCK_ACTION()
     this.setState({
       pkLoaded: true,
-    },()=>{
-      actions.UNLOCK_TROPHY_KEYMASTER();
-      if(!trophyKeymaster){
-        actions.SHOW_TROPHY_ACTION();
-      }
     })
   }
 
@@ -590,6 +585,9 @@ class KeyPage extends Component {
     } = this.state;
     let pageNo = this.checkPageNo()
     return (
+      /*
+        Note how the animation here is done differently - this is much more pleasent for User Experience than forcing them to jump to the top every time
+      */
       <ScrollView
           ref={scrollView => this.scrollView = scrollView}
           onContentSizeChange={(contentWidth, contentHeight)=>{
@@ -693,7 +691,6 @@ const mapDispatchToProps = (dispatch) => ({
     NEXT_KEY_PAGE_ACTION,
     ENCRYPT_UNLOCK_ACTION,
     UNLOCK_TROPHY_KEYRING,
-    UNLOCK_TROPHY_KEYMASTER,
     SHOW_TROPHY_ACTION,
   }, dispatch)
 });
