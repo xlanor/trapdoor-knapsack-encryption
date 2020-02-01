@@ -159,6 +159,11 @@ class SimulatorPage extends Component{
         })
     }
 
+    getNumericFromString = (delimitedByComma) => {
+        // ONLY use this if you have validated the string!
+        return delimitedByComma.split(',').map(x=>{return Number(x)})
+    }
+
 
    computePublicKey = () => {
         const { lockState, actions, trophyKeymaster } = this.props;
@@ -414,9 +419,10 @@ class SimulatorPage extends Component{
             let binString = this.getBinaryOfInput(currentPlainTextInput)
             let binBlocks = this.generateBinaryBlocks(binString)
             let encryptedArr = [];
+            let localPubNumeric = this.getNumericFromString(localPublicKey);
             let lockStateArr = binBlocks.map((block, idx)=>{
               encryptedArr.push( block.map((x, index)=>{
-                  return Number(localPublicKey[index]) * Number(x)
+                  return Number(localPubNumeric[index]) * Number(x)
               }))
             })
             for(let i = 0; i < encryptedArr.length; i++){
