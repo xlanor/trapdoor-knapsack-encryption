@@ -65,61 +65,45 @@ class CreditsParent extends Component {
                 <View style={styles.creditsParent.sectionStyle}>
                     <Text style={styles.creditsParent.sectionHeader}>Content</Text>
 
-                    <Text style={styles.creditsParent.contentStyle}>Discrete Logarithm Problem:{" "}
-                        <Text
-                            style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
-                            onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Discrete_logarithm')}>
-                            link
-                        </Text>
+                    <Text
+                        style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Discrete_logarithm')}>
+                        Discrete Logarithm Problem
                     </Text>
-                    <Text style={styles.creditsParent.contentStyle}>Ralph Merkle’s Biography:{" "}
-                        <Text
-                            style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
-                            onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Ralph_Merkle')}>
-                            link
-                        </Text>
+                    <Text
+                        style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Ralph_Merkle')}>
+                        Ralph Merkle’s Biography
                     </Text>
-                    <Text style={styles.creditsParent.contentStyle}>Martin Hellman’s Biography:{" "}
-                        <Text
-                            style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
-                            onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Martin_Hellman')}>
-                            link
-                        </Text>
+                    <Text
+                        style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Martin_Hellman')}>
+                        Martin Hellman’s Biography
                     </Text>
-                    <Text style={styles.creditsParent.contentStyle}>Leonard Adleman breaking the public-key cryptosystem:{" "}
-                        <Text
-                            style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
-                            onPress={() => Linking.openURL('https://link.springer.com/chapter/10.1007/978-1-4757-0602-4_29')}>
-                            link
-                        </Text>
+                    <Text
+                        style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
+                        onPress={() => Linking.openURL('https://link.springer.com/chapter/10.1007/978-1-4757-0602-4_29')}>
+                        Leonard Adleman breaking the public-key cryptosystem
                     </Text>
-                    <Text style={styles.creditsParent.contentStyle}>Polynomial time algorithm for breaking the basic Merkle-Hellman cryptosystem:{" "}
-                        <Text
-                            style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
-                            onPress={() => Linking.openURL('https://ieeexplore.ieee.org/document/4568386')}>
-                            link
-                        </Text>
+                    <Text
+                        style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
+                        onPress={() => Linking.openURL('https://ieeexplore.ieee.org/document/4568386')}>
+                        Polynomial time algorithm for breaking the basic Merkle-Hellman cryptosystem
                     </Text>
-                    <Text style={styles.creditsParent.contentStyle}>Leonard Adleman’s Biography:{" "}
-                        <Text
-                            style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
-                            onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Leonard_Adleman')}>
-                            link
-                        </Text>
+                    <Text
+                        style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Leonard_Adleman')}>
+                        Leonard Adleman’s Biography
                     </Text>
-                    <Text style={styles.creditsParent.contentStyle}>Adi Shamir’s Biography:{" "}
-                        <Text
-                            style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
-                            onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Adi_Shamir')}>
-                            link
-                        </Text>
+                    <Text
+                        style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
+                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Adi_Shamir')}>
+                        Adi Shamir’s Biography
                     </Text>
-                    <Text style={styles.creditsParent.contentStyle}>Euclidean Algorithm:{" "}
-                        <Text
-                            style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
-                            onPress={() => Linking.openURL('https://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html')}>
-                            link
-                        </Text>
+                    <Text
+                        style={{ ...styles.creditsParent.contentStyle, ...styles.creditsParent.links }}
+                        onPress={() => Linking.openURL('https://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html')}>
+                        Euclidean Algorithm
                     </Text>
                 </View>
             </ScrollView>

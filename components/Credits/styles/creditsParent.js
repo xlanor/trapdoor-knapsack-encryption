@@ -12,27 +12,27 @@ const headerStyle = {
     paddingTop: 0,
 }
 
-const headerFont = { 
+const headerFont = {
     fontSize: 25,
     fontFamily: 'comfortaa-bold',
 }
 
 const sectionStyle = {
-    marginTop: Dimensions.get('screen').width *0.05
+    marginTop: Dimensions.get('screen').width * 0.05
 }
 
 const sectionHeader = {
     fontSize: 20,
-    fontFamily:'comfortaa-bold',
+    fontFamily: 'comfortaa-bold',
     color: COLORS.PUBLICKEY_COLOR,
     textAlign: 'center',
 }
 
 const contentStyle = {
+    marginTop: Dimensions.get('screen').width * 0.015,
     fontSize: 15,
     fontFamily: 'comfortaa',
-    textAlign: 'center',
-    //fontStyle: 'italic'
+    textAlign: 'center'
 }
 
 const links = {
