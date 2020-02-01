@@ -47,8 +47,8 @@ class PageThree extends Component {
                     ...styles.tutorial.encryptTextGray,
                     marginTop: u * 0.01
                 }}>
-                    eg:{"\n"}
-                    remainder = 8 % 3 = 2{"\n"}
+                    E.g:{"\n"}
+                    Remainder = 8 % 3 = 2{"\n"}
                     Padding = 3 - 2 = 1{"\n"}
                     Add 1 '0' to the back of the binary string x
                 </Text>

@@ -51,11 +51,15 @@ class PageTwo extends Component{
                         Sum of <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>a</Text>
                         : {privateKeySum}
                     </Text>
-                    <Text
-                        style={{ marginTop: u * 0.02, ...styles.page1.contentStyleSmall, ...styles.page1.linkStyle }}
-                        onPress={showModulusInfoPopUp}
-                    >
-                        m should be bigger than the sum of a
+                    <Text style={{marginTop:u*0.02,...styles.page1.contentStyle}}>
+                        (<Text style={{ ...styles.page1.modulusStyle, ...styles.page1.boldFont }}>m</Text> should be{" "}
+                        <Text
+                            style={styles.page1.linkStyle }
+                            onPress={showModulusInfoPopUp}
+                        >
+                            bigger than the sum
+                        </Text>
+                        {" "}of <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>a</Text>)
                     </Text>
                     <View style={{ marginTop: Dimensions.get('window').height * 0.03 }}>
                         <TextInput defaultValue={
