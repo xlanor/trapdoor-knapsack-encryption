@@ -90,6 +90,8 @@ class SimulatorPage extends Component{
             decrypted: "",
             showAlertPopUp: false,
             alertPopUpMessage: "",
+            localPublicKey: "",
+            localPublicKeyValid: false,
         }
     }
 
@@ -329,13 +331,25 @@ class SimulatorPage extends Component{
         total.arrOfVals = splitKey
         return true;
     }
+
+    validateLocalPublicKey = () => {
+      const { localPublicKey } = this.state;
+      console.log(`Checking ${localPublicKey}`)
+      if (!this.validateNumeric(localPublicKey)){
+          this.enableError("Non numeric message received!")
+      }else{
+        this.setState((prevState)=>({
+            localPublicKeyValid: true,
+          })
+        )
+      }
+    }
+
     validateCurrentPrivateKey = () => {
         const { actions } = this.props;
         const { currentPrivateKeyInput } = this.state;
-        console.log("Validating "+currentPrivateKeyInput)
         if (!this.validateNumeric(currentPrivateKeyInput)){
             this.enableError("Non numeric message received!")
-            console.log("here")
             actions.UPDATE_SIMULATOR_PRIVATE_KEY_VALID_ACTION(false);
         }else{
             // check if it is superincreasing
@@ -351,10 +365,10 @@ class SimulatorPage extends Component{
         }
 
     }
+
     validateCurrentModulus = () => {
         const { actions, lockState } = this.props;
         const { currentModulusInput } = this.state;
-        console.log(actions)
         if(!this.validateNumeric(currentModulusInput)){
             this.enableError("Non numeric modulo received!")
             actions.UPDATE_SIMULATOR_MODULO_VALID_ACTION(false);
@@ -370,6 +384,7 @@ class SimulatorPage extends Component{
             }
           }
     }
+
     validateCurrentMultiplier = () => {
         const { actions, lockState } = this.props;
         const { currentMultiplierInput } = this.state;
@@ -392,7 +407,7 @@ class SimulatorPage extends Component{
     }
     validateEncryptionText = () => {
         const { lockState, trophySafetyFirst, actions } = this.props;
-        const { currentPlainTextInput } = this.state;
+        const { currentPlainTextInput, localPublicKey } = this.state;
         if (this.isEmptyInput(currentPlainTextInput)){
             this.enableError("Input cannot be empty!")
         }else{
@@ -401,8 +416,7 @@ class SimulatorPage extends Component{
             let encryptedArr = [];
             let lockStateArr = binBlocks.map((block, idx)=>{
               encryptedArr.push( block.map((x, index)=>{
-
-                  return Number(lockState.simulator.publicKey[index]) * Number(x)
+                  return Number(localPublicKey[index]) * Number(x)
               }))
             })
             for(let i = 0; i < encryptedArr.length; i++){
@@ -466,140 +480,229 @@ class SimulatorPage extends Component{
     }
     encryptionPage = () => {
         const { actions, lockState } = this.props;
-        const { encryptedOutput } = this.state;
+        const { encryptedOutput, localPublicKeyValid, localPublicKey } = this.state;
+        console.log(`Local Public Key: ${localPublicKeyValid}`)
         return (
             <>
             {
-                encryptedOutput.length === 0
-                ?(
-                    <View style={styles.SimulatorPage.rowKeyGen}>
-                         <Text style={styles.SimulatorPage.textStyleRow}>Enter your encryption string: </Text>
-                            <TextInput
-                                style={{
-                                    ...styles.SimulatorPage.textStyleInput,
-                                    ...styles.SimulatorPage.roundLeftCorner,
-                                    ...styles.SimulatorPage.roundRightCorner,
-                                }}
-                                onChangeText =
-                                {(text)=>{
-                                this.setState({
-                                    currentPlainTextInput: text,
-                                })
-                            }}/>
+                !localPublicKeyValid ?
+                 (
+                  <View style={styles.SimulatorPage.rowKeyGen}>
+                       <Text style={styles.SimulatorPage.textStyleRow}>Enter your public key: </Text>
+                       <TextInput
 
-                                <View style={styles.SimulatorPage.genKeyButtonView}>
-                                    <View style={{flexDirection: 'row', }}>
-                                        <View style={styles.SimulatorPage.multipleButtonLeft}>
-                                            <CustomButton text="Menu" callback={
-                                                ()=>{
-                                                    this.setState({currentSimulatorPage: "menu"
-                                                    })
-                                                }
-                                            }
-                                            buttonColor="blue"/>
-                                        </View>
-                                        <View style={styles.SimulatorPage.multipleButtonRight}>
-                                                <CustomButton text="Encrypt" callback={()=>{this.validateEncryptionText()}} />
-                                        </View>
+                           style={{
+                               ...styles.SimulatorPage.textStyleInput,
+                               ...styles.SimulatorPage.roundLeftCorner,
+                               ...styles.SimulatorPage.roundRightCorner,
+                           }}
+                           onChangeText =
+                           {(text)=>{
+                           this.setState({
+                               localPublicKey: text,
+                           })
+                       }}/>
+                       <View style={styles.SimulatorPage.genKeyButtonView}>
+                           <View style={{flexDirection: 'row'}}>
+                               <View style={styles.SimulatorPage.multipleButtonLeft}>
+                                   <CustomButton text="Menu" callback={
+                                       ()=>{
+                                           this.setState({currentSimulatorPage: "menu"
+                                           })
+                                       }
+                                   }
+                                   buttonColor="blue"/>
+                               </View>
+                               <View style={styles.SimulatorPage.multipleButtonRight}>
+                                   <CustomButton text="Validate" callback={()=>{this.validateLocalPublicKey()}} />
+                               </View>
 
-                                    </View>
+                           </View>
 
-                                </View>
-                    </View>
-                )
-                :
-                (
-                    <>
+                       </View>
+                  </View>
+                ):
+                  encryptedOutput.length === 0
+                  ?(
                       <View style={styles.SimulatorPage.rowKeyGen}>
-                        <Text style={styles.SimulatorPage.textStyleRow}>
-                            Ciphertext
-                        </Text>
-                        <View style={{flexDirection: 'row'}}>
-                            <TextInput
-                                style={{
-                                    ...styles.SimulatorPage.textStyleInputUneditable,
-                                    ...styles.SimulatorPage.roundLeftCorner,
-                                }}
-                                editable={false}
-                            >
-                                {encryptedOutput.join(',')}
-                            </TextInput>
-                            <View
-                                style={{
-                                    ...styles.SimulatorPage.imageButtonStyle,
-                                    ...styles.SimulatorPage.roundRightCorner
-                                }}
-                            >
-                                <TouchableOpacity
-                                    onPress={()=>{
-                                        Clipboard.setString(encryptedOutput.join(','))
-                                        this.setState({
-                                            showAlertPopUp: true,
-                                            alertPopUpMessage: "Successfully copied the encrypted string to your clipboard!"
-                                        })
-                                    }}
-                                >
-                                <Image
-                                    style={styles.SimulatorPage.copyStyle}
-                                    source={Copy}
-                                />
-                                </TouchableOpacity>
-                            </View>
+                           <Text style={styles.SimulatorPage.textStyleRow}>Using public key: </Text>
+                           <View style={{flexDirection: 'row'}}>
+                               <TextInput
+                                   style={{
+                                       ...styles.SimulatorPage.textStyleInputUneditable,
+                                       ...styles.SimulatorPage.roundLeftCorner,
+                                   }}
+                                   editable={false}
+                               >
+                                   {localPublicKey}
+                               </TextInput>
+                               <View style={styles.SimulatorPage.imageButtonStyle}>
+                                   <TouchableOpacity
+                                       onPress = {()=>{
+                                           this.setState({
+                                              localPublicKey: "",
+                                              localPublicKeyValid: false,
+                                           })
+                                       }}
+                                   >
+                                   <Image
+                                       style={styles.SimulatorPage.copyStyle}
+                                       source={EditButton}
+                                   />
+                                   </TouchableOpacity>
+                               </View>
+                               <View
+                                   style={{
+                                       ...styles.SimulatorPage.imageButtonStyle,
+                                       ...styles.SimulatorPage.roundRightCorner
+                                   }}
+                               >
+                                   <TouchableOpacity
+                                       onPress={()=>{
+                                           Clipboard.setString(localPublicKey)
+                                           this.setState({
+                                               showAlertPopUp: true,
+                                               alertPopUpMessage: "Successfully copied your public key to your clipboard!"
+                                           })
+                                       }}
+                                   >
+                                   <Image
+                                       style={styles.SimulatorPage.copyStyle}
+                                       source={Copy}
+                                   />
+                                   </TouchableOpacity>
+                               </View>
 
-                        </View>
+                           </View>
+
+                           <Text style={styles.SimulatorPage.textStyleRow}>Enter your encryption string: </Text>
+                              <TextInput
+                                  style={{
+                                      ...styles.SimulatorPage.textStyleInput,
+                                      ...styles.SimulatorPage.roundLeftCorner,
+                                      ...styles.SimulatorPage.roundRightCorner,
+                                  }}
+                                  onChangeText =
+                                  {(text)=>{
+                                  this.setState({
+                                      currentPlainTextInput: text,
+                                  })
+                              }}/>
+
+                                  <View style={styles.SimulatorPage.genKeyButtonView}>
+                                      <View style={{flexDirection: 'row', }}>
+                                          <View style={styles.SimulatorPage.multipleButtonLeft}>
+                                              <CustomButton text="Menu" callback={
+                                                  ()=>{
+                                                      this.setState({
+                                                        currentSimulatorPage: "menu"
+                                                      })
+                                                  }
+                                              }
+                                              buttonColor="blue"/>
+                                          </View>
+                                          <View style={styles.SimulatorPage.multipleButtonRight}>
+                                                  <CustomButton text="Encrypt" callback={()=>{this.validateEncryptionText()}} />
+                                          </View>
+
+                                      </View>
+
+                                  </View>
                       </View>
-                      <View style={styles.SimulatorPage.rowKeyGen}>
-                        <Text style={styles.SimulatorPage.textStyleRow}>
-                            Padding:
-                        </Text>
-                        <View style={{flexDirection: 'row'}}>
-                            <TextInput
-                                style={{
-                                    ...styles.SimulatorPage.textStyleInputUneditable,
-                                    ...styles.SimulatorPage.roundLeftCorner,
-                                }}
-                                editable={false}
-                            >
-                                {lockState.simulator.padding}
-                            </TextInput>
+                  )
+                  :
+                  (
+                      <>
+                        <View style={styles.SimulatorPage.rowKeyGen}>
+                          <Text style={styles.SimulatorPage.textStyleRow}>
+                              Ciphertext
+                          </Text>
+                          <View style={{flexDirection: 'row'}}>
+                              <TextInput
+                                  style={{
+                                      ...styles.SimulatorPage.textStyleInputUneditable,
+                                      ...styles.SimulatorPage.roundLeftCorner,
+                                  }}
+                                  editable={false}
+                              >
+                                  {encryptedOutput.join(',')}
+                              </TextInput>
+                              <View
+                                  style={{
+                                      ...styles.SimulatorPage.imageButtonStyle,
+                                      ...styles.SimulatorPage.roundRightCorner
+                                  }}
+                              >
+                                  <TouchableOpacity
+                                      onPress={()=>{
+                                          Clipboard.setString(encryptedOutput.join(','))
+                                          this.setState({
+                                              showAlertPopUp: true,
+                                              alertPopUpMessage: "Successfully copied the encrypted string to your clipboard!"
+                                          })
+                                      }}
+                                  >
+                                  <Image
+                                      style={styles.SimulatorPage.copyStyle}
+                                      source={Copy}
+                                  />
+                                  </TouchableOpacity>
+                              </View>
+
+                          </View>
                         </View>
-                        <View style={styles.SimulatorPage.genKeyButtonView}>
-                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                <View style={styles.SimulatorPage.multipleButtonLeft}>
-                                        <CustomButton
-                                        text="Menu"
-                                        callback={
-                                            ()=>{
-                                                this.setState({currentSimulatorPage: "menu"
-                                                })
-                                            }
-                                        }
-                                        buttonColor="blue"/>
-                                    </View>
-                                <View style={styles.SimulatorPage.multipleButtonRight}>
-                                    <CustomButton
-                                        text="Clear"
-                                        callback={
-                                            ()=>{
-                                                actions.UPDATE_SIMULATOR_RESET_ENC_ACTION()
-                                                this.setState({
-                                                    currentPlainTextInput: "",
-                                                    currentPaddingInput: "",
-                                                    encryptedOutput: []
-                                                })
-                                            }
-                                    }/>
-                                </View>
+                        <View style={styles.SimulatorPage.rowKeyGen}>
+                          <Text style={styles.SimulatorPage.textStyleRow}>
+                              Padding:
+                          </Text>
+                          <View style={{flexDirection: 'row'}}>
+                              <TextInput
+                                  style={{
+                                      ...styles.SimulatorPage.textStyleInputUneditable,
+                                      ...styles.SimulatorPage.roundLeftCorner,
+                                  }}
+                                  editable={false}
+                              >
+                                  {lockState.simulator.padding}
+                              </TextInput>
+                          </View>
+                          <View style={styles.SimulatorPage.genKeyButtonView}>
+                              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                  <View style={styles.SimulatorPage.multipleButtonLeft}>
+                                          <CustomButton
+                                          text="Menu"
+                                          callback={
+                                              ()=>{
+                                                  this.setState({currentSimulatorPage: "menu"
+                                                  })
+                                              }
+                                          }
+                                          buttonColor="blue"/>
+                                      </View>
+                                  <View style={styles.SimulatorPage.multipleButtonRight}>
+                                      <CustomButton
+                                          text="Clear"
+                                          callback={
+                                              ()=>{
+                                                  actions.UPDATE_SIMULATOR_RESET_ENC_ACTION()
+                                                  this.setState({
+                                                      currentPlainTextInput: "",
+                                                      currentPaddingInput: "",
+                                                      encryptedOutput: []
+                                                  })
+                                              }
+                                      }/>
+                                  </View>
 
 
-                            </View>
+                              </View>
 
-                        </View>
-                    </View>
-                    </>
+                          </View>
+                      </View>
+                      </>
 
 
-                )
+                  )
 
             }
 
@@ -665,7 +768,7 @@ class SimulatorPage extends Component{
                                                     }catch(e){
                                                         console.log(e)
                                                     }
-                                                    
+
                                                 }}
                                             />
                                         </View>
@@ -1167,7 +1270,7 @@ class SimulatorPage extends Component{
                     this.getCurrentPage()
 
                 }
-                
+
             </View>
         );
     }
