@@ -69,13 +69,13 @@ class PageOne extends Component{
                     ? null
                     : (
                         <>
-                        <Text style={styles.tutorial.contentStyleSmall}>
+                        <Text style={styles.tutorial.contentStyle}>
                             <Text style={styles.tutorial.boldFont}>Your message:</Text> {textToEncrypt}{"\n"}
                             <Text style={styles.tutorial.boldFont}>Ascii value:</Text> {asciiString}{"\n"}
                             <Text style={styles.tutorial.boldFont}>Binary value:</Text> {binaryString}
                         </Text>
                         <Text style={{
-                            ...styles.tutorial.contentStyleSmall,
+                            ...styles.tutorial.contentStyle,
                             marginTop: Dimensions.get('window').height * 0.02
                         }}>
                             Divide the binary string to the blocks according to{" "}
@@ -85,7 +85,7 @@ class PageOne extends Component{
                             {" "}(binary length ÷ n)
                         </Text>
                         <Text style={{
-                            ...styles.tutorial.contentStyleSmall,
+                            ...styles.tutorial.contentStyle,
                             marginTop: Dimensions.get('window').height * 0.02
                         }}>
                             Add the{" "}
