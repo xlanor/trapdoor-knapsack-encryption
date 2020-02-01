@@ -31,7 +31,7 @@ class GCDPage extends Component {
     return contents.QuizTab
   }
   getPageElements = () => {
-    
+
     const { currentPage } = this.props;
     switch (currentPage) {
       case 1: return contents.page1;
@@ -55,7 +55,13 @@ class GCDPage extends Component {
   render() {
     let Page = this.getPageElements();
     return (
-      <ScrollView style={styles.ScrollStyle.scrollStyle}>
+      <ScrollView
+          style={styles.ScrollStyle.scrollStyle}
+          ref={ref => this.scrollView = ref}
+              onContentSizeChange={() => {
+                this.scrollView.scrollTo({x: 0, y: 0, animated: true})
+              }}
+        >
         <Page />
       </ScrollView>
     )

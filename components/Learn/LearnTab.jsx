@@ -84,6 +84,7 @@ import {
   HIDE_TROPHY_ACTION
 } from '../../redux-modules/actions/manageTrophies'
 
+
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -292,13 +293,10 @@ class LearnTab extends Component{
       let currentTab = lockState.lessonPageTabAndPages.tabName
       let currentPage = lockState.lessonPageTabAndPages.tabPage
       let CurPage = this.getContent()
-      console.log("Current page:" + currentPage)
-      console.log(CurPage);
       // for dynamic pages, we render component, while for static
       // we render a page.
       return (
         <Card containerStyle={{maxHeight: '95%', height: '95%'}}>
-
             <CurPage />
         </Card>
       )

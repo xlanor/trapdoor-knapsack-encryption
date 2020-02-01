@@ -4,6 +4,7 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import ErrorBoundaryDecrypt from './components/Common/ErrorBoundaryDecrypt'
 
 import AppNavigator from './navigation/AppNavigator';
 import UpdateQuestions from './components/UpdateQuestions';
@@ -53,7 +54,9 @@ export default function App(props) {
             <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             <UpdateQuestions />
-            <AppNavigator />
+            <ErrorBoundaryDecrypt>
+              <AppNavigator />
+            </ErrorBoundaryDecrypt>
           </View>
           </PersistGate>
 

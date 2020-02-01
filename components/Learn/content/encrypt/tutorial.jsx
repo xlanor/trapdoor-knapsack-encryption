@@ -44,7 +44,6 @@ import {
 
 import {
     UNLOCK_TROPHY_CONCEALMENT,
-    UNLOCK_TROPHY_SAFETY_FIRST,
     SHOW_TROPHY_ACTION,
 }  from '../../../../redux-modules/actions/manageTrophies'
 
@@ -285,13 +284,7 @@ class EncryptTutorial extends Component {
       actions.ALLOW_NEXT_PAGE_ACTION()
       this.setState({
         showBlocks: true,
-      }, ()=> {
-        actions.UNLOCK_TROPHY_SAFETY_FIRST();
-        if(!trophySafetyFirst){
-          actions.SHOW_TROPHY_ACTION()
-        }
       })
-      //UNLOCK_TROPHY_SAFETY_FIRST
     })
 
   }
@@ -307,6 +300,7 @@ class EncryptTutorial extends Component {
       </>
     )
   }
+
   ciphertextInfoPopUp = () => {
     return (
       <>
@@ -574,20 +568,26 @@ class EncryptTutorial extends Component {
             : null
         }
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
-            <ScrollView>
-          <View onStartShouldSetResponder={() => true} style={{ ...styles.tutorial.learnTabPad, height: '100%' }}>
-            <View style={styles.tutorial.textStyleTitleWrapper}>
-              {
-                keyboardVisiblity
-                  ? null
-                  : <Text style={styles.tutorial.titleStyle}>Encryption</Text>
-              }
-            </View>
-            {
-              this.getPageElements()
 
-            }
-          </View>
+            <ScrollView
+              ref={ref => this.scrollView = ref}
+                  onContentSizeChange={() => {
+                    this.scrollView.scrollTo({x: 0, y: 0, animated: true})
+                  }}
+            >
+              <View onStartShouldSetResponder={() => true} style={{ ...styles.tutorial.learnTabPad, height: '100%' }}>
+                <View style={styles.tutorial.textStyleTitleWrapper}>
+                  {
+                    keyboardVisiblity
+                      ? null
+                      : <Text style={styles.tutorial.titleStyle}>Encryption</Text>
+                  }
+                </View>
+                {
+                  this.getPageElements()
+
+                }
+              </View>
             </ScrollView>
         </TouchableWithoutFeedback>
       </>
@@ -598,7 +598,6 @@ class EncryptTutorial extends Component {
 const mapStateToProps = state => ({
   lockState: state,
   trophyConcealment: state.trophy.trophyConcealment,
-  trophySafetyFirst: state.trophy.trophySafetyFirst,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -613,7 +612,6 @@ const mapDispatchToProps = (dispatch) => ({
     DECRYPT_UNLOCK_ACTION,
     NEXT_ENCRYPT_PAGE_ACTION,
     UNLOCK_TROPHY_CONCEALMENT,
-    UNLOCK_TROPHY_SAFETY_FIRST,
     SHOW_TROPHY_ACTION,
   }, dispatch)
 });
