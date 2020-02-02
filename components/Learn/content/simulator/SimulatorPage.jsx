@@ -581,7 +581,7 @@ class SimulatorPage extends Component{
 
                            </View>
 
-                           <Text style={styles.SimulatorPage.textStyleRow}>Enter your encryption string: </Text>
+                           <Text style={styles.SimulatorPage.textStyleRow}>Enter your string to encrypt: </Text>
                               <TextInput
                                   style={{
                                       ...styles.SimulatorPage.textStyleInput,
@@ -726,7 +726,7 @@ class SimulatorPage extends Component{
                     ?(
                         <>
                             <View style={styles.SimulatorPage.rowKeyGen}>
-                                <Text style={styles.SimulatorPage.textStyleRow}>Enter your encryption string: </Text>
+                                <Text style={styles.SimulatorPage.textStyleRow}>Enter your ciphertext: </Text>
                                 <TextInput
                                     style={{
                                         ...styles.SimulatorPage.textStyleInput,
