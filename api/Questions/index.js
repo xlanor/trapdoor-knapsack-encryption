@@ -8,8 +8,9 @@ const GET_QUESTION_URL='questions/';
 export const getQuestions = async(currentTab, succ, fail) => {
     const apiHeader = Header()
     .contentType('application/json')
+    .filter('published')
     .build();
-    
+
     try{
         const res = await axios({
             headers: apiHeader,
