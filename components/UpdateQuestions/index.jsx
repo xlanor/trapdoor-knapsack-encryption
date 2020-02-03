@@ -2,8 +2,6 @@ import { AppState } from 'react-native';
 
 import React, { Component } from 'react';
 
-import { getQuestions } from '../../api/Questions';
-
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -29,12 +27,10 @@ class UpdateQuestions extends Component{
     componentWillUnmount() {
         AppState.removeEventListener('change', this.handleAppStateChange);
     }
-    
+
     handleAppStateChange = nextAppState => {
         const { appState } = this.state;
         const { actions } = this.props;
-
-       
             actions.CALL_API('INTRO')
             actions.CALL_API('ALGO')
             actions.CALL_API('KEYGEN')
@@ -51,7 +47,7 @@ class UpdateQuestions extends Component{
 const mapStateToProps = state => ({
     lockState: state
   })
-  
+
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators({
         CALL_API

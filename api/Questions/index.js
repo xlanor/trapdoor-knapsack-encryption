@@ -5,7 +5,7 @@ import mapIndex from '../pageIndexMapper';
 
 const GET_QUESTION_URL='questions/';
 
-export const getQuestions = async(currentTab, succ, fail) => {
+export const getQuestions = async(currentTab, pageNo, succ, fail) => {
     const apiHeader = Header()
     .contentType('application/json')
     .filter('published')
@@ -15,9 +15,10 @@ export const getQuestions = async(currentTab, succ, fail) => {
         const res = await axios({
             headers: apiHeader,
             method: 'get',
-            url: `${GET_QUESTION_URL}${currentTab}/`
+            url: `${GET_QUESTION_URL}${currentTab}/${pageNo}`
         });
         succ(res.data);
+        return res.data;
     }catch(err){
         fail({
             other: err.message,
