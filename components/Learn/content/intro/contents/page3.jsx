@@ -145,7 +145,7 @@ export default class page3 extends Component {
                         : null
                 }
                 <Text style={style.titleStyle}>Introduction</Text>
-                <Text style={style.contentHead}>Trapdoor Knapsack Algorithm</Text>
+                <Text style={style.contentHead}>Trapdoor Knapsack Cryptosystem</Text>
 
                 <Text style={style.contentStyle}>
                     <Text style={style.links} onPress={() => { this.setState({ showRalphMerkleInfoPopUp: true, }) }}>Ralph Merkle</Text>
@@ -153,11 +153,11 @@ export default class page3 extends Component {
                     <Text style={style.links} onPress={() => { this.setState({ showMartinHellmanInfoPopUp: true, }) }}>Martin Hellman</Text>
                     {" "}invented the{" "}
                     <Text style={style.links} onPress={() => { this.setState({ showTrapdoorKnapsackAlgoPopUp: true, }) }}>
-                        Trapdoor Knapsack Algorithm
+                        Trapdoor Knapsack Cryptosystem
                     </Text>
                     {" "}in 1978.
                     {"\n\n"}
-                    The general idea behind this algorithm is to create{" "}
+                    The general idea behind this cryptosystem is to create{" "}
                     <Text style={style.links} onPress={() => { this.setState({ showProblemsInfoPopUp: true, }) }}>
                         2 separate problems
                     </Text>.
