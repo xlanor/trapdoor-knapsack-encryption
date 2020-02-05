@@ -782,6 +782,12 @@ class SimulatorPage extends Component{
                                     </View>
 
                                 </View>
+                                <Text style={{
+                                    ...styles.SimulatorPage.textStyleRow,
+                                    ...styles.SimulatorPage.rowKeyGen
+                                }}>
+                                    Note: Decryption will use your secret key as given in key generation page
+                                </Text>
 
                             </View>
                         </>
