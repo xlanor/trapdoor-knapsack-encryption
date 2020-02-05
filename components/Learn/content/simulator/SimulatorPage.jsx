@@ -473,14 +473,24 @@ class SimulatorPage extends Component{
             let unpadded = this.removePadding(binStringList,padding)
             console.log(unpadded)
             let dec = this.convertBinToText(unpadded)
-            this.setState({
-                decrypted: dec,
-            },()=>{
-              if (!trophyBreakWall){
-                actions.UNLOCK_TROPHY_BREAK_WALL()
-                actions.SHOW_TROPHY_ACTION()
-              }
-            })
+            console.log("dec: "+dec+" Length: "+dec.length)
+            // Wrong prikey -> dec == " " & dec.length == 1
+            // binstring == all 0s -> dec =="" & dec.length == 0
+            if (dec == " " || dec.length == 0)  
+            {
+                this.enableError("Unable to map the decryption result to the proper ascii value! \nMight be decrypting with wrong key!")
+            }
+            else
+            {
+                this.setState({
+                    decrypted: dec,
+                },()=>{
+                  if (!trophyBreakWall){
+                    actions.UNLOCK_TROPHY_BREAK_WALL()
+                    actions.SHOW_TROPHY_ACTION()
+                  }
+                })
+            }
         }
 
     }
