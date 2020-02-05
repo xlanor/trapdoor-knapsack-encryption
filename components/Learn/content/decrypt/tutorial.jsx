@@ -508,6 +508,7 @@ class DecryptTutorial extends Component {
                 ? <ScrollViewPopUp
                   visibility={showBlocks}
                   lockStateArr={decryptedArr}
+                  title="Decrypted Blocks"
                   callback={
                     () => {
                       this.setState({
