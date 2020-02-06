@@ -12,6 +12,7 @@ import {
   TextInput,
   Modal,
   Keyboard,
+  Dimensions,
 } from 'react-native';
 
 // import stylesheet.
@@ -489,9 +490,9 @@ class EncryptTutorial extends Component {
     const { lockState, actions } = this.props;
     let lockStateArr = null;
     if (lockState.encryption.binaryBlocks.length != 0) {
-      let flexLength = []
+      let widthLength = []
       for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++) {
-        flexLength.push(1);
+        widthLength.push(Dimensions.get('screen').width * 0.2);
       }
       let encryptedArr = [];
       lockStateArr = lockState.encryption.binaryBlocks.map((block, idx) => {
@@ -503,7 +504,7 @@ class EncryptTutorial extends Component {
             <Block
               key={'binary-' + idx}
               tableTitle={["Key", "Binary", "Total"]}
-              flexArr={flexLength}
+              widthArr={widthLength}
               tableData={block}
               currentPublicKey={lockState.updateParameters.publicKeyArr}
               tableType="binary"
