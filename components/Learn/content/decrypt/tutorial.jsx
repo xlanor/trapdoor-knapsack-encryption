@@ -394,7 +394,7 @@ class DecryptTutorial extends Component {
     if (currentDecryptedBlocks !== null) {
       let flexLength = []
       for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++) {
-        flexLength.push(1);
+        flexLength.push(Dimensions.get('screen').width * 0.2);
       }
       decryptedArr.push(
         currentDecryptedBlocks.blocks.map((x, idx) => {
@@ -508,6 +508,7 @@ class DecryptTutorial extends Component {
                 ? <ScrollViewPopUp
                   visibility={showBlocks}
                   lockStateArr={decryptedArr}
+                  title="Decrypted Blocks"
                   callback={
                     () => {
                       this.setState({

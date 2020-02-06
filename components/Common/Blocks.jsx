@@ -2,7 +2,9 @@ import React, { Component } from 'React';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView,
+  Dimensions
 } from 'react-native'
 
 import {
@@ -44,7 +46,8 @@ class Block extends Component{
   }
   render(){
     const { total } = this.state;
-    const { flexArr,
+    const {
+          widthArr,
           tableTitle,
           tableData,
           currentPublicKey,
@@ -60,13 +63,24 @@ class Block extends Component{
               : null
             }
         </View>
-        <Table borderStyle={{borderWidth: 1}}>
-          <TableWrapper style={styles.wrapperStyle}>
-            <Col data={tableTitle} style={styles.titleStyle} heightArr={[28,28]} textStyle={styles.headerTextStyle}/>
-            <Rows data={this.constructRowData()} flexArr={flexArr} style={styles.rowStyle} textStyle={styles.textStyle}/>
-          </TableWrapper>
+        <ScrollView horizontal={true}>
+          <Table borderStyle={{borderWidth: 1}}>
+            <TableWrapper style={styles.wrapperStyle}>
+              <Col
+                  data={tableTitle}
+                  style={styles.titleStyle}
+                  heightArr={[
+                    28,
+                    28,
+                    28,
+                  ]}
+                  textStyle={styles.headerTextStyle}
+              />
+              <Rows data={this.constructRowData()} widthArr={widthArr} style={styles.rowStyle} textStyle={styles.textStyle}/>
+            </TableWrapper>
 
-        </Table>
+          </Table>
+        </ScrollView>
         <View style={styles.blockTotalView}>
         {
             tableType == "binary"
@@ -86,7 +100,6 @@ class Block extends Component{
 
 
 Block.propTypes = {
-  flexArr: PropTypes.array.isRequired,
   tableTitle: PropTypes.array.isRequired,
   tableData: PropTypes.array.isRequired,
   currentPublicKey: PropTypes.array.isRequired,
