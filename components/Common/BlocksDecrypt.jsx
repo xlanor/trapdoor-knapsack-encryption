@@ -2,7 +2,8 @@ import React, { Component } from 'React';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native'
 
 import {
@@ -47,14 +48,16 @@ class BlockDecrypt extends Component{
           Encrypted Value: {encryptedInput}{"\n"}
           Multiplied with Inverse ({inverse}): {Number(encryptedInput) * inverse}{"\n"}
         </Text>
-        <Table borderStyle={{borderWidth: 1}}>
-          <TableWrapper style={styles.wrapperStyle}>
-            <Col data={tableTitle} style={styles.titleStyle} heightArr={[28,28]} textStyle={styles.textStyle}/>
-            <Rows data={[
-                currentR, pubKey, postSub, binary, binaryOrdered
-            ]} flexArr={flexArr} style={styles.rowStyle} textStyle={styles.textStyle}/>
-          </TableWrapper>
-        </Table>
+        <ScrollView horizontal={true}>
+          <Table borderStyle={{borderWidth: 1}}>
+            <TableWrapper style={styles.wrapperStyle}>
+              <Col data={tableTitle} style={styles.titleStyle} heightArr={[28,28]} textStyle={styles.textStyle}/>
+              <Rows data={[
+                  currentR, pubKey, postSub, binary, binaryOrdered
+              ]} widthArr={flexArr} style={styles.rowStyle} textStyle={styles.textStyle}/>
+            </TableWrapper>
+          </Table>
+        </ScrollView>
       </View>
     );
   }
