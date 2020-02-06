@@ -42,7 +42,7 @@ class PageFour extends Component {
                     </Text>
                     :
                 </Text>
-                <Text style={{ ...styles.page1.contentStyleSmall, marginTop: u * 0.02 }}>
+                <Text style={{ ...styles.page1.contentStyle, marginTop: u * 0.02 }}>
                     (Using Extended Euclidean's algorithm)
                     {"\n\n"}
                     This is needed for decryption

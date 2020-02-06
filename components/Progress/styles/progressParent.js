@@ -1,5 +1,5 @@
 import { COLORS } from '../../../redux-modules/constants/Colors';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 const containerStyle = {
     marginLeft: Dimensions.get('screen').width * 0.05,
@@ -9,10 +9,14 @@ const containerStyle = {
 
 const headerStyle = {
     backgroundColor: COLORS.ORANGE_1,
-    paddingTop: 0,
+    ...Platform.select({
+      ios:{
+        paddingTop: 0,
+      }
+    })
 }
 
-const headerFont = { 
+const headerFont = {
     fontSize: 25,
     fontFamily: 'comfortaa-bold',
 }

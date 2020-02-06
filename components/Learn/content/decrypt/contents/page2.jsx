@@ -51,14 +51,14 @@ class PageTwo extends Component{
                     {" "}to the{" "}
                     <Text style={styles.tutorial.boldFont}>
                         ascii value
-                    </Text>.{"\n"}
+                    </Text>.{"\n\n"}
                     Lastly, convert the{" "}
                     <Text style={styles.tutorial.boldFont}>
                         ascii value
                     </Text>
                     {" "}back to characters to get back the decrypted message.
                     {"\n\n"}
-                    Current Padding: {padding}
+                    <Text style={styles.tutorial.boldFont}>Current Padding:</Text> {padding}
                 </Text>
                 <View style={{ marginTop: u * 0.03, marginBottom: u * 0.03 }}>
                     {

@@ -44,7 +44,7 @@ class PageFour extends Component {
             binaryBlocks,
             encryptedText,
             padding,
-
+            curPublicKeyString
         } = this.props;
         let u = Dimensions.get('window').height;
         return (
@@ -62,7 +62,8 @@ class PageFour extends Component {
                 </View>
 
                 <Text style={styles.tutorial.contentStyle}>
-                    Your <Text style={styles.tutorial.publicKey}>public key b</Text>:
+                    Your <Text style={styles.tutorial.publicKey}>public key b</Text>:{"\n"}
+                    {curPublicKeyString + "\n"}
                 </Text>
                 <Text style={styles.tutorial.contentStyleSmall}>
                     Binary values x are assigned into blocks and will add padding if there is a need.
@@ -103,14 +104,14 @@ class PageFour extends Component {
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <Text style={styles.tutorial.contentStyle}>
-                        Current Padding: {
+                        <Text style={styles.tutorial.boldFont}>Current Padding:</Text> {
                             encryptedText.length != 0
                                 ? padding
                                 : null
                         }
                     </Text>
                     <Text style={styles.tutorial.contentStyle}>
-                        Ciphertext: {
+                        <Text style={styles.tutorial.boldFont}>Ciphertext:</Text> {
                             encryptedText.length != 0
                                 ? encryptedText.join(", ")
                                 : null
@@ -133,6 +134,7 @@ const mapStateToProps = state => ({
     binaryBlocks: state.encryption.binaryBlocks,
     encryptedText: state.encryption.encryptedText,
     padding: state.encryption.padding,
+    curPublicKeyString: state.updateParameters.publicKeyString,
 })
 
 export default connect(mapStateToProps)(PageFour);

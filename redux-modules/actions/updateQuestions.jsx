@@ -1,4 +1,4 @@
-import { 
+import {
     UPDATE_QUESTIONS,
     CALL_QUESTIONS_API,
     GET_QUESTIONS,
@@ -38,6 +38,8 @@ export const GET_QUESTIONS_ACTION = questionType => {
 
 /* Redux thunk actions */
 export const CALL_API = (quizType) => async dispatch => {
+    let isPaginatedFinish = false;
+    let pageNo = 1;
     const succ = (data) => {
         dispatch(ADD_QUESTIONS_API_ACTION(data.results, quizType));
     }
@@ -45,5 +47,13 @@ export const CALL_API = (quizType) => async dispatch => {
         console.log(err);
     }
     let idx = pageIndexMapper(quizType);
-    getQuestions(idx, succ, err);
+    while(!isPaginatedFinish){
+      let apiData = await getQuestions(idx, pageNo, succ, err);
+      if("has_next" in apiData && apiData.has_next){
+        pageNo += 1;
+      }else{
+        isPaginatedFinish = true;
+        console.log(`Called api finish for ${quizType}, page ${pageNo}`)
+      }
+    }
 }
