@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Trapdoor",
-    "slug": "trapdoor",
+    "name": "Traplearn",
+    "slug": "Traplearn",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -11,7 +11,7 @@
     ],
     "version": "1.1.2",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/AppIcon1.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
