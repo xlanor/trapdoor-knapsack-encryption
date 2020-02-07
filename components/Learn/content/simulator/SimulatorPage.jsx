@@ -1164,7 +1164,7 @@ class SimulatorPage extends Component {
   };
 
   mainMenu = () => {
-    const { lockState, genKeyCompleted } = this.props;
+    const { genKeyCompleted } = this.props;
     return (
       // Don't anyhow remove empty views, they are there to provide flex.
       <>
@@ -1215,7 +1215,7 @@ class SimulatorPage extends Component {
   };
 
   render() {
-    const { currentSimulatorPage, errorMessage, showError, showAlertPopUp, alertPopUpMessage } = this.state;
+    const { errorMessage, showError, showAlertPopUp, alertPopUpMessage } = this.state;
     setTimeout(() => {
       if (showAlertPopUp) this.setState({ showAlertPopUp: false, alertPopUpMessage: '' });
     }, 3000);
