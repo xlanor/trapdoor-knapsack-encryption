@@ -8,6 +8,9 @@ import { bindActionCreators } from 'redux';
 // import third party libs
 import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements'
 
+// import stylesheet.
+import styles from '../styles';
+
 // import components
 import Quiz from '../../../quiz/Quiz';
 
@@ -25,6 +28,7 @@ class QuizTab extends Component {
         const { actions } = this.props;
         return(
             <>
+                <Text style={styles.GCDPages.titleStyle}>Euclidean and Extended Euclidean Algorithm</Text>
                 <Quiz quizType="KEYGEN" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_GCD_PAGE_ACTION()}} />
             </>
         )

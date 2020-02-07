@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Text, Image } from 'react-native';
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -43,6 +43,7 @@ class UnlockNext extends Component{
         console.log(actions)
         return (
             <>
+                <Text style={styles.PageStyle.titleStyle}>Introduction</Text>
                 <Animatable.View animation="slideInDown">
                     <Card title="Unlocked Next Tab!">
                     <RneButton
