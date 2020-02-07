@@ -1223,7 +1223,7 @@ class SimulatorPage extends Component {
   render() {
     const { errorMessage, showError, showAlertPopUp, alertPopUpMessage } = this.state;
     const { publicKey } = this.props;
-    console.log(publicKey);
+    console.log(`PUB KEY ${publicKey}`);
     setTimeout(() => {
       if (showAlertPopUp) this.setState({ showAlertPopUp: false, alertPopUpMessage: '' });
     }, 3000);
@@ -1292,15 +1292,15 @@ const mapDispatchToProps = dispatch => ({
 });
 
 SimulatorPage.propTypes = {
-  publicKey: PropTypes.arrayOf(PropTypes.string).isRequired,
+  publicKey: PropTypes.arrayOf(PropTypes.number),
   privateKeyValid: PropTypes.bool.isRequired,
   modulusValid: PropTypes.bool.isRequired,
   multiplierValid: PropTypes.bool.isRequired,
   privateKeySum: PropTypes.number.isRequired,
   padding: PropTypes.number.isRequired,
   privateKey: PropTypes.string.isRequired,
-  modulus: PropTypes.string.isRequired,
-  multiplier: PropTypes.string.isRequired,
+  modulus: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  multiplier: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   genKeyCompleted: PropTypes.bool.isRequired,
   trophyKeymaster: PropTypes.bool.isRequired,
   trophySafetyFirst: PropTypes.bool.isRequired,

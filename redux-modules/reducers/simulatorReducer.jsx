@@ -42,7 +42,7 @@ const simulatorReducer = (state = initialState, action) => {
         /* If we update the private key, everything else becomes invalid. */
         modulus: '',
         modulusValid: false,
-        publicKey: '',
+        publicKey: [],
         genKeyCompleted: false,
       };
     case UPDATE_SIMULATOR_PRIVATE_KEY_VALID:
@@ -58,7 +58,7 @@ const simulatorReducer = (state = initialState, action) => {
           modulusValid: false,
           multiplier: '',
           multiplierValid: false,
-          publicKey: '',
+          publicKey: [],
           genKeyCompleted: false,
         };
       }
@@ -78,7 +78,7 @@ const simulatorReducer = (state = initialState, action) => {
         ...state,
         modulus: action.payload,
         modulusValid: true,
-        publicKey: '',
+        publicKey: [],
         genKeyCompleted: false,
       };
     case UPDATE_SIMULATOR_MODULO_VALID:
@@ -105,7 +105,7 @@ const simulatorReducer = (state = initialState, action) => {
         ...state,
         multiplier: action.payload,
         multiplierValid: true,
-        publicKey: false,
+        publicKey: [],
         genKeyCompleted: false,
       };
     case UPDATE_SIMULATOR_MULTIPLIER_VALID: {
@@ -115,7 +115,7 @@ const simulatorReducer = (state = initialState, action) => {
           ...state,
           multiplier: '',
           multiplierValid: false,
-          publicKey: false,
+          publicKey: [],
           genKeyCompleted: false,
         };
       }
