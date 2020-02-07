@@ -82,7 +82,6 @@ class SimulatorPage extends Component {
       alertPopUpMessage: '',
       localPublicKey: '',
       localPublicKeyValid: false,
-      msgValue: '',
     };
   }
 
@@ -229,7 +228,7 @@ class SimulatorPage extends Component {
       mod = multiplier % mod;
       multiplier = temp;
     }
-    return multiplier == 1;
+    return multiplier === 1;
   };
 
   getBinaryOfInput = textToGet => {
@@ -276,25 +275,25 @@ class SimulatorPage extends Component {
       binBlocks.push(binaryString.substring(i, i + trapdoorSize));
     }
     // need to pad
-    if (binaryString.length % trapdoorSize != 0) {
+    if (binaryString.length % trapdoorSize !== 0) {
       const padding = trapdoorSize - (binaryString.length % trapdoorSize);
       const start = binaryString.length - (binaryString.length % trapdoorSize);
       let blockStr = binaryString.substring(start);
       console.log(`Padding to ${padding}`);
-      for (let j = 0; j < padding; j++) {
+      for (let j = 0; j < padding; j += 1) {
         blockStr += '0';
       }
       binBlocks.push(blockStr);
       actions.UPDATE_SIMULATOR_PADDING_ACTION(padding);
     }
     const binBlocksNumeric = [];
-    for (let i = 0; i < binBlocks.length; i++) {
+    for (let i = 0; i < binBlocks.length; i += 1) {
       // for each number string inside bin blocks, cast it to an array of numbers.
       console.log(binBlocks[i]);
       const binLen = binBlocks[i].length;
       const numeric = binBlocks[i].split('').map(Number);
       let differential = binLen - numeric.length;
-      while (differential != 0) {
+      while (differential !== 0) {
         numeric.unshift(0); // prepends
         differential -= 1;
       }
@@ -306,7 +305,7 @@ class SimulatorPage extends Component {
   validateNumeric = numericString => {
     // splits the numeric.
     const splitKey = numericString.split(',');
-    for (let i = 0; i < splitKey.length; i++) {
+    for (let i = 0; i < splitKey.length; i += 1) {
       const checkNum = this.isValidNumber(splitKey[i]);
       if (!checkNum) {
         return false;
@@ -319,7 +318,7 @@ class SimulatorPage extends Component {
     // splits the private key.
     const splitKey = numericString.split(',');
     let currentMax = 0;
-    for (let i = 0; i < splitKey.length; i++) {
+    for (let i = 0; i < splitKey.length; i += 1) {
       const curNo = Number(splitKey[i]);
       const checkSuperIncreasing = this.isGreater(currentMax, curNo, i);
       if (checkSuperIncreasing) {
@@ -719,7 +718,7 @@ class SimulatorPage extends Component {
     const { actions } = this.props;
     return (
       <>
-        {decrypted == '' ? (
+        {decrypted === '' ? (
           <>
             <View style={styles.SimulatorPage.rowKeyGen}>
               <Text style={styles.SimulatorPage.textStyleRow}>Enter your ciphertext: </Text>
@@ -1122,9 +1121,6 @@ class SimulatorPage extends Component {
                   ...styles.SimulatorPage.roundLeftCorner,
                 }}
                 editable={false}
-                onChangeText={text => {
-                  this.setState({ msgValue: text });
-                }}
               >
                 {typeof publicKey === 'object' ? publicKey.join(', ') : null}
               </TextInput>
