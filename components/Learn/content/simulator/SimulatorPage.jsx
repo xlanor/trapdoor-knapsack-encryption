@@ -11,7 +11,8 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   FlatList,
-  Alert
+  Alert,
+  Share
 } from 'react-native';
 
 import CustomButton from '../../../Common/Button';
@@ -49,6 +50,7 @@ import Error from '../../../../assets/images/Error.png'
 import EditButton from '../../../../assets/images/EditButton.png'
 import Copy from '../../../../assets/images/Copy.png'
 import Success from '../../../../assets/images/success.png'
+import ShareButton from '../../../../assets/images/Share.png'
 
 import PopUp from '../../../Common/PopUp'
 import AlertPopUp from '../../../Common/AlertPopUp'
@@ -92,6 +94,7 @@ class SimulatorPage extends Component{
             alertPopUpMessage: "",
             localPublicKey: "",
             localPublicKeyValid: false,
+            msgValue: "", 
         }
     }
 
@@ -159,6 +162,18 @@ class SimulatorPage extends Component{
         })
     }
 
+    onShare = () => {
+        const { publicKey } = this.props;
+        //Here is the Share API 
+        Share.share({
+          message: publicKey.join(","),
+        })
+        //after successful share return result
+        .then(result => console.log(result))
+        //If any thing goes wrong it comes here
+        .catch(errorMsg => console.log(errorMsg));
+    }
+
     getNumericFromString = (delimitedByComma) => {
         // ONLY use this if you have validated the string!
         return delimitedByComma.split(',').map(x=>{return Number(x)})
@@ -166,19 +181,24 @@ class SimulatorPage extends Component{
 
 
    computePublicKey = () => {
-        const { lockState, actions, trophyKeymaster } = this.props;
+        const { 
+            lockState, 
+            actions, 
+            trophyKeymaster, 
+            privateKey,
+            modulus, 
+            multiplier,
+            genKeyCompleted
+        } = this.props;
         // for every element in the public key, multiply by the multiplier and get the remainder.
-        let privateKeyString = lockState.simulator.privateKey
-        let privateKey = privateKeyString.split(',')
-        let modulo = lockState.simulator.modulus
-        let multiplier = lockState.simulator.multiplier
+        let localPrivateKey = privateKey.split(',')
         let newPk = []
-        console.log(`Modulo ${modulo} Multiplier ${multiplier} Private Key ${privateKey}`)
-        for (let i = 0; i < privateKey.length; i++){
-            let pub = (privateKey[i] * multiplier) % modulo
+        console.log(`Modulo ${modulus} Multiplier ${multiplier} Private Key ${localPrivateKey}`)
+        for (let i = 0; i < localPrivateKey.length; i++){
+            let pub = (localPrivateKey[i] * multiplier) % modulus
             newPk.push(pub);
         }
-        if( !lockState.simulator.genKeyCompleted ){
+        if( !genKeyCompleted ){
             actions.UPDATE_SIMULATOR_PUBLIC_KEY_ACTION(newPk);
             if (!trophyKeymaster){
               actions.UNLOCK_TROPHY_KEYMASTER();
@@ -244,7 +264,7 @@ class SimulatorPage extends Component{
     generateBinaryBlocks = (binaryString) => {
         const { lockState, actions } = this.props
         let binUserInput = binaryString
-        let binPubKeyArr = lockState.simulator.publicKey
+        let binPubKeyArr = publicKey
         let binaryBlocks = this.chunk(binUserInput,binPubKeyArr.length)
         return binaryBlocks
     }
@@ -372,7 +392,7 @@ class SimulatorPage extends Component{
     }
 
     validateCurrentModulus = () => {
-        const { actions, lockState } = this.props;
+        const { actions, lockState, privateKeySum } = this.props;
         const { currentModulusInput } = this.state;
         if(!this.validateNumeric(currentModulusInput)){
             this.enableError("Non numeric modulo received!")
@@ -380,8 +400,8 @@ class SimulatorPage extends Component{
           }else{
             // check if is bigger
             let curMod = Number(currentModulusInput)
-            if(!this.isGreaterInteger( lockState.simulator.privateKeySum , curMod )){
-              this.enableError(`Modulus is not larger than ${lockState.simulator.privateKeySum}!`)
+            if(!this.isGreaterInteger( privateKeySum , curMod )){
+              this.enableError(`Modulus is not larger than ${privateKeySum}!`)
               actions.UPDATE_SIMULATOR_MODULO_VALID_ACTION(false);
             }else{
                 // integer is greater.
@@ -391,9 +411,9 @@ class SimulatorPage extends Component{
     }
 
     validateCurrentMultiplier = () => {
-        const { actions, lockState } = this.props;
+        const { actions, lockState, modulus } = this.props;
         const { currentMultiplierInput } = this.state;
-        let mod = Number(lockState.simulator.modulus)
+        let mod = Number(modulus)
 
         if (!this.validateNumeric(currentMultiplierInput)){
            this.enableError("Non numeric multiplier received!")
@@ -440,7 +460,7 @@ class SimulatorPage extends Component{
         }
     }
     validateDecryptionText = () => {
-        const { lockState, actions, trophyBreakWall  } = this.props
+        const { lockState, actions, trophyBreakWall, privateKey, modulus, multiplier  } = this.props
         const { currentEncryptedTextInput, currentPaddingInput } = this.state
 
         if (this.isEmptyInput(currentEncryptedTextInput)){
@@ -459,33 +479,43 @@ class SimulatorPage extends Component{
             let encryptedNumberArray = currentEncryptedTextInput.replace(/, +/g, ",").split(",").map(Number);
             let decrypted = []
             // compute the current inverse
-            let currentInverse = this.xgcd(lockState.simulator.multiplier,lockState.simulator.modulus)
+            let currentInverse = this.xgcd(multiplier,modulus)
             encryptedNumberArray.forEach((enc)=>{
                 let multiplied = enc * currentInverse;
-                let modVal = multiplied % lockState.simulator.modulus;
+                let modVal = multiplied % modulus;
                 decrypted.push(modVal)
             })
             // convert private key to an array of numbers
-            let privateKeyArr = lockState.simulator.privateKey.replace(/, +/g, ",").split(",").map(Number);
+            let privateKeyArr = privateKey.replace(/, +/g, ",").split(",").map(Number);
             let binStringList = this.getBinaryString(privateKeyArr, decrypted)
             console.log(binStringList)
 
             let unpadded = this.removePadding(binStringList,padding)
             console.log(unpadded)
             let dec = this.convertBinToText(unpadded)
-            this.setState({
-                decrypted: dec,
-            },()=>{
-              if (!trophyBreakWall){
-                actions.UNLOCK_TROPHY_BREAK_WALL()
-                actions.SHOW_TROPHY_ACTION()
-              }
-            })
+            console.log("dec: "+dec+" Length: "+dec.length)
+            // Wrong prikey -> dec == " " & dec.length == 1
+            // binstring == all 0s -> dec =="" & dec.length == 0
+            if (!dec || dec.trim().length === 0)  
+            {
+                this.enableError("Unable to map the decryption result to the proper ascii value! \nMight be decrypting with wrong key!")
+            }
+            else
+            {
+                this.setState({
+                    decrypted: dec,
+                },()=>{
+                  if (!trophyBreakWall){
+                    actions.UNLOCK_TROPHY_BREAK_WALL()
+                    actions.SHOW_TROPHY_ACTION()
+                  }
+                })
+            }
         }
 
     }
     encryptionPage = () => {
-        const { actions, lockState } = this.props;
+        const { actions, lockState, padding } = this.props;
         const { encryptedOutput, localPublicKeyValid, localPublicKey } = this.state;
         console.log(`Local Public Key: ${localPublicKeyValid}`)
         return (
@@ -669,7 +699,7 @@ class SimulatorPage extends Component{
                                   }}
                                   editable={false}
                               >
-                                  {lockState.simulator.padding}
+                                  {padding}
                               </TextInput>
                           </View>
                           <View style={styles.SimulatorPage.genKeyButtonView}>
@@ -866,12 +896,13 @@ class SimulatorPage extends Component{
         )
     }
     keyGenerationPage = () => {
-        const { actions, lockState } = this.props;
+        const { actions, lockState, publicKey, privateKey, modulus, multiplier, privateKeyValid, modulusValid, multiplierValid } = this.props;
+        const { msgValue } = this.state;
         return (
 
             <>
                 {
-                    lockState.simulator.privateKeyValid
+                    privateKeyValid
                     ? (
                         <View style={styles.SimulatorPage.rowKeyGen}>
                             <Text style={styles.SimulatorPage.textStyleRow}>Private Key: </Text>
@@ -883,7 +914,7 @@ class SimulatorPage extends Component{
                                         }}
                                         editable={false}
                                     >
-                                        {lockState.simulator.privateKey}
+                                        {privateKey}
                                     </TextInput>
                                     <View style={styles.SimulatorPage.imageButtonStyle}>
                                         <TouchableOpacity
@@ -906,7 +937,7 @@ class SimulatorPage extends Component{
                                     >
                                         <TouchableOpacity
                                             onPress={()=>{
-                                                Clipboard.setString(lockState.simulator.privateKey)
+                                                Clipboard.setString(privateKey)
                                                 this.setState({
                                                     showAlertPopUp: true,
                                                     alertPopUpMessage: "Successfully copied the private key to your clipboard!"
@@ -960,9 +991,9 @@ class SimulatorPage extends Component{
                     )
                 }
                 {
-                    lockState.simulator.privateKeyValid
+                    privateKeyValid
                     ? (
-                        lockState.simulator.modulusValid
+                        modulusValid
                         ?  (
                             <View style={styles.SimulatorPage.rowKeyGen}>
                                 <Text style={styles.SimulatorPage.textStyleRow}>
@@ -976,7 +1007,7 @@ class SimulatorPage extends Component{
                                         }}
                                         editable={false}
                                     >
-                                        {lockState.simulator.modulus}
+                                        {modulus}
                                     </TextInput>
                                     <View style={styles.SimulatorPage.imageButtonStyle}>
                                         <TouchableOpacity
@@ -998,7 +1029,7 @@ class SimulatorPage extends Component{
                                     >
                                         <TouchableOpacity
                                             onPress={()=>{
-                                                Clipboard.setString(lockState.simulator.modulus.toString())
+                                                Clipboard.setString(modulus.toString())
                                                 this.setState({
                                                     showAlertPopUp: true,
                                                     alertPopUpMessage: "Successfully copied the modulus to your clipboard!"
@@ -1055,10 +1086,10 @@ class SimulatorPage extends Component{
                 }
                 {
 
-                    (lockState.simulator.modulusValid
-                        && lockState.simulator.privateKeyValid )
+                    (modulusValid
+                        && privateKeyValid )
                         ? (
-                            lockState.simulator.multiplierValid
+                            multiplierValid
                             ? (
                                 <View style={styles.SimulatorPage.rowKeyGen}>
                                     <Text style={styles.SimulatorPage.textStyleRow}>
@@ -1073,7 +1104,7 @@ class SimulatorPage extends Component{
                                             keyboardType={'numeric'}
                                             editable={false}
                                         >
-                                            {lockState.simulator.multiplier}
+                                            {multiplier}
                                         </TextInput>
                                         <View style={styles.SimulatorPage.imageButtonStyle}>
                                             <TouchableOpacity
@@ -1095,7 +1126,7 @@ class SimulatorPage extends Component{
                                         >
                                             <TouchableOpacity
                                                 onPress={()=>{
-                                                    Clipboard.setString(lockState.simulator.multiplier.toString())
+                                                    Clipboard.setString(multiplier.toString())
                                                     this.setState({
                                                         showAlertPopUp: true,
                                                         alertPopUpMessage: "Successfully copied the multiplier to your clipboard!"
@@ -1147,9 +1178,9 @@ class SimulatorPage extends Component{
 
                 }
                 {
-                    (lockState.simulator.modulusValid
-                        && lockState.simulator.privateKeyValid
-                        && lockState.simulator.multiplierValid)
+                    (modulusValid
+                        && privateKeyValid
+                        && multiplierValid)
                     ?  (
 
                         <View style={styles.SimulatorPage.rowKeyGen}>
@@ -1159,16 +1190,29 @@ class SimulatorPage extends Component{
                             </Text>
                             <View style={{flexDirection: 'row'}}>
                                 <TextInput
-                                    style={styles.SimulatorPage.textStyleInputUneditable}
+                                    style={{                                        
+                                        ...styles.SimulatorPage.textStyleInputUneditable,
+                                        ...styles.SimulatorPage.roundLeftCorner,
+                                    }}
                                     editable={false}
+                                    onChangeText={text => { this.setState({ msgValue: text }); }}
                                 >
                                     {
-                                        typeof(lockState.simulator.publicKey) === "object"
-                                        ? lockState.simulator.publicKey.join(", ")
+                                        typeof(publicKey) === "object"
+                                        ? publicKey.join(", ")
                                         :null
-                                    }
+                                    }                                                                    
                                 </TextInput>
-
+                                <View style={styles.SimulatorPage.imageButtonStyle}>
+                                    <TouchableOpacity                                        
+                                        onPress={this.onShare}
+                                    >
+                                    <Image
+                                        style={styles.SimulatorPage.copyStyle}
+                                        source={ShareButton}
+                                    />
+                                    </TouchableOpacity>
+                                </View>
                                 <View
                                     style={{
                                         ...styles.SimulatorPage.imageButtonStyle,
@@ -1178,9 +1222,8 @@ class SimulatorPage extends Component{
                                     <TouchableOpacity
                                         onPress={()=>{
                                             Clipboard.setString(
-
-                                            typeof(lockState.simulator.publicKey) === "object"
-                                            ? lockState.simulator.publicKey.join(",")
+                                            typeof(publicKey) === "object"
+                                            ? publicKey.join(",")
                                             :null
                                             )
 
@@ -1196,7 +1239,7 @@ class SimulatorPage extends Component{
                                         source={Copy}
                                     />
                                     </TouchableOpacity>
-                                </View>
+                                </View>                                   
                             </View>
 
                              <View style={styles.SimulatorPage.genKeyButtonView}>
@@ -1212,7 +1255,7 @@ class SimulatorPage extends Component{
 
     }
     mainMenu = () => {
-        const { lockState } = this.props;
+        const { lockState, genKeyCompleted } = this.props;
         return (
             // Don't anyhow remove empty views, they are there to provide flex.
             <>
@@ -1221,7 +1264,7 @@ class SimulatorPage extends Component{
 
                 </View>
                 {
-                    lockState.simulator.genKeyCompleted
+                    genKeyCompleted
                     ? <>
                         <View style={styles.SimulatorPage.rowView}>
                                 <CustomButton callback={() => {this.setCurrentSimulatorPage("encrypt")}} text="Encrypt" />
@@ -1290,6 +1333,16 @@ class SimulatorPage extends Component{
 
 const mapStateToProps = state => ({
     lockState: state,
+    privateKeyValid: state.simulator.privateKeyValid,
+    modulusValid: state.simulator.modulusValid,
+    multiplierValid: state.simulator.multiplierValid,
+    privateKeySum: state.simulator.privateKeySum,
+    padding: state.simulator.padding,
+    publicKey: state.simulator.publicKey,
+    privateKey: state.simulator.privateKey,
+    modulus: state.simulator.modulus,
+    multiplier: state.simulator.multiplier,
+    genKeyCompleted: state.simulator.genKeyCompleted,
     trophyKeymaster: state.trophy.trophyKeymaster,
     trophySafetyFirst: state.trophy.trophySafetyFirst,
     trophyBreakWall: state.trophy.trophyBreakWall,

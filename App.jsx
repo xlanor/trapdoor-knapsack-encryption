@@ -8,6 +8,7 @@ import ErrorBoundaryDecrypt from './components/Common/ErrorBoundaryDecrypt'
 
 import AppNavigator from './navigation/AppNavigator';
 import UpdateQuestions from './components/UpdateQuestions';
+import SplashScreen from './screens/SplashScreen';
 
 import { Provider } from 'react-redux';
 
@@ -24,6 +25,7 @@ export default function App(props) {
       );    
   };
   const [isLoadingComplete, setLoadingComplete] = useState(false);
+  const [isSplash, setSplash] = useState(true);
 
   const myStore = getStore();  
   const myPersistor = getPersistor();
@@ -55,7 +57,7 @@ export default function App(props) {
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             <UpdateQuestions />
             <ErrorBoundaryDecrypt>
-              <AppNavigator />
+              <SplashScreen/>
             </ErrorBoundaryDecrypt>
           </View>
           </PersistGate>
