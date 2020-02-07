@@ -340,48 +340,56 @@ class ProgressParent extends Component {
                 "subtitle": "Successfully completed the introduction",
                 "enabled": trophyHistorian,
                 "image": HistorianIcon,
+                "id":1
             },
             {
                 "title": "Math is Easy",
                 "subtitle": "Successfully completed extended euclidean algorithm",
                 "enabled": trophyEzMath,
                 "image": MathIcon,
+                "id":2
             },
             {
                 "title": "Keyring",
                 "subtitle": "Successfully completed extended key generation",
                 "enabled": trophyKeyRing,
                 "image": KeyRingIcon,
+                "id":3
             },
             {
                 "title": "Concealment",
                 "subtitle": "Successfully completed encryption",
                 "enabled": trophyConcealment,
                 "image": ConcealmentIcon,
+                "id":4
             },
             {
                 "title": "The Reveal",
                 "subtitle": "Successfully completed decryption",
                 "enabled": trophyReveal,
                 "image": RevealIcon,
+                "id":5
             },
             {
                 "title": "The Key Master",
                 "subtitle": "Successfully generated keys in the simulator",
                 "enabled": trophyKeymaster,
                 "image": KeyMasterIcon,
+                "id":6
             },
             {
                 "title": "Safety First",
                 "subtitle": "Successfully encrypt message in the simulator",
                 "enabled": trophySafetyFirst,
                 "image": SafetyIcon,
+                "id":7
             },
             {
                 "title": "Break the Wall",
                 "subtitle": "Successfully decrypt message in the simulator",
                 "enabled": trophyBreakWall,
                 "image": BreakIcon,
+                "id":8
             }
         ]
     }
@@ -396,38 +404,38 @@ class ProgressParent extends Component {
                 {
                     (() => {
                         switch (showInfoPopUp) {
-                            case "Historian": return <AlertPopUp
+                            case 1: return <AlertPopUp
                                 renderedBlocks={this.historianInfoPopUp()}
                                 callback={() => { this.setState({ showInfoPopUp: false, }) }}
-                                visibility={showInfoPopUp == "Historian"} />
-                            case "Math is Easy": return <AlertPopUp
+                                visibility={showInfoPopUp == 1} />
+                            case 2: return <AlertPopUp
                                 renderedBlocks={this.mathiseasyInfoPopUp()}
                                 callback={() => { this.setState({ showInfoPopUp: false, }) }}
-                                visibility={showInfoPopUp == "Math is Easy"} />
-                            case "Keyring": return <AlertPopUp
+                                visibility={showInfoPopUp == 2} />
+                            case 3: return <AlertPopUp
                                 renderedBlocks={this.keyringInfoPopUp()}
                                 callback={() => { this.setState({ showInfoPopUp: false, }) }}
-                                visibility={showInfoPopUp == "Keyring"} />
-                            case "Concealment": return <AlertPopUp
+                                visibility={showInfoPopUp == 3} />
+                            case 4: return <AlertPopUp
                                 renderedBlocks={this.concealmentInfoPopUp()}
                                 callback={() => { this.setState({ showInfoPopUp: false, }) }}
-                                visibility={showInfoPopUp == "Concealment"} />
-                            case "The Reveal": return <AlertPopUp
+                                visibility={showInfoPopUp == 4} />
+                            case 5: return <AlertPopUp
                                 renderedBlocks={this.therevealInfoPopUp()}
                                 callback={() => { this.setState({ showInfoPopUp: false, }) }}
-                                visibility={showInfoPopUp == "The Reveal"} />
-                            case "The Key Master": return <AlertPopUp
+                                visibility={showInfoPopUp == 5} />
+                            case 6: return <AlertPopUp
                                 renderedBlocks={this.thekeymasterInfoPopUp()}
                                 callback={() => { this.setState({ showInfoPopUp: false, }) }}
-                                visibility={showInfoPopUp == "The Key Master"} />
-                            case "Safety First": return <AlertPopUp
+                                visibility={showInfoPopUp == 6} />
+                            case 7: return <AlertPopUp
                                 renderedBlocks={this.safetyfirstInfoPopUp()}
                                 callback={() => { this.setState({ showInfoPopUp: false, }) }}
-                                visibility={showInfoPopUp == "Safety First"} />
-                            case "Break the Wall": return <AlertPopUp
+                                visibility={showInfoPopUp == 7} />
+                            case 8: return <AlertPopUp
                                 renderedBlocks={this.breakthewallInfoPopUp()}
                                 callback={() => { this.setState({ showInfoPopUp: false, }) }}
-                                visibility={showInfoPopUp == "Break the Wall"} />
+                                visibility={showInfoPopUp == 8} />
                             default: return null;
                         }
                     }
@@ -491,7 +499,7 @@ class ProgressParent extends Component {
                                 image={x.image}
                                 onPress={() => {
                                     this.setState({
-                                        showInfoPopUp: x.title
+                                        showInfoPopUp: x.id
                                     })
                                 }}
                             />
