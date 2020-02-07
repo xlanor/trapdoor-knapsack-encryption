@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Text, Image } from 'react-native';
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -41,6 +41,7 @@ class UnlockNext extends Component{
         const { actions } = this.props;
         return (
             <>
+                <Text style={styles.GCDPages.titleStyle}>Euclidean and Extended Euclidean Algorithm</Text>
                 <Animatable.View animation="slideInDown">
                     <Card title="Unlocked Next Tab!">
                     <RneButton
