@@ -163,9 +163,10 @@ class SimulatorPage extends Component{
     }
 
     onShare = () => {
+        const { lockState } = this.props;
         //Here is the Share API 
         Share.share({
-          message: this.state.msgValue.toString(),
+          message:lockState.simulator.publicKey.join(","),
         })
         //after successful share return result
         .then(result => console.log(result))
