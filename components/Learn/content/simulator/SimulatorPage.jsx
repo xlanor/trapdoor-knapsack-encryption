@@ -520,6 +520,7 @@ class SimulatorPage extends Component{
         console.log(`Local Public Key: ${localPublicKeyValid}`)
         return (
             <>
+            <Text style={styles.SimulatorPage.textStyleSubTitle}>Encryption</Text>
             {
                 !localPublicKeyValid ?
                  (
@@ -751,6 +752,7 @@ class SimulatorPage extends Component{
         return (
 
             <>
+                <Text style={styles.SimulatorPage.textStyleSubTitle}>Decryption</Text>
                 {
                     decrypted == ""
                     ?(
@@ -901,6 +903,7 @@ class SimulatorPage extends Component{
         return (
 
             <>
+                <Text style={styles.SimulatorPage.textStyleSubTitle}>Key Generation</Text>
                 {
                     privateKeyValid
                     ? (

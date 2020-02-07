@@ -18,6 +18,13 @@ const textStyleTitle = {
     fontSize: 20,
     textAlign: 'center',
     marginTop: Dimensions.get('screen').height * 0.05,
+    textDecorationLine: 'underline',
+}
+const textStyleSubTitle = {
+    fontFamily: 'comfortaa-bold',
+    fontSize: 18,
+    marginTop: Dimensions.get('screen').height * 0.01,
+    textAlign: 'center',
 }
 const textStyleBold = {
     fontFamily: 'comfortaa-bold',
@@ -125,6 +132,7 @@ const multipleButtonRight = {
 export default {
     textStyle,
     textStyleTitle,
+    textStyleSubTitle,
     textStyleBold,
     textStyleRow,
     flexContainerWrapper,
