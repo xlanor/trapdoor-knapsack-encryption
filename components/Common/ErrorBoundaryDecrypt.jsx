@@ -10,18 +10,19 @@ class ErrorBoundaryDecrypt extends React.Component {
     }
   
     componentDidCatch (error, info) {
-      logErrorToService(error, info.componentStack)
+      console.log(error, info.componentStack)
     }
   
     render () {
+      const { hasError } = this.state;
       return this.state.hasError
         ? <PopUpWithButtons
         ButtonOne={this.setState(
                 (prevState)=>({
-                    showErrorPopUp: !prevState.showErrorPopUp
+                  hasError: !prevState.hasError
                 }))
             }
-        visibility={showErrorPopUp}
+        visibility={hasError}
         messageContent={'An error occure!'}
     />
         : this.props.children
