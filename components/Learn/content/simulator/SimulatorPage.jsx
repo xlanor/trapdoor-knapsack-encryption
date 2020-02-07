@@ -11,7 +11,8 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   FlatList,
-  Alert
+  Alert,
+  Share
 } from 'react-native';
 
 import CustomButton from '../../../Common/Button';
@@ -49,6 +50,7 @@ import Error from '../../../../assets/images/Error.png'
 import EditButton from '../../../../assets/images/EditButton.png'
 import Copy from '../../../../assets/images/Copy.png'
 import Success from '../../../../assets/images/success.png'
+import ShareButton from '../../../../assets/images/Share.png'
 
 import PopUp from '../../../Common/PopUp'
 import AlertPopUp from '../../../Common/AlertPopUp'
@@ -92,6 +94,7 @@ class SimulatorPage extends Component{
             alertPopUpMessage: "",
             localPublicKey: "",
             localPublicKeyValid: false,
+            msgValue: "", 
         }
     }
 
@@ -157,6 +160,17 @@ class SimulatorPage extends Component{
             showError: false,
             errorMessage: "",
         })
+    }
+
+    onShare = () => {
+        //Here is the Share API 
+        Share.share({
+          message: this.state.msgValue.toString(),
+        })
+        //after successful share return result
+        .then(result => console.log(result))
+        //If any thing goes wrong it comes here
+        .catch(errorMsg => console.log(errorMsg));
     }
 
     getNumericFromString = (delimitedByComma) => {
@@ -473,14 +487,24 @@ class SimulatorPage extends Component{
             let unpadded = this.removePadding(binStringList,padding)
             console.log(unpadded)
             let dec = this.convertBinToText(unpadded)
-            this.setState({
-                decrypted: dec,
-            },()=>{
-              if (!trophyBreakWall){
-                actions.UNLOCK_TROPHY_BREAK_WALL()
-                actions.SHOW_TROPHY_ACTION()
-              }
-            })
+            console.log("dec: "+dec+" Length: "+dec.length)
+            // Wrong prikey -> dec == " " & dec.length == 1
+            // binstring == all 0s -> dec =="" & dec.length == 0
+            if (!dec || dec.trim().length === 0)  
+            {
+                this.enableError("Unable to map the decryption result to the proper ascii value! \nMight be decrypting with wrong key!")
+            }
+            else
+            {
+                this.setState({
+                    decrypted: dec,
+                },()=>{
+                  if (!trophyBreakWall){
+                    actions.UNLOCK_TROPHY_BREAK_WALL()
+                    actions.SHOW_TROPHY_ACTION()
+                  }
+                })
+            }
         }
 
     }
@@ -867,6 +891,7 @@ class SimulatorPage extends Component{
     }
     keyGenerationPage = () => {
         const { actions, lockState } = this.props;
+        const { msgValue } = this.state;
         return (
 
             <>
@@ -1159,16 +1184,29 @@ class SimulatorPage extends Component{
                             </Text>
                             <View style={{flexDirection: 'row'}}>
                                 <TextInput
-                                    style={styles.SimulatorPage.textStyleInputUneditable}
+                                    style={{                                        
+                                        ...styles.SimulatorPage.textStyleInputUneditable,
+                                        ...styles.SimulatorPage.roundLeftCorner,
+                                    }}
                                     editable={false}
+                                    onChangeText={text => { this.setState({ msgValue: text }); }}
                                 >
                                     {
                                         typeof(lockState.simulator.publicKey) === "object"
                                         ? lockState.simulator.publicKey.join(", ")
                                         :null
-                                    }
+                                    }                                                                    
                                 </TextInput>
-
+                                <View style={styles.SimulatorPage.imageButtonStyle}>
+                                    <TouchableOpacity                                        
+                                        onPress={this.onShare}
+                                    >
+                                    <Image
+                                        style={styles.SimulatorPage.copyStyle}
+                                        source={ShareButton}
+                                    />
+                                    </TouchableOpacity>
+                                </View>
                                 <View
                                     style={{
                                         ...styles.SimulatorPage.imageButtonStyle,
@@ -1178,7 +1216,6 @@ class SimulatorPage extends Component{
                                     <TouchableOpacity
                                         onPress={()=>{
                                             Clipboard.setString(
-
                                             typeof(lockState.simulator.publicKey) === "object"
                                             ? lockState.simulator.publicKey.join(",")
                                             :null
@@ -1196,7 +1233,7 @@ class SimulatorPage extends Component{
                                         source={Copy}
                                     />
                                     </TouchableOpacity>
-                                </View>
+                                </View>                                   
                             </View>
 
                              <View style={styles.SimulatorPage.genKeyButtonView}>
