@@ -19,7 +19,8 @@ class Trophy extends Component {
             title,
             subtitle,
             isEnabled,
-            image
+            image,
+            onPress,
         } = this.props
         return(
             isEnabled
@@ -48,6 +49,7 @@ class Trophy extends Component {
                         size: 'large',
                         rounded: false,
                     }}
+                    onPress={onPress}
                 />
                 :
               
