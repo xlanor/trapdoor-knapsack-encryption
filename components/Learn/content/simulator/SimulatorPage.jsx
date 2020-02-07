@@ -1,11 +1,12 @@
-/* eslint-disable no-nested-ternary */
 import React, { Component } from 'React';
 
 import { View, Text, Clipboard, Image, TouchableOpacity, TextInput, Share } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'react-proptypes';
 import CustomButton from '../../../Common/Button';
+
 // begin redux imports
 
 import {
@@ -110,7 +111,7 @@ class SimulatorPage extends Component {
 
   isEmptyInput = textToCheck => {
     console.log(`Received Text to check ${textToCheck}`);
-    if (typeof textToCheck === undefined) return true;
+    if (typeof textToCheck === 'undefined') return true;
     return textToCheck.trim() === '';
   };
 
@@ -126,7 +127,7 @@ class SimulatorPage extends Component {
 
   isGreater = (a, b, idx) => {
     // returns true by default if idx is 0, if not whether a > b.
-    return idx == 0 ? true : a < b;
+    return idx === 0 ? true : a < b;
   };
 
   setCurrentSimulatorPage = curPage => {
@@ -169,12 +170,12 @@ class SimulatorPage extends Component {
   };
 
   computePublicKey = () => {
-    const { lockState, actions, trophyKeymaster, privateKey, modulus, multiplier, genKeyCompleted } = this.props;
+    const { actions, trophyKeymaster, privateKey, modulus, multiplier, genKeyCompleted } = this.props;
     // for every element in the public key, multiply by the multiplier and get the remainder.
     const localPrivateKey = privateKey.split(',');
     const newPk = [];
     console.log(`Modulo ${modulus} Multiplier ${multiplier} Private Key ${localPrivateKey}`);
-    for (let i = 0; i < localPrivateKey.length; i++) {
+    for (let i = 0; i < localPrivateKey.length; i += 1) {
       const pub = (localPrivateKey[i] * multiplier) % modulus;
       newPk.push(pub);
     }
@@ -187,9 +188,9 @@ class SimulatorPage extends Component {
     }
   };
 
-  xgcd = (a, m) => {
+  xgcd = (inputA, inputM) => {
     // validate inputs
-    [a, m] = [Number(a), Number(m)];
+    let [a, m] = [Number(inputA), Number(inputM)];
     if (Number.isNaN(a) || Number.isNaN(m)) {
       return NaN; // invalid input
     }
@@ -210,7 +211,7 @@ class SimulatorPage extends Component {
     // find the inverse
     let x = 1;
     let y = 0;
-    for (let i = s.length - 2; i >= 0; --i) {
+    for (let i = s.length - 2; i >= 0; i -= 1) {
       [x, y] = [y, x - y * Math.floor(s[i].a / s[i].b)];
     }
     return ((y % m) + m) % m;
@@ -239,10 +240,11 @@ class SimulatorPage extends Component {
       .join('');
   };
 
-  generateBinaryBlocks = binaryString => {
-    const { lockState, actions, publicKey } = this.props;
+  generateBinaryBlocks = (binaryString, localPubNumeric) => {
     const binUserInput = binaryString;
-    const binPubKeyArr = publicKey;
+    const binPubKeyArr = localPubNumeric;
+    console.log(`localPubKey ${localPubNumeric}`);
+    console.log(`local PK len ${localPubNumeric.length}`);
     const binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length);
     return binaryBlocks;
   };
@@ -251,7 +253,7 @@ class SimulatorPage extends Component {
     const binList = [];
     yVal.forEach(y => {
       let binaryStr = '';
-      for (let i = knapsack.length - 1; i >= 0; i--) {
+      for (let i = knapsack.length - 1; i >= 0; i -= 1) {
         if (y >= knapsack[i]) {
           binaryStr = `1${binaryStr}`;
           y -= knapsack[i];
@@ -338,7 +340,7 @@ class SimulatorPage extends Component {
     if (!this.validateNumeric(localPublicKey)) {
       this.enableError('Non numeric message received!');
     } else {
-      this.setState(prevState => ({
+      this.setState(() => ({
         localPublicKeyValid: true,
       }));
     }
@@ -365,7 +367,7 @@ class SimulatorPage extends Component {
   };
 
   validateCurrentModulus = () => {
-    const { actions, lockState, privateKeySum } = this.props;
+    const { actions, privateKeySum } = this.props;
     const { currentModulusInput } = this.state;
     if (!this.validateNumeric(currentModulusInput)) {
       this.enableError('Non numeric modulo received!');
@@ -384,7 +386,7 @@ class SimulatorPage extends Component {
   };
 
   validateCurrentMultiplier = () => {
-    const { actions, lockState, modulus } = this.props;
+    const { actions, modulus } = this.props;
     const { currentMultiplierInput } = this.state;
     const mod = Number(modulus);
 
@@ -405,23 +407,28 @@ class SimulatorPage extends Component {
   };
 
   validateEncryptionText = () => {
-    const { lockState, trophySafetyFirst, actions } = this.props;
+    const { trophySafetyFirst, actions } = this.props;
     const { currentPlainTextInput, localPublicKey } = this.state;
     if (this.isEmptyInput(currentPlainTextInput)) {
       this.enableError('Input cannot be empty!');
     } else {
       const binString = this.getBinaryOfInput(currentPlainTextInput);
-      const binBlocks = this.generateBinaryBlocks(binString);
-      const encryptedArr = [];
+      console.log(`binString ${binString}`);
       const localPubNumeric = this.getNumericFromString(localPublicKey);
+      const binBlocks = this.generateBinaryBlocks(binString, localPubNumeric);
+      const encryptedArr = [];
+      console.log(`LOCAL PUB NUMERIC: ${localPubNumeric}`);
+      console.log(`BIN BLOCKS ${binBlocks}`);
       const lockStateArr = binBlocks.map((block, idx) => {
+        console.log(`BLOCK ${idx} - ${block}`);
         encryptedArr.push(
           block.map((x, index) => {
+            console.log(`${localPubNumeric[index]} -${x}`);
             return Number(localPubNumeric[index]) * Number(x);
           }),
         );
       });
-      for (let i = 0; i < encryptedArr.length; i++) {
+      for (let i = 0; i < encryptedArr.length; i += 1) {
         encryptedArr[i] = encryptedArr[i].reduce(this.sumReducer);
       }
       this.setState(
@@ -439,7 +446,7 @@ class SimulatorPage extends Component {
   };
 
   validateDecryptionText = () => {
-    const { lockState, actions, trophyBreakWall, privateKey, modulus, multiplier } = this.props;
+    const { actions, trophyBreakWall, privateKey, modulus, multiplier } = this.props;
     const { currentEncryptedTextInput, currentPaddingInput } = this.state;
 
     if (this.isEmptyInput(currentEncryptedTextInput)) {
@@ -502,7 +509,7 @@ class SimulatorPage extends Component {
   };
 
   encryptionPage = () => {
-    const { actions, lockState, padding } = this.props;
+    const { actions, padding } = this.props;
     const { encryptedOutput, localPublicKeyValid, localPublicKey } = this.state;
     console.log(`Local Public Key: ${localPublicKeyValid}`);
     return (
@@ -847,7 +854,7 @@ class SimulatorPage extends Component {
   keyGenerationPage = () => {
     const {
       actions,
-      lockState,
+
       publicKey,
       privateKey,
       modulus,
@@ -856,7 +863,6 @@ class SimulatorPage extends Component {
       modulusValid,
       multiplierValid,
     } = this.props;
-    const { msgValue } = this.state;
     return (
       <>
         {privateKeyValid ? (
@@ -1216,6 +1222,8 @@ class SimulatorPage extends Component {
 
   render() {
     const { errorMessage, showError, showAlertPopUp, alertPopUpMessage } = this.state;
+    const { publicKey } = this.props;
+    console.log(publicKey);
     setTimeout(() => {
       if (showAlertPopUp) this.setState({ showAlertPopUp: false, alertPopUpMessage: '' });
     }, 3000);
@@ -1240,7 +1248,6 @@ class SimulatorPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  lockState: state,
   privateKeyValid: state.simulator.privateKeyValid,
   modulusValid: state.simulator.modulusValid,
   multiplierValid: state.simulator.multiplierValid,
@@ -1283,5 +1290,43 @@ const mapDispatchToProps = dispatch => ({
     dispatch,
   ),
 });
+
+SimulatorPage.propTypes = {
+  publicKey: PropTypes.arrayOf(PropTypes.string).isRequired,
+  privateKeyValid: PropTypes.bool.isRequired,
+  modulusValid: PropTypes.bool.isRequired,
+  multiplierValid: PropTypes.bool.isRequired,
+  privateKeySum: PropTypes.number.isRequired,
+  padding: PropTypes.number.isRequired,
+  privateKey: PropTypes.string.isRequired,
+  modulus: PropTypes.string.isRequired,
+  multiplier: PropTypes.string.isRequired,
+  genKeyCompleted: PropTypes.bool.isRequired,
+  trophyKeymaster: PropTypes.bool.isRequired,
+  trophySafetyFirst: PropTypes.bool.isRequired,
+  trophyBreakWall: PropTypes.bool.isRequired,
+  actions: PropTypes.shape({
+    SHOW_TROPHY_ACTION: PropTypes.func,
+    UNLOCK_TROPHY_BREAK_WALL: PropTypes.func,
+    UNLOCK_TROPHY_KEYMASTER: PropTypes.func,
+    UNLOCK_TROPHY_SAFETY_FIRST: PropTypes.func,
+    UPDATE_SIMULATOR_DECRYPTED_TEXT_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_GEN_KEY_COMPLETED_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_MODULO_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_MODULO_VALID_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_MULTIPLIER_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_MULTIPLIER_VALID_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_PADDING_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_PRIVATE_KEY_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_PRIVATE_KEY_SUM_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_PRIVATE_KEY_VALID_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_PUBLIC_KEY_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_RESET_DEC_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_RESET_ENC_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_TEXT_TO_DECRYPT_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_TEXT_TO_ENC_ACTION: PropTypes.func,
+    UPDATE_SIMULATOR_TEXT_TO_ENC_VALID_ACTION: PropTypes.func,
+  }),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimulatorPage);
