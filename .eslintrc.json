@@ -32,7 +32,8 @@
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "react/require-default-props": "off"
   },
   "globals": {
     "__DEV__": true
