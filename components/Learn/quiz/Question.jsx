@@ -41,15 +41,18 @@ class Question extends Component {
     const { checkedValue, isCheckedValueCorrect } = this.state;
     const { callback } = this.props;
     const { answer } = this.props;
+    console.log(isCheckedValueCorrect)
+    console.log(`checked val ${checkedValue} answer ${answer} ${checkedValue === answer}`)
+    const newChecked = checkedValue === answer;
     this.setState(
       prevState => ({
         disable: !prevState.disable,
         checkedValue: -1,
         checking: !prevState.checking,
-        isCheckedValueCorrect: checkedValue === answer,
+        isCheckedValueCorrect: newChecked,
       }),
       () => {
-        if (isCheckedValueCorrect === true) {
+        if (newChecked) {
           callback();
         }
       },
