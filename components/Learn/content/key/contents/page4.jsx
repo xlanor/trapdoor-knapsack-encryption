@@ -4,7 +4,6 @@ import { View, Text, Dimensions } from 'react-native';
 
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 // import stylesheet.
 import PropTypes from 'prop-types';
@@ -16,10 +15,6 @@ import CustomButton from '../../../../Common/Button';
 // typecheck
 
 class PageFour extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { curMultiplier, curInverse, loadInverse, inverseLoaded } = this.props;
     const u = Dimensions.get('window').height;
@@ -68,6 +63,8 @@ class PageFour extends Component {
 PageFour.propTypes = {
   loadInverse: PropTypes.func.isRequired,
   inverseLoaded: PropTypes.bool.isRequired,
+  curMultiplier: PropTypes.number.isRequired,
+  curInverse: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({

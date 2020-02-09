@@ -4,7 +4,6 @@ import { TouchableWithoutFeedback, View, Text, TextInput, Keyboard, Dimensions }
 
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 // import stylesheet.
 import PropTypes from 'prop-types';
@@ -16,10 +15,6 @@ import CustomButton from '../../../../Common/Button';
 // typecheck
 
 class PageTwo extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const u = Dimensions.get('window').height;
     const {
@@ -76,12 +71,12 @@ PageTwo.propTypes = {
   setModulo: PropTypes.func.isRequired,
   validateModulus: PropTypes.func.isRequired,
   keyboardVisiblity: PropTypes.bool.isRequired,
+  privateKeySum: PropTypes.number.isRequired,
+  currentModulo: PropTypes.number.isRequired,
 };
 const mapStateToProps = state => ({
   privateKeySum: state.updateParameters.privateKeySum,
   currentModulo: state.updateParameters.modulo,
 });
-
-const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps)(PageTwo);

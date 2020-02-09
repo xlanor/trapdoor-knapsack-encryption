@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 // RN imports
-import { TouchableWithoutFeedback, View, Text, Image, Keyboard, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions } from 'react-native';
 
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 // import stylesheet.
 import PropTypes from 'prop-types';
@@ -19,10 +18,6 @@ import CustomButton from '../../../../Common/Button';
 import bFormula from '../../../../../assets/images/bFormula.png';
 
 class PageFive extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const u = Dimensions.get('window').height;
     const {
@@ -84,6 +79,11 @@ PageFive.propTypes = {
   showKeyMultiplicationInfoPopUp: PropTypes.func.isRequired,
   generatePubKey: PropTypes.func.isRequired,
   pkLoaded: PropTypes.bool.isRequired,
+  curPrivateKeyString: PropTypes.string.isRequired,
+  curPublicKeyString: PropTypes.string.isRequired,
+  curMultiplier: PropTypes.number.isRequired,
+  curModulo: PropTypes.number.isRequired,
+  curInverse: PropTypes.number.isRequired,
 };
 const mapStateToProps = state => ({
   curPublicKeyString: state.updateParameters.publicKeyString,

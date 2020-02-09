@@ -4,7 +4,6 @@ import { TouchableWithoutFeedback, View, Text, TextInput, Keyboard, Dimensions }
 
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 // import stylesheet.
 import PropTypes from 'prop-types';
@@ -15,10 +14,6 @@ import CustomButton from '../../../../Common/Button';
 
 // typecheck
 class FirstPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       allowNextPage,
@@ -80,6 +75,9 @@ FirstPage.propTypes = {
   updatePrivateKey: PropTypes.func.isRequired,
   validatePrivateKey: PropTypes.func.isRequired,
   showSuperIncreasingInfoPopUp: PropTypes.func.isRequired,
+  privateKeyArr: PropTypes.arrayOf(PropTypes.number),
+  privateKeyString: PropTypes.string.isRequired,
+  allowNextPage: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(FirstPage);

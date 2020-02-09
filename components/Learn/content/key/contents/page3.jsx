@@ -4,7 +4,6 @@ import { TouchableWithoutFeedback, View, Text, TextInput, Keyboard, Dimensions }
 
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 // import stylesheet.
 import PropTypes from 'prop-types';
@@ -16,10 +15,6 @@ import CustomButton from '../../../../Common/Button';
 // typecheck
 
 class PageThree extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       showCoprimeInfoPopUp,
@@ -82,6 +77,8 @@ PageThree.propTypes = {
   setMultiplier: PropTypes.func.isRequired,
   validateMultiplier: PropTypes.func.isRequired,
   keyboardVisiblity: PropTypes.bool.isRequired,
+  curModulo: PropTypes.number.isRequired,
+  curMultiplier: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
