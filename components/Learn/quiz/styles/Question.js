@@ -1,12 +1,12 @@
 const viewCard = {
-    marginBottom: '10%',
-}
+  marginBottom: '10%',
+};
 
 const viewQns = {
-    textAlign: 'left',
-}
+  textAlign: 'left',
+};
 
 export default {
-    viewCard,
-    viewQns
+  viewCard,
+  viewQns,
 };

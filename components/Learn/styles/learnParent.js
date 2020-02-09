@@ -1,6 +1,5 @@
-import { COLORS } from '../../../redux-modules/constants/Colors';
-
 import { Dimensions } from 'react-native';
+import { COLORS } from '../../../redux-modules/constants/Colors';
 
 const borderLine = {
   borderBottomColor: COLORS.BLACK_1,
@@ -9,16 +8,15 @@ const borderLine = {
 
 const wrapperViewBackground = {
   backgroundColor: COLORS.ORANGE_1,
-  flex:0.5,
+  flex: 0.5,
   borderBottomColor: COLORS.BLACK_1,
   borderBottomWidth: 5,
-  //height: Dimensions.get('window').height * 0.09
+  // height: Dimensions.get('window').height * 0.09
 };
 const bodyViewBackground = {
   flex: 5.5,
-  //height: Dimensions.get('window').height * (1-0.09)
+  // height: Dimensions.get('window').height * (1-0.09)
 };
-
 
 const scrollViewBackground = {
   flex: 1,
@@ -26,17 +24,17 @@ const scrollViewBackground = {
   paddingRight: 20,
   height: '100%',
   backgroundColor: COLORS.GREEN_1,
-  //backgroundColor: COLORS.WHITE_1,
+  // backgroundColor: COLORS.WHITE_1,
 };
 
 const imageSize = {
   width: Dimensions.get('window').width * 0.12,
   height: Dimensions.get('window').width * 0.12,
-}
+};
 
-const nestedIconView ={
+const nestedIconView = {
   flexDirection: 'row',
-}
+};
 
 const wrappingIconView = {
   alignItems: 'center',
@@ -44,12 +42,12 @@ const wrappingIconView = {
   paddingRight: Dimensions.get('screen').width * 0.15,
   paddingTop: Dimensions.get('screen').height * 0.007,
   paddingBottom: Dimensions.get('screen').height * 0.007,
-}
+};
 
 const listStyle = {
-  flexDirection: "row",
-  flexWrap: "wrap",
-}
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+};
 
 export default {
   borderLine,
@@ -60,4 +58,4 @@ export default {
   wrappingIconView,
   nestedIconView,
   bodyViewBackground,
-}
+};

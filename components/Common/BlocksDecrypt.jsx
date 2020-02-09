@@ -1,60 +1,54 @@
 import React, { Component } from 'React';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView
-} from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-import {
-  Table,
-  TableWrapper,
-  Rows,
-  Row,
-  Col }
-from 'react-native-table-component';
+import { Table, TableWrapper, Rows, Row, Col } from 'react-native-table-component';
 
+import PropTypes from 'prop-types';
 
-import PropTypes from 'prop-types'
+import { blocks as styles } from './styles';
 
-import { blocks as styles } from './styles'
-
-
-class BlockDecrypt extends Component{
-  constructor(props){
+class BlockDecrypt extends Component {
+  constructor(props) {
     super(props);
   }
 
-  render(){
+  render() {
     const {
-        flexArr,
-        tableTitle,
-        tableData,
-        encryptedInput,
-        inverse,
-        modulo,
-        currentR,
-        pubKey,
-        postSub,
-        binary,
-        binaryOrdered,
-        rVal,
+      flexArr,
+      tableTitle,
+      tableData,
+      encryptedInput,
+      inverse,
+      modulo,
+      currentR,
+      pubKey,
+      postSub,
+      binary,
+      binaryOrdered,
+      rVal,
     } = this.props;
     return (
       <View style={{ ...styles.containerStyle }}>
-        <Text style={{fontFamily:'comfortaa', 'textAlign': 'center'}}>
-          R: {rVal}{"\n"}
-          Modulo by: {modulo}{"\n"}
-          Encrypted Value: {encryptedInput}{"\n"}
-          Multiplied with Inverse ({inverse}): {Number(encryptedInput) * inverse}{"\n"}
+        <Text style={{ fontFamily: 'comfortaa', textAlign: 'center' }}>
+          R: {rVal}
+          {'\n'}
+          Modulo by: {modulo}
+          {'\n'}
+          Encrypted Value: {encryptedInput}
+          {'\n'}
+          Multiplied with Inverse ({inverse}): {Number(encryptedInput) * inverse}
+          {'\n'}
         </Text>
-        <ScrollView horizontal={true}>
-          <Table borderStyle={{borderWidth: 1}}>
+        <ScrollView horizontal>
+          <Table borderStyle={{ borderWidth: 1 }}>
             <TableWrapper style={styles.wrapperStyle}>
-              <Col data={tableTitle} style={styles.titleStyle} heightArr={[28,28]} textStyle={styles.textStyle}/>
-              <Rows data={[
-                  currentR, pubKey, postSub, binary, binaryOrdered
-              ]} widthArr={flexArr} style={styles.rowStyle} textStyle={styles.textStyle}/>
+              <Col data={tableTitle} style={styles.titleStyle} heightArr={[28, 28]} textStyle={styles.textStyle} />
+              <Rows
+                data={[currentR, pubKey, postSub, binary, binaryOrdered]}
+                widthArr={flexArr}
+                style={styles.rowStyle}
+                textStyle={styles.textStyle}
+              />
             </TableWrapper>
           </Table>
         </ScrollView>
@@ -62,7 +56,6 @@ class BlockDecrypt extends Component{
     );
   }
 }
-
 
 BlockDecrypt.propTypes = {
   flexArr: PropTypes.array.isRequired,

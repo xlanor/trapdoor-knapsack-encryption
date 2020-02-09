@@ -1,5 +1,3 @@
 import GCDPage from './gcdTutorial';
 
-export { 
-  GCDPage as gcdPageOne,
-};
+export { GCDPage as gcdPageOne };
