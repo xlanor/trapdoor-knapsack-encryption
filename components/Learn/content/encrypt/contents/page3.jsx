@@ -10,10 +10,6 @@ import { Table, TableWrapper, Rows, Col } from 'react-native-table-component';
 import styles from '../styles';
 
 class PageThree extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const u = Dimensions.get('window').height;
     const { showPaddingInfoPopUp } = this.props;
@@ -40,7 +36,7 @@ class PageThree extends Component {
           E.g:{'\n'}
           Remainder = 8 % 3 = 2{'\n'}
           Padding = 3 - 2 = 1{'\n'}
-          Add 1 '0' to the back of the binary string x
+          {`Add 1 '0' to the back of the binary string x`}
         </Text>
         <View style={styles.tutorial.tableView}>
           <Table borderStyle={{ borderWidth: 1 }}>

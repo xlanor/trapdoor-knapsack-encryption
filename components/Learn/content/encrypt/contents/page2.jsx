@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // RN imports
 import { View, Text, Dimensions } from 'react-native';
 
-import PropTypes from 'react-proptypes';
 // React-Native Table Imports
 import { Table, TableWrapper, Rows, Col } from 'react-native-table-component';
 
@@ -10,10 +9,6 @@ import { Table, TableWrapper, Rows, Col } from 'react-native-table-component';
 import styles from '../styles';
 
 class PageTwo extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <>
@@ -32,7 +27,7 @@ class PageTwo extends Component {
           E.g:{'\n'}
           Public key b: (22, 16, 32) where n = 3{'\n'}
           Message: a, ASCII of a = 97{'\n'}
-          Binary of 97: '0110 0001'{'\n'}
+          Binary of 97: {'0110 0001'} {'\n'}
           Binary length / n: 8 / 3 = 3 (rounded up)
         </Text>
 

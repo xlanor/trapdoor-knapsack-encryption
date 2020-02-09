@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 // RN imports
-import { TouchableWithoutFeedback, View, Text, TextInput, Keyboard, Dimensions } from 'react-native';
+import { View, Text, TextInput, Dimensions } from 'react-native';
 
 import PropTypes from 'react-proptypes';
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 // import stylesheet.
 import styles from '../styles';
@@ -14,10 +13,6 @@ import styles from '../styles';
 import CustomButton from '../../../../Common/Button';
 
 class PageOne extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       keyboardVisiblity,
@@ -101,6 +96,9 @@ PageOne.propTypes = {
   keyboardVisiblity: PropTypes.bool.isRequired,
   updateCurrentTextBox: PropTypes.func.isRequired,
   validateInput: PropTypes.func.isRequired,
+  textToEncrypt: PropTypes.string,
+  binaryString: PropTypes.string,
+  asciiString: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
