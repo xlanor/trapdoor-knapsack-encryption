@@ -1,11 +1,11 @@
-import React, { Component } from 'React';
+import React, { Component } from 'react';
 
-import { View, Dimensions, ScrollView, Text, Image, TouchableOpacity, TextInput, FlatList } from 'react-native';
+import { View, Dimensions, ScrollView, Text } from 'react-native';
 
-import { Table, TableWrapper, Rows, Row, Col } from 'react-native-table-component';
+import { Table, TableWrapper, Rows, Col } from 'react-native-table-component';
 
 import * as Animatable from 'react-native-animatable';
-import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ALLOW_NEXT_PAGE_ACTION, NEXT_DECRYPT_PAGE_ACTION } from '../../../../redux-modules/actions/tabPage';
@@ -25,16 +25,12 @@ import { COLORS } from '../../../../redux-modules/constants/Colors';
 import styles from './styles';
 // begin redux imports
 
-import Alert from '../../../../assets/images/alert.png';
-import Exclaim from '../../../../assets/images/ExclaimIcon.png';
 import InfoIcon from '../../../../assets/images/InfoIcon.png';
 
 import BlocksDecrypt from '../../../Common/BlocksDecrypt';
-import CustomButton from '../../../Common/Button';
 import ScrollViewPopUp from '../../../Common/ScrollViewPopUp';
 import Loader from '../../../Common/Spinner';
 import AlertPopUp from '../../../Common/AlertPopUp';
-import Block from '../../../Common/Blocks';
 import Quiz from '../../quiz/Quiz';
 
 import content from './contents';

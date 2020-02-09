@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 // RN imports
-import { TouchableWithoutFeedback, View, Text, Image, Keyboard, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions } from 'react-native';
 import PropTypes from 'react-proptypes';
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 // import stylesheet.
 import styles from '../styles';
-
-// import our own components
-import CustomButton from '../../../../Common/Button';
 
 // import images
 import DF1 from '../../../../../assets/images/DecryptionFormula_1.png';
@@ -81,6 +77,8 @@ PageOne.propTypes = {
   showInversePopUp: PropTypes.func.isRequired,
   showrPopUp: PropTypes.func.isRequired,
   showCmpPopUp: PropTypes.func.isRequired,
+  encryptedText: PropTypes.string.isRequired,
+  padding: PropTypes.number.isRequired,
 };
 const mapStateToProps = state => ({
   encryptedText: state.encryption.encryptedText,
