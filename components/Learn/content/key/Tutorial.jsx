@@ -1,24 +1,13 @@
-import React, { Component } from 'React';
+/* eslint-disable no-param-reassign */
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import {
-  View,
-  ScrollView,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableWithoutFeedback,
-  Button,
-  Text,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  FlatList,
-} from 'react-native';
+import { View, ScrollView, Keyboard, TouchableWithoutFeedback, Text, Image } from 'react-native';
 // import stylesheet.
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
-import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements';
+import { Card, Button as RneButton } from 'react-native-elements';
 import styles from './styles';
 // begin redux imports
 
@@ -45,11 +34,7 @@ import {
   UPDATE_PUBLIC_KEY_ARRAY_ACTION,
 } from '../../../../redux-modules/actions/updateParameters';
 
-import {
-  UNLOCK_TROPHY_KEYRING,
-  UNLOCK_TROPHY_KEYMASTER,
-  SHOW_TROPHY_ACTION,
-} from '../../../../redux-modules/actions/manageTrophies';
+import { UNLOCK_TROPHY_KEYRING, SHOW_TROPHY_ACTION } from '../../../../redux-modules/actions/manageTrophies';
 
 import {
   ENCRYPT_LOCK_ACTION,
@@ -58,7 +43,6 @@ import {
 } from '../../../../redux-modules/actions/learnPageLock';
 
 import PopUp from '../../../Common/PopUp';
-import CustomButton from '../../../Common/Button';
 import AlertPopUp from '../../../Common/AlertPopUp';
 import Quiz from '../../quiz/Quiz';
 // contents
@@ -68,16 +52,16 @@ import contents from './contents';
 class KeyPage extends Component {
   constructor(props) {
     super(props);
-    const { lockState } = this.props;
+    const { modulo, multiplier, privateKeyString } = this.props;
 
-    const reduxMod = lockState.updateParameters.modulo;
-    const reduxMultipler = lockState.updateParameters.multiplier;
+    const reduxMod = modulo;
+    const reduxMultipler = multiplier;
 
     // local state not affected by redux
     this.state = {
-      currentPrivateKey: lockState.updateParameters.privateKeyString, // we do not need to persist this state, nor do we need to store this state elsewhere yet.
-      currentModulo: reduxMod == 0 ? '' : reduxMod, // we do not need to persist this state, nor do we need to store this state elsewhere yet.
-      currentMultiplier: reduxMultipler == 0 ? '' : reduxMultipler, // we do not need to persist this state, nor do we need to store this state elsewhere yet.
+      currentPrivateKey: privateKeyString, // we do not need to persist this state, nor do we need to store this state elsewhere yet.
+      currentModulo: reduxMod === 0 ? '' : reduxMod, // we do not need to persist this state, nor do we need to store this state elsewhere yet.
+      currentMultiplier: reduxMultipler === 0 ? '' : reduxMultipler, // we do not need to persist this state, nor do we need to store this state elsewhere yet.
       showError: false,
       inverseLoaded: false,
       pkLoaded: false,
@@ -100,12 +84,14 @@ class KeyPage extends Component {
     this.keyboardDidHideListener.remove();
   }
 
+  // eslint-disable-next-line no-unused-vars
   handleKeyboardDidShow = event => {
     this.setState({
       keyboardVisiblity: true,
     });
   };
 
+  // eslint-disable-next-line no-unused-vars
   keyboardDidHide = event => {
     this.setState({
       keyboardVisiblity: false,
@@ -116,7 +102,7 @@ class KeyPage extends Component {
     return (
       <>
         <Text style={styles.page1.popUpTextStyle}>
-          Every number of the sequence is > the sum of all previous numbers in the sequence
+          Every number of the sequence is {'>'} the sum of all previous numbers in the sequence
           {'\n\n'}
           Eg. a = 2, 5, 10 where 2 {'<'} 5 and 2 + 5 {'<'} 10,
         </Text>
@@ -130,8 +116,8 @@ class KeyPage extends Component {
         <Text style={styles.page1.popUpTextStyle}>
           Eg. <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>a</Text> = 2, 5, 10, sum of{' '}
           <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>a</Text> = 17{'\n'}
-          <Text style={{ ...styles.page1.modulusStyle, ...styles.page1.boldFont }}>m</Text> = 39 which is > 17 (sum of{' '}
-          <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>a</Text>)
+          <Text style={{ ...styles.page1.modulusStyle, ...styles.page1.boldFont }}>m</Text> = 39 which is {'>'} 17 (sum
+          of <Text style={{ ...styles.page1.privateKeyStyle, ...styles.page1.boldFont }}>a</Text>)
         </Text>
       </>
     );
@@ -188,7 +174,7 @@ class KeyPage extends Component {
     const { currentPrivateKey } = this.state;
     // splits the private key.
     const splitKey = currentPrivateKey.split(',');
-    for (let i = 0; i < splitKey.length; i++) {
+    for (let i = 0; i < splitKey.length; i += 1) {
       const checkNum = this.isValidNumber(splitKey[i]);
       if (!checkNum) {
         // TODO: declare error in popup.
@@ -205,7 +191,7 @@ class KeyPage extends Component {
   isGreater = (a, b, idx) => {
     // returns true by default if idx is 0, if not whether a > b.
     console.log(`Comparing ${a} ${b}`);
-    return idx == 0 ? true : a < b;
+    return idx === 0 ? true : a < b;
   };
 
   isGreaterInteger = (a, b) => {
@@ -225,7 +211,7 @@ class KeyPage extends Component {
       multiplier = temp;
     }
     console.log(`Final gcd ${multiplier}`);
-    return multiplier == 1;
+    return multiplier === 1;
   };
 
   xgcd = (a, m) => {
@@ -251,7 +237,7 @@ class KeyPage extends Component {
     // find the inverse
     let x = 1;
     let y = 0;
-    for (let i = s.length - 2; i >= 0; --i) {
+    for (let i = s.length - 2; i >= 0; i -= 1) {
       [x, y] = [y, x - y * Math.floor(s[i].a / s[i].b)];
     }
     return ((y % m) + m) % m;
@@ -262,7 +248,7 @@ class KeyPage extends Component {
     // splits the private key.
     const splitKey = currentPrivateKey.split(',');
     let currentMax = 0;
-    for (let i = 0; i < splitKey.length; i++) {
+    for (let i = 0; i < splitKey.length; i += 1) {
       const curNo = Number(splitKey[i]);
       const checkSuperIncreasing = this.isGreater(currentMax, curNo, i);
       if (checkSuperIncreasing) {
@@ -340,15 +326,15 @@ class KeyPage extends Component {
   };
 
   validateModulus = () => {
-    const { lockState, actions } = this.props;
+    const { actions, privateKeySum } = this.props;
     const { currentModulo } = this.state;
     if (!this.isValidNumber(currentModulo)) {
       this.enableError('Non numeric modulo received!');
     } else {
       // check if is bigger
       const curMod = Number(currentModulo);
-      if (!this.isGreaterInteger(lockState.updateParameters.privateKeySum, curMod)) {
-        this.enableError(`Modulus is not larger than ${lockState.updateParameters.privateKeySum}!`);
+      if (!this.isGreaterInteger(privateKeySum, curMod)) {
+        this.enableError(`Modulus is not larger than ${privateKeySum}!`);
       } else {
         // integer is greater.
         actions.ALLOW_NEXT_PAGE_ACTION();
@@ -359,10 +345,10 @@ class KeyPage extends Component {
   };
 
   validateMultiplier = () => {
-    const { lockState, actions } = this.props;
+    const { actions, modulo } = this.props;
     const { currentMultiplier } = this.state;
 
-    const mod = Number(lockState.updateParameters.modulo);
+    const mod = Number(modulo);
 
     if (!this.isValidNumber(currentMultiplier)) {
       this.enableError('Non numeric multiplier received!');
@@ -388,13 +374,11 @@ class KeyPage extends Component {
   };
 
   computePublicKey = () => {
-    const { lockState } = this.props;
+    const { privateKeyArr, modulo, multiplier } = this.props;
     // for every element in the public key, multiply by the multiplier and get the remainder.
-    const privateKey = lockState.updateParameters.privateKeyArr;
-    const { modulo } = lockState.updateParameters;
-    const { multiplier } = lockState.updateParameters;
+    const privateKey = privateKeyArr;
     const newPk = [];
-    for (let i = 0; i < privateKey.length; i++) {
+    for (let i = 0; i < privateKey.length; i += 1) {
       const pub = (privateKey[i] * multiplier) % modulo;
       newPk.push(pub);
     }
@@ -402,8 +386,8 @@ class KeyPage extends Component {
   };
 
   loadInverse = () => {
-    const { lockState, actions } = this.props;
-    const currentInverse = this.xgcd(lockState.updateParameters.multiplier, lockState.updateParameters.modulo);
+    const { actions, multiplier, modulo } = this.props;
+    const currentInverse = this.xgcd(multiplier, modulo);
     actions.UPDATE_INVERSE_ACTION(currentInverse);
     actions.ALLOW_NEXT_PAGE_ACTION();
     // have to relock decryption to force them to generate pk and inverse again.
@@ -416,7 +400,7 @@ class KeyPage extends Component {
   };
 
   generatePubKey = () => {
-    const { actions, trophyKeymaster } = this.props;
+    const { actions } = this.props;
     const pub = this.computePublicKey();
     actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION(pub);
     actions.UPDATE_PUBLIC_KEY_STRING_ACTION(pub.join());
@@ -440,7 +424,6 @@ class KeyPage extends Component {
   };
 
   getSeventhPage = () => {
-    const { actions } = this.props;
     return (
       <Animatable.View animation="slideInDown">
         <Card title="Unlocked Next Tab!">
@@ -559,8 +542,8 @@ class KeyPage extends Component {
   };
 
   checkPageNo = () => {
-    const { lockState } = this.props;
-    return lockState.lessonPageTabAndPages.tabPage;
+    const { tabPage } = this.props;
+    return tabPage;
   };
 
   getProgressImage = () => {
@@ -619,9 +602,14 @@ class KeyPage extends Component {
         Note how the animation here is done differently - this is much more pleasent for User Experience than forcing them to jump to the top every time
       */
       <ScrollView
-        ref={scrollView => (this.scrollView = scrollView)}
+        ref={ref => {
+          this.scrollView = ref;
+        }}
+        // eslint-disable-next-line no-unused-vars
         onContentSizeChange={(contentWidth, contentHeight) => {
-          pageNo < 6 ? this.scrollView.scrollToEnd({ animated: true }) : null;
+          if (pageNo < 6) {
+            this.scrollView.scrollToEnd({ animated: true });
+          }
         }}
       >
         {showKeyMultiplicationInfoPopUp ? (
@@ -685,10 +673,43 @@ class KeyPage extends Component {
   }
 }
 
+KeyPage.propTypes = {
+  trophyKeyRing: PropTypes.bool.isRequired,
+  modulo: PropTypes.number.isRequired,
+  multiplier: PropTypes.bool.isRequired,
+  privateKeyString: PropTypes.string.isRequired,
+  privateKeySum: PropTypes.number.isRequired,
+  tabPage: PropTypes.number.isRequired,
+  privateKeyArr: PropTypes.arrayOf(PropTypes.number),
+  actions: PropTypes.shape({
+    ALLOW_NEXT_PAGE_ACTION: PropTypes.func,
+    UPDATE_PRIVATE_KEY_STRING_ACTION: PropTypes.func,
+    UPDATE_PRIVATE_KEY_SUM_ACTION: PropTypes.func,
+    UPDATE_PRIVATE_KEY_ARRAY_ACTION: PropTypes.func,
+    UPDATE_MODULO_ACTION: PropTypes.func,
+    UPDATE_MULTIPLIER_ACTION: PropTypes.func,
+    UPDATE_INVERSE_ACTION: PropTypes.func,
+    UPDATE_PUBLIC_KEY_ARRAY_ACTION: PropTypes.func,
+    UPDATE_PUBLIC_KEY_STRING_ACTION: PropTypes.func,
+    ENCRYPT_LOCK_ACTION: PropTypes.func,
+    DECRYPT_LOCK_ACTION: PropTypes.func,
+    NEXT_KEY_PAGE_ACTION: PropTypes.func,
+    ENCRYPT_UNLOCK_ACTION: PropTypes.func,
+    UNLOCK_TROPHY_KEYRING: PropTypes.func,
+    SHOW_TROPHY_ACTION: PropTypes.func,
+  }),
+};
+
 const mapStateToProps = state => ({
   lockState: state,
   trophyKeyRing: state.trophy.trophyKeyRing,
   trophyKeymaster: state.trophy.trophyKeymaster,
+  modulo: state.updateParameters.modulo,
+  multiplier: state.updateParameters.multiplier,
+  privateKeyString: state.updateParameters.privateKeyString,
+  privateKeyArr: state.updateParameters.privateKeyArr,
+  privateKeySum: state.updateParameters.privateKeySum,
+  tabPage: state.lessonPageTabAndPages.tabPage,
 });
 
 const mapDispatchToProps = dispatch => ({
