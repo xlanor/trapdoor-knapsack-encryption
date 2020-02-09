@@ -34,7 +34,8 @@
     "jest/valid-expect": "error",
     "no-nested-ternary": "off",
     "react/require-default-props": "off",
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "import/no-extraneous-dependencies": "off",
   },
   "globals": {
     "__DEV__": true
