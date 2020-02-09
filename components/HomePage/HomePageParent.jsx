@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 
 import { withNavigation } from 'react-navigation';
-import { View, Button, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Constants from 'expo-constants';
 import { Button as RneButton, Icon } from 'react-native-elements';
@@ -39,7 +39,7 @@ class HomePageParent extends Component {
         ? 'Progress'
         : 'TrapLearn';
     const selectedOption =
-      keyName === 'creditsIcon' ? 1 : keyName == 'lightBulbIcon' ? 2 : keyName == 'progressIcon' ? 3 : null;
+      keyName === 'creditsIcon' ? 1 : keyName === 'lightBulbIcon' ? 2 : keyName === 'progressIcon' ? 3 : null;
     this.setState({
       selectedText: newKey,
       optionChosen: true,

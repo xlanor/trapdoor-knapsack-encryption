@@ -1,11 +1,6 @@
 import { Dimensions } from 'react-native';
 import { COLORS } from '../../../../../redux-modules/constants/Colors';
 
-const DF1Width = Dimensions.get('window').width * 0.7;
-const DF1Height = (DF1Width / 665) * 75;
-const DF2Width = Dimensions.get('window').width * 0.4;
-const DF2Height = (DF2Width / 309) * 59;
-
 const titleStyle = {
   fontFamily: 'comfortaa-bold',
   fontSize: 25,

@@ -1,8 +1,9 @@
 // begin react/rn imports
 import React, { Component } from 'react';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { withNavigation } from 'react-navigation';
-import { View, Button, Text, Image, TouchableOpacity, FlatList, Modal } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
+
+import PropTypes from 'react-proptypes';
 
 // begin redux imports
 import { connect } from 'react-redux';
@@ -29,7 +30,6 @@ import {
   KNAPSACK_LOCK_ACTION,
   KNAPSACK_UNLOCK_ACTION,
   UNLOCK_ALL_ACTION,
-  RESET_ALL_ACTION,
 } from '../../redux-modules/actions/learnPageLock';
 
 import { CHANGE_TAB_ACTION } from '../../redux-modules/actions/tabPage';
@@ -75,7 +75,6 @@ class LearnParent extends Component {
     // a state defined in redux so that the state
     // is able to persist throughout app shutdowns.
     this.state = {
-      selected: 1,
       displayPopup: false,
       popupMessage: 'An error has occured',
     };
@@ -90,8 +89,8 @@ class LearnParent extends Component {
 
   getAlgoIcon = () => {
     // lockState is the result of our redux state
-    const { lockState, actions } = this.props;
-    if (lockState.lessonPage.algoLocked === true) {
+    const { algoLocked, algoSelected, actions } = this.props;
+    if (algoLocked === true) {
       return (
         <TouchableOpacity
           onPress={() => {
@@ -102,7 +101,7 @@ class LearnParent extends Component {
         </TouchableOpacity>
       );
     }
-    if (lockState.lessonPage.algoSelected === true) {
+    if (algoSelected === true) {
       return (
         // to be replaced when kevin is done with selected icon
         <TouchableOpacity
@@ -130,8 +129,8 @@ class LearnParent extends Component {
 
   getDecryptIcon = () => {
     // lockState is the result of our redux state
-    const { lockState, actions } = this.props;
-    if (lockState.lessonPage.decryptLocked === true) {
+    const { decryptSelected, decryptLocked, actions } = this.props;
+    if (decryptLocked === true) {
       return (
         <TouchableOpacity
           onPress={() => {
@@ -142,7 +141,7 @@ class LearnParent extends Component {
         </TouchableOpacity>
       );
     }
-    if (lockState.lessonPage.decryptSelected === true) {
+    if (decryptSelected === true) {
       return (
         <TouchableOpacity
           onPress={() => {
@@ -171,8 +170,8 @@ class LearnParent extends Component {
 
   getEncryptIcon = () => {
     // lockState is the result of our redux state
-    const { lockState, actions } = this.props;
-    if (lockState.lessonPage.encryptLocked === true) {
+    const { encryptLocked, encryptSelected, actions } = this.props;
+    if (encryptLocked === true) {
       return (
         <TouchableOpacity
           onPress={() => {
@@ -183,7 +182,7 @@ class LearnParent extends Component {
         </TouchableOpacity>
       );
     }
-    if (lockState.lessonPage.encryptSelected === true) {
+    if (encryptSelected === true) {
       return (
         // to be replaced when kevin is done with selected icon
         <TouchableOpacity
@@ -211,8 +210,8 @@ class LearnParent extends Component {
 
   getKnapsackIcon = () => {
     // lockState is the result of our redux state
-    const { lockState, actions } = this.props;
-    if (lockState.lessonPage.knapSackLocked === true) {
+    const { knapSackLocked, knapSackSelected, actions } = this.props;
+    if (knapSackLocked === true) {
       return (
         <TouchableOpacity
           onPress={() => {
@@ -223,7 +222,7 @@ class LearnParent extends Component {
         </TouchableOpacity>
       );
     }
-    if (lockState.lessonPage.knapSackSelected === true) {
+    if (knapSackSelected === true) {
       return (
         <TouchableOpacity
           onPress={() => {
@@ -250,8 +249,8 @@ class LearnParent extends Component {
 
   getKeyIcon = () => {
     // lockState is the result of our redux state
-    const { lockState, actions } = this.props;
-    if (lockState.lessonPage.keyLocked === true) {
+    const { keyLocked, keySelected, actions } = this.props;
+    if (keyLocked === true) {
       return (
         <TouchableOpacity
           onPress={() => {
@@ -262,7 +261,7 @@ class LearnParent extends Component {
         </TouchableOpacity>
       );
     }
-    if (lockState.lessonPage.keySelected === true) {
+    if (keySelected === true) {
       return (
         // to be replaced when kevin is done with selected icon
         <TouchableOpacity
@@ -290,11 +289,11 @@ class LearnParent extends Component {
 
   getIntroIcon = () => {
     // lockState is the result of our redux state
-    const { lockState, actions } = this.props;
-    if (lockState.lessonPage.introLocked === true) {
+    const { introLocked, introSelected, actions } = this.props;
+    if (introLocked === true) {
       return <Image style={styles.learnParent.imageSize} source={Intro} />;
     }
-    if (lockState.lessonPage.introSelected === true) {
+    if (introSelected === true) {
       return (
         // to be replaced when kevin is done with selected icon
         <TouchableOpacity
@@ -363,8 +362,57 @@ class LearnParent extends Component {
   }
 }
 
+LearnParent.propTypes = {
+  actions: PropTypes.shapeOf({
+    INTRO_SELECT_ACTION: PropTypes.func,
+    INTRO_LOCK_ACTION: PropTypes.func,
+    INTRO_UNLOCK_ACTION: PropTypes.func,
+    ALGO_SELECT_ACTION: PropTypes.func,
+    ALGO_LOCK_ACTION: PropTypes.func,
+    ALGO_UNLOCK_ACTION: PropTypes.func,
+    KEY_SELECT_ACTION: PropTypes.func,
+    KEY_LOCK_ACTION: PropTypes.func,
+    KEY_UNLOCK_ACTION: PropTypes.func,
+    DECRYPT_SELECT_ACTION: PropTypes.func,
+    DECRYPT_LOCK_ACTION: PropTypes.func,
+    DECRYPT_UNLOCK_ACTION: PropTypes.func,
+    ENCRYPT_SELECT_ACTION: PropTypes.func,
+    ENCRYPT_LOCK_ACTION: PropTypes.func,
+    ENCRYPT_UNLOCK_ACTION: PropTypes.func,
+    KNAPSACK_SELECT_ACTION: PropTypes.func,
+    KNAPSACK_LOCK_ACTION: PropTypes.func,
+    KNAPSACK_UNLOCK_ACTION: PropTypes.func,
+    UNLOCK_ALL_ACTION: PropTypes.func,
+    CHANGE_TAB_ACTION: PropTypes.func,
+  }),
+  algoLocked: PropTypes.bool.isRequired,
+  algoSelected: PropTypes.bool.isRequired,
+  decryptLocked: PropTypes.bool.isRequired,
+  decryptSelected: PropTypes.bool.isRequired,
+  encryptLocked: PropTypes.bool.isRequired,
+  encryptSelected: PropTypes.bool.isRequired,
+  knapSackLocked: PropTypes.bool.isRequired,
+  knapSackSelected: PropTypes.bool.isRequired,
+  keyLocked: PropTypes.bool.isRequired,
+  keySelected: PropTypes.bool.isRequired,
+  introLocked: PropTypes.bool.isRequired,
+  introSelected: PropTypes.bool.isRequired,
+};
+
 const mapStateToProps = state => ({
   lockState: state,
+  algoLocked: state.lessonPage.algoLocked,
+  algoSelected: state.lessonPage.algoSelected,
+  decryptLocked: state.lessonPage.decryptLocked,
+  decryptSelected: state.lessonPage.decryptSelected,
+  encryptLocked: state.lessonPage.isRequired,
+  encryptSelected: state.lessonPage.isRequired,
+  knapSackLocked: state.lessonPage.isRequired,
+  knapSackSelected: state.lessonPage.isRequired,
+  keyLocked: state.lessonPage.isRequired,
+  keySelected: state.lessonPage.isRequired,
+  introLocked: state.lessonPage.isRequired,
+  introSelected: state.lessonPage.isRequired,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -389,7 +437,6 @@ const mapDispatchToProps = dispatch => ({
       KNAPSACK_LOCK_ACTION,
       KNAPSACK_UNLOCK_ACTION,
       UNLOCK_ALL_ACTION,
-      RESET_ALL_ACTION,
       CHANGE_TAB_ACTION,
     },
     dispatch,

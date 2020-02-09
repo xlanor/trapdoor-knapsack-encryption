@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Text, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
 // import stylesheet.
@@ -31,7 +31,6 @@ export default class page7 extends Component {
 
   inverseInfoPopUp = () => {
     const style = styles.GCDPages;
-    const u = Dimensions.get('window').height;
 
     return (
       <>

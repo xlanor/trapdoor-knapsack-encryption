@@ -1,4 +1,4 @@
-import { UPDATE_QUESTIONS, CALL_QUESTIONS_API, GET_QUESTIONS } from '../constants';
+import { CALL_QUESTIONS_API, GET_QUESTIONS } from '../constants';
 
 import { getQuestions } from '../../api/Questions';
 
@@ -49,6 +49,7 @@ export const CALL_API = quizType => async dispatch => {
   };
   const idx = pageIndexMapper(quizType);
   while (!isPaginatedFinish) {
+    // eslint-disable-next-line no-await-in-loop
     const apiData = await getQuestions(idx, pageNo, succ, err);
     if ('has_next' in apiData && apiData.has_next) {
       pageNo += 1;

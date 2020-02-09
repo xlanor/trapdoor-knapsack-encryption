@@ -1,5 +1,3 @@
-const tintColor = '#2f95dc';
-
 export const COLORS = {
   BLACK_1: '#000000',
   ORANGE_1: '#FFA200',

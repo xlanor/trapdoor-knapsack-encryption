@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // react-native imports
 import { Text } from 'react-native';
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-// import third party libs
-import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements';
-
 // import stylesheet.
 import styles from '../styles';
 
@@ -34,9 +31,12 @@ class QuizTab extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  lockState: state,
-});
+QuizTab.propTypes = {
+  actions: PropTypes.shape({
+    ALLOW_NEXT_PAGE_ACTION: PropTypes.func.isRequired,
+    NEXT_INTRO_PAGE_ACTION: PropTypes.func.isRequired,
+  }),
+};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
@@ -48,4 +48,4 @@ const mapDispatchToProps = dispatch => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuizTab);
+export default connect(mapDispatchToProps)(QuizTab);

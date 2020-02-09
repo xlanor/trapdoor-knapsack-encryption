@@ -318,7 +318,7 @@ class ProgressParent extends Component {
                   callback={() => {
                     this.setState({ showInfoPopUp: false });
                   }}
-                  visibility={showInfoPopUp == 1}
+                  visibility={showInfoPopUp === 1}
                 />
               );
             case 2:
@@ -328,7 +328,7 @@ class ProgressParent extends Component {
                   callback={() => {
                     this.setState({ showInfoPopUp: false });
                   }}
-                  visibility={showInfoPopUp == 2}
+                  visibility={showInfoPopUp === 2}
                 />
               );
             case 3:
@@ -338,7 +338,7 @@ class ProgressParent extends Component {
                   callback={() => {
                     this.setState({ showInfoPopUp: false });
                   }}
-                  visibility={showInfoPopUp == 3}
+                  visibility={showInfoPopUp === 3}
                 />
               );
             case 4:
@@ -348,7 +348,7 @@ class ProgressParent extends Component {
                   callback={() => {
                     this.setState({ showInfoPopUp: false });
                   }}
-                  visibility={showInfoPopUp == 4}
+                  visibility={showInfoPopUp === 4}
                 />
               );
             case 5:
@@ -358,7 +358,7 @@ class ProgressParent extends Component {
                   callback={() => {
                     this.setState({ showInfoPopUp: false });
                   }}
-                  visibility={showInfoPopUp == 5}
+                  visibility={showInfoPopUp === 5}
                 />
               );
             case 6:
@@ -368,7 +368,7 @@ class ProgressParent extends Component {
                   callback={() => {
                     this.setState({ showInfoPopUp: false });
                   }}
-                  visibility={showInfoPopUp == 6}
+                  visibility={showInfoPopUp === 6}
                 />
               );
             case 7:
@@ -378,7 +378,7 @@ class ProgressParent extends Component {
                   callback={() => {
                     this.setState({ showInfoPopUp: false });
                   }}
-                  visibility={showInfoPopUp == 7}
+                  visibility={showInfoPopUp === 7}
                 />
               );
             case 8:
@@ -388,7 +388,7 @@ class ProgressParent extends Component {
                   callback={() => {
                     this.setState({ showInfoPopUp: false });
                   }}
-                  visibility={showInfoPopUp == 8}
+                  visibility={showInfoPopUp === 8}
                 />
               );
             default:
