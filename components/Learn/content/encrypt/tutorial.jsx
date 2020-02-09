@@ -1,27 +1,18 @@
+/* eslint-disable react/no-array-index-key */
 // react imports
-import React, { Component } from 'React';
+import React, { Component } from 'react';
+
+import PropTypes from 'prop-types';
 
 // react-native imports.
-import {
-  View,
-  ScrollView,
-  Button,
-  Text,
-  Image,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  TextInput,
-  Modal,
-  Keyboard,
-  Dimensions,
-} from 'react-native';
+import { View, ScrollView, Text, Image, TouchableWithoutFeedback, Keyboard, Dimensions } from 'react-native';
 
 // import stylesheet.
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Table, TableWrapper, Rows, Row, Col } from 'react-native-table-component';
+import { Table, TableWrapper, Rows, Col } from 'react-native-table-component';
 import * as Animatable from 'react-native-animatable';
-import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements';
+import { Card, Button as RneButton } from 'react-native-elements';
 import styles from './styles';
 
 /* Third Party Libs begin here */
@@ -56,8 +47,6 @@ import { COLORS } from '../../../../redux-modules/constants/Colors';
 // Image Asset Imports
 import Error from '../../../../assets/images/Error.png';
 import InfoIcon from '../../../../assets/images/InfoIcon.png';
-import Exclaim from '../../../../assets/images/ExclaimIcon.png';
-import EncryptionFormula from '../../../../assets/images/EncryptionFormula.png';
 import Unlock from '../../../../assets/images/unlock.png';
 
 // Other Component Imports
@@ -73,8 +62,8 @@ import contents from './contents';
 class EncryptTutorial extends Component {
   constructor(props) {
     super(props);
-    const { lockState } = this.props;
-    const currentEncryptText = lockState.encryption.textToEncrypt;
+    const { textToEncrypt } = this.props;
+    const currentEncryptText = textToEncrypt;
     this.state = {
       currentTextBox: currentEncryptText === '' ? '' : currentEncryptText, // temporary, to be stored in redux - this is only for use in onTextChange
       showError: false,
@@ -97,12 +86,14 @@ class EncryptTutorial extends Component {
     this.keyboardDidHideListener.remove();
   }
 
+  // eslint-disable-next-line no-unused-vars
   handleKeyboardDidShow = event => {
     this.setState({
       keyboardVisiblity: true,
     });
   };
 
+  // eslint-disable-next-line no-unused-vars
   keyboardDidHide = event => {
     this.setState({
       keyboardVisiblity: false,
@@ -164,8 +155,8 @@ class EncryptTutorial extends Component {
   };
 
   checkPageNo = () => {
-    const { lockState } = this.props;
-    return lockState.lessonPageTabAndPages.tabPage;
+    const { tabPage } = this.props;
+    return tabPage;
   };
 
   isEmptyInput = () => {
@@ -186,10 +177,11 @@ class EncryptTutorial extends Component {
     const binList = [];
     yVal.forEach(y => {
       let binaryStr = '';
-      for (let i = knapsack.length - 1; i >= 0; i--) {
+      for (let i = knapsack.length - 1; i >= 0; i -= 1) {
         console.log(`Current y ${y} Current Knapsack ${knapsack[i]}`);
         if (y >= knapsack[i]) {
           binaryStr = `1${binaryStr}`;
+          // eslint-disable-next-line no-param-reassign
           y -= knapsack[i];
         } else {
           binaryStr = `0${binaryStr}`;
@@ -210,12 +202,12 @@ class EncryptTutorial extends Component {
       binBlocks.push(binaryString.substring(i, i + trapdoorSize));
     }
     // need to pad
-    if (binaryString.length % trapdoorSize != 0) {
+    if (binaryString.length % trapdoorSize !== 0) {
       const padding = trapdoorSize - (binaryString.length % trapdoorSize);
       const start = binaryString.length - (binaryString.length % trapdoorSize);
       let blockStr = binaryString.substring(start);
       console.log(`Padding to ${padding}`);
-      for (let j = 0; j < padding; j++) {
+      for (let j = 0; j < padding; j += 1) {
         blockStr += '0';
       }
       binBlocks.push(blockStr);
@@ -224,13 +216,13 @@ class EncryptTutorial extends Component {
       actions.UPDATE_ENCRYPTION_PADDING_ACTION(0);
     }
     const binBlocksNumeric = [];
-    for (let i = 0; i < binBlocks.length; i++) {
+    for (let i = 0; i < binBlocks.length; i += 1) {
       // for each number string inside bin blocks, cast it to an array of numbers.
       console.log(binBlocks[i]);
       const binLen = binBlocks[i].length;
       const numeric = binBlocks[i].split('').map(Number);
       let differential = binLen - numeric.length;
-      while (differential != 0) {
+      while (differential !== 0) {
         numeric.unshift(0); // prepends
         differential -= 1;
       }
@@ -240,7 +232,7 @@ class EncryptTutorial extends Component {
   };
 
   validateInput = () => {
-    const { lockState, actions } = this.props;
+    const { actions } = this.props;
     const { currentTextBox } = this.state;
     const asciiVal = this.stringToAscii(currentTextBox);
     if (this.isEmptyInput()) {
@@ -258,13 +250,11 @@ class EncryptTutorial extends Component {
   };
 
   generateBinaryBlocks = () => {
-    const { lockState, actions, trophySafetyFirst } = this.props;
-    const binUserInput = lockState.encryption.binaryString;
-    const binPubKeyString = lockState.updateParameters.publicKeyString;
-    const binPubKeyArr = lockState.updateParameters.publicKeyArr;
+    const { actions, publicKeyArr, binaryString } = this.props;
+    const binUserInput = binaryString;
+    const binPubKeyArr = publicKeyArr;
     this.setSpinnerCallback(() => {
       const binaryBlocks = this.chunk(binUserInput, binPubKeyArr.length);
-      console.log(binaryBlocks);
       actions.UPDATE_ENCRYPTION_BLOCKS_ACTION(binaryBlocks);
       actions.ALLOW_NEXT_PAGE_ACTION();
       this.setState({
@@ -317,12 +307,11 @@ class EncryptTutorial extends Component {
   };
 
   stringToAscii = text => {
-    const { lockState } = this.props;
     let asciiVal = '(';
 
-    for (let i = 0; i < text.length; i++) {
+    for (let i = 0; i < text.length; i += 1) {
       asciiVal += Number(text.charCodeAt(i));
-      if (i + 1 != text.length) asciiVal += ', ';
+      if (i + 1 !== text.length) asciiVal += ', ';
     }
     asciiVal += ')';
 
@@ -359,7 +348,6 @@ class EncryptTutorial extends Component {
   };
 
   getSixthPage = () => {
-    const { actions } = this.props;
     return (
       <Animatable.View animation="slideInDown">
         <Card title="Unlocked Next Tab!">
@@ -393,8 +381,6 @@ class EncryptTutorial extends Component {
   };
 
   getFourthPage = () => {
-    const { showBlocks } = this.state;
-    const { lockState, actions } = this.props;
     const Page4 = contents.page4;
     return (
       <Page4
@@ -415,10 +401,10 @@ class EncryptTutorial extends Component {
   };
 
   getThirdPage = () => {
-    const { actions, lockState } = this.props;
+    const { actions, allowNextPage } = this.props;
     const Page3 = contents.page3;
 
-    if (!lockState.lessonPageTabAndPages.allowNextPage) {
+    if (!allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION();
     }
     return (
@@ -431,9 +417,9 @@ class EncryptTutorial extends Component {
   };
 
   getSecondPage = () => {
-    const { actions, lockState } = this.props;
+    const { actions, allowNextPage } = this.props;
     const Page2 = contents.page2;
-    if (!lockState.lessonPageTabAndPages.allowNextPage) {
+    if (!allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION();
     }
     return <Page2 />;
@@ -485,18 +471,18 @@ class EncryptTutorial extends Component {
       showCiphertextInfoPopUp,
       keyboardVisiblity,
     } = this.state;
-    const { lockState, actions } = this.props;
+    const { actions, binaryBlocks, publicKeyArr, encryptedText } = this.props;
     let lockStateArr = null;
-    if (lockState.encryption.binaryBlocks.length != 0) {
+    if (binaryBlocks.length !== 0) {
       const widthLength = [];
-      for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++) {
+      for (let i = 0; i < publicKeyArr.length; i += 1) {
         widthLength.push(Dimensions.get('screen').width * 0.2);
       }
       const encryptedArr = [];
-      lockStateArr = lockState.encryption.binaryBlocks.map((block, idx) => {
+      lockStateArr = binaryBlocks.map((block, idx) => {
         encryptedArr.push(
           block.map((x, index) => {
-            return Number(lockState.updateParameters.publicKeyArr[index]) * Number(x);
+            return Number(publicKeyArr[index]) * Number(x);
           }),
         );
         return (
@@ -506,7 +492,7 @@ class EncryptTutorial extends Component {
               tableTitle={['Key', 'Binary', 'Total']}
               widthArr={widthLength}
               tableData={block}
-              currentPublicKey={lockState.updateParameters.publicKeyArr}
+              currentPublicKey={publicKeyArr}
               tableType="binary"
               blockNo={idx + 1}
             />
@@ -514,10 +500,10 @@ class EncryptTutorial extends Component {
         );
       });
       console.log(encryptedArr);
-      for (let i = 0; i < encryptedArr.length; i++) {
+      for (let i = 0; i < encryptedArr.length; i += 1) {
         encryptedArr[i] = encryptedArr[i].reduce(this.sumReducer);
       }
-      if (lockState.encryption.encryptedText.length == 0) {
+      if (encryptedText.length === 0) {
         actions.UPDATE_ENCRYPTED_STRING_ACTION(encryptedArr);
       }
     }
@@ -564,7 +550,9 @@ class EncryptTutorial extends Component {
           }}
         >
           <ScrollView
-            ref={ref => (this.scrollView = ref)}
+            ref={ref => {
+              this.scrollView = ref;
+            }}
             onContentSizeChange={() => {
               this.scrollView.scrollTo({ x: 0, y: 0, animated: true });
             }}
@@ -582,9 +570,41 @@ class EncryptTutorial extends Component {
   }
 }
 
+EncryptTutorial.propTypes = {
+  tabPage: PropTypes.number.isRequired,
+  allowNextPage: PropTypes.bool.isRequired,
+  trophyConcealment: PropTypes.bool.isRequired,
+  binaryBlocks: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  publicKeyArr: PropTypes.arrayOf(PropTypes.number).isRequired,
+  encryptedText: PropTypes.string.isRequired,
+  binaryString: PropTypes.string.isRequired,
+  textToEncrypt: PropTypes.string.isRequired,
+  actions: PropTypes.shape({
+    UPDATE_ENCRYPTION_STRING_ACTION: PropTypes.func,
+    UPDATE_ENCRYPTION_ASCII_STRING_ACTION: PropTypes.func,
+    UPDATE_ENCRYPTION_BINARY_STRING_ACTION: PropTypes.func,
+    UPDATE_ENCRYPTION_PADDING_ACTION: PropTypes.func,
+    UPDATE_ENCRYPTION_BLOCKS_ACTION: PropTypes.func,
+    UPDATE_ENCRYPTED_STRING_ACTION: PropTypes.func,
+    ALLOW_NEXT_PAGE_ACTION: PropTypes.func,
+    DECRYPT_UNLOCK_ACTION: PropTypes.func,
+    NEXT_ENCRYPT_PAGE_ACTION: PropTypes.func,
+    UNLOCK_TROPHY_CONCEALMENT: PropTypes.func,
+    SHOW_TROPHY_ACTION: PropTypes.func,
+  }),
+};
+
 const mapStateToProps = state => ({
   lockState: state,
+  tabPage: state.lessonPageTabAndPages.tabPage,
+  allowNextPage: state.lessonPageTabAndPages.allowNextPage,
   trophyConcealment: state.trophy.trophyConcealment,
+  binaryBlocks: state.encryption.binaryBlocks,
+  publicKeyArr: state.updateParameters.publicKeyArr,
+  encryptedText: state.encryption.encryptedText,
+  publicKeyString: state.updateParameters.publicKeyString,
+  binaryString: state.encryption.binaryString,
+  textToEncrypt: state.encryption.textToEncrypt,
 });
 
 const mapDispatchToProps = dispatch => ({

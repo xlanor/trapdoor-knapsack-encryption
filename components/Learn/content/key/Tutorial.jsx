@@ -676,11 +676,11 @@ class KeyPage extends Component {
 KeyPage.propTypes = {
   trophyKeyRing: PropTypes.bool.isRequired,
   modulo: PropTypes.number.isRequired,
-  multiplier: PropTypes.bool.isRequired,
+  multiplier: PropTypes.number.isRequired,
   privateKeyString: PropTypes.string.isRequired,
   privateKeySum: PropTypes.number.isRequired,
   tabPage: PropTypes.number.isRequired,
-  privateKeyArr: PropTypes.arrayOf(PropTypes.number),
+  privateKeyArr: PropTypes.arrayOf(PropTypes.string),
   actions: PropTypes.shape({
     ALLOW_NEXT_PAGE_ACTION: PropTypes.func,
     UPDATE_PRIVATE_KEY_STRING_ACTION: PropTypes.func,

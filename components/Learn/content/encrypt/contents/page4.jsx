@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 // RN imports
-import { TouchableWithoutFeedback, View, Text, Image, Keyboard, Dimensions } from 'react-native';
+import {  View, Text, Image, Dimensions } from 'react-native';
 
 import PropTypes from 'react-proptypes';
-// React-Native Table Imports
-import { Table, TableWrapper, Rows, Row, Col } from 'react-native-table-component';
 
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 // import stylesheet.
 import styles from '../styles';
@@ -20,10 +17,6 @@ import CustomButton from '../../../../Common/Button';
 import EncryptionFormula from '../../../../../assets/images/EncryptionFormula.png';
 
 class PageFour extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       showCiphertextInfoPopUp,
@@ -59,7 +52,7 @@ class PageFour extends Component {
           <Text style={styles.tutorial.publicKey}>b</Text>.
         </Text>
         <View style={{ marginTop: u * 0.03 }}>
-          {binaryBlocks.length != 0 ? (
+          {binaryBlocks.length !== 0 ? (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={styles.tutorial.multipleButtonLeft}>
                 <CustomButton text="Encrypt" callback={generateBinaryBlocks} />
@@ -77,11 +70,11 @@ class PageFour extends Component {
         </View>
         <View style={{ marginTop: 10 }}>
           <Text style={styles.tutorial.contentStyle}>
-            <Text style={styles.tutorial.boldFont}>Current Padding:</Text> {encryptedText.length != 0 ? padding : null}
+            <Text style={styles.tutorial.boldFont}>Current Padding:</Text> {encryptedText.length !== 0 ? padding : null}
           </Text>
           <Text style={styles.tutorial.contentStyle}>
             <Text style={styles.tutorial.boldFont}>Ciphertext:</Text>{' '}
-            {encryptedText.length != 0 ? encryptedText.join(', ') : null}
+            {encryptedText.length !== 0 ? encryptedText.join(', ') : null}
           </Text>
         </View>
       </>
@@ -92,8 +85,11 @@ class PageFour extends Component {
 PageFour.propTypes = {
   showCiphertextInfoPopUp: PropTypes.func.isRequired,
   generateBinaryBlocks: PropTypes.func.isRequired,
-  showBlocks: PropTypes.func.isRequired,
   setSpinner: PropTypes.func.isRequired,
+  binaryBlocks: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+  encryptedText: PropTypes.string.isRequired,
+  padding: PropTypes.number.isRequired,
+  curPublicKeyString: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -75,7 +75,7 @@ FirstPage.propTypes = {
   updatePrivateKey: PropTypes.func.isRequired,
   validatePrivateKey: PropTypes.func.isRequired,
   showSuperIncreasingInfoPopUp: PropTypes.func.isRequired,
-  privateKeyArr: PropTypes.arrayOf(PropTypes.number),
+  privateKeyArr: PropTypes.arrayOf(PropTypes.string),
   privateKeyString: PropTypes.string.isRequired,
   allowNextPage: PropTypes.bool.isRequired,
 };
