@@ -6,7 +6,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-navigation';
 import { scrollViewPopUp as styles } from './styles';
 
-
 const ScrollViewPopUp = props => {
   const { visibility, callback, lockStateArr, title } = props;
   return (

@@ -17,7 +17,7 @@ class Block extends Component {
 
   multiplyTwoArrays = (array1, array2) => {
     const returnArr = [];
-    for (let i = 0; i < array1.length; i+=1) {
+    for (let i = 0; i < array1.length; i += 1) {
       returnArr[i] = array1[i] * array2[i];
     }
     return returnArr;
