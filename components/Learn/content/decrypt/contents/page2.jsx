@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 // RN imports
-import { TouchableWithoutFeedback, View, Text, TextInput, Keyboard, Dimensions } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 
 // begin redux imports
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'react-proptypes';
 
 // import stylesheet.
@@ -59,7 +58,7 @@ class PageTwo extends Component {
           )}
         </View>
 
-        {decryptedText != '' ? (
+        {decryptedText !== '' ? (
           <>
             <Text style={styles.tutorial.contentStyle}>
               <Text style={styles.tutorial.boldFont}>Binary value</Text>:{'\n'}
@@ -79,10 +78,14 @@ class PageTwo extends Component {
 
 PageTwo.propTypes = {
   showPaddingInfoPopUp: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   currentDecryptedBlocks: PropTypes.any,
   decryption: PropTypes.func.isRequired,
   setSpinner: PropTypes.func.isRequired,
   decryptedText: PropTypes.string.isRequired,
+  binaryString: PropTypes.string.isRequired,
+  asciiString: PropTypes.string.isRequired,
+  padding: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
