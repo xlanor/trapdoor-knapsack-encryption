@@ -1,12 +1,11 @@
 import React from 'react';
-import { Dimensions, View, Image } from 'react-native';
+import { Dimensions, Image } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import { DotIndicator } from 'react-native-indicators';
 import * as Animatable from 'react-native-animatable';
 import styles2 from './styles';
 import Book from '../assets/images/Book.png';
-import ProgressParent from '../components/Progress/ProgressParent';
 
 import AppNavigator from '../navigation/AppNavigator';
 

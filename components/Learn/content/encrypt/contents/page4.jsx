@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // RN imports
-import {  View, Text, Image, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions } from 'react-native';
 
 import PropTypes from 'react-proptypes';
 

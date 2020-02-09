@@ -1,4 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { View, Dimensions, ScrollView, Text } from 'react-native';
 
@@ -83,12 +86,12 @@ class DecryptTutorial extends Component {
   };
 
   checkPageNo = () => {
-    const { lockState } = this.props;
-    return lockState.lessonPageTabAndPages.tabPage;
+    const { tabPage } = this.props;
+    return tabPage;
   };
 
   getBinaryString = (knapsack, yVal) => {
-    const { lockState } = this.props;
+    const { encryptedText } = this.props;
     const returnObj = {
       binlist: [],
       blocks: [],
@@ -96,18 +99,19 @@ class DecryptTutorial extends Component {
     yVal.forEach((y, idx) => {
       let binaryStr = '';
       const blocksInner = {
-        inital_enc: lockState.encryption.encryptedText[idx],
+        inital_enc: encryptedText[idx],
         initial_r: Number(y), // get new object so its not mutated
         current_r: [],
         knapsack: [],
         decrypted: [],
         new_r: [],
       };
-      for (let i = knapsack.length - 1; i >= 0; i--) {
+      for (let i = knapsack.length - 1; i >= 0; i -= 1) {
         blocksInner.knapsack.push(knapsack[i]);
         blocksInner.current_r.push(Number(y));
         if (y >= knapsack[i]) {
           binaryStr = `1${binaryStr}`;
+          // eslint-disable-next-line no-param-reassign
           y -= knapsack[i];
           blocksInner.decrypted.push('1');
         } else {
@@ -124,7 +128,7 @@ class DecryptTutorial extends Component {
 
   removePadding = (binStringList, padNumber) => {
     const binString = binStringList.join('');
-    if (padNumber != 0) {
+    if (padNumber !== 0) {
       return binString.substring(0, binString.length - padNumber);
     }
 
@@ -234,13 +238,8 @@ class DecryptTutorial extends Component {
   };
 
   decrypt = () => {
-    const { actions, lockState } = this.props;
-    const { encryptedText } = lockState.encryption;
-    const { modulo } = lockState.updateParameters;
-    const { inverse } = lockState.updateParameters;
-    const { multiplier } = lockState.updateParameters;
-    const { padding } = lockState.encryption;
-    const privateKey = lockState.updateParameters.privateKeyArr;
+    const { encryptedText, modulo, inverse, padding, privateKey } = this.props;
+
     const decrypted = [];
     encryptedText.forEach(enc => {
       const multiplied = enc * inverse;
@@ -257,24 +256,6 @@ class DecryptTutorial extends Component {
       showBlocks: true,
     };
   };
-
-  async decryption() {
-    const { actions, trophyBreakWall } = this.props;
-    this.setState(
-      {
-        showSpinner: true,
-      },
-      () => {
-        const decryptRs = this.decrypt();
-        setTimeout(() => {
-          this.setState({
-            showSpinner: false,
-            ...decryptRs,
-          });
-        }, 500);
-      },
-    );
-  }
 
   unlockTrophy = () => {
     const { actions, trophyReveal } = this.props;
@@ -315,11 +296,10 @@ class DecryptTutorial extends Component {
 
   getSecondPage = () => {
     const { decryptedText, currentDecryptedBlocks } = this.state;
-    const { actions, lockState } = this.props;
-    const u = Dimensions.get('window').height;
+    const { actions, allowNextPage } = this.props;
 
     const Page2 = content.page2;
-    if (!lockState.lessonPageTabAndPages.allowNextPage) {
+    if (!allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION();
     }
     return (
@@ -340,9 +320,9 @@ class DecryptTutorial extends Component {
   };
 
   getFirstPage = () => {
-    const { actions, lockState } = this.props;
+    const { actions, allowNextPage } = this.props;
     const Page1 = content.page1;
-    if (!lockState.lessonPageTabAndPages.allowNextPage) {
+    if (!allowNextPage) {
       actions.ALLOW_NEXT_PAGE_ACTION();
     }
     return (
@@ -376,14 +356,31 @@ class DecryptTutorial extends Component {
     }
   };
 
+  async decryption() {
+    this.setState(
+      {
+        showSpinner: true,
+      },
+      () => {
+        const decryptRs = this.decrypt();
+        setTimeout(() => {
+          this.setState({
+            showSpinner: false,
+            ...decryptRs,
+          });
+        }, 500);
+      },
+    );
+  }
+
   render() {
-    const { lockState } = this.props;
+    const { inverse, modulo, publicKeyArr } = this.props;
     const { showBlocks, showSpinner, showInversePopUp, showrPopUp, showCmpPopUp, showPaddingInfoPopUp } = this.state;
     const { currentDecryptedBlocks } = this.state;
     const decryptedArr = [];
     if (currentDecryptedBlocks !== null) {
       const flexLength = [];
-      for (let i = 0; i < lockState.updateParameters.publicKeyArr.length; i++) {
+      for (let i = 0; i < publicKeyArr.length; i += 1) {
         flexLength.push(Dimensions.get('screen').width * 0.2);
       }
       decryptedArr.push(
@@ -400,8 +397,8 @@ class DecryptTutorial extends Component {
                 binary={x.decrypted}
                 binaryOrdered={x.decrypted.slice().reverse()}
                 encryptedInput={x.inital_enc}
-                inverse={lockState.updateParameters.inverse}
-                modulo={lockState.updateParameters.modulo}
+                inverse={inverse}
+                modulo={modulo}
                 rVal={x.initial_r}
               />
             </View>
@@ -411,7 +408,9 @@ class DecryptTutorial extends Component {
     }
     return (
       <ScrollView
-        ref={ref => (this.scrollView = ref)}
+        ref={ref => {
+          this.scrollView = ref;
+        }}
         onContentSizeChange={() => {
           this.scrollView.scrollTo({ x: 0, y: 0, animated: true });
         }}
@@ -479,10 +478,35 @@ class DecryptTutorial extends Component {
   }
 }
 
+DecryptTutorial.propTypes = {
+  trophyReveal: PropTypes.bool.isRequired,
+  encryptedText: PropTypes.string.isRequired,
+  padding: PropTypes.number.isRequired,
+  modulo: PropTypes.number.isRequired,
+  inverse: PropTypes.number.isRequired,
+  publicKeyArr: PropTypes.arrayOf(PropTypes.number).isRequired,
+  allowNextPage: PropTypes.bool.isRequired,
+  tabPage: PropTypes.number.isRequired,
+  privateKey: PropTypes.arrayOf(PropTypes.string),
+  actions: {
+    ALLOW_NEXT_PAGE_ACTION: PropTypes.func.isRequired,
+    NEXT_DECRYPT_PAGE_ACTION: PropTypes.func.isRequired,
+    UNLOCK_TROPHY_BREAK_WALL: PropTypes.func.isRequired,
+    UNLOCK_TROPHY_REVEAL: PropTypes.func.isRequired,
+    SHOW_TROPHY_ACTION: PropTypes.func.isRequired,
+  },
+};
+
 const mapStateToProps = state => ({
-  lockState: state,
   trophyReveal: state.trophy.trophyReveal,
-  trophyBreakWall: state.trophy.trophyBreakWall,
+  encryptedText: state.encryption.encryptedText,
+  padding: state.encryption.padding,
+  modulo: state.updateParameters.modulo,
+  inverse: state.updateParameters.inverse,
+  publicKeyArr: state.updateParameters.publicKeyArr,
+  privateKey: state.updateParameters.privateKeyArr,
+  allowNextPage: state.lessonPageTabAndPages.allowNextPage,
+  tabPage: state.lessonPageTabAndPages.tabPage,
 });
 
 const mapDispatchToProps = dispatch => ({

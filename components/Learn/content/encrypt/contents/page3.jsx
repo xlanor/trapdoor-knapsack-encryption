@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 // RN imports
 import { View, Text, Dimensions } from 'react-native';
 

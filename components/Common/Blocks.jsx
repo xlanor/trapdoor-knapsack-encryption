@@ -1,4 +1,5 @@
-import React, { Component } from 'React';
+/* eslint-disable react/forbid-prop-types */
+import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 
 import { Table, TableWrapper, Rows, Col } from 'react-native-table-component';
@@ -8,13 +9,6 @@ import PropTypes from 'prop-types';
 import { blocks as styles } from './styles';
 
 class Block extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      total: -1,
-    };
-  }
-
   multiplyTwoArrays = (array1, array2) => {
     const returnArr = [];
     for (let i = 0; i < array1.length; i += 1) {
@@ -34,7 +28,6 @@ class Block extends Component {
   };
 
   render() {
-    const { total } = this.state;
     const { widthArr, tableTitle, tableData, currentPublicKey, tableType, blockNo } = this.props;
     return (
       <View style={styles.containerStyle}>
@@ -60,7 +53,7 @@ class Block extends Component {
           </Table>
         </ScrollView>
         <View style={styles.blockTotalView}>
-          {tableType == 'binary' ? (
+          {tableType === 'binary' ? (
             <Text style={styles.textStyle}>
               Block Total:
               {` ${this.multiplyTwoArrays(currentPublicKey, tableData).reduce((a, b) => a + b, 0)}`}
@@ -78,6 +71,7 @@ Block.propTypes = {
   currentPublicKey: PropTypes.array.isRequired,
   tableType: PropTypes.string.isRequired,
   blockNo: PropTypes.number,
+  widthArr: PropTypes.arrayOf(PropTypes.number),
 };
 
 export default Block;

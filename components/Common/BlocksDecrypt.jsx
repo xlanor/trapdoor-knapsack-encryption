@@ -1,22 +1,18 @@
-import React, { Component } from 'React';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+/* eslint-disable react/forbid-prop-types */
+import React, { Component } from 'react';
+import { View, Text, ScrollView } from 'react-native';
 
-import { Table, TableWrapper, Rows, Row, Col } from 'react-native-table-component';
+import { Table, TableWrapper, Rows, Col } from 'react-native-table-component';
 
 import PropTypes from 'prop-types';
 
 import { blocks as styles } from './styles';
 
 class BlockDecrypt extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       flexArr,
       tableTitle,
-      tableData,
       encryptedInput,
       inverse,
       modulo,

@@ -1,4 +1,5 @@
-import React, { Component } from 'React';
+/* eslint-disable no-param-reassign */
+import React, { Component } from 'react';
 
 import { View, Text, Clipboard, Image, TouchableOpacity, TextInput, Share } from 'react-native';
 
@@ -189,6 +190,7 @@ class SimulatorPage extends Component {
 
   xgcd = (inputA, inputM) => {
     // validate inputs
+    // eslint-disable-next-line prefer-const
     let [a, m] = [Number(inputA), Number(inputM)];
     if (Number.isNaN(a) || Number.isNaN(m)) {
       return NaN; // invalid input
@@ -416,9 +418,8 @@ class SimulatorPage extends Component {
       const localPubNumeric = this.getNumericFromString(localPublicKey);
       const binBlocks = this.generateBinaryBlocks(binString, localPubNumeric);
       const encryptedArr = [];
-      console.log(`LOCAL PUB NUMERIC: ${localPubNumeric}`);
-      console.log(`BIN BLOCKS ${binBlocks}`);
-      const lockStateArr = binBlocks.map((block, idx) => {
+      // eslint-disable-next-line array-callback-return
+      binBlocks.map((block, idx) => {
         console.log(`BLOCK ${idx} - ${block}`);
         encryptedArr.push(
           block.map((x, index) => {

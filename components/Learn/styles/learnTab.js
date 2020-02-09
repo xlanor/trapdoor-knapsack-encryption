@@ -1,5 +1,4 @@
 import { Dimensions } from 'react-native';
-import { COLORS } from '../../../redux-modules/constants/Colors';
 
 const arrowWidth = Dimensions.get('window').width * 0.1;
 const arrowImageWidth = 937;

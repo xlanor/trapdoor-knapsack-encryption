@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react';
 import { View, Dimensions, Text, Image, Linking } from 'react-native';
 

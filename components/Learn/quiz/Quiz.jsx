@@ -43,7 +43,6 @@ class Quiz extends Component {
       case 'DECRYPT':
         return questionList.decrypt;
       default:
-        console.log(`Falling back to default quiz`)
         return questionList.intro;
     }
   };

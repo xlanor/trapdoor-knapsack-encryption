@@ -1,4 +1,4 @@
-import { Platform, StatusBar, Dimensions } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import { COLORS } from '../../redux-modules/constants/Colors';
 
 const safeAreaHeader = {
