@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'react-proptypes';
 // react-native imports
 import { Text } from 'react-native';
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-// import third party libs
-import { Card, Button as RneButton, Image as RneImage } from 'react-native-elements';
 
 // import stylesheet.
 import styles from '../styles';
@@ -33,6 +31,12 @@ class QuizTab extends Component {
     );
   }
 }
+QuizTab.propTypes = {
+  actions: PropTypes.shape({
+    ALLOW_NEXT_PAGE_ACTION: PropTypes.func.isRequired,
+    NEXT_GCD_PAGE_ACTION: PropTypes.func.isRequired,
+  }),
+};
 
 const mapStateToProps = state => ({
   lockState: state,
