@@ -43,6 +43,7 @@ class Quiz extends Component {
       case 'DECRYPT':
         return questionList.decrypt;
       default:
+        console.log(`Falling back to default quiz`)
         return questionList.intro;
     }
   };
@@ -76,7 +77,7 @@ class Quiz extends Component {
 
     return (
       <>
-        {isQuizEnded ? null : currentQuestionIdx <= questions.length - 1 && questions.length != 0 ? (
+        {isQuizEnded ? null : currentQuestionIdx <= questions.length - 1 && questions.length !== 0 ? (
           <Question
             qnName={questions[currentQuestionIdx].questions_name}
             label={questions[currentQuestionIdx].questions_label}

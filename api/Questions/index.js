@@ -1,7 +1,5 @@
 import { axios } from '../axios';
 import Header from '../header';
-import common from '../common';
-import mapIndex from '../pageIndexMapper';
 
 const GET_QUESTION_URL = 'questions/';
 

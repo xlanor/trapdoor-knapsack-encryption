@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Dimensions,
-  Button,
-  Text,
-  Image,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  FlatList,
-  Linking,
-} from 'react-native';
+import { View, Dimensions, Text, Linking } from 'react-native';
 
 import AlertPopUp from '../../../../Common/AlertPopUp';
 import Info from '../../../../../assets/images/InfoIcon.png';

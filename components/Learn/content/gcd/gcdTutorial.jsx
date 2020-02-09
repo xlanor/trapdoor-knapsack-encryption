@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 // begin redux imports
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,10 +17,6 @@ import { DISABLE_NEXT_PAGE_ACTION } from '../../../../redux-modules/actions/tabP
 
 // dynamic pages not static pages.
 class GCDPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   placeholder15 = () => {
     return <Text>15</Text>;
   };
@@ -86,6 +84,14 @@ class GCDPage extends Component {
     );
   }
 }
+
+GCDPage.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  allowNextPage: PropTypes.bool.isRequired,
+  actions: PropTypes.shape({
+    DISABLE_NEXT_PAGE_ACTION: PropTypes.func.isRequired,
+  }),
+};
 
 const mapStateToProps = state => ({
   currentPage: state.lessonPageTabAndPages.tabPage,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'react-proptypes';
 import { Text, Image } from 'react-native';
 // begin redux imports
 import { connect } from 'react-redux';
@@ -20,10 +21,6 @@ import Unlock from '../../../../../assets/images/unlock.png';
 import styles from '../styles';
 
 class UnlockNext extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   unlockEzMath = () => {
     const { actions, trophyEzMath } = this.props;
     // always unlock the tabs and trophies,
@@ -35,7 +32,6 @@ class UnlockNext extends Component {
   };
 
   render() {
-    const { actions } = this.props;
     return (
       <>
         <Text style={styles.GCDPages.titleStyle}>Euclidean and Extended Euclidean Algorithm</Text>
@@ -55,6 +51,15 @@ class UnlockNext extends Component {
     );
   }
 }
+
+UnlockNext.propTypes = {
+  trophyEzMath: PropTypes.bool.isRequired,
+  actions: PropTypes.shape({
+    KEY_UNLOCK_ACTION: PropTypes.func.isRequired,
+    UNLOCK_TROPHY_EZ_MATH: PropTypes.func.isRequired,
+    SHOW_TROPHY_ACTION: PropTypes.func.isRequired,
+  }),
+};
 
 const mapStateToProps = state => ({
   trophyEzMath: state.trophy.trophyEzMath,

@@ -44,8 +44,8 @@ export const CALL_API = quizType => async dispatch => {
   const succ = data => {
     dispatch(ADD_QUESTIONS_API_ACTION(data.results, quizType));
   };
-  const err = err => {
-    console.log(err);
+  const err = error => {
+    console.log(error);
   };
   const idx = pageIndexMapper(quizType);
   while (!isPaginatedFinish) {

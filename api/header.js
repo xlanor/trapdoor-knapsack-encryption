@@ -1,5 +1,3 @@
-import common from './common';
-
 const Header = () => ({
   res: {},
 
