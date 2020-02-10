@@ -400,7 +400,7 @@ class EncryptTutorial extends Component {
     const { actions } = this.props;
     return (
       <>
-        <Text style={{ ...styles.tutorial.contentStyle, textAlign: 'center' }}>Quiz Time</Text>
+        {/* <Text style={{ ...styles.tutorial.contentStyle, textAlign: 'center' }}>Quiz Time</Text> */}
         <Quiz quizType="ENCRYPT" callback={()=>{actions.ALLOW_NEXT_PAGE_ACTION(); actions.NEXT_ENCRYPT_PAGE_ACTION()}} />
       </>
     )

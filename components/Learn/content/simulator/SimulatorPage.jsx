@@ -485,10 +485,10 @@ class SimulatorPage extends Component {
       const unpadded = this.removePadding(binStringList, padding);
       console.log(unpadded);
       const dec = this.convertBinToText(unpadded);
-      console.log(`dec: ${dec} Length: ${dec.length}`);
+      console.log(`dec: ${dec} Length: ${dec.length} Ascii: ${dec.charCodeAt()}`);
       // Wrong prikey -> dec == " " & dec.length == 1
       // binstring == all 0s -> dec =="" & dec.length == 0
-      if (!dec || dec.trim().length === 0) {
+      if (!dec || dec.trim().length === 0 || dec === "\0") {
         this.enableError(
           'Unable to map the decryption result to the proper ascii value! \nMight be decrypting with wrong key!',
         );

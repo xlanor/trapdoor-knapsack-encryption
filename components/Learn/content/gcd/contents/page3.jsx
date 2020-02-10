@@ -38,7 +38,7 @@ export default class page3 extends Component {
                     insert the 2 integers into the table.
                     {"\n\n"}
                     <Text style={style.bold}>
-                        Note{"\n"}
+                        Note:{"\n"}
                         Always set{" "}
                         <Text style={style.valA}>a</Text>
                         {" "}as the larger number and{" "}
