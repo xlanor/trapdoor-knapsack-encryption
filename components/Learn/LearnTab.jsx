@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
-import { withNavigation, SafeAreaView } from 'react-navigation';
-import {
-  View,
-  KeyboardAvoidingView,
-  Button,
-  FlatList,
-  Text,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  Modal,
-} from 'react-native';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import PropTypes from 'prop-types';
+import { withNavigation } from 'react-navigation';
+import { View, Image, TouchableOpacity, Dimensions } from 'react-native';
 
 import { Card, Button as RneButton, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Algo } from '../../assets/images';
 
 import { introPageOne, gcdPageOne, keyPageOne, EncryptTutorial, DecryptTutorial, SimulatorPage } from './content';
 
@@ -58,7 +47,6 @@ import {
   KNAPSACK_LOCK_ACTION,
   KNAPSACK_UNLOCK_ACTION,
   UNLOCK_ALL_ACTION,
-  RESET_ALL_ACTION,
 } from '../../redux-modules/actions/learnPageLock';
 
 import {
@@ -75,35 +63,21 @@ import {
 
 import { HIDE_TROPHY_ACTION } from '../../redux-modules/actions/manageTrophies';
 
-// begin redux imports
-
 // importing image assets
 // unlocked
-import Next from '../../assets/images/Next.png';
 import Unlock from '../../assets/images/unlock.png';
 
 // import stylesheet.
 import styles from './styles';
 
-import BackArrow from '../../assets/images/backArrow.png';
-import FrontArrow from '../../assets/images/FrontArrow.png';
-
 // we will use ONE tab that will contain state
 class LearnTab extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showTrophyAnimation: false,
-    };
-  }
-
   getNextTab = () => {
     // to be defined  - hardcoded.
     // from current name, get next possible name.
     // if not, return none.
-    const { lockState, actions } = this.props;
-    const currentTab = lockState.lessonPageTabAndPages.tabName;
-    const isUnlockable = lockState.lessonPageTabAndPages.allowNextPage;
+    const { actions, tabName } = this.props;
+    const currentTab = tabName;
     let isFound = false;
     switch (currentTab) {
       case 'intro':
@@ -148,28 +122,26 @@ class LearnTab extends Component {
   };
 
   canNavigate = () => {
-    const { lockState } = this.props;
-    const isUnlockable = lockState.lessonPageTabAndPages.allowNextPage;
-    console.log(`Next page is ${isUnlockable}`);
-    console.log(`Inverse is ${lockState.updateParameters.inverse}`);
+    const { allowNextPage } = this.props;
+    const isUnlockable = allowNextPage;
     return !!isUnlockable; // redundant true/false but to be a little more explicit
   };
 
   getTouchablePreviousAction = () => {
-    const { lockState, actions } = this.props;
-    const currentTab = lockState.lessonPageTabAndPages.tabName;
-    const currentPage = lockState.lessonPageTabAndPages.tabPage;
+    const { actions, tabName, tabPage } = this.props;
+    const currentTab = tabName;
+    const currentPage = tabPage;
     switch (currentTab) {
       case 'intro':
         return actions.PREVIOUS_INTRO_PAGE_ACTION();
       case 'gcd':
         return actions.PREVIOUS_GCD_PAGE_ACTION();
       case 'key':
-        if (currentPage == 4) {
+        if (currentPage === 4) {
           actions.UPDATE_INVERSE_ACTION(0);
           return actions.PREVIOUS_KEY_PAGE_ACTION();
         }
-        if (currentPage == 5) {
+        if (currentPage === 5) {
           actions.UPDATE_PUBLIC_KEY_ARRAY_ACTION([]);
           actions.UPDATE_PUBLIC_KEY_STRING_ACTION('');
           return actions.PREVIOUS_KEY_PAGE_ACTION();
@@ -178,7 +150,7 @@ class LearnTab extends Component {
         return actions.PREVIOUS_KEY_PAGE_ACTION();
 
       case 'encrypt':
-        if (currentPage == 2) {
+        if (currentPage === 2) {
           // reset
           actions.UPDATE_ENCRYPTION_PADDING_ACTION(0);
           actions.UPDATE_ENCRYPTION_BLOCKS_ACTION([]);
@@ -195,9 +167,9 @@ class LearnTab extends Component {
   };
 
   getTouchableNextAction = () => {
-    const { lockState, actions } = this.props;
-    const currentTab = lockState.lessonPageTabAndPages.tabName;
-    const currentPage = lockState.lessonPageTabAndPages.tabPage;
+    const { actions, tabName, tabPage } = this.props;
+    const currentTab = tabName;
+    const currentPage = tabPage;
     switch (currentTab) {
       case 'intro':
         return actions.NEXT_INTRO_PAGE_ACTION();
@@ -206,7 +178,7 @@ class LearnTab extends Component {
       case 'key':
         return actions.NEXT_KEY_PAGE_ACTION();
       case 'encrypt':
-        if (currentPage == 1) {
+        if (currentPage === 1) {
           // reset
           actions.UPDATE_ENCRYPTION_PADDING_ACTION(0);
           actions.UPDATE_ENCRYPTION_BLOCKS_ACTION([]);
@@ -222,24 +194,22 @@ class LearnTab extends Component {
   };
 
   isFinalPage = () => {
-    const { lockState } = this.props;
-    const currentTab = lockState.lessonPageTabAndPages.tabName;
-    console.log(
-      `CUrrent tab ${currentTab} Max page ${lockState.lessonPageTabAndPages.maxPage} CurrentPage: ${lockState.lessonPageTabAndPages.tabPage}`,
-    );
-    return lockState.lessonPageTabAndPages.tabPage >= lockState.lessonPageTabAndPages.maxPage;
+    const { tabPage, tabName, maxPage } = this.props;
+    const currentTab = tabName;
+    console.log(`Current tab ${currentTab} Max page ${maxPage} CurrentPage: ${tabPage}`);
+    return tabPage >= maxPage;
   };
 
   isFirstPage = () => {
-    const { lockState } = this.props;
-    return lockState.lessonPageTabAndPages.tabPage <= 1;
+    const { tabPage } = this.props;
+    return tabPage <= 1;
   };
 
   getContent = () => {
     // loads the static pages...
-    const { lockState } = this.props;
-    const currentTab = lockState.lessonPageTabAndPages.tabName;
-    const currentPage = lockState.lessonPageTabAndPages.tabPage;
+    const { tabName, tabPage } = this.props;
+    const currentTab = tabName;
+    const currentPage = tabPage;
     console.log(`Getting content for ${currentTab} : ${currentPage}`);
     switch (currentTab) {
       case 'intro':
@@ -290,9 +260,6 @@ class LearnTab extends Component {
   };
 
   loadPage = () => {
-    const { lockState } = this.props;
-    const currentTab = lockState.lessonPageTabAndPages.tabName;
-    const currentPage = lockState.lessonPageTabAndPages.tabPage;
     const CurPage = this.getContent();
     // for dynamic pages, we render component, while for static
     // we render a page.
@@ -303,18 +270,12 @@ class LearnTab extends Component {
     );
   };
 
-  hideTrophyAnimation = endState => {
+  // eslint-disable-next-line no-unused-vars
+  hideTrophyAnimation = _endState => {
     const { actions } = this.props;
-    this.setState(
-      {
-        showTrophyAnimation: false,
-      },
-      () => {
-        setTimeout(() => {
-          actions.HIDE_TROPHY_ACTION();
-        }, 3000);
-      },
-    );
+    setTimeout(() => {
+      actions.HIDE_TROPHY_ACTION();
+    }, 3000);
   };
 
   render() {
@@ -376,9 +337,59 @@ class LearnTab extends Component {
   }
 }
 
+LearnTab.propTypes = {
+  actions: PropTypes.shape({
+    NEXT_INTRO_PAGE_ACTION: PropTypes.func,
+    PREVIOUS_INTRO_PAGE_ACTION: PropTypes.func,
+    NEXT_GCD_PAGE_ACTION: PropTypes.func,
+    PREVIOUS_GCD_PAGE_ACTION: PropTypes.func,
+    NEXT_ENCRYPT_PAGE_ACTION: PropTypes.func,
+    NEXT_DECRYPT_PAGE_ACTION: PropTypes.func,
+    PREVIOUS_DECRYPT_PAGE_ACTION: PropTypes.func,
+    PREVIOUS_ENCRYPT_PAGE_ACTION: PropTypes.func,
+    RESET_PAGE_ACTION: PropTypes.func,
+    CHANGE_TAB_ACTION: PropTypes.func,
+    INTRO_SELECT_ACTION: PropTypes.func,
+    INTRO_LOCK_ACTION: PropTypes.func,
+    INTRO_UNLOCK_ACTION: PropTypes.func,
+    ALGO_SELECT_ACTION: PropTypes.func,
+    ALGO_LOCK_ACTION: PropTypes.func,
+    ALGO_UNLOCK_ACTION: PropTypes.func,
+    KEY_SELECT_ACTION: PropTypes.func,
+    KEY_LOCK_ACTION: PropTypes.func,
+    KEY_UNLOCK_ACTION: PropTypes.func,
+    DECRYPT_SELECT_ACTION: PropTypes.func,
+    DECRYPT_LOCK_ACTION: PropTypes.func,
+    DECRYPT_UNLOCK_ACTION: PropTypes.func,
+    ENCRYPT_SELECT_ACTION: PropTypes.func,
+    ENCRYPT_LOCK_ACTION: PropTypes.func,
+    ENCRYPT_UNLOCK_ACTION: PropTypes.func,
+    KNAPSACK_SELECT_ACTION: PropTypes.func,
+    KNAPSACK_LOCK_ACTION: PropTypes.func,
+    KNAPSACK_UNLOCK_ACTION: PropTypes.func,
+    UNLOCK_ALL_ACTION: PropTypes.func,
+    NEXT_KEY_PAGE_ACTION: PropTypes.func,
+    PREVIOUS_KEY_PAGE_ACTION: PropTypes.func,
+    UPDATE_INVERSE_ACTION: PropTypes.func,
+    UPDATE_PUBLIC_KEY_STRING_ACTION: PropTypes.func,
+    UPDATE_PUBLIC_KEY_ARRAY_ACTION: PropTypes.func,
+    UPDATE_ENCRYPTION_PADDING_ACTION: PropTypes.func,
+    UPDATE_ENCRYPTION_BLOCKS_ACTION: PropTypes.func,
+    UPDATE_ENCRYPTED_STRING_ACTION: PropTypes.func,
+    HIDE_TROPHY_ACTION: PropTypes.func,
+  }),
+  tabName: PropTypes.string.isRequired,
+  tabPage: PropTypes.number.isRequired,
+  allowNextPage: PropTypes.bool.isRequired,
+  maxPage: PropTypes.number.isRequired,
+  showTrophy: PropTypes.bool.isRequired,
+};
 const mapStateToProps = state => ({
-  lockState: state,
   showTrophy: state.trophy.showTrophy,
+  tabName: state.lessonPageTabAndPages.tabName,
+  tabPage: state.lessonPageTabAndPages.tabPage,
+  allowNextPage: state.lessonPageTabAndPages.allowNextPage,
+  maxPage: state.lessonPageTabAndPages.maxPage,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -413,7 +424,6 @@ const mapDispatchToProps = dispatch => ({
       KNAPSACK_LOCK_ACTION,
       KNAPSACK_UNLOCK_ACTION,
       UNLOCK_ALL_ACTION,
-      RESET_ALL_ACTION,
       NEXT_KEY_PAGE_ACTION,
       PREVIOUS_KEY_PAGE_ACTION,
       UPDATE_INVERSE_ACTION,

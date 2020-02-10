@@ -405,14 +405,14 @@ const mapStateToProps = state => ({
   algoSelected: state.lessonPage.algoSelected,
   decryptLocked: state.lessonPage.decryptLocked,
   decryptSelected: state.lessonPage.decryptSelected,
-  encryptLocked: state.lessonPage.isRequired,
-  encryptSelected: state.lessonPage.isRequired,
-  knapSackLocked: state.lessonPage.isRequired,
-  knapSackSelected: state.lessonPage.isRequired,
-  keyLocked: state.lessonPage.isRequired,
-  keySelected: state.lessonPage.isRequired,
-  introLocked: state.lessonPage.isRequired,
-  introSelected: state.lessonPage.isRequired,
+  encryptLocked: state.lessonPage.encryptLocked,
+  encryptSelected: state.lessonPage.encryptSelected,
+  knapSackLocked: state.lessonPage.knapSackLocked,
+  knapSackSelected: state.lessonPage.knapSackSelected,
+  keyLocked: state.lessonPage.keyLocked,
+  keySelected: state.lessonPage.keySelected,
+  introLocked: state.lessonPage.introLocked,
+  introSelected: state.lessonPage.introSelected,
 });
 
 const mapDispatchToProps = dispatch => ({
