@@ -368,7 +368,6 @@ class EncryptTutorial extends Component {
     const { actions } = this.props;
     return (
       <>
-        <Text style={{ ...styles.tutorial.contentStyle, textAlign: 'center' }}>Quiz Time</Text>
         <Quiz
           quizType="ENCRYPT"
           callback={() => {
