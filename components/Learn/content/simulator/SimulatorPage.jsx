@@ -368,6 +368,38 @@ class SimulatorPage extends Component{
           })
         )
       }
+
+
+    validateNumeric = (numericString) => {
+        // splits the numeric.
+        let splitKey = numericString.split(',');
+        for(let i = 0; i < splitKey.length; i++){
+          let checkNum = this.isValidNumber(splitKey[i]);
+          if(!checkNum){
+              return false;
+          }
+        }
+        return true;
+     }
+
+
+    validateSuperIncreasing = (total, numericString) => {
+        // splits the private key.
+        let splitKey = numericString.split(',');
+        let currentMax = 0
+        for(let i = 0; i < splitKey.length; i++){
+          let curNo = Number(splitKey[i])
+          let checkSuperIncreasing = this.isGreater(currentMax,curNo,i)
+          if (checkSuperIncreasing){
+            currentMax += (curNo);
+          }else{
+            return false;
+          }
+        }
+        total.size = splitKey.length - 1
+        total.total = currentMax
+        total.arrOfVals = splitKey
+        return true;
     }
 
     validateCurrentPrivateKey = () => {
@@ -498,6 +530,70 @@ class SimulatorPage extends Component{
             // binstring == all 0s -> dec =="" & dec.length == 0
             if (!dec || dec.trim().length === 0)  
             {
+                this.enableError("Unable to map the decryption result to the proper ascii value! \nMight be decrypting with wrong key!")
+            }
+            else
+            {
+                this.setState({
+                    decrypted: dec,
+                },()=>{
+                  if (!trophyBreakWall){
+                    actions.UNLOCK_TROPHY_BREAK_WALL()
+                    actions.SHOW_TROPHY_ACTION()
+                  }
+                })
+            }
+            this.setState({
+                encryptedOutput: encryptedArr,
+            },()=>{
+                if(!trophySafetyFirst){
+                  actions.UNLOCK_TROPHY_SAFETY_FIRST()
+                  actions.SHOW_TROPHY_ACTION()
+                }
+            })
+
+        }
+    }
+    validateDecryptionText = () => {
+        const { lockState, actions, trophyBreakWall, privateKey, modulus, multiplier  } = this.props
+        const { currentEncryptedTextInput, currentPaddingInput } = this.state
+
+        if (this.isEmptyInput(currentEncryptedTextInput)){
+            this.enableError("Encrypted Input cannot be empty!")
+        }else if (!this.validateNumeric(currentEncryptedTextInput)){
+            // check if they are valid numbers.
+            this.enableError("Text input is NOT numeric!")
+        }else if (!this.isValidNumber(currentPaddingInput)){
+            this.enableError("Padding is not a numerical value!")
+        }else if (this.isEmptyInput(currentPaddingInput)) {
+            this.enableError("Padding Input cannot be empty!")
+        }else{
+            let padding = Number(currentPaddingInput)
+            console.log("Current padding input: "+padding)
+            // convert the text to an array of numbers.
+            let encryptedNumberArray = currentEncryptedTextInput.replace(/, +/g, ",").split(",").map(Number);
+            let decrypted = []
+            // compute the current inverse
+            let currentInverse = this.xgcd(multiplier,modulus)
+            encryptedNumberArray.forEach((enc)=>{
+                let multiplied = enc * currentInverse;
+                let modVal = multiplied % modulus;
+                decrypted.push(modVal)
+            })
+            // convert private key to an array of numbers
+            let privateKeyArr = privateKey.replace(/, +/g, ",").split(",").map(Number);
+            let binStringList = this.getBinaryString(privateKeyArr, decrypted)
+            console.log(binStringList)
+
+            let unpadded = this.removePadding(binStringList,padding)
+            console.log(unpadded)
+            let dec = this.convertBinToText(unpadded)
+            console.log("dec: "+dec+" Length: "+dec.length)
+            // Wrong prikey -> dec == " " & dec.length == 1
+            // binstring == all 0s -> dec =="" & dec.length == 0
+            if (!dec || dec.trim().length === 0)  
+            {
+<<<<<<< HEAD
                 this.enableError("Unable to map the decryption result to the proper ascii value! \nMight be decrypting with wrong key!")
             }
             else
@@ -703,6 +799,8 @@ class SimulatorPage extends Component{
             <>
             <Text style={styles.SimulatorPage.textStyleSubTitle}>Encryption</Text>
             {
+=======
+>>>>>>> parent of a2223c8... Merge branch from develop to dev-fix-content
                 !localPublicKeyValid ?
                  (
                   <View style={styles.SimulatorPage.rowKeyGen}>
@@ -738,6 +836,9 @@ class SimulatorPage extends Component{
                            </View>
 
                        </View>
+<<<<<<< HEAD
+>>>>>>> parent of a2223c8... Merge branch from develop to dev-fix-content
+=======
 >>>>>>> parent of a2223c8... Merge branch from develop to dev-fix-content
                   </View>
                 ):

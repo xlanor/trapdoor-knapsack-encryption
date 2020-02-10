@@ -14,6 +14,7 @@ const keyGenWrapperView = {
 }
 const textStyleTitle = {
 <<<<<<< HEAD
+<<<<<<< HEAD
   fontFamily: 'comfortaa-bold',
   fontWeight: 'bold',
   fontSize: 20,
@@ -21,6 +22,8 @@ const textStyleTitle = {
   marginTop: Dimensions.get('screen').height * 0.05,
 };
 =======
+=======
+>>>>>>> parent of a2223c8... Merge branch from develop to dev-fix-content
     fontFamily: 'comfortaa-bold',
     fontWeight: 'bold',
     fontSize: 20,
@@ -34,6 +37,9 @@ const textStyleSubTitle = {
     marginTop: Dimensions.get('screen').height * 0.01,
     textAlign: 'center',
 }
+<<<<<<< HEAD
+>>>>>>> parent of a2223c8... Merge branch from develop to dev-fix-content
+=======
 >>>>>>> parent of a2223c8... Merge branch from develop to dev-fix-content
 const textStyleBold = {
     fontFamily: 'comfortaa-bold',
