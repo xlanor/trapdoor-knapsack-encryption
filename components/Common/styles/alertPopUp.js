@@ -8,7 +8,6 @@ const modalBackground = {
   alignItems: 'center',
 };
 
-
 const modalContainer = {
   backgroundColor: '#FFFFFF',
   borderRadius: 5,
@@ -23,27 +22,26 @@ const modalContainer = {
   textAlign: 'center',
 };
 
-
 const iconSize = {
-    width: iconWidth,
-    height: iconWidth,
-}
+  width: iconWidth,
+  height: iconWidth,
+};
 const modalMessage = {
   fontSize: 18,
   color: 'black',
   textAlign: 'center',
-  fontFamily: 'comfortaa'
+  fontFamily: 'comfortaa',
 };
 
 const iconViewWrapper = {
   alignItems: 'center',
   marginBottom: Dimensions.get('window').height * 0.02,
-}
+};
 
-export default { 
-  modalBackground, 
-  modalContainer, 
+export default {
+  modalBackground,
+  modalContainer,
   modalMessage,
-  iconSize, 
+  iconSize,
   iconViewWrapper,
 };

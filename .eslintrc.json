@@ -1,0 +1,43 @@
+{
+  "env": {
+    "node": true, 
+    "browser": true, // for react web
+    "es6": true // enables es6 features
+  },
+  "parser": "babel-eslint", // needed to make babel stuff work properly
+  "extends": ["airbnb", "prettier", "prettier/react", "plugin:jest/recommended"],
+  "plugins": ["prettier", "jest"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-console": "off", // Allow console logging code.
+    "no-use-before-define": "off", // Allows us to define style/prop objects later.
+    "import/prefer-default-export": "off", // Remove preference over default export.
+    "no-useless-escape": "off", // Disable useless-escape since regex needs it.
+    "no-underscore-dangle": ["error", { "allow": ["_val", "_value", "_carousel"] }],
+    "no-useless-rename": ["error", { "ignoreDestructuring": true }],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "no-nested-ternary": "off",
+    "react/require-default-props": "off",
+    "react/prefer-stateless-function": "off",
+    "import/no-extraneous-dependencies": "off"
+  },
+  "globals": {
+    "__DEV__": true
+  }
+}

@@ -1,5 +1,3 @@
-const tintColor = '#2f95dc';
-
 export const COLORS = {
   BLACK_1: '#000000',
   ORANGE_1: '#FFA200',
@@ -15,7 +13,7 @@ export const COLORS = {
   LINKS_BLUE: '#2980B9',
   CORRECT_GREEN: '#27AE60',
 
-  //keywords
+  // keywords
   PRIVATEKEY_COLOR: '#C0392B',
   SECRETKEY_COLOR: '#0404FB',
   MODULUS_COLOR: '#16A085',
@@ -25,4 +23,3 @@ export const COLORS = {
   KNAPSACK_SIZE_GREY: '#7F8C8D',
   GCD_COLOR: '#0B0080',
 };
-

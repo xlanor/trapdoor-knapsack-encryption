@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Modal,
-  ActivityIndicator
-} from 'react-native';
+import React from 'react';
 
-import {
-  DotIndicator
-} from 'react-native-indicators'
+import PropTypes from 'prop-types';
+
+import { StyleSheet, View, Modal } from 'react-native';
+
+import { DotIndicator } from 'react-native-indicators';
 
 const Loader = props => {
-  const {
-    loading,
-    ...attributes
-  } = props;
-  console.log("Spinner called")
+  const { loading } = props;
+  console.log('Spinner called');
   return (
     <Modal
-      transparent={true}
-      animationType={'none'}
+      transparent
+      animationType="none"
       visible={loading}
-      onRequestClose={() => {console.log('close modal')}}>
+      onRequestClose={() => {
+        console.log('close modal');
+      }}
+    >
       <View style={styles.modalBackground}>
-        <DotIndicator color='white' />
+        <DotIndicator color="white" />
       </View>
     </Modal>
-  )
-}
+  );
+};
+
+Loader.propTypes = {
+  loading: PropTypes.bool.isRequired,
+};
 
 const styles = StyleSheet.create({
   modalBackground: {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    backgroundColor: '#4B444480'
+    backgroundColor: '#4B444480',
   },
   activityIndicatorWrapper: {
     backgroundColor: '#FFFFFF',
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-around'
-  }
+    justifyContent: 'space-around',
+  },
 });
 
 export default Loader;

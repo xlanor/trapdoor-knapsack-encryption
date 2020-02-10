@@ -6,7 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "lint": "eslint components/ api/ navigation/ redux-modules/ screens/ -c .eslintrc.json --ext js,jsx"
   },
   "jest": {
     "preset": "jest-expo"
@@ -24,8 +25,9 @@
     "expo-web-browser": "^7.0.0",
     "lodash": "^4.17.15",
     "mathjs": "^6.2.3",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
+    "prop-types": "^15.7.2",
+    "react": "16.10.0",
+    "react-dom": "16.10.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-animatable": "^1.3.3",
     "react-native-elements": "^1.2.7",
@@ -42,13 +44,32 @@
     "react-proptypes": "^1.0.0",
     "react-redux": "^7.1.3",
     "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^7.0.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "babel-eslint": "^10.0.2",
+    "babel-plugin-i18next-extract": "^0.2.1",
+    "babel-preset-expo": "^7.1.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.19.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.16.0",
+    "expo-cli": "^3.4.1",
+    "husky": "^3.0.9",
     "jest-expo": "^35.0.0",
-    "redux-devtools-extension": "^2.13.8"
+    "prettier": "^1.18.2",
+    "react-test-renderer": "16.10.0",
+    "redux-mock-store": "^1.5.3"
   },
   "private": true
 }

@@ -1,8 +1,5 @@
-import { Dimensions } from 'react-native';
-
-const scrollStyle = {
-}
+const scrollStyle = {};
 
 export default {
-    scrollStyle,
+  scrollStyle,
 };
