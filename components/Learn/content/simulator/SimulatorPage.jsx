@@ -525,60 +525,6 @@ class SimulatorPage extends Component {
               }}
               onChangeText={text => {
                 this.setState({
-<<<<<<< HEAD
-                    decrypted: dec,
-                },()=>{
-                  if (!trophyBreakWall){
-                    actions.UNLOCK_TROPHY_BREAK_WALL()
-                    actions.SHOW_TROPHY_ACTION()
-                  }
-                })
-            }
-        }
-
-    }
-    encryptionPage = () => {
-        const { actions, lockState, padding } = this.props;
-        const { encryptedOutput, localPublicKeyValid, localPublicKey } = this.state;
-        console.log(`Local Public Key: ${localPublicKeyValid}`)
-        return (
-            <>
-            <Text style={styles.SimulatorPage.textStyleSubTitle}>Encryption</Text>
-            {
-                !localPublicKeyValid ?
-                 (
-                  <View style={styles.SimulatorPage.rowKeyGen}>
-                       <Text style={styles.SimulatorPage.textStyleRow}>Enter your public key: </Text>
-                       <TextInput
-
-                           style={{
-                               ...styles.SimulatorPage.textStyleInput,
-                               ...styles.SimulatorPage.roundLeftCorner,
-                               ...styles.SimulatorPage.roundRightCorner,
-                           }}
-                           onChangeText =
-                           {(text)=>{
-                           this.setState({
-                               localPublicKey: text,
-                           })
-                       }}/>
-                       <View style={styles.SimulatorPage.genKeyButtonView}>
-                           <View style={{flexDirection: 'row'}}>
-                               <View style={styles.SimulatorPage.multipleButtonLeft}>
-                                   <CustomButton text="Menu" callback={
-                                       ()=>{
-                                           this.setState({currentSimulatorPage: "menu"
-                                           })
-                                       }
-                                   }
-                                   buttonColor="blue"/>
-                               </View>
-                               <View style={styles.SimulatorPage.multipleButtonRight}>
-                                   <CustomButton text="Validate" callback={()=>{this.validateLocalPublicKey()}} />
-                               </View>
-
-                           </View>
-=======
                   localPublicKey: text,
                 });
               }}
@@ -649,7 +595,6 @@ class SimulatorPage extends Component {
                 </TouchableOpacity>
               </View>
             </View>
->>>>>>> develop
 
             <Text style={styles.SimulatorPage.textStyleRow}>Enter your string to encrypt: </Text>
             <TextInput

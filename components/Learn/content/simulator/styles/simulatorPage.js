@@ -12,28 +12,12 @@ const keyGenWrapperView = {
   flex: 1,
 };
 const textStyleTitle = {
-<<<<<<< HEAD
-    fontFamily: 'comfortaa-bold',
-    fontWeight: 'bold',
-    fontSize: 20,
-    textAlign: 'center',
-    marginTop: Dimensions.get('screen').height * 0.05,
-    textDecorationLine: 'underline',
-}
-const textStyleSubTitle = {
-    fontFamily: 'comfortaa-bold',
-    fontSize: 18,
-    marginTop: Dimensions.get('screen').height * 0.01,
-    textAlign: 'center',
-}
-=======
   fontFamily: 'comfortaa-bold',
   fontWeight: 'bold',
   fontSize: 20,
   textAlign: 'center',
   marginTop: Dimensions.get('screen').height * 0.05,
 };
->>>>>>> develop
 const textStyleBold = {
   fontFamily: 'comfortaa-bold',
   fontWeight: 'bold',
