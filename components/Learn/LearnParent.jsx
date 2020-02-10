@@ -363,7 +363,7 @@ class LearnParent extends Component {
 }
 
 LearnParent.propTypes = {
-  actions: PropTypes.shapeOf({
+  actions: PropTypes.shape({
     INTRO_SELECT_ACTION: PropTypes.func,
     INTRO_LOCK_ACTION: PropTypes.func,
     INTRO_UNLOCK_ACTION: PropTypes.func,
