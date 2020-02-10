@@ -1,3 +1,4 @@
 import DecryptTutorial from './tutorial';
-
-export { DecryptTutorial };
+export { 
+  DecryptTutorial as DecryptTutorial,
+};

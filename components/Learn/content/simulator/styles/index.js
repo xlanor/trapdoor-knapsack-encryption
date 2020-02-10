@@ -1,5 +1,6 @@
-import SimulatorPage from './simulatorPage';
+
+import SimulatorPage from './simulatorPage'
 
 export default {
-  SimulatorPage,
+    SimulatorPage
 };

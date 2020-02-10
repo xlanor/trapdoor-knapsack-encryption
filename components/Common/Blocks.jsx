@@ -1,77 +1,110 @@
-/* eslint-disable react/forbid-prop-types */
-import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import React, { Component } from 'React';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Dimensions
+} from 'react-native'
 
-import { Table, TableWrapper, Rows, Col } from 'react-native-table-component';
+import {
+  Table,
+  TableWrapper,
+  Rows,
+  Row,
+  Col }
+from 'react-native-table-component';
 
-import PropTypes from 'prop-types';
 
-import { blocks as styles } from './styles';
+import PropTypes from 'prop-types'
 
-class Block extends Component {
-  multiplyTwoArrays = (array1, array2) => {
-    const returnArr = [];
-    for (let i = 0; i < array1.length; i += 1) {
-      returnArr[i] = array1[i] * array2[i];
+import { blocks as styles } from './styles'
+
+
+class Block extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      total: -1,
     }
-    return returnArr;
-  };
+  }
 
+  multiplyTwoArrays = ( array1, array2 ) => {
+    let returnArr = []
+    for(let i = 0; i < array1.length; i++){
+      returnArr[i] = array1[i] * array2[i]
+    }
+    return returnArr
+  }
   constructRowData = () => {
     const { tableData, currentPublicKey, tableType } = this.props;
-    const rArr =
-      tableType === 'binary'
-        ? [currentPublicKey, tableData, this.multiplyTwoArrays(currentPublicKey, tableData)]
-        : [currentPublicKey, tableData];
+    let rArr =  tableType === "binary" ?
+          [ currentPublicKey, tableData, this.multiplyTwoArrays(currentPublicKey,tableData) ]
+          : [currentPublicKey, tableData ]
 
-    return rArr;
-  };
-
-  render() {
-    const { widthArr, tableTitle, tableData, currentPublicKey, tableType, blockNo } = this.props;
+    return rArr
+  }
+  render(){
+    const { total } = this.state;
+    const {
+          widthArr,
+          tableTitle,
+          tableData,
+          currentPublicKey,
+          tableType,
+          blockNo
+    } = this.props;
     return (
       <View style={styles.containerStyle}>
         <View style={styles.blockTitleView}>
-          {blockNo ? <Text style={styles.textStyle}>Block #{blockNo}</Text> : null}
+            {
+              blockNo
+              ? <Text style={styles.textStyle}>Block #{blockNo}</Text>
+              : null
+            }
         </View>
-        <ScrollView horizontal>
-          <Table borderStyle={{ borderWidth: 1 }}>
+        <ScrollView horizontal={true}>
+          <Table borderStyle={{borderWidth: 1}}>
             <TableWrapper style={styles.wrapperStyle}>
               <Col
-                data={tableTitle}
-                style={styles.titleStyle}
-                heightArr={[28, 28, 28]}
-                textStyle={styles.headerTextStyle}
+                  data={tableTitle}
+                  style={styles.titleStyle}
+                  heightArr={[
+                    28,
+                    28,
+                    28,
+                  ]}
+                  textStyle={styles.headerTextStyle}
               />
-              <Rows
-                data={this.constructRowData()}
-                widthArr={widthArr}
-                style={styles.rowStyle}
-                textStyle={styles.textStyle}
-              />
+              <Rows data={this.constructRowData()} widthArr={widthArr} style={styles.rowStyle} textStyle={styles.textStyle}/>
             </TableWrapper>
+
           </Table>
         </ScrollView>
         <View style={styles.blockTotalView}>
-          {tableType === 'binary' ? (
-            <Text style={styles.textStyle}>
+        {
+            tableType == "binary"
+            ? <Text style={styles.textStyle}>
               Block Total:
-              {` ${this.multiplyTwoArrays(currentPublicKey, tableData).reduce((a, b) => a + b, 0)}`}
+              {
+                ` ${this.multiplyTwoArrays(currentPublicKey,tableData).reduce((a,b) => a+b, 0)}`
+              }
             </Text>
-          ) : null}
-        </View>
+            : null
+          }
+          </View>
       </View>
     );
   }
 }
 
+
 Block.propTypes = {
   tableTitle: PropTypes.array.isRequired,
   tableData: PropTypes.array.isRequired,
   currentPublicKey: PropTypes.array.isRequired,
-  tableType: PropTypes.string.isRequired,
+  tableType:PropTypes.string.isRequired,
   blockNo: PropTypes.number,
-  widthArr: PropTypes.arrayOf(PropTypes.number),
 };
 
 export default Block;

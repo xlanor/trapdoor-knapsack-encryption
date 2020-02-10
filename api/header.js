@@ -1,20 +1,22 @@
-const Header = () => ({
-  res: {},
+import common from './common';
 
-  contentType(val) {
-    this.res = { ...this.res, 'Content-Type': val || '' };
-    return this;
-  },
-  filter(val) {
-    this.res = { ...this.res, filter: val || '' };
-    return this;
-  },
-  token(val) {
-    this.res = { ...this.res, 'x-token': val || '' };
-    return this;
-  },
-  build() {
-    return this.res;
-  },
-});
+const Header = () => ({
+    res : {},
+
+    contentType(val) {
+        this.res = { ...this.res, 'Content-Type': val || '' };
+        return this;
+    },
+    filter(val) {
+        this.res = { ...this.res, 'filter': val || '' };
+        return this;
+    },
+    token(val) {
+        this.res = { ...this.res, 'x-token': val || '' };
+        return this;
+    },
+    build() {
+      return this.res;
+    },
+  });
 export default Header;

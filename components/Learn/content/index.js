@@ -1,15 +1,40 @@
-import { introPageOne } from './intro';
+import { 
+    introPageOne, 
+    introPageTwo, 
+    introPageThree, 
+    introPageFour 
+} from './intro';
 
-import { gcdPageOne } from './gcd';
+import {
+    gcdPageOne,
+} from './gcd';
 
-import { keyPageOne } from './key';
 
-import { EncryptTutorial } from './encrypt';
-
-import { DecryptTutorial } from './decrypt';
-
-import { SimulatorPage } from './simulator';
-
+import {
+    keyPageOne,
+} from './key';
 console.log(keyPageOne);
 
-export { introPageOne, gcdPageOne, keyPageOne, EncryptTutorial, DecryptTutorial, SimulatorPage };
+import {
+    EncryptTutorial
+} from './encrypt'
+
+import {
+    DecryptTutorial
+} from './decrypt'
+
+import {
+    SimulatorPage
+} from './simulator'
+
+export { 
+    introPageOne as introPageOne,
+    introPageTwo as introPageTwo,
+    introPageThree as introPageThree,
+    introPageFour as introPageFour,
+    gcdPageOne as gcdPageOne,
+    keyPageOne as keyPageOne,
+    EncryptTutorial as EncryptTutorial,
+    DecryptTutorial as DecryptTutorial,
+    SimulatorPage as SimulatorPage,
+};

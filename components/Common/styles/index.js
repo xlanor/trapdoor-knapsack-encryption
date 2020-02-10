@@ -6,4 +6,12 @@ import button from './button';
 import scrollViewPopUp from './scrollViewPopUp';
 import bottomPopUp from './bottomPopUp';
 
-export { alertPopUp, scrollViewPopUp, blocks, popUp, button, blocksdecrypt, bottomPopUp };
+export {
+  alertPopUp,
+  scrollViewPopUp,
+  blocks,
+  popUp,
+  button,
+  blocksdecrypt,
+  bottomPopUp,
+};

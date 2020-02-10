@@ -1,5 +1,6 @@
-import tutorial from './tutorial';
+
+import tutorial from './tutorial'
 
 export default {
-  tutorial,
+  tutorial
 };

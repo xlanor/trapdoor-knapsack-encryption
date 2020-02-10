@@ -1,5 +1,5 @@
 /* Actions for redux */
-import {
+import { 
   INTRO_SELECT,
   INTRO_LOCK,
   INTRO_UNLOCK,
@@ -20,114 +20,114 @@ import {
   KNAPSACK_UNLOCK,
   UNLOCK_ALL,
   RESET_ALL,
-} from '../constants';
-
-export const UNLOCK_ALL_ACTION = () => {
-  return {
-    type: UNLOCK_ALL,
-  };
-};
-export const KNAPSACK_SELECT_ACTION = () => {
-  return {
+ } from '../constants';
+ 
+export const UNLOCK_ALL_ACTION = () =>{
+  return{
+    type: UNLOCK_ALL
+  }
+} 
+export const KNAPSACK_SELECT_ACTION = () =>{
+  return{
     type: KNAPSACK_SELECT,
-    payload: 'knapsack',
-  };
-};
-export const KNAPSACK_LOCK_ACTION = () => {
-  return {
-    type: KNAPSACK_LOCK,
-  };
-};
-export const KNAPSACK_UNLOCK_ACTION = () => {
-  return {
-    type: KNAPSACK_UNLOCK,
-  };
-};
-export const ENCRYPT_SELECT_ACTION = () => {
-  return {
+    payload: 'knapsack'
+  }
+} 
+export const KNAPSACK_LOCK_ACTION = () =>{
+  return{
+    type: KNAPSACK_LOCK
+  }
+} 
+export const KNAPSACK_UNLOCK_ACTION = () =>{
+  return{
+    type: KNAPSACK_UNLOCK
+  }
+} 
+export const ENCRYPT_SELECT_ACTION = () =>{
+  return{
     type: ENCRYPT_SELECT,
     payload: 'encrypt',
-  };
-};
-export const ENCRYPT_LOCK_ACTION = () => {
-  return {
-    type: ENCRYPT_LOCK,
-  };
-};
-export const ENCRYPT_UNLOCK_ACTION = () => {
-  return {
-    type: ENCRYPT_UNLOCK,
-  };
-};
-export const DECRYPT_SELECT_ACTION = () => {
-  return {
+  }
+} 
+export const ENCRYPT_LOCK_ACTION = () =>{
+  return{
+    type: ENCRYPT_LOCK
+  }
+} 
+export const ENCRYPT_UNLOCK_ACTION = () =>{
+  return{
+    type: ENCRYPT_UNLOCK
+  }
+} 
+export const DECRYPT_SELECT_ACTION = () =>{
+  return{
     type: DECRYPT_SELECT,
     payload: 'decrypt',
-  };
-};
-export const DECRYPT_LOCK_ACTION = () => {
-  return {
-    type: DECRYPT_LOCK,
-  };
-};
-export const DECRYPT_UNLOCK_ACTION = () => {
-  return {
-    type: DECRYPT_UNLOCK,
-  };
-};
+  }
+} 
+export const DECRYPT_LOCK_ACTION = () =>{
+  return{
+    type: DECRYPT_LOCK
+  }
+} 
+export const DECRYPT_UNLOCK_ACTION = () =>{
+  return{
+    type: DECRYPT_UNLOCK
+  }
+} 
 
-export const KEY_SELECT_ACTION = () => {
-  return {
+export const KEY_SELECT_ACTION = () =>{
+  return{
     type: KEY_SELECT,
-    payload: 'key',
-  };
-};
-export const KEY_LOCK_ACTION = () => {
-  return {
-    type: KEY_LOCK,
-  };
-};
-export const KEY_UNLOCK_ACTION = () => {
-  return {
-    type: KEY_UNLOCK,
-  };
-};
+    payload: 'key'
+  }
+} 
+export const KEY_LOCK_ACTION = () =>{
+  return{
+    type: KEY_LOCK
+  }
+} 
+export const KEY_UNLOCK_ACTION = () =>{
+  return{
+    type: KEY_UNLOCK
+  }
+} 
 
-export const ALGO_SELECT_ACTION = () => {
-  return {
+export const ALGO_SELECT_ACTION = () =>{
+  return{
     type: ALGO_SELECT,
     payload: 'algo',
-  };
-};
-export const ALGO_LOCK_ACTION = () => {
-  return {
-    type: ALGO_LOCK,
-  };
-};
-export const ALGO_UNLOCK_ACTION = () => {
-  return {
-    type: ALGO_UNLOCK,
-  };
-};
-export const INTRO_SELECT_ACTION = () => {
-  return {
+  }
+} 
+export const ALGO_LOCK_ACTION = () =>{
+  return{
+    type: ALGO_LOCK
+  }
+}
+export const ALGO_UNLOCK_ACTION = () =>{
+  return{
+    type: ALGO_UNLOCK
+  }
+}
+export const INTRO_SELECT_ACTION = () =>{
+  return{
     type: INTRO_SELECT,
     payload: 'intro',
-  };
-};
-export const INTRO_LOCK_ACTION = () => {
-  return {
-    type: INTRO_LOCK,
-  };
-};
-export const INTRO_UNLOCK_ACTION = () => {
-  return {
-    type: INTRO_UNLOCK,
-  };
-};
+  }
+}
+export const INTRO_LOCK_ACTION = () =>{
+  return{
+    type: INTRO_LOCK
+  }
+}
+export const INTRO_UNLOCK_ACTION = () =>{
+  return{
+    type: INTRO_UNLOCK
+  }
+}
 
-export const RESET_ALL_TAB_ACTION = () => {
-  return {
-    type: RESET_ALL,
-  };
-};
+export const RESET_ALL_TAB_ACTION = () =>{
+  return{
+    type: RESET_ALL
+  }
+} 
