@@ -48,22 +48,6 @@ import AlertPopUp from '../../../Common/AlertPopUp';
 // import stylesheet.
 import styles from './styles';
 
-/*
-
-
-const initialState = {
-    privateKey: "",
-    privateKeyValid: false,
-    modulus: "",
-    modulusValid: false,
-    publicKey: "",
-    genKeyCompleted: false,
-    textToEncrypt: "",
-    textToDecrypt: "",
-    decryptedText: "",
-}
-
-    */
 class SimulatorPage extends Component {
   constructor(props) {
     super(props);
@@ -150,16 +134,41 @@ class SimulatorPage extends Component {
     });
   };
 
-  onShare = () => {
-    const { publicKey } = this.props;
+  onShare = typeToShare => {
+    const { publicKey, padding } = this.props;
+    const { encryptedOutput } = this.state;
     // Here is the Share API
-    Share.share({
-      message: publicKey.join(','),
-    })
-      // after successful share return result
-      .then(result => console.log(result))
-      // If any thing goes wrong it comes here
-      .catch(errorMsg => console.log(errorMsg));
+    switch (typeToShare) {
+      case 'Public Key':
+        Share.share({
+          message: `Public Key: ${publicKey.join(',')}`,
+        })
+          // after successful share return result
+          .then(result => console.log(result))
+          // If any thing goes wrong it comes here
+          .catch(errorMsg => console.log(errorMsg));
+        break;
+      case 'Ciphertext':
+        Share.share({
+          message: `Encrypted Text: ${encryptedOutput.join(',')}`,
+        })
+          // after successful share return result
+          .then(result => console.log(result))
+          // If any thing goes wrong it comes here
+          .catch(errorMsg => console.log(errorMsg));
+        break;
+      case 'Padding':
+        Share.share({
+          message: `Padding: ${padding}`,
+        })
+          // after successful share return result
+          .then(result => console.log(result))
+          // If any thing goes wrong it comes here
+          .catch(errorMsg => console.log(errorMsg));
+        break;
+      default:
+        break;
+    }
   };
 
   getNumericFromString = delimitedByComma => {
@@ -488,7 +497,7 @@ class SimulatorPage extends Component {
       console.log(`dec: ${dec} Length: ${dec.length}`);
       // Wrong prikey -> dec == " " & dec.length == 1
       // binstring == all 0s -> dec =="" & dec.length == 0
-      if (!dec || dec.trim().length === 0 || dec === "\0") {
+      if (!dec || dec.trim().length === 0 || dec === '\0') {
         this.enableError(
           'Unable to map the decryption result to the proper ascii value! \nMight be decrypting with wrong key!',
         );
@@ -648,6 +657,16 @@ class SimulatorPage extends Component {
                 >
                   {encryptedOutput.join(',')}
                 </TextInput>
+
+                <View style={styles.SimulatorPage.imageButtonStyle}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.onShare('Ciphertext');
+                    }}
+                  >
+                    <Image style={styles.SimulatorPage.copyStyle} source={ShareButton} />
+                  </TouchableOpacity>
+                </View>
                 <View
                   style={{
                     ...styles.SimulatorPage.imageButtonStyle,
@@ -680,6 +699,18 @@ class SimulatorPage extends Component {
                 >
                   {padding}
                 </TextInput>
+                <View style={{
+                  ...styles.SimulatorPage.imageButtonStyle,
+                  ...styles.SimulatorPage.roundRightCorner,
+                }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.onShare('Padding');
+                    }}
+                  >
+                    <Image style={styles.SimulatorPage.copyStyle} source={ShareButton} />
+                  </TouchableOpacity>
+                </View>
               </View>
               <View style={styles.SimulatorPage.genKeyButtonView}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -1126,7 +1157,11 @@ class SimulatorPage extends Component {
                 {typeof publicKey === 'object' ? publicKey.join(', ') : null}
               </TextInput>
               <View style={styles.SimulatorPage.imageButtonStyle}>
-                <TouchableOpacity onPress={this.onShare}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.onShare('Public Key');
+                  }}
+                >
                   <Image style={styles.SimulatorPage.copyStyle} source={ShareButton} />
                 </TouchableOpacity>
               </View>
