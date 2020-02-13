@@ -699,10 +699,12 @@ class SimulatorPage extends Component {
                 >
                   {padding}
                 </TextInput>
-                <View style={{
-                  ...styles.SimulatorPage.imageButtonStyle,
-                  ...styles.SimulatorPage.roundRightCorner,
-                }}>
+                <View
+                  style={{
+                    ...styles.SimulatorPage.imageButtonStyle,
+                    ...styles.SimulatorPage.roundRightCorner,
+                  }}
+                >
                   <TouchableOpacity
                     onPress={() => {
                       this.onShare('Padding');

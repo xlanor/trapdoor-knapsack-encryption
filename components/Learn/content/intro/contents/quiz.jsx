@@ -48,4 +48,4 @@ const mapDispatchToProps = dispatch => ({
   ),
 });
 
-export default connect(null,mapDispatchToProps)(QuizTab);
+export default connect(null, mapDispatchToProps)(QuizTab);
