@@ -23,7 +23,7 @@ export default class page3 extends Component {
           into the table.
           {'\n\n'}
           <Text style={style.bold}>
-            Note{'\n'}
+            Note:{'\n'}
             Always set <Text style={style.valA}>a</Text> as the larger number and <Text style={style.valB}>b</Text> as
             the smaller number.
           </Text>
