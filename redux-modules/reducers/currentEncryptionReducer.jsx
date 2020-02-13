@@ -5,6 +5,7 @@ import {
   UPDATE_ENCRYPTION_PADDING,
   UPDATE_ENCRYPTION_BLOCKS,
   UPDATE_ENCRYPTED_STRING,
+  RESET_ALL,
 } from '../constants';
 
 const initialState = {
@@ -48,6 +49,10 @@ const currentEncryptionReducer = (state = initialState, action) => {
         ...state,
         encryptedText: action.payload,
       };
+    case RESET_ALL:
+      return {
+        ...initialState,
+      }
     default:
       return state;
   }
