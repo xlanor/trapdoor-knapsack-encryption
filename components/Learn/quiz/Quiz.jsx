@@ -49,6 +49,7 @@ class Quiz extends Component {
 
   getQuestions = () => {
     // I'm going to handle the disabling on the API side instead.
+    const { currentQuestionIdx } = this.state;
     const numberOfQuestions = this.getValidNumberOfQuestions();
     const ql = this.getQuestionByType();
     const sample = ql
@@ -56,6 +57,9 @@ class Quiz extends Component {
       .sort((a, b) => a.r - b.r)
       .map(a => a.x)
       .slice(0, numberOfQuestions);
+    if (currentQuestionIdx === 0 && sample.length === 0) {
+      this.incrementIndex();
+    }
     this.setState({
       questions: sample,
     });
@@ -73,7 +77,6 @@ class Quiz extends Component {
 
   render() {
     const { currentQuestionIdx, questions, isQuizEnded } = this.state;
-
     return (
       <>
         {isQuizEnded ? null : currentQuestionIdx <= questions.length - 1 && questions.length !== 0 ? (
