@@ -52,7 +52,7 @@ const currentEncryptionReducer = (state = initialState, action) => {
     case RESET_ALL:
       return {
         ...initialState,
-      }
+      };
     default:
       return state;
   }
