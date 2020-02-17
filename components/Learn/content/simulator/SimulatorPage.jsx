@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { Component } from 'react';
 
-import { View, Text, Clipboard, Image, TouchableOpacity, TextInput, Share } from 'react-native';
+import { View, Text, Clipboard, Image, TouchableOpacity, TextInput, Share, Dimensions } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -523,6 +523,13 @@ class SimulatorPage extends Component {
     console.log(`Local Public Key: ${localPublicKeyValid}`);
     return (
       <>
+      <Text style={{ 
+        marginTop: Dimensions.get('screen').height * 0.01,
+        textAlign: 'center',
+        fontSize: 18,
+        fontFamily: 'comfortaa',
+        textDecorationLine: 'underline'
+      }}>Encryption</Text>
         {!localPublicKeyValid ? (
           <View style={styles.SimulatorPage.rowKeyGen}>
             <Text style={styles.SimulatorPage.textStyleRow}>Enter your public key: </Text>
@@ -752,6 +759,13 @@ class SimulatorPage extends Component {
     const { actions } = this.props;
     return (
       <>
+        <Text style={{ 
+          marginTop: Dimensions.get('screen').height * 0.01,
+          textAlign: 'center',
+          fontSize: 18,
+          fontFamily: 'comfortaa',
+          textDecorationLine: 'underline'
+        }}>Decryption</Text>
         {decrypted === '' ? (
           <>
             <View style={styles.SimulatorPage.rowKeyGen}>
@@ -898,6 +912,13 @@ class SimulatorPage extends Component {
     } = this.props;
     return (
       <>
+        <Text style={{ 
+          marginTop: Dimensions.get('screen').height * 0.01,
+          textAlign: 'center',
+          fontSize: 18,
+          fontFamily: 'comfortaa',
+          textDecorationLine: 'underline'
+      }}>Key Generation</Text>
         {privateKeyValid ? (
           <View style={styles.SimulatorPage.rowKeyGen}>
             <Text style={styles.SimulatorPage.textStyleRow}>Private Key: </Text>
