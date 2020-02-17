@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import Button from '../../../components/Common/Button';
+import { Button as rneButton } from 'react-native-elements';
 import 'jest-styled-components/native';
 // https://github.com/styled-components/jest-styled-components
 
@@ -31,5 +32,23 @@ describe('Components/Button testing', () => {
     buttonWrapper.setProps({ buttonColor: 'red' });
     // if not, the color should default to green
     expect(toJson(buttonWrapper).props.buttonStyle).toEqual(expect.objectContaining({ backgroundColor: GREEN_1 }));
+  });
+
+  it('Test that callback function is working', () => {
+    let callbackCheck = false;
+    const props = {
+      callback: () => {
+        callbackCheck = true;
+      },
+      text: 'Hello, world!',
+      buttonColor: 'green',
+    };
+    const buttonWrapper = shallow(TestComp(props));
+    // now, when the touchable opacity is clicked, callbackCheck should be false,
+    // because of the callback function.
+    buttonWrapper
+      .find(rneButton)
+      .props()
+      .onPress();
   });
 });
