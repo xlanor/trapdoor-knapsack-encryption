@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Modal, TouchableOpacity, Image } from 'react-native';
+import { Modal } from 'react-native';
 import { Button as RneButton } from 'react-native-elements';
 import PopUpWithButtons from '../../../components/Common/PopUpWithButtons';
 
