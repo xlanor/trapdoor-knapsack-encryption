@@ -523,13 +523,17 @@ class SimulatorPage extends Component {
     console.log(`Local Public Key: ${localPublicKeyValid}`);
     return (
       <>
-      <Text style={{ 
-        marginTop: Dimensions.get('screen').height * 0.01,
-        textAlign: 'center',
-        fontSize: 18,
-        fontFamily: 'comfortaa',
-        textDecorationLine: 'underline'
-      }}>Encryption</Text>
+        <Text
+          style={{
+            marginTop: Dimensions.get('screen').height * 0.01,
+            textAlign: 'center',
+            fontSize: 18,
+            fontFamily: 'comfortaa',
+            textDecorationLine: 'underline',
+          }}
+        >
+          Encryption
+        </Text>
         {!localPublicKeyValid ? (
           <View style={styles.SimulatorPage.rowKeyGen}>
             <Text style={styles.SimulatorPage.textStyleRow}>Enter your public key: </Text>
@@ -759,13 +763,17 @@ class SimulatorPage extends Component {
     const { actions } = this.props;
     return (
       <>
-        <Text style={{ 
-          marginTop: Dimensions.get('screen').height * 0.01,
-          textAlign: 'center',
-          fontSize: 18,
-          fontFamily: 'comfortaa',
-          textDecorationLine: 'underline'
-        }}>Decryption</Text>
+        <Text
+          style={{
+            marginTop: Dimensions.get('screen').height * 0.01,
+            textAlign: 'center',
+            fontSize: 18,
+            fontFamily: 'comfortaa',
+            textDecorationLine: 'underline',
+          }}
+        >
+          Decryption
+        </Text>
         {decrypted === '' ? (
           <>
             <View style={styles.SimulatorPage.rowKeyGen}>
@@ -912,13 +920,17 @@ class SimulatorPage extends Component {
     } = this.props;
     return (
       <>
-        <Text style={{ 
-          marginTop: Dimensions.get('screen').height * 0.01,
-          textAlign: 'center',
-          fontSize: 18,
-          fontFamily: 'comfortaa',
-          textDecorationLine: 'underline'
-      }}>Key Generation</Text>
+        <Text
+          style={{
+            marginTop: Dimensions.get('screen').height * 0.01,
+            textAlign: 'center',
+            fontSize: 18,
+            fontFamily: 'comfortaa',
+            textDecorationLine: 'underline',
+          }}
+        >
+          Key Generation
+        </Text>
         {privateKeyValid ? (
           <View style={styles.SimulatorPage.rowKeyGen}>
             <Text style={styles.SimulatorPage.textStyleRow}>Private Key: </Text>
