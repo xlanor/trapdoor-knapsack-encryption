@@ -7,10 +7,26 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
-    "lint": "eslint components/ api/ navigation/ redux-modules/ screens/ -c .eslintrc.json --ext js,jsx"
+    "lint": "eslint components/ api/ navigation/ redux-modules/ screens/ -c .eslintrc.json --ext js,jsx",
+    "test": "jest",
+    "updateSnapshot": "jest --updateSnapshot"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.js?$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ]
   },
   "dependencies": {
     "@expo/samples": "~3.0.3",
