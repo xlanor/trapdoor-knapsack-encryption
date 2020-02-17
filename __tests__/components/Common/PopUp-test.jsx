@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Modal, View, Text, TouchableOpacity, Image } from 'react-native';
+import { Modal, TouchableOpacity, Image } from 'react-native';
 import Alert from '../../../assets/images/alert.png';
 import PopUp from '../../../components/Common/PopUp';
 
