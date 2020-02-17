@@ -4,6 +4,7 @@ import { COLORS } from '../../../redux-modules/constants/Colors';
 const containerStyle = {
   marginLeft: Dimensions.get('screen').width * 0.05,
   marginRight: Dimensions.get('screen').width * 0.05,
+  marginBottom: Dimensions.get('screen').height * 0.05,
   backgroundColor: COLORS.ORANGE_1,
 };
 

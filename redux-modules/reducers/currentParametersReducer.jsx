@@ -7,6 +7,7 @@ import {
   UPDATE_MODULO,
   UPDATE_MULTIPLIER,
   UPDATE_INVERSE,
+  RESET_ALL,
 } from '../constants';
 
 const initialState = {
@@ -63,6 +64,10 @@ const currentParametersReducer = (state = initialState, action) => {
       return {
         ...state,
         publicKeyString: action.payload,
+      };
+    case RESET_ALL:
+      return {
+        ...initialState,
       };
     default:
       return state;
