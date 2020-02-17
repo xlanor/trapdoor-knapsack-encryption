@@ -6,9 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll",
-    "lint": "eslint components/ api/ navigation/ redux-modules/ screens/ -c .eslintrc.json --ext js,jsx",
     "test": "jest",
+    "lint": "eslint components/ api/ navigation/ redux-modules/ screens/ -c .eslintrc.json --ext js,jsx",
     "updateSnapshot": "jest --updateSnapshot"
   },
   "jest": {
