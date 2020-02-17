@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import Button from '../../../components/Common/Button';
 import { Button as rneButton } from 'react-native-elements';
+import Button from '../../../components/Common/Button';
 import 'jest-styled-components/native';
 // https://github.com/styled-components/jest-styled-components
 
@@ -50,5 +50,19 @@ describe('Components/Button testing', () => {
       .find(rneButton)
       .props()
       .onPress();
+    // the value of callbackCheck should have been switched to true
+    expect(callbackCheck).toEqual(true);
+
+    // for good measure, we test it when it is blue, because blue returns a different
+    // button object.
+    // reset the variable,
+    callbackCheck = false;
+    expect(callbackCheck).toEqual(false);
+    buttonWrapper.setProps({ buttonColor: 'green' });
+    buttonWrapper
+      .find(rneButton)
+      .props()
+      .onPress();
+    expect(callbackCheck).toEqual(true);
   });
 });
