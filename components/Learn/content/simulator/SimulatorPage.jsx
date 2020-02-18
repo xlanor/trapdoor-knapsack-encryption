@@ -497,7 +497,7 @@ class SimulatorPage extends Component {
       console.log(`dec: ${dec} Length: ${dec.length}`);
       // Wrong prikey -> dec == " " & dec.length == 1
       // binstring == all 0s -> dec =="" & dec.length == 0
-      let pattern = /^\0*\0$/g; 
+      const pattern = /^\0*\0$/g;
       if (!dec || dec.trim().length === 0 || pattern.test(dec)) {
         this.enableError(
           'Unable to map the decryption result to the proper ascii value! \nMight be decrypting with wrong key!',
