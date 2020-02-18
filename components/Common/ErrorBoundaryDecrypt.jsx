@@ -25,7 +25,7 @@ class ErrorBoundaryDecrypt extends Component {
           hasError: !prevState.hasError,
         }))}
         visibility={hasError}
-        messageContent="An error occure!"
+        messageContent="An error occured!"
       />
     ) : (
       children
