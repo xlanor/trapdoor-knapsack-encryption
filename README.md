@@ -1,13 +1,17 @@
+<p align="center">
+
+
+  <img align="center" alt="Mockup" title="Mockup" src="https://i.imgur.com/2b3yJRI.png" width="200" height="200"/>
+
+</p>
   
 <h1 align="center">TrapLearn</h1> 
 <p align="center">
 
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat&logo=EXPO&labelColor=ffffff&logoColor=000)](https://github.com/expo/expo)
 ![.github/workflows/main.yml](https://github.com/xlanor/trapdoor-knapsack-encryption/workflows/.github/workflows/main.yml/badge.svg?branch=develop)
-
 [![supports iOS](https://img.shields.io/badge/iOS-4630EB.svg?style=for-the-badge&logo=APPLE&labelColor=000&logoColor=fff)](https://github.com/expo/expo)
 [![supports Android](https://img.shields.io/badge/Android-4630EB.svg?style=for-the-badge&logo=ANDROID&labelColor=000&logoColor=fff)](https://github.com/expo/expo)
-
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 </p>
 
@@ -33,23 +37,7 @@ Kindly note that expo has issues with node@13, use node@12.xx instead.
 
 ![expo](https://i.imgur.com/8s8x1lu.gif)
 
-### FAQ:
 
-- Why react-native?
-  - Our advisor saw that we had a team of 6 and wanted us to do a cross-platform application....
-  - It is much easier to get up to speed in react because of the vast popularity of react-native.
-  - That's not to say that java is not popular, simply put, when having to do a cross-platform application within six months, given that none of us have any prior experience with building/styling mobile applications, it is much simpler to pick a language that can be cross-compiled with minimal disruptions, as compared to learning two entirely different frameworks within that timeframe.
-- But ES6 is hard to read!
-  - I don't like JS either, it is undisciplined as hell and throws all sorts of weird errors, but for reasons mentioned above, JS was picked for this project.
-- Why are there so many subfolders?
-  - There are two primary folder organization methods for JS apps - the first is to place a mirrored structure of the components and put the styling code there, and then import it, the second is to place a style subfolder in the same folder as the code and just put it there.
-  - I picked the second method because I don't want to deal with `../../../../` relative hell.
-- I'm getting errors with expo!
-  - check node version. 7 times out of 10, the error with even running or installing the application lies with the node version.
-  - There's a particular dependency (sharp) which throws all sorts of errors in node13.
-- How can I get this on my iOS device?
-  - Currently I only have a development ad-hoc cert, which means you need to give me the UDID to be whitelisted so that you can install it.
-  - The public self-hosted `app.json` and iOS `.plist` files are being served from my home server, so it may go down if my mum decides to turn off the central switch....
 
 
 ### Directory Layout
