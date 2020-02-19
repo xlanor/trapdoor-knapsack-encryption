@@ -86,5 +86,8 @@ I don't recommend YouTube videos for redux because they take 3 hours to explain 
   - navigation stacks are defined here, and the flow of transition from one screen to another occurs here
 
 
+### License
+This project will be published under the AGPL-v3 license upon submission of the FYP project and the source code publicly avaliable on Github for future use by any educators interested in the application.
+
 
 
