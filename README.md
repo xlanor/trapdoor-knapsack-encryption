@@ -3,6 +3,7 @@
 <p align="center">
 
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat&logo=EXPO&labelColor=ffffff&logoColor=000)](https://github.com/expo/expo)
+![.github/workflows/main.yml](https://github.com/xlanor/trapdoor-knapsack-encryption/workflows/.github/workflows/main.yml/badge.svg?branch=develop)
 
 [![supports iOS](https://img.shields.io/badge/iOS-4630EB.svg?style=for-the-badge&logo=APPLE&labelColor=000&logoColor=fff)](https://github.com/expo/expo)
 [![supports Android](https://img.shields.io/badge/Android-4630EB.svg?style=for-the-badge&logo=ANDROID&labelColor=000&logoColor=fff)](https://github.com/expo/expo)
@@ -14,6 +15,23 @@
 A react-native application bootstrapped with expo.
 
 Kindly note that expo has issues with node@13, use node@12.xx instead.
+
+### Requirements
+
+- AVD (Android emulator) or Simulator (iOS emulator)
+- nodeJS version 12.x
+
+### Running the Application
+- Install nodejs & npm. **Make sure that nodeJS is on 12.x.x LTS**
+- If you use macOS, `brew install nodejs` is going to give you node13 - pour the tap for node@12 directly to avoid this!
+- Clone the source code directory and navigate to it
+- `npm install --save` to install the relevant libraries from npm
+- `npm install -g expo-cli` to install expo
+- Prepare your simulator (for android, use the AVD in android studio, for macOS, use the simulator from xcode)
+- run `expo start` in the directory
+- Please dont ever run npm as sudo to avoid screwing up your `$PATH`.
+
+![expo](https://i.imgur.com/8s8x1lu.gif)
 
 ### FAQ:
 
@@ -34,19 +52,7 @@ Kindly note that expo has issues with node@13, use node@12.xx instead.
   - The public self-hosted `app.json` and iOS `.plist` files are being served from my home server, so it may go down if my mum decides to turn off the central switch....
 
 
-## 0. Setup for development
-- Install nodejs & npm. **Make sure that nodeJS is on 12.x.x LTS**
-- If you use macOS, `brew install nodejs` is going to give you node13 - pour the tap for node@12 directly to avoid this!
-- Clone the source code directory and navigate to it
-- `npm install --save` to install the relevant libraries from npm
-- `npm install -g expo-cli` to install expo
-- Prepare your simulator (for android, use the AVD in android studio, for macOS, use the simulator from xcode)
-- run `expo start` in the directory
-- Please dont ever run npm as sudo to avoid screwing up your `$PATH`.
-- It is strongly recommended that you have some experiences in running nodeJS apps before you try this out.
-- Compilation is much, much more complicated using expo, because this is a `private` repository. As such, we have to use expo's self-hosted method of compiling via turtle-cli, which is a PITA because of the conflicting documentation and/or the lack of documentation about most parts.
-
-## 1. Directory Layout
+### Directory Layout
 ```
 ---
  |
