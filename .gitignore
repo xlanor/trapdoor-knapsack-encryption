@@ -1,3 +1,4 @@
+*.env
 *.ipa
 node_modules/**/*
 .expo/*
